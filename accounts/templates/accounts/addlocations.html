@@ -1,0 +1,435 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% block pagetitle %}
+    Treatment First - Add Locations
+{% endblock pagetitle %}
+{% block content %}
+
+<script>
+    var searchInput = 'address';
+
+    $(document).ready(function () {
+        var autocomplete;
+        autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
+            types: ['geocode'],
+        });
+
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            var near_place = autocomplete.getPlace();
+            document.getElementById('latitude').value = near_place.geometry.location.lat();
+            document.getElementById('longitude').value = near_place.geometry.location.lng();
+            for (var i = 0; i < near_place.address_components.length; i++) {
+                for (var j = 0; j < near_place.address_components[i].types.length; j++) {
+                    if (near_place.address_components[i].types[j] == "country") {
+
+                        document.getElementById('country').value = near_place.address_components[i].long_name;
+                    }
+                    if (near_place.address_components[i].types[j] == "postal_code") {
+
+                        document.getElementById('postal').value = near_place.address_components[i].long_name;
+                    }
+                    if (near_place.address_components[i].types[j] == "locality") {
+
+                        document.getElementById('city').value = near_place.address_components[i].long_name;
+                    }
+                    if (near_place.address_components[i].types[j] == "administrative_area_level_1") {
+
+                        document.getElementById('state').value = near_place.address_components[i].long_name;
+                    }
+                }
+            }
+
+            // document.getElementById('latitude_view').innerHTML = near_place.geometry.location.lat();
+            // document.getElementById('longitude_view').innerHTML = near_place.geometry.location.lng();
+        });
+    });
+
+    $(document).on('change', '#' + searchInput, function () {
+        document.getElementById('latitude').value = '';
+        document.getElementById('longitude').value = '';
+        document.getElementById('country').value = '';
+        document.getElementById('postal').value = '';
+        document.getElementById('city').value = '';
+        document.getElementById('state').value = '';
+        // document.getElementById('latitude_view').innerHTML = '';
+        // document.getElementById('longitude_view').innerHTML = '';
+    });
+</script>
+
+    <h3 class="mb-3 text-primary"><i class="fa fa-map-marker"></i> Add Location</h3>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div id="manual-address" class="card copysection mb-3">
+            <div class="card-body">
+
+                <div class="mb-3 row">
+                    <label for="inputUsername" class="col-sm-3 col-form-label fw-bold">Select Address</label>
+                    <div class="col-sm-9">
+                        <input type="text" required class="form-control" placeholder="*Start typing the address" name="address1" autocomplete="off" id="address">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="inputUsername" class="col-sm-3 col-form-label fw-bold">Address 1</label>
+                    <div class="col-sm-9">
+                        <input type="text" required class="form-control" placeholder="Enter Address 1" name="address1" data-field="address1">
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label for="inputUsername" class="col-sm-3 col-form-label fw-bold">Address 2</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="Enter the Suite & Office No." name="address3" id="address2" data-field="address2">
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label for="inputUsername" class="col-sm-3 col-form-label fw-bold">City</label>
+                    <div class="col-sm-9">
+                        <input type="text" required class="form-control" name="city1" id="city" data-field="city" />
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label for="inputUsername" class="col-sm-3 col-form-label fw-bold">State</label>
+                    <div class="col-sm-9">
+                        <input type="text" required class="form-control" name="state1" id="state" data-field="state" />
+                    </div>
+                </div>
+
+                <div class="mb-3 row temp1">
+                    <label for="inputEmail" class="col-sm-3 col-form-label fw-bold">Country</label>
+                    <div class="col-sm-9">
+                        <input type="text" required class="form-control" name="country1" id="country" data-field="country" />
+                    </div>
+                </div>
+
+                <div class="mb-3 row temp1">
+                    <label for="inputEmail" class="col-sm-3 col-form-label fw-bold">Zip Code</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="postal1" id="postal" data-field="postal" />
+                    </div>
+                </div>
+
+                <div class="mb-3 row temp1">
+                    <label for="inputEmail" class="col-sm-3 col-form-label fw-bold">Longitude</label>
+                    <div class="col-sm-9">
+                        <input type="text" required class="form-control" name="longitude1" id="longitude">
+                    </div>
+                </div>
+
+                <div class="mb-3 row temp1">
+                    <label for="inputEmail" class="col-sm-3 col-form-label fw-bold">Latitude</label>
+                    <div class="col-sm-9">
+                        <input type="text" required class="form-control" name="latitude1" id="latitude">
+                    </div>
+                </div>
+
+                <div class="mb-3 row temp1">
+                    <label for="inputEmail" class="col-sm-3 col-form-label fw-bold">Phone</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="phone1" id="phone" data-field="phone" />
+                         
+                    </div>
+                 
+                </div>
+
+                <div class="mb-3 row temp1">
+                    <label for="inputEmail" class="col-sm-3 col-form-label fw-bold">Fax</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="fax1" id="fax" data-field="fax" />
+                    </div>
+                </div>
+
+                <div class="mb-3 row temp1">
+                    <label for="inputEmail" class="col-sm-3 col-form-label fw-bold">Email</label>
+                    <div class="col-sm-9">
+                        <input type="email" class="form-control" name="email1" id="email" data-field="email" />
+                    </div>
+                </div>
+
+                <div class="col-sm-9 offset-sm-3">
+                    <label class="mb-3 fw-bold">Add Specialties</label>
+                    {% for specialty in specialties %}
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-xs-12">
+                            <div class="form-check">
+                                <input class="form-check-input" name="specialties" type="checkbox" value="{{specialty.id}}" id="option{{specialty.id}}">
+                                <label class="form-check-label" for="{{specialty.id}}">
+                                    {{specialty.name}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div id="medical-address" class="card copysection mb-3">
+            <div class="card-body">
+                <button type="button" class="btn btn-primary btn-sm btn-copy float-end" data-copyfrom="#manual-address">
+                    <i class="fa fa-clone me-1"></i> Copy Physical Address
+                </button>
+
+                <label class="mb-3 fw-bold">Medical Bill Request Location</label>
+                <div class="row">
+                    <div class="mb-3 col-6">
+                        <label for="exampleFormControlInput1" class="form-label">Address 1</label>
+                        <input type="text" class="form-control" id="bill-request-address" name="bill-request-address1" placeholder="Enter the Address 1" data-field="xaddress1" autocomplete="off" />
+                    </div>
+                    <div class="mb-3 col-6">
+                        <label for="exampleFormControlInput1" class="form-label">Address 2</label>
+                        <input type="text" class="form-control" id="bill-request-address" name="bill-request-address2" placeholder="Enter the Address 2" data-field="xaddress2" autocomplete="off" />
+                    </div>
+
+                    <div class="mb-3 col-4">
+                        <label for="exampleFormControlInput1" class="form-label">City</label>
+                        <input type="text" class="form-control" id="bill-request-address" name="bill-request-city" placeholder="City" data-field="xcity1" autocomplete="off" />
+                    </div>
+                    <div class="mb-3 col-4">
+                        <label for="exampleFormControlInput1" class="form-label">State</label>
+                        <input type="text" class="form-control" id="bill-request-address" name="bill-request-state" placeholder="State" data-field="xstate1" autocomplete="off" />
+                    </div>
+                    <div class="mb-3 col-4">
+                        <label for="exampleFormControlInput1" class="form-label">Zip Code</label>
+                        <input type="text" class="form-control" id="bill-request-address" name="bill-request-zip" placeholder="Zip Code" data-field="xzipcode1" autocomplete="off" />
+                    </div>
+
+                    <div class="col-lg-6 col-md-5 col-xs-12">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="bill-request-phone" name="bill-request-phone" placeholder="Enter the Phone" data-field="phone" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Address Type</label>
+                            <input type="text" disabled class="form-control" id="bill-request-type" name="bill-request-type" value="Medical Bill Request Location" data-field="address-type" />
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-5 col-xs-12">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Fax</label>
+                            <input type="text" class="form-control" id="bill-request-fax" name="bill-request-fax" placeholder="Enter the Fax" data-field="fax" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="bill-request-email" name="bill-request-email" placeholder="name@email.com" data-field="email" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="record-location" class="card copysection mb-3">
+            <div class="card-body">
+                <button type="button" class="btn btn-primary btn-sm btn-copy float-end" data-copyfrom="#manual-address">
+                    <i class="fa fa-clone me-1"></i> Copy Physical Address
+                </button>
+                <label class="mb-3 fw-bold">Medical Record Request Location</label>
+                <div class="row">
+                    <div class="mb-3 col-6">
+                        <label for="exampleFormControlInput1" class="form-label">Address 1</label>
+                        <input type="text" class="form-control" id="record-request-address" name="record-request-address1" placeholder="Enter the Address 1" data-field="xaddress1" autocomplete="off" />
+                    </div>
+                    <div class="mb-3 col-6">
+                        <label for="exampleFormControlInput1" class="form-label">Address 2</label>
+                        <input type="text" class="form-control" id="record-request-address" name="record-request-address2" placeholder="Enter the Address 2" data-field="xaddress2" autocomplete="off" />
+                    </div>
+
+                    <div class="mb-3 col-4">
+                        <label for="exampleFormControlInput1" class="form-label">City</label>
+                        <input type="text" class="form-control" id="record-request-address" name="record-request-city" placeholder="City" data-field="xcity1" autocomplete="off" />
+                    </div>
+                    <div class="mb-3 col-4">
+                        <label for="exampleFormControlInput1" class="form-label">State</label>
+                        <input type="text" class="form-control" id="record-request-address" name="record-request-state" placeholder="State" data-field="xstate1" autocomplete="off" />
+                    </div>
+                    <div class="mb-3 col-4">
+                        <label for="exampleFormControlInput1" class="form-label">Zip Code</label>
+                        <input type="text" class="form-control" id="record-request-address" name="record-request-zip" placeholder="Zip Code" data-field="xzipcode1" autocomplete="off" />
+                    </div>
+
+                    <div class="col-lg-6 col-md-5 col-xs-12">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="record-request-phone" name="record-request-phone" placeholder="Enter the Phone" data-field="phone" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Address Type</label>
+                            <input type="text" disabled class="form-control" id="record-request-type" name="record-request-type" value="Medical Record Request Location" data-field="address-type" />
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-5 col-xs-12">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Fax</label>
+                            <input type="text" class="form-control" id="record-request-fax" name="record-request-fax" placeholder="Enter the Fax" data-field="fax" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="record-request-email" name="record-request-email" placeholder="name@email.com" data-field="email" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="payment-location" class="card copysection mb-3">
+            <div class="card-body">
+                <button type="button" class="btn btn-primary btn-sm btn-copy float-end" data-copyfrom="#manual-address">
+                    <i class="fa fa-clone me-1"></i> Copy Physical Address
+                </button>
+                <label class="mb-3 fw-bold">Medical Bill Request Payment Location</label>
+                <div class="row">
+                    <div class="mb-3 col-6">
+                        <label for="exampleFormControlInput1" class="form-label">Address 1</label>
+                        <input type="text" class="form-control" id="bill-payment-request-address" name="bill-payment-request-address1" placeholder="Enter the Address 1" data-field="xaddress1" autocomplete="off" />
+                    </div>
+                    <div class="mb-3 col-6">
+                        <label for="exampleFormControlInput1" class="form-label">Address 2</label>
+                        <input type="text" class="form-control" id="bill-payment-request-address" name="bill-payment-request-address2" placeholder="Enter the Address 2" data-field="xaddress2" autocomplete="off" />
+                    </div>
+
+                    <div class="mb-3 col-4">
+                        <label for="exampleFormControlInput1" class="form-label">City</label>
+                        <input type="text" class="form-control" id="bill-payment-request-address" name="bill-payment-request-city" placeholder="City" data-field="xcity1" autocomplete="off" />
+                    </div>
+                    <div class="mb-3 col-4">
+                        <label for="exampleFormControlInput1" class="form-label">State</label>
+                        <input type="text" class="form-control" id="bill-payment-request-address" name="bill-payment-request-state" placeholder="State" data-field="xstate1" autocomplete="off" />
+                    </div>
+                    <div class="mb-3 col-4">
+                        <label for="exampleFormControlInput1" class="form-label">Zip Code</label>
+                        <input type="text" class="form-control" id="bill-payment-request-address" name="bill-payment-request-zip" placeholder="Zip Code" data-field="xzipcode1" autocomplete="off" />
+                    </div>
+                    <div class="col-lg-6 col-md-5 col-xs-12">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="bill-payment-request-phone" name="bill-payment-request-phone" placeholder="Enter the Phone" data-field="phone" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Address Type</label>
+                            <input type="text" disabled class="form-control" id="bill-payment-request-type" name="bill-payment-request-type" value="Medical Bill Request Payment Location" data-field="address-type" />
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-5 col-xs-12">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Fax</label>
+                            <input type="text" class="form-control" id="bill-payment-request-fax" name="bill-payment-request-fax" placeholder="Enter the Fax" data-field="fax" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="bill-payment-request-email" name="bill-payment-request-email" placeholder="name@email.com" data-field="email" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="payment-record-location" class="copysection card mb-3">
+            <div class="card-body">
+                <button type="button" class="btn btn-primary btn-sm btn-copy float-end" data-copyfrom="#manual-address">
+                    <i class="fa fa-clone me-1"></i> Copy Physical Address
+                </button>
+                <label class="mb-3 fw-bold">Medical Record Request Payment Location</label>
+                <div class="row">
+                    <div class="mb-3 col-6">
+                        <label for="exampleFormControlInput1" class="form-label">Address 1</label>
+                        <input type="text" class="form-control" id="record-payment-request-address" name="record-payment-request-address1" placeholder="Enter the Address 1" data-field="xaddress1" autocomplete="off" />
+                    </div>
+                    <div class="mb-3 col-6">
+                        <label for="exampleFormControlInput1" class="form-label">Address 2</label>
+                        <input type="text" class="form-control" id="record-payment-request-address" name="record-payment-request-address2" placeholder="Enter the Address 2" data-field="xaddress2" autocomplete="off" />
+                    </div>
+
+                    <div class="mb-3 col-4">
+                        <label for="exampleFormControlInput1" class="form-label">City</label>
+                        <input type="text" class="form-control" id="record-payment-request-address" name="record-payment-request-city" placeholder="City" data-field="xcity1" autocomplete="off" />
+                    </div>
+                    <div class="mb-3 col-4">
+                        <label for="exampleFormControlInput1" class="form-label">State</label>
+                        <input type="text" class="form-control" id="record-payment-request-address" name="record-payment-request-state" placeholder="State" data-field="xstate1" autocomplete="off" />
+                    </div>
+                    <div class="mb-3 col-4">
+                        <label for="exampleFormControlInput1" class="form-label">Zip Code</label>
+                        <input type="text" class="form-control" id="record-payment-request-address" name="record-payment-request-zip" placeholder="Zip Code" data-field="xzipcode1" autocomplete="off" />
+                    </div>
+                    <div class="col-lg-6 col-md-5 col-xs-12">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="record-payment-request-phone" name="record-payment-request-phone" placeholder="Enter the Phone" data-field="phone" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Address Type</label>
+                            <input type="text" disabled class="form-control" id="record-payment-request-type" name="record-payment-request-type" value="Medical Record Request Payment Location" data-field="address-type" />
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-5 col-xs-12">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Fax</label>
+                            <input type="text" class="form-control" id="record-payment-request-fax" name="record-payment-request-fax" placeholder="Enter the Fax" data-field="fax" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="record-payment-request-email" name="record-payment-request-email" placeholder="name@email.com" data-field="email" />
+                        </div>
+                        <input type="text" hidden name="value" id="value">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary me-3">Add Address</button>
+        <button type="submit" onclick="setCheck()" class="btn btn-primary">Add Address and Add Another</button>
+    </form>
+            
+    <script>
+        function setCheck(){
+            document.getElementById('value').value = 'True'
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyBqxc6kyS-LoyaHvVca125NQMefYWI3bn8"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.btn-copy').click(function () {
+                var $from = $($(this).attr('data-copyfrom'));
+                var $section = $(this).closest('.copysection');
+
+                // var address = [
+                //     $from.find('[data-field="address1"]').val(),
+                //     $from.find('[data-field="address2"]').val(),
+                //     $from.find('[data-field="city"]').val(),
+                //     $from.find('[data-field="state"]').val(),
+                //     $from.find('[data-field="postal"]').val(),
+                    
+                // ].join(', ').replace(', ,', ',');
+
+                $section.find('[data-field="xaddress1"]').val($from.find('[data-field="address1"]').val());
+                $section.find('[data-field="xaddress2"]').val($from.find('[data-field="address2"]').val());
+                
+
+                $section.find('[data-field="xcity1"]').val($from.find('[data-field="city"]').val());
+                $section.find('[data-field="xstate1"]').val($from.find('[data-field="state"]').val());
+                
+                $section.find('[data-field="xzipcode1"]').val($from.find('[data-field="postal"]').val());
+                $section.find('[data-field="phone"]').val($from.find('[data-field="phone"]').val());
+                $section.find('[data-field="email"]').val($from.find('[data-field="email"]').val());
+                $section.find('[data-field="fax"]').val($from.find('[data-field="fax"]').val());
+            });
+        });
+    </script>
+
+{% endblock content %}

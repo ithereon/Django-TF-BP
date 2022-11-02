@@ -1,0 +1,721 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+       
+        <!-- Title Page-->
+        <title>Dashboard</title>
+    
+        <!-- Fontfaces CSS-->
+        <link href="{% static 'BP_resources/css/font-face.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Bootstrap CSS-->
+        <link href="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Vendor CSS-->
+        <link href="{% static 'BP_resources/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Main CSS-->
+        <link href="{% static 'BP_resources/css/theme.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/sidebar.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/header.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/directory.css' %}" rel="stylesheet" media="all">
+    
+    </head>
+
+<body class="animsition homepage">
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            <div class="logo">
+                
+            </div>
+            
+            <div class="menu-sidebar__content">
+                <nav class="navbar-sidebar position-relative">
+                    <ul class="list-unstyled navbar__list">
+                        <li class="Row  active" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(1, '0')" href="/BP/client/50/43/">
+                                <img src="/static/BP_resources/images/icon/client-icon-color.svg">Client
+                            </a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(2, '0')" style="font:14px poppins" href="/BP/medicaltreatment/50/43/">
+                               <img src="/static/BP_resources/images/icon/medical-treatment-icon-color.svg">Medical Treatment
+                            </a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li style="100%" class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(3, '0')" class="js-arrow" href="/BP/case/50/43/">
+                               <img src="/static/BP_resources/images/icon/case-icon-color.svg">Case</a>
+                               <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(4, '0')" href="/BP/todo/50/43/">
+                                <img src="/static/BP_resources/images/icon/to-do-icon-color.svg">To-Do</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(5, '0')" href="/BP/defendants/50/43/">
+                            <img src="/static/BP_resources/images/icon/defendants-icon-color.svg">Defendants</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="has-sub Row " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(6, '0')" href="/BP/caraccident/50/43/">
+                            <img src="/static/BP_resources/images/icon/car-accident-icon-color.svg">Car Accident</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(7, '0')" href="/BP/photo/50/43/">
+                              <img src="/static/BP_resources/images/icon/photo-icon-color.svg">Photo</a>
+                              <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(8, '0')" href="/BP/injuriessub/50/43/">
+                            <img src="/static/BP_resources/images/icon/injuries-icon-color.svg">Injuries</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(9, '0')" href="/BP/otherparties/50/43/">
+                            <img src="/static/BP_resources/images/icon/other-parties-icon-color.svg">Other Parties</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(10, '0')" href="/BP/witnesses/50/43/">
+                            <img src="/static/BP_resources/images/icon/witnesses-icon-color.svg">Witnesses</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(11, '0')" href="/BP/insurance/50/43/">
+                            <img src="/static/BP_resources/images/icon/insurance-icon-color.svg">Insurance</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(12, '0')" href="#">
+                            <img src="/static/BP_resources/images/icon/employment-icon-color.svg">Employment</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(13, '0')" href="/BP/recordings/50/43/">
+                             <img src="/static/BP_resources/images/icon/recording-icon-color.svg">Recordings</a>
+                             <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(14, '0')" href="/BP/incidentreport/50/43/">
+                             <img src="/static/BP_resources/images/icon/incident-folder-icon-color.svg">Incident Report</a>
+                             <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(15, '0')" href="/BP/documents/50/43/">
+                             <img src="/static/BP_resources/images/icon/documents-icon-color.svg">Documents</a>
+                             <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(16, '0')" href="/BP/costs/50/43/">
+                            <img src="/static/BP_resources/images/icon/costs-icon-color.svg">Costs</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(17, '0')" href="/BP/caseloan/50/43/">
+                            <img src="/static/BP_resources/images/icon/case-loans-icon-color.svg">Case Loans</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(18, '0')" href="/BP/settlement/50/43/">
+                            <img src="/static/BP_resources/images/icon/settlement-icon-color.svg">Settlement</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(19, '0')" href="/BP/litigation/50/43/">
+                              <img src="/static/BP_resources/images/icon/litigation-icon-color.svg">Litigation</a>
+                              <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(20, '0')" href="/BP/discovery/50/43/">
+                             <img src="/static/BP_resources/images/icon/discovery-icon-color.svg">Discovery</a>
+                             <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(21, '0')" href="/BP/depositions/50/43/">
+                               <img src="/static/BP_resources/images/icon/menu-icon21.png">Depositions</a>
+                               <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(22, '0')" href="/BP/note/50/43/">
+                             <img src="/static/BP_resources/images/icon/notes-icon-color.svg">Notes</a>
+                             <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+        
+                    </ul>
+                </nav>
+                <div class="sidebar-bottom">
+                </div>
+                
+            </div>
+        </aside>
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container" style="padding-left: 190px">
+            <!-- HEADER DESKTOP-->
+           {% include 'BP/header-desktop.html' %}
+            <!-- HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content lawfirmdir" style="padding-top: 46px !important;">
+                <div class="section__content section__content--p30 photos-page" style="margin-top: 71px;">
+                    <div class="container-fluid px-0">
+
+                        <div class="row">
+                            <div class="col-lg-12 top-head">
+                                <table class="table table-borderless table-striped table-earning">
+                                    <thead>
+                                        <tr>
+                                        <td width="40%" class="p-0"><h2> <svg xmlns="http://www.w3.org/2000/svg" width="51" height="50" viewBox="0 0 51 50" fill="none">
+                                                <path d="M44.158 11.7312L28.4098 3.31491C26.3783 2.22828 23.9531 2.22828 21.9193 3.31491L6.17107 11.7312C4.01131 12.8853 2.66821 15.0968 2.66821 17.4996V40.9239C2.66821 44.5483 5.69637 47.4999 9.41745 47.4999H40.9139C44.635 47.4999 47.6631 44.5483 47.6631 40.9217V17.4996C47.6631 15.0968 46.32 12.8853 44.158 11.7312ZM20.6662 43.0004V34.0015C20.6662 31.52 22.6842 29.502 25.1657 29.502C27.6472 29.502 29.6652 31.52 29.6652 34.0015V43.0004H20.6662ZM43.1637 40.9217C43.1637 42.0668 42.1535 43.0004 40.9139 43.0004H34.1647V34.0015C34.1647 29.0385 30.1286 25.0025 25.1657 25.0025C20.2027 25.0025 16.1667 29.0385 16.1667 34.0015V43.0004H9.41745C8.17784 43.0004 7.16771 42.0668 7.16771 40.9217V17.4996C7.16771 16.7594 7.59741 16.071 8.29258 15.6998L24.0408 7.28346C24.3873 7.09898 24.7765 7.0045 25.1657 7.0045C25.5549 7.0045 25.9441 7.09898 26.2906 7.28346L42.0388 15.6998C42.734 16.071 43.1637 16.7594 43.1637 17.4996V40.9217Z" fill="black"/>
+                                                </svg>Law firm directory</h2></td>
+                                               <td> <div class="mid-search">
+                                                    <form class="form-header" action="" method="POST">
+                                                 <span><input class="au-input au-input--xl" type="text" name="search" placeholder="Smith"><i class="fa fa-search"></i> <button type="submit">Search</button></span>  
+                                                     </form>
+                                                    </div>
+                                                </td>
+                                        </tr>
+                                    </thead>
+                                </table>
+                                
+                                   
+                                <div class="custom-tab">
+
+                                    <nav class="ml-0">
+                                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                            <a class="nav-item nav-link active" id="custom-nav-home-tab" data-toggle="tab" href="#custom-nav-home" role="tab" aria-controls="custom-nav-home"
+                                             aria-selected="true">Firm Search Results</a>
+                                            <a class="nav-item nav-link" id="custom-nav-profile-tab" data-toggle="tab" href="#custom-nav-profile" role="tab" aria-controls="custom-nav-profile"
+                                             aria-selected="false">Example firm</a>
+                                             <a class="nav-item nav-link" id="custom-nav-profile-tab" data-toggle="tab" href="#custom-nav-profile" role="tab" aria-controls="custom-nav-profile"
+                                             aria-selected="false">Your Firm</a>
+                                             <a class="nav-item nav-link" id="custom-nav-profile-tab" data-toggle="tab" href="#custom-nav-profile" role="tab" aria-controls="custom-nav-profile"
+                                             aria-selected="false">That firm</a>
+                                             <a class="nav-item nav-link" id="custom-nav-profile-tab" data-toggle="tab" href="#custom-nav-profile" role="tab" aria-controls="custom-nav-profile"
+                                             aria-selected="false">Litigating firm</a>
+
+                                             <a class="nav-item nav-link"  href="{% url 'bp-search_attorneys' %}"  
+                                             >Search Attorneys</a>
+                                            
+
+                                        </div>
+                                    </nav>
+                                    <div class="tab-content" id="nav-tabContent">
+                                        <div class="tab-pane fade show active" id="custom-nav-home" role="tabpanel" aria-labelledby="custom-nav-home-tab">
+                                          <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="table-responsive table--no-card m-b-40 subpg-table firm-directory-table mt-0 rounded-0">
+                                                    <table class="table table-borderless table-earning startrating">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Location</th>
+                                                                <th>Contacts</th>
+                                                                <th>Co-Pilot Case Types</th>
+                                                                <th>Favorite</th>
+                                                                <th>reviews</th>
+                                                                <th>Co-Counsel Cases</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr data-href="{% url 'bp-firmprofile' %}">
+                                                                <td>1</td>
+                                                                <td>Your Law Firm<br>
+                                                                    100 Main Street, Suite 123<br>
+                                                                    Bangor, ME, 04620</td>
+                                                                <td>(000) 000-0000<br>
+                                                                    (000) 000-0000 - <b style="font-weight: normal;color: rgb(102, 102, 102);text-transform: lowercase">fax</b><br>
+                                                                    example@email.com
+                                                                    </td>
+                                                                <td>Personal Injury, Car<br> Accident, Dog Bite, Slip and<br> Fall, Plaintiff’s Employment,<br> General Litigation</td>
+                                                                <td class="heart-icon"><span><svg xmlns="http://www.w3.org/2000/svg" width="50" height="51" viewBox="0 0 50 51" fill="none">
+                                                                    <g clip-path="url(#clip0_390_8145)">
+                                                                    <path d="M25 47.1233C24.7471 47.1233 24.4942 47.058 24.2677 46.9271C24.0216 46.7851 18.1748 43.3904 12.2442 38.2754C8.72914 35.2438 5.92329 32.237 3.90474 29.3386C1.29263 25.588 -0.020939 21.9804 0.000252352 18.6158C0.025057 14.7008 1.4273 11.019 3.94897 8.24846C6.51323 5.43128 9.93529 3.87991 13.585 3.87991C18.2624 3.87991 22.5389 6.50003 25.0001 10.6506C27.4613 6.50012 31.7378 3.87991 36.4152 3.87991C39.8633 3.87991 43.153 5.27972 45.6788 7.82151C48.4506 10.6109 50.0255 14.5521 49.9997 18.6344C49.9785 21.9931 48.6403 25.5952 46.0224 29.3406C43.9976 32.2376 41.1957 35.243 37.6944 38.2737C31.7854 43.3882 25.9807 46.7829 25.7364 46.9249C25.5088 47.0571 25.2543 47.1233 25 47.1233ZM13.5849 6.8096C10.7702 6.8096 8.11762 8.02092 6.11557 10.2205C4.0814 12.4554 2.95005 15.4435 2.92993 18.6344C2.8898 24.986 8.99525 31.599 14.1242 36.0281C18.6546 39.9403 23.2497 42.8771 24.9974 43.9482C26.736 42.8754 31.2987 39.9396 35.8102 36.0298C40.9247 31.5972 47.0298 24.978 47.0701 18.6159C47.091 15.3082 45.8264 12.1266 43.6006 9.88664C41.629 7.90246 39.0771 6.80969 36.4152 6.80969C31.9364 6.80969 27.9091 9.95969 26.394 14.6482C26.1986 15.2528 25.6355 15.6625 25.0002 15.6625C24.3646 15.6625 23.8017 15.2527 23.6064 14.6481C22.091 9.95969 18.0638 6.8096 13.5849 6.8096Z" fill=""/>
+                                                                    </g>
+                                                                    <defs>
+                                                                    <clipPath id="clip0_390_8145">
+                                                                    <rect width="50" height="50" fill="white" transform="translate(0 0.501587)"/>
+                                                                    </clipPath>
+                                                                    </defs>
+                                                                    </svg></span></td>
+                                                                <td>
+                                                                    <div class="overflow-hidden">
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star"></span>
+                                                                    </div>
+                                                                    <p>263 reviews</p>
+                                                                </td>
+                                                                <td>12 Pending<br>
+                                                                    23 Referred<br>
+                                                                    11 Complete
+                                                                    </td>
+                                                                
+                                                            </tr>
+                                                            <tr data-href="{% url 'bp-firmprofile' %}">
+                                                                <td>2</td>
+                                                                <td>Your Law Firm<br>
+                                                                    100 Main Street, Suite 123<br>
+                                                                    Bangor, ME, 04620</td>
+                                                                <td>(000) 000-0000<br>
+                                                                    (000) 000-0000 - <b style="font-weight: normal;color: rgb(102, 102, 102);text-transform: lowercase">fax</b><br>
+                                                                    example@email.com
+                                                                    </td>
+                                                                <td>Personal Injury, Car<br> Accident, Dog Bite, Slip and<br> Fall, Plaintiff’s Employment,<br> General Litigation</td>
+                                                                <td class="heart-icon"><span><svg xmlns="http://www.w3.org/2000/svg" width="50" height="51" viewBox="0 0 50 51" fill="none">
+                                                                    <g clip-path="url(#clip0_390_8145)">
+                                                                    <path d="M25 47.1233C24.7471 47.1233 24.4942 47.058 24.2677 46.9271C24.0216 46.7851 18.1748 43.3904 12.2442 38.2754C8.72914 35.2438 5.92329 32.237 3.90474 29.3386C1.29263 25.588 -0.020939 21.9804 0.000252352 18.6158C0.025057 14.7008 1.4273 11.019 3.94897 8.24846C6.51323 5.43128 9.93529 3.87991 13.585 3.87991C18.2624 3.87991 22.5389 6.50003 25.0001 10.6506C27.4613 6.50012 31.7378 3.87991 36.4152 3.87991C39.8633 3.87991 43.153 5.27972 45.6788 7.82151C48.4506 10.6109 50.0255 14.5521 49.9997 18.6344C49.9785 21.9931 48.6403 25.5952 46.0224 29.3406C43.9976 32.2376 41.1957 35.243 37.6944 38.2737C31.7854 43.3882 25.9807 46.7829 25.7364 46.9249C25.5088 47.0571 25.2543 47.1233 25 47.1233ZM13.5849 6.8096C10.7702 6.8096 8.11762 8.02092 6.11557 10.2205C4.0814 12.4554 2.95005 15.4435 2.92993 18.6344C2.8898 24.986 8.99525 31.599 14.1242 36.0281C18.6546 39.9403 23.2497 42.8771 24.9974 43.9482C26.736 42.8754 31.2987 39.9396 35.8102 36.0298C40.9247 31.5972 47.0298 24.978 47.0701 18.6159C47.091 15.3082 45.8264 12.1266 43.6006 9.88664C41.629 7.90246 39.0771 6.80969 36.4152 6.80969C31.9364 6.80969 27.9091 9.95969 26.394 14.6482C26.1986 15.2528 25.6355 15.6625 25.0002 15.6625C24.3646 15.6625 23.8017 15.2527 23.6064 14.6481C22.091 9.95969 18.0638 6.8096 13.5849 6.8096Z" fill=""/>
+                                                                    </g>
+                                                                    <defs>
+                                                                    <clipPath id="clip0_390_8145">
+                                                                    <rect width="50" height="50" fill="white" transform="translate(0 0.501587)"/>
+                                                                    </clipPath>
+                                                                    </defs>
+                                                                    </svg></span></td>
+                                                                    <td>
+                                                                        <div class="overflow-hidden">
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star"></span>
+                                                                        </div>
+                                                                        <p>263 reviews</p>
+                                                                    </td>
+                                                                <td>12 Pending<br>
+                                                                    23 Referred<br>
+                                                                    11 Complete
+                                                                    </td>
+                                                                
+                                                            </tr>
+                                                            <tr data-href="{% url 'bp-firmprofile' %}">
+                                                                <td>3</td>
+                                                                <td>Your Law Firm<br>
+                                                                    100 Main Street, Suite 123<br>
+                                                                    Bangor, ME, 04620</td>
+                                                                <td>(000) 000-0000<br>
+                                                                    (000) 000-0000 - <b style="font-weight: normal;color: rgb(102, 102, 102);text-transform: lowercase">fax</b><br>
+                                                                    example@email.com
+                                                                    </td>
+                                                                <td>Personal Injury, Car<br> Accident, Dog Bite, Slip and<br> Fall, Plaintiff’s Employment,<br> General Litigation</td>
+                                                                <td class="heart-icon"><span><svg xmlns="http://www.w3.org/2000/svg" width="50" height="51" viewBox="0 0 50 51" fill="none">
+                                                                    <g clip-path="url(#clip0_390_8145)">
+                                                                    <path d="M25 47.1233C24.7471 47.1233 24.4942 47.058 24.2677 46.9271C24.0216 46.7851 18.1748 43.3904 12.2442 38.2754C8.72914 35.2438 5.92329 32.237 3.90474 29.3386C1.29263 25.588 -0.020939 21.9804 0.000252352 18.6158C0.025057 14.7008 1.4273 11.019 3.94897 8.24846C6.51323 5.43128 9.93529 3.87991 13.585 3.87991C18.2624 3.87991 22.5389 6.50003 25.0001 10.6506C27.4613 6.50012 31.7378 3.87991 36.4152 3.87991C39.8633 3.87991 43.153 5.27972 45.6788 7.82151C48.4506 10.6109 50.0255 14.5521 49.9997 18.6344C49.9785 21.9931 48.6403 25.5952 46.0224 29.3406C43.9976 32.2376 41.1957 35.243 37.6944 38.2737C31.7854 43.3882 25.9807 46.7829 25.7364 46.9249C25.5088 47.0571 25.2543 47.1233 25 47.1233ZM13.5849 6.8096C10.7702 6.8096 8.11762 8.02092 6.11557 10.2205C4.0814 12.4554 2.95005 15.4435 2.92993 18.6344C2.8898 24.986 8.99525 31.599 14.1242 36.0281C18.6546 39.9403 23.2497 42.8771 24.9974 43.9482C26.736 42.8754 31.2987 39.9396 35.8102 36.0298C40.9247 31.5972 47.0298 24.978 47.0701 18.6159C47.091 15.3082 45.8264 12.1266 43.6006 9.88664C41.629 7.90246 39.0771 6.80969 36.4152 6.80969C31.9364 6.80969 27.9091 9.95969 26.394 14.6482C26.1986 15.2528 25.6355 15.6625 25.0002 15.6625C24.3646 15.6625 23.8017 15.2527 23.6064 14.6481C22.091 9.95969 18.0638 6.8096 13.5849 6.8096Z" fill=""/>
+                                                                    </g>
+                                                                    <defs>
+                                                                    <clipPath id="clip0_390_8145">
+                                                                    <rect width="50" height="50" fill="white" transform="translate(0 0.501587)"/>
+                                                                    </clipPath>
+                                                                    </defs>
+                                                                    </svg></span></td>
+                                                                    <td>
+                                                                        <div class="overflow-hidden">
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star"></span>
+                                                                        </div>
+                                                                        <p>263 reviews</p>
+                                                                    </td>
+                                                                <td>12 Pending<br>
+                                                                    23 Referred<br>
+                                                                    11 Complete
+                                                                    </td>
+                                                                
+                                                            </tr>
+                                                            <tr data-href="{% url 'bp-firmprofile' %}">
+                                                                <td>4</td>
+                                                                <td>Your Law Firm<br>
+                                                                    100 Main Street, Suite 123<br>
+                                                                    Bangor, ME, 04620</td>
+                                                                <td>(000) 000-0000<br>
+                                                                    (000) 000-0000 - <b style="font-weight: normal;color: rgb(102, 102, 102);text-transform: lowercase">fax</b><br>
+                                                                    example@email.com
+                                                                    </td>
+                                                                <td>Personal Injury, Car<br> Accident, Dog Bite, Slip and<br> Fall, Plaintiff’s Employment,<br> General Litigation</td>
+                                                                <td class="heart-icon"><span><svg xmlns="http://www.w3.org/2000/svg" width="50" height="51" viewBox="0 0 50 51" fill="none">
+                                                                    <g clip-path="url(#clip0_390_8145)">
+                                                                    <path d="M25 47.1233C24.7471 47.1233 24.4942 47.058 24.2677 46.9271C24.0216 46.7851 18.1748 43.3904 12.2442 38.2754C8.72914 35.2438 5.92329 32.237 3.90474 29.3386C1.29263 25.588 -0.020939 21.9804 0.000252352 18.6158C0.025057 14.7008 1.4273 11.019 3.94897 8.24846C6.51323 5.43128 9.93529 3.87991 13.585 3.87991C18.2624 3.87991 22.5389 6.50003 25.0001 10.6506C27.4613 6.50012 31.7378 3.87991 36.4152 3.87991C39.8633 3.87991 43.153 5.27972 45.6788 7.82151C48.4506 10.6109 50.0255 14.5521 49.9997 18.6344C49.9785 21.9931 48.6403 25.5952 46.0224 29.3406C43.9976 32.2376 41.1957 35.243 37.6944 38.2737C31.7854 43.3882 25.9807 46.7829 25.7364 46.9249C25.5088 47.0571 25.2543 47.1233 25 47.1233ZM13.5849 6.8096C10.7702 6.8096 8.11762 8.02092 6.11557 10.2205C4.0814 12.4554 2.95005 15.4435 2.92993 18.6344C2.8898 24.986 8.99525 31.599 14.1242 36.0281C18.6546 39.9403 23.2497 42.8771 24.9974 43.9482C26.736 42.8754 31.2987 39.9396 35.8102 36.0298C40.9247 31.5972 47.0298 24.978 47.0701 18.6159C47.091 15.3082 45.8264 12.1266 43.6006 9.88664C41.629 7.90246 39.0771 6.80969 36.4152 6.80969C31.9364 6.80969 27.9091 9.95969 26.394 14.6482C26.1986 15.2528 25.6355 15.6625 25.0002 15.6625C24.3646 15.6625 23.8017 15.2527 23.6064 14.6481C22.091 9.95969 18.0638 6.8096 13.5849 6.8096Z" fill=""/>
+                                                                    </g>
+                                                                    <defs>
+                                                                    <clipPath id="clip0_390_8145">
+                                                                    <rect width="50" height="50" fill="white" transform="translate(0 0.501587)"/>
+                                                                    </clipPath>
+                                                                    </defs>
+                                                                    </svg></span></td>
+                                                                    <td>
+                                                                        <div class="overflow-hidden">
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star"></span>
+                                                                        </div>
+                                                                        <p>263 reviews</p>
+                                                                    </td>
+                                                                <td>12 Pending<br>
+                                                                    23 Referred<br>
+                                                                    11 Complete
+                                                                    </td>
+                                                                
+                                                            </tr>
+                                                            <tr data-href="{% url 'bp-firmprofile' %}">
+                                                                <td>5</td>
+                                                                <td>Your Law Firm<br>
+                                                                    100 Main Street, Suite 123<br>
+                                                                    Bangor, ME, 04620</td>
+                                                                <td>(000) 000-0000<br>
+                                                                    (000) 000-0000 - <b style="font-weight: normal;color: rgb(102, 102, 102);text-transform: lowercase">fax</b><br>
+                                                                    example@email.com
+                                                                    </td>
+                                                                <td>Personal Injury, Car<br> Accident, Dog Bite, Slip and<br> Fall, Plaintiff’s Employment,<br> General Litigation</td>
+                                                                <td class="heart-icon"><span><svg xmlns="http://www.w3.org/2000/svg" width="50" height="51" viewBox="0 0 50 51" fill="none">
+                                                                    <g clip-path="url(#clip0_390_8145)">
+                                                                    <path d="M25 47.1233C24.7471 47.1233 24.4942 47.058 24.2677 46.9271C24.0216 46.7851 18.1748 43.3904 12.2442 38.2754C8.72914 35.2438 5.92329 32.237 3.90474 29.3386C1.29263 25.588 -0.020939 21.9804 0.000252352 18.6158C0.025057 14.7008 1.4273 11.019 3.94897 8.24846C6.51323 5.43128 9.93529 3.87991 13.585 3.87991C18.2624 3.87991 22.5389 6.50003 25.0001 10.6506C27.4613 6.50012 31.7378 3.87991 36.4152 3.87991C39.8633 3.87991 43.153 5.27972 45.6788 7.82151C48.4506 10.6109 50.0255 14.5521 49.9997 18.6344C49.9785 21.9931 48.6403 25.5952 46.0224 29.3406C43.9976 32.2376 41.1957 35.243 37.6944 38.2737C31.7854 43.3882 25.9807 46.7829 25.7364 46.9249C25.5088 47.0571 25.2543 47.1233 25 47.1233ZM13.5849 6.8096C10.7702 6.8096 8.11762 8.02092 6.11557 10.2205C4.0814 12.4554 2.95005 15.4435 2.92993 18.6344C2.8898 24.986 8.99525 31.599 14.1242 36.0281C18.6546 39.9403 23.2497 42.8771 24.9974 43.9482C26.736 42.8754 31.2987 39.9396 35.8102 36.0298C40.9247 31.5972 47.0298 24.978 47.0701 18.6159C47.091 15.3082 45.8264 12.1266 43.6006 9.88664C41.629 7.90246 39.0771 6.80969 36.4152 6.80969C31.9364 6.80969 27.9091 9.95969 26.394 14.6482C26.1986 15.2528 25.6355 15.6625 25.0002 15.6625C24.3646 15.6625 23.8017 15.2527 23.6064 14.6481C22.091 9.95969 18.0638 6.8096 13.5849 6.8096Z" fill=""/>
+                                                                    </g>
+                                                                    <defs>
+                                                                    <clipPath id="clip0_390_8145">
+                                                                    <rect width="50" height="50" fill="white" transform="translate(0 0.501587)"/>
+                                                                    </clipPath>
+                                                                    </defs>
+                                                                    </svg></span></td>
+                                                                    <td>
+                                                                        <div class="overflow-hidden">
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star checked"></span>
+                                                                            <span class="fa fa-star"></span>
+                                                                        </div>
+                                                                        <p>263 reviews</p>
+                                                                    </td>
+                                                                <td>12 Pending<br>
+                                                                    23 Referred<br>
+                                                                    11 Complete
+                                                                    </td>
+                                                                
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div> 
+                                        </div>
+                                        </div>      
+                                       </div>
+                               
+                                        <div class="tab-pane fade" id="custom-nav-profile" role="tabpanel" aria-labelledby="custom-nav-profile-tab">
+                                            <div class="row">
+                                                <div class="col-lg-12 top-head">
+                                                    <table class="table table-borderless table-striped table-earning startrating">
+                                                        <thead>
+                                                            <tr class="d-flex" style="align-items: center">
+                                                                
+                                                            <td width="40%"  class="d-flex p-0" style="align-items: center">
+                                                                <div class="firm-logo-wrap"><img src="{% static 'BP_resources/images/firm-logo.png' %}" alt="John Doe" /></div><h2 class="ml-3">The Simon Law Group</h2>
+                                                                <div class="ml-4">
+                                                                    <div class="overflow-hidden">
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                        <span class="fa fa-star"></span>
+                                                                    </div>
+                                                                    <p>4.75 stars from 263 reviews</p>
+                                                                </div>
+                                                            </td>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                    <!--<div class="firm-name-phone-address">
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <div class="firm-name">
+                                                                    <h3>The Simon Law Group</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <div class="firm-phone">
+                                                                    <p>123-786-976</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="firm-address">
+                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, sed unde commodi suscipit voluptate rerum</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="copilot-casetype">
+                                                                    <p>Personal Injury, Car Accident, Dog Bite, Slip and Fall, General Litigation</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="dropdown">
+                                                                    <select onchange="this.form.submit()" style="color:grey; font:14px poppins;width: 100%;text-align: center;" class="form-select" name="template_id" id="template_id" aria-label="Default select example">
+                                                                    <option selected="" style="color:grey; font-size:14px;" value="no_option">Select Letter Template</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>-->
+                                                    <div class="row">
+                                                        <div class="col-md-5">
+                                                            <div class="columnsContainer2  litigation-columns position-relative" style="padding-top: 50px">
+                                                                <div class="flexStart" style="height: auto; width: 250px;">
+                                                                    <div class="colFonts colFont" style="margin-top: 0px;margin-bottom: 5px;font:14px poppins">Your Law Firm </div>
+                                                                    <div class="colFonts colFont" style="margin-top: 0px;margin-bottom: 5px;font:14px poppins">100 Min Street, Suit 123</div>
+                                                                    <div class="colFonts colFont" style="margin-top: 0px;margin-bottom: 5px;font:14px poppins">Bangor, ME, 04620</div>
+                                                                    <form method="POST" style="width: 100%" action="/BP/fillTemplate/">
+                                                                        <input type="hidden" name="csrfmiddlewaretoken" value="Wui0IefcpNyJ1c44R8iy5LjulfsT5htpomZ4K8bv63Qa5OiSspPOyBMHZmB4XzYV">
+                                                                        <div>
+                                                                            <input type="text" name="provider_id" value="31" hidden="">
+                                                                            <div>
+                                                                                <select onchange="this.form.submit()" style="color:grey; font:14px poppins;width: 100%;text-align: center;" class="form-select" name="template_id" id="template_id" aria-label="Default select example">
+                                                                                    <option selected="" style="color:grey; font-size:14px;" value="no_option">Select Letter Template</option>
+                                                                                    
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>  
+                                                                </div>
+                                                                <div class="flexStart mx-0 mt-0" style="height: auto;">
+                                                                    <p class="colText colFont" style="color:black;font:14px poppins;"><small style="font: 14px poppins">(</small>000<small style="font: 14px poppins">)</small> 000-000</p>
+                                                                    <p class="colText colFont" style="color:black;font:14px poppins;"><small style="font: 14px poppins">(</small>000<small style="font: 14px poppins">)</small> 345-3456 <small class="ml-2" style="font: 14px poppins;color: rgb(102, 102, 102);">fax</small></p>
+                                                                    <p class="colText colFont" style="color:black;font:14px poppins;">rghdf@kdhfg.com</p> 
+                                                                </div>
+                                                                <div class="flexStart" style="height: auto; width: 250px;">
+                                                                    <div class="colFonts colFont" style="margin-top: 0px;margin-bottom: 5px;font:14px poppins">Personal injury, Car Accident, Dog Bite, Slip And Fall, Plaintiff's Employment, General Litigation</div>
+                                                                </div>
+                                                                <div class="co-case-types-btn">
+                                                                    <p>CO-PILOT CASE TYPE</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                           <div class="firm-right-row">
+                                                                <div class="firm-client-details">
+                                                                    <p class="form-col-1">1.</p>
+                                                                    <span class="form-col-2"><p>Client_First</p>, <p>Client_Last</p></span>
+                                                                    <p class="form-col-3">5/30/2022</p>
+                                                                    <p class="form-col-4">Auto Accident</p>
+                                                                    <p class="form-col-5">7/30/2022</p>
+                                                                    <p class="form-col-6">Pending Review</p>
+                                                                    <p class="form-col-7">Intake</p>
+                                                                </div>
+                                                                <div class="firm-client-details">
+                                                                    <p class="form-col-1">2.</p>
+                                                                    <span class="form-col-2"><p>Client_First</p>, <p>Client_Last</p></span>
+                                                                    <p class="form-col-3">5/30/2022</p>
+                                                                    <p class="form-col-4">Auto Accident</p>
+                                                                    <p class="form-col-5">7/30/2022</p>
+                                                                    <p class="form-col-6">Accepted</p>
+                                                                    <p class="form-col-7">Case Management</p>
+                                                                </div>
+                                                                <div class="firm-client-details">
+                                                                    <p class="form-col-1">3.</p>
+                                                                    <span class="form-col-2"><p>Client_First</p>, <p>Client_Last</p></span>
+                                                                    <p class="form-col-3">5/30/2022</p>
+                                                                    <p class="form-col-4">Auto Accident</p>
+                                                                    <p class="form-col-5">7/30/2022</p>
+                                                                    <p class="form-col-6">Complete</p>
+                                                                    <p class="form-col-7">Litigation</p>
+                                                                </div>
+                                                                <div class="firm-client-details">
+                                                                    <p class="form-col-1">4.</p>
+                                                                    <span class="form-col-2"><p>Client_First</p>, <p>Client_Last</p></span>
+                                                                    <p class="form-col-3">5/30/2022</p>
+                                                                    <p class="form-col-4">Auto Accident</p>
+                                                                    <p class="form-col-5">7/30/2022</p>
+                                                                    <p class="form-col-6">Pending Review</p>
+                                                                    <p class="form-col-7">Intake</p>
+                                                                </div>
+                                                                <div class="firm-client-details">
+                                                                    <p class="form-col-1">5.</p>
+                                                                    <span class="form-col-2"><p>Client_First</p>, <p>Client_Last</p></span>
+                                                                    <p class="form-col-3">5/30/2022</p>
+                                                                    <p class="form-col-4">Auto Accident</p>
+                                                                    <p class="form-col-5">7/30/2022</p>
+                                                                    <p class="form-col-6">Pending Review</p>
+                                                                    <p class="form-col-7">Case Management</p>
+                                                                </div>
+                                                                <div class="firm-client-details">
+                                                                    <p class="form-col-1">6.</p>
+                                                                    <span class="form-col-2"><p>Client_First</p>, <p>Client_Last</p></span>
+                                                                    <p class="form-col-3">5/30/2022</p>
+                                                                    <p class="form-col-4">Auto Accident</p>
+                                                                    <p class="form-col-5">7/30/2022</p>
+                                                                    <p class="form-col-6">Pending Review</p>
+                                                                    <p class="form-col-7">Case Management</p>
+                                                                </div>
+                                                           </div> 
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <img width="100%" src="{% static 'BP_resources/images/profile-images.png' %}" alt="John Doe" />
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <p class="grey-text-firm">The Simon Law Group copilots attorneys by being available for advice, case review, and individual case examination.<br><br>Bring us on board to copilot with you to get our information updates, insights and case guidance for your firm today!<br><br>We do not charge to be your Co-Pilot!</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                    
+                                            </div>
+                                            </div>   
+                                           
+                                         </div>
+                                     </div>
+                                    </div>
+
+                            </div>
+
+                        </div>
+
+                            </div>
+                        </div>  
+                       
+                    <div class="col-lg-6"> 
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2022 Ian Silverthorne</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'BP_resources/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'BP_resources/vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/select2/select2.min.js' %}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static 'BP_resources/js/main.js' %}"></script>
+    <!-- <script>
+        $(document).ready(function(){
+            $('.firm-directory-table tr').click(function(){
+              window.location = $(this).data('href');
+              return false;
+            });
+          });
+    </script>-->
+
+
+
+</body>
+
+</html>
+<!-- end document-->

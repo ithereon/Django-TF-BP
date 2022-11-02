@@ -1,0 +1,1240 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+       
+        <!-- Title Page-->
+        <title>Dashboard</title>
+
+        <!-- Fontfaces CSS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <link href="{% static 'BP_resources/css/font-face.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Bootstrap CSS-->
+        <link href="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Vendor CSS-->
+        <link href="{% static 'BP_resources/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+        
+        <!-- Main CSS-->
+        <link href="{% static 'BP_resources/css/theme.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'css/style.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/sidebar.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/header.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/case.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/client.css' %}" rel="stylesheet" media="all">
+    
+    </head>
+
+<body class="animsition client-page photos-page Settlement-pg">
+    <div class="modal fade zoom-in" id="phone-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+                <form action="{% url 'bp-editClientInfo1' client.id case.id %}" method="post" id="editClientForm1">
+                    {% csrf_token %}
+                    <div class="modal-content-row">
+                        <p>{{client.phone}}</p>
+                        <p>Phone Number</p>
+                        
+                        <input type="text" name="client_phone" class="form-control" placeholder="Enter Phone....">
+                        
+                    </div>
+                    <div class="modal-content-row mt-2">
+                        <p>{{client.email}}</p>
+                        <p>Email address</p>
+                        
+                        <input type="email" name="client_email" class="form-control" placeholder="Enter Email....">
+                        
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button form="editClientForm1" type="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade zoom-in" id="dob-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+                <form id="editClientForm2" action="{% url 'bp-editClientInfo2' client.id case.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="modal-content-row">
+                        <p>{{client.birthday}}</p>
+                        <p>DOB</p>
+                        
+                        <input type="date" name="client_dob" class="form-control" placeholder="Enter DOB....">
+                        
+                    </div>
+                    <div class="modal-content-row mt-2">
+                        <p>{{client.ssn}}</p>
+                        <p>ssn</p>
+                        
+                        <input type="number" name="client_ssn" class="form-control" placeholder="Enter SSN....">
+                        
+                    </div>
+                    <div class="modal-content-row mt-2">
+                        <p>{{client.driver_license_number}}, {{client.driver_license_state}}</p>
+                        <p>dl#</p>
+                        
+                        <input type="text" name="client_driver_license" class="form-control" placeholder="Enter DL#....">
+                        
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button form="editClientForm2" type="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="page-wrapper">
+
+        <!-- MENU SIDEBAR-->
+        {% include 'BP/SideBar.html' %}
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP NEW-->
+            {% include 'BP/header.html' %}
+            <!-- HEADER DESKTOP NEW-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content notespg" style="padding-top: 0px !important;">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid clienthead  top-head">
+
+                        <h2 class="m-0"><img src="{% static 'BP_resources/images/icon/pencil-tool.png' %}">Notes <span><button type="button" onclick="location.href='{% url 'bp-addnotes' client.id case.id %}';">New Note or To-Do</button></span></h2>
+                        <!-- Button trigger modal -->
+                        {% if flagPage %}
+                            <div class="top-pane" style="top: -65px !important; right: 362px !important" onclick="location.href='{% url 'bp-removeFlagPage' client.id case.id flagPage.id %}';">
+                                <img src="{% static 'BP_resources/images/icon/flag-icon-red-bg-gray.svg' %}" width="46px">
+                            </div>
+                        {% else %}
+                            <div class="top-pane" style="top: -65px !important; right: 362px !important" onclick="location.href='{% url 'bp-flagPage' client.id case.id 'Note' 'bp-note' %}';">
+                                <img src="{% static 'BP_resources/images/icon/flag-icon-bg-gray.svg' %}" width="46px">
+                            </div>
+                        {% endif %}
+                        {% comment %} <div class="check-circle">
+                            <p>{{total_marked}}/{{total_checklists}}</p>
+                            <div class="nt-box">
+                                <div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:{{checklist_percentage}}"></div>
+                            </div>
+                            <div class="dropdown">
+                                <button onclick="myFunction()" class="dropbtn"><i class="fa fa-check" aria-hidden="true"></i> Checklist <i class="fa fa-chevron-down" aria-hidden="true"></i></button>
+                                <div id="myDropdown" class="dropdown-content">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="checklist-cont">
+                                                {% for checklist in final_checklist %}
+                                                    {% if not checklist.status  %}
+                                                        <div><input type="checkbox" onclick="location.href='{% url 'bp-markChecklist' checklist.id client.id case.id  %}';" id="vehicle1" name="vehicle1" value="Bike">
+                                                            <label for="vehicle1">{{checklist.name}}</label><br>
+                                                        </div>
+                                                    {% else %}
+                                                        <div><input type="checkbox" onclick="location.href='{% url 'bp-uncheckChecklist' checklist.case_checklist_id %}';" checked id="vehicle1" name="vehicle1" value="Bike">
+                                                            <label for="vehicle1">{{checklist.name}}</label><br>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-lg-6">
+                                            <div class="checklist-cont">
+                                                <div><input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                                                    <label for="vehicle1">example checkbox 1</label><br>
+                                                </div>
+                                                <div><input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                                                    <label for="vehicle2">example checkbox 2</label><br>
+                                                </div>
+                                                <div><input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                                                    <label for="vehicle3">example checkbox 3</label><br>
+                                                </div>
+                                                <div><input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                                                    <label for="vehicle3">example checkbox 4</label><br>
+                                                </div>
+                                                <div><input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                                                    <label for="vehicle3">example checkbox 5</label><br>
+                                                </div>
+                                                <div> <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                                                    <label for="vehicle3">example checkbox 6</label><br>
+                                                </div>
+                                                <div><input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                                                    <label for="vehicle3">example checkbox 7</label><br>
+                                                </div>
+                                                <div><input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                                                    <label for="vehicle3">example checkbox 8</label><br>
+                                                </div>
+                                                <div><input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                                                    <label for="vehicle3">example checkbox 9</label><br>
+                                                </div>
+                                                <div><input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                                                    <label for="vehicle3">example checkbox 10</label><br>
+                                                </div>
+
+                                            </div>
+                                        </div> -->
+                                        <div class="checkbottom">
+                                            <div class="col-lg-2">
+                                                <p>{{total_marked}}/{{total_checklists}}</p>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:{{checklist_percentage}};"></div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <button onclick="myFunction()" class="dropbtn"><i class="fa fa-check" aria-hidden="true"></i> Checklist <i class="fa fa-angle-up" aria-hidden="true"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div> {% endcomment %}
+  
+  <!-- Modal -->
+                        
+                        <div class="row" id="other-parties-page">
+                            <div class="col-lg-12 notetable">
+								<div class="card">
+									<div class="">
+										<div class="custom-tab">
+
+											<nav>
+												<div class="nav nav-tabs" id="nav-tab" role="tablist">
+													<a class="nav-item nav-link active" id="custom-nav-home-tab" data-toggle="tab" href="#custom-nav-all" role="tab" aria-controls="custom-nav-all"
+													 aria-selected="true">All</a>
+													<a class="nav-item nav-link" id="custom-nav-profile-tab" data-toggle="tab" href="#custom-nav-case" role="tab" aria-controls="custom-nav-case"
+													 aria-selected="false">case</a>
+													<a class="nav-item nav-link" id="custom-nav-contact-tab" data-toggle="tab" href="#custom-nav-contact" role="tab" aria-controls="custom-nav-contact"
+													 aria-selected="false">client</a>
+                                                     <a class="nav-item nav-link" id="custom-nav-injurie-tab" data-toggle="tab" href="#custom-nav-injurie" role="tab" aria-controls="custom-nav-contact"
+													 aria-selected="false">Defendants</a>
+                                                     <a class="nav-item nav-link" id="custom-nav-car_accident-tab" data-toggle="tab" href="#custom-nav-car_accident" role="tab" aria-controls="custom-nav-car_accident"
+													 aria-selected="false">Car Accident</a>
+                                                     <a class="nav-item nav-link" id="custom-nav-photo-tab" data-toggle="tab" href="#custom-nav-photo" role="tab" aria-controls="custom-nav-photo"
+													 aria-selected="false">Photo</a>
+                                                     <a class="nav-item nav-link" id="custom-nav-injury-tab" data-toggle="tab" href="#custom-nav-injury" role="tab" aria-controls="custom-nav-injury"
+													 aria-selected="false">injuries</a>
+                                                     <a class="nav-item nav-link" id="custom-nav-medical-tab" data-toggle="tab" href="#custom-nav-medical" role="tab" aria-controls="custom-nav-medical"
+													 aria-selected="false">Medical Treatment</a>
+                                                     <a class="nav-item nav-link" id="custom-nav-other_party-tab" data-toggle="tab" href="#custom-nav-other_party" role="tab" aria-controls="custom-nav-other_party"
+													 aria-selected="false">Other Party</a>
+                                                     <a class="nav-item nav-link" id="custom-nav-witnesses-tab" data-toggle="tab" href="#custom-nav-witnesses" role="tab" aria-controls="custom-nav-witnesses"
+													 aria-selected="false">witnesses</a>
+                                                     <a class="nav-item nav-link" id="custom-nav-insurance-tab" data-toggle="tab" href="#custom-nav-insurance" role="tab" aria-controls="custom-nav-insurance"
+													 aria-selected="false">Insurance</a>
+                                                     <a class="nav-item nav-link" id="custom-nav-employment-tab" data-toggle="tab" href="#custom-nav-employment" role="tab" aria-controls="custom-nav-employment"
+													 aria-selected="false">Employment</a>
+                                                     <a class="nav-item nav-link" id="custom-nav-recording-tab" data-toggle="tab" href="#custom-nav-recording" role="tab" aria-controls="custom-nav-recording"
+													 aria-selected="false">recording</a>
+                                                     <a class="nav-item nav-link" id="custom-nav-documents-tab" data-toggle="tab" href="#custom-nav-documents" role="tab" aria-controls="custom-nav-documents"
+													 aria-selected="false">documents</a>
+                                                     <a class="nav-item nav-link" id="custom-nav-costs-tab" data-toggle="tab" href="#custom-nav-costs" role="tab" aria-controls="custom-nav-costs"
+													 aria-selected="false">costs</a>
+                                                     <a class="nav-item nav-link" id="custom-nav-case_loans-tab" data-toggle="tab" href="#custom-nav-case_loans" role="tab" aria-controls="custom-nav-case_loans"
+													 aria-selected="false">case Loan</a>
+                                                     <a class="nav-item nav-link" id="custom-nav-settlement-tab" data-toggle="tab" href="#custom-nav-settlement" role="tab" aria-controls="custom-nav-settlement"
+													 aria-selected="false">Settlement</a>
+                                                     <a class="nav-item nav-link" id="custom-nav-litigation-tab" data-toggle="tab" href="#custom-nav-litigation" role="tab" aria-controls="custom-nav-litigation"
+													 aria-selected="false">litigation</a>
+                                                     <a class="nav-item nav-link" id="custom-nav-discovery-tab" data-toggle="tab" href="#custom-nav-discovery" role="tab" aria-controls="custom-nav-discovery"
+													 aria-selected="false">discovery</a>
+                                                     <a class="nav-item nav-link" id="custom-nav-deposition-tab" data-toggle="tab" href="#custom-nav-deposition" role="tab" aria-controls="custom-nav-deposition"
+													 aria-selected="false">deposition</a>
+                                                    
+                                                     
+
+												</div>
+											</nav>
+											<div class="tab-content" id="nav-tabContent">
+												<div class="tab-pane fade show active" id="custom-nav-all" role="tabpanel" aria-labelledby="custom-nav-all-tab">
+                                                 
+                                                    <div class="col-lg-12">
+                                                    <div class="row">
+                                                    <div class="table-responsive table--no-card m-b-20 table-img">
+                                                    
+                                                        <table class="table table-borderless table-striped table-earning">
+                                                        <thead>
+                                                            <tr>
+                                                                <td>date</td>
+                                                                <td>time</td>
+                                                                <td>user</td>
+                                                                <td>note</td>
+                                                                <td>category</td>
+                                                            </tr>
+                                                        </thead>
+                                                            <tbody>
+                                                                {% for note in case.case_notes.all %}
+                                                                {% if empty %}
+                                                                    <div class="alert alert-danger" role="alert">
+                                                                        A simple danger alert—check it out!
+                                                                    </div>
+                                                                {% endif %}
+                                                                    <tr class="hove">
+                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                        <td>{{note.description}}</td>
+                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                            
+                                                                    </tr>
+                                                                {% endfor %}
+                                                                
+                                                                
+                                                                
+                                                           
+                                                            
+                                                            </tbody>
+                                                        </table>
+                                                        
+                                                    </div>
+                                                </div>
+                                               </div>
+
+
+
+											</div>
+                                       
+												<div class="tab-pane fade" id="custom-nav-case" role="tabpanel" aria-labelledby="custom-nav-case-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                        <div class="table-responsive table--no-card m-b-20 table-img">
+                                                        
+                                                            <table class="table table-borderless table-striped table-earning">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td>date</td>
+                                                                    <td>time</td>
+                                                                    <td>user</td>
+                                                                    <td>note</td>
+                                                                    <td>category</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for note in case.case_notes.all %}
+                                                                {% if note.category.name == 'Case' %}
+                                                                    
+                                                                
+                                                                    <tr class="hove">
+                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                        <td>{{note.description}}</td>
+                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                    </tr>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                
+                                                                
+                                                                
+                                                           
+                                                            
+                                                            </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                   </div>
+
+												</div>
+												<div class="tab-pane fade" id="custom-nav-contact" role="tabpanel" aria-labelledby="custom-nav-contact-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                        <div class="table-responsive table--no-card m-b-20 table-img">
+                                                        
+                                                            <table class="table table-borderless table-striped table-earning">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td>date</td>
+                                                                    <td>time</td>
+                                                                    <td>user</td>
+                                                                    <td>note</td>
+                                                                    <td>category</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for note in case.case_notes.all %}
+                                                                {% if note.category.name == 'Client' %}
+                                                                    
+                                                                
+                                                                    <tr class="hove">
+                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                        <td>{{note.description}}</td>
+                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                            
+                                                                    </tr>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                
+                                                                
+                                                                
+                                                           
+                                                            
+                                                            </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                   </div>
+												</div>
+
+                                                <div class="tab-pane fade" id="custom-nav-injurie" role="tabpanel" aria-labelledby="custom-nav-injurie-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                        <div class="table-responsive table--no-card m-b-20 table-img">
+                                                        
+                                                            <table class="table table-borderless table-striped table-earning">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td>date</td>
+                                                                    <td>time</td>
+                                                                    <td>user</td>
+                                                                    <td>note</td>
+                                                                    <td>category</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for note in case.case_notes.all %}
+                                                                {% if note.category.name == 'Defendants' %}
+                                                                    
+                                                                
+                                                                    <tr class="hove">
+                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                        <td>{{note.description}}</td>
+                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                            
+                                                                    </tr>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                
+                                                                
+                                                                
+                                                           
+                                                            
+                                                            </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                   </div>
+                                                       
+                                                  </div>
+                                                  <div class="tab-pane fade" id="custom-nav-car_accident" role="tabpanel" aria-labelledby="custom-nav-car_accident-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                        <div class="table-responsive table--no-card m-b-20 table-img">
+                                                        
+                                                            <table class="table table-borderless table-striped table-earning">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td>date</td>
+                                                                    <td>time</td>
+                                                                    <td>user</td>
+                                                                    <td>note</td>
+                                                                    <td>category</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for note in case.case_notes.all %}
+                                                                {% if note.category.name == 'Car Accident' %}
+                                                                    
+                                                                
+                                                                    <tr class="hove">
+                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                        <td>{{note.description}}</td>
+                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                            
+                                                                    </tr>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                
+                                                                
+                                                                
+                                                           
+                                                            
+                                                            </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                   </div>
+                                                       
+                                                  </div>
+                                                  <div class="tab-pane fade" id="custom-nav-photo" role="tabpanel" aria-labelledby="custom-nav-photo-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                        <div class="table-responsive table--no-card m-b-20 table-img">
+                                                        
+                                                            <table class="table table-borderless table-striped table-earning">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td>date</td>
+                                                                    <td>time</td>
+                                                                    <td>user</td>
+                                                                    <td>note</td>
+                                                                    <td>category</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for note in case.case_notes.all %}
+                                                                {% if note.category.name == 'Photo' %}
+                                                                    
+                                                                
+                                                                    <tr class="hove">
+                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                        <td>{{note.description}}</td>
+                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                            
+                                                                    </tr>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                
+                                                                
+                                                                
+                                                           
+                                                            
+                                                            </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                   </div>
+                                                       
+                                                  </div>
+                                                  <div class="tab-pane fade" id="custom-nav-injury" role="tabpanel" aria-labelledby="custom-nav-injury-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                        <div class="table-responsive table--no-card m-b-20 table-img">
+                                                        
+                                                            <table class="table table-borderless table-striped table-earning">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td>date</td>
+                                                                    <td>time</td>
+                                                                    <td>user</td>
+                                                                    <td>note</td>
+                                                                    <td>category</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for note in case.case_notes.all %}
+                                                                {% if note.category.name == 'Injury' %}
+                                                                    
+                                                                
+                                                                    <tr class="hove">
+                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                        <td>{{note.description}}</td>
+                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                            
+                                                                    </tr>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                
+                                                                
+                                                                
+                                                           
+                                                            
+                                                            </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                   </div>
+                                                       
+                                                  </div>
+                                                  <div class="tab-pane fade" id="custom-nav-medical" role="tabpanel" aria-labelledby="custom-nav-medical-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                        <div class="table-responsive table--no-card m-b-20 table-img">
+                                                        
+                                                            <table class="table table-borderless table-striped table-earning">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td>date</td>
+                                                                    <td>time</td>
+                                                                    <td>user</td>
+                                                                    <td>note</td>
+                                                                    <td>category</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for note in case.case_notes.all %}
+                                                                {% if note.category.name == 'Medical Treatment' %}
+                                                                    
+                                                                
+                                                                    <tr class="hove">
+                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                        <td>{{note.description}}</td>
+                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                            
+                                                                    </tr>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                
+                                                                
+                                                                
+                                                           
+                                                            
+                                                            </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                   </div>
+                                                       
+                                                  </div>
+                                                  <div class="tab-pane fade" id="custom-nav-other_party" role="tabpanel" aria-labelledby="custom-nav-other_party-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                        <div class="table-responsive table--no-card m-b-20 table-img">
+                                                        
+                                                            <table class="table table-borderless table-striped table-earning">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td>date</td>
+                                                                    <td>time</td>
+                                                                    <td>user</td>
+                                                                    <td>note</td>
+                                                                    <td>category</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for note in case.case_notes.all %}
+                                                                {% if note.category.name == 'Other Party' %}
+                                                                    
+                                                                
+                                                                    <tr class="hove">
+                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                        <td>{{note.description}}</td>
+                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                            
+                                                                    </tr>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                
+                                                                
+                                                                
+                                                           
+                                                            
+                                                            </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                   </div>
+                                                       
+                                                  </div>
+                                                  <div class="tab-pane fade" id="custom-nav-witnesses" role="tabpanel" aria-labelledby="custom-nav-witnesses-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                        <div class="table-responsive table--no-card m-b-20 table-img">
+                                                        
+                                                            <table class="table table-borderless table-striped table-earning">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td>date</td>
+                                                                    <td>time</td>
+                                                                    <td>user</td>
+                                                                    <td>note</td>
+                                                                    <td>category</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for note in case.case_notes.all %}
+                                                                {% if note.category.name == 'Witnesses' %}
+                                                                    
+                                                                
+                                                                    <tr class="hove">
+                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                        <td>{{note.description}}</td>
+                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                            
+                                                                    </tr>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                
+                                                                
+                                                                
+                                                           
+                                                            
+                                                            </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                   </div>
+                                                       
+                                                  </div>
+                                                  <div class="tab-pane fade" id="custom-nav-insurance" role="tabpanel" aria-labelledby="custom-nav-insurance-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                        <div class="table-responsive table--no-card m-b-20 table-img">
+                                                        
+                                                            <table class="table table-borderless table-striped table-earning">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td>date</td>
+                                                                    <td>time</td>
+                                                                    <td>user</td>
+                                                                    <td>note</td>
+                                                                    <td>category</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for note in case.case_notes.all %}
+                                                                {% if note.category.name == 'Insurance' %}
+                                                                    
+                                                                
+                                                                    <tr class="hove">
+                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                        <td>{{note.description}}</td>
+                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                            
+                                                                    </tr>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                
+                                                                
+                                                                
+                                                           
+                                                            
+                                                            </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                   </div>
+                                                       
+                                                  </div>
+                                                  <div class="tab-pane fade" id="custom-nav-employment" role="tabpanel" aria-labelledby="custom-nav-employment-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                        <div class="table-responsive table--no-card m-b-20 table-img">
+                                                        
+                                                            <table class="table table-borderless table-striped table-earning">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td>date</td>
+                                                                    <td>time</td>
+                                                                    <td>user</td>
+                                                                    <td>note</td>
+                                                                    <td>category</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for note in case.case_notes.all %}
+                                                                {% if note.category.name == 'Employment' %}
+                                                                    
+                                                                
+                                                                    <tr class="hove">
+                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                        <td>{{note.description}}</td>
+                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                            
+                                                                    </tr>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                
+                                                                
+                                                                
+                                                           
+                                                            
+                                                            </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                   </div>
+                                                       
+                                                  </div>
+                                                  <div class="tab-pane fade" id="custom-nav-recordings" role="tabpanel" aria-labelledby="custom-nav-recordings-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                        <div class="table-responsive table--no-card m-b-20 table-img">
+                                                        
+                                                            <table class="table table-borderless table-striped table-earning">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td>date</td>
+                                                                    <td>time</td>
+                                                                    <td>user</td>
+                                                                    <td>note</td>
+                                                                    <td>category</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for note in case.case_notes.all %}
+                                                                {% if note.category.name == 'Recordings' %}
+                                                                    
+                                                                
+                                                                    <tr class="hove">
+                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                        <td>{{note.description}}</td>
+                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                            
+                                                                    </tr>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                
+                                                                
+                                                                
+                                                           
+                                                            
+                                                            </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                   </div>
+                                                       
+                                                  </div>
+                                                  <div class="tab-pane fade" id="custom-nav-documents" role="tabpanel" aria-labelledby="custom-nav-documents-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                        <div class="table-responsive table--no-card m-b-20 table-img">
+                                                        
+                                                            <table class="table table-borderless table-striped table-earning">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td>date</td>
+                                                                    <td>time</td>
+                                                                    <td>user</td>
+                                                                    <td>note</td>
+                                                                    <td>category</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for note in case.case_notes.all %}
+                                                                {% if note.category.name == 'Documents' %}
+                                                                    
+                                                                
+                                                                    <tr class="hove">
+                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                        <td>{{note.description}}</td>
+                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                            
+                                                                    </tr>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                
+                                                                
+                                                                
+                                                           
+                                                            
+                                                            </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                   </div>
+                                                       
+                                                  </div>
+                                                  <div class="tab-pane fade" id="custom-nav-costs" role="tabpanel" aria-labelledby="custom-nav-costs-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                        <div class="table-responsive table--no-card m-b-20 table-img">
+                                                        
+                                                            <table class="table table-borderless table-striped table-earning">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td>date</td>
+                                                                    <td>time</td>
+                                                                    <td>user</td>
+                                                                    <td>note</td>
+                                                                    <td>category</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for note in case.case_notes.all %}
+                                                                {% if note.category.name == 'Costs' %}
+                                                                    
+                                                                
+                                                                    <tr class="hove">
+                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                        <td>{{note.description}}</td>
+                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                            
+                                                                    </tr>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                
+                                                                
+                                                                
+                                                           
+                                                            
+                                                            </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                   </div>
+                                                       
+                                                  </div>
+                                                  <div class="tab-pane fade" id="custom-nav-case_loans" role="tabpanel" aria-labelledby="custom-nav-case_loans-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                        <div class="table-responsive table--no-card m-b-20 table-img">
+                                                        
+                                                            <table class="table table-borderless table-striped table-earning">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td>date</td>
+                                                                    <td>time</td>
+                                                                    <td>user</td>
+                                                                    <td>note</td>
+                                                                    <td>category</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for note in case.case_notes.all %}
+                                                                {% if note.category.name == 'Case Loan' %}
+                                                                    
+                                                                
+                                                                    <tr class="hove">
+                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                        <td>{{note.description}}</td>
+                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                            
+                                                                    </tr>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                
+                                                                
+                                                                
+                                                           
+                                                            
+                                                            </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                   </div>
+                                                       
+                                                  </div>
+                                                  <div class="tab-pane fade" id="custom-nav-settlement" role="tabpanel" aria-labelledby="custom-nav-settlement-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                        <div class="table-responsive table--no-card m-b-20 table-img">
+                                                        
+                                                            <table class="table table-borderless table-striped table-earning">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td>date</td>
+                                                                    <td>time</td>
+                                                                    <td>user</td>
+                                                                    <td>note</td>
+                                                                    <td>category</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for note in case.case_notes.all %}
+                                                                {% if note.category.name == 'Settlement' %}
+                                                                    
+                                                                
+                                                                    <tr class="hove">
+                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                        <td>{{note.description}}</td>
+                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                            
+                                                                    </tr>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                
+                                                                
+                                                                
+                                                           
+                                                            
+                                                            </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                   </div>
+                                                       
+                                                  </div>
+                                                  <div class="tab-pane fade" id="custom-nav-litigation" role="tabpanel" aria-labelledby="custom-nav-litigation-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                        <div class="table-responsive table--no-card m-b-20 table-img">
+                                                        
+                                                            <table class="table table-borderless table-striped table-earning">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td>date</td>
+                                                                    <td>time</td>
+                                                                    <td>user</td>
+                                                                    <td>note</td>
+                                                                    <td>category</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for note in case.case_notes.all %}
+                                                                {% if note.category.name == 'Litigation' %}
+                                                                    
+                                                                
+                                                                    <tr class="hove">
+                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                        <td>{{note.description}}</td>
+                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                            
+                                                                    </tr>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                
+                                                                
+                                                                
+                                                           
+                                                            
+                                                            </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                   </div>
+                                                       
+                                                  </div>
+                                                  <div class="tab-pane fade" id="custom-nav-discovery" role="tabpanel" aria-labelledby="custom-nav-discovery-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                        <div class="table-responsive table--no-card m-b-20 table-img">
+                                                        
+                                                            <table class="table table-borderless table-striped table-earning">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td>date</td>
+                                                                    <td>time</td>
+                                                                    <td>user</td>
+                                                                    <td>note</td>
+                                                                    <td>category</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for note in case.case_notes.all %}
+                                                                {% if note.category.name == 'Discovery' %}
+                                                                    
+                                                                
+                                                                    <tr class="hove">
+                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                        <td>{{note.description}}</td>
+                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                            
+                                                                    </tr>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                
+                                                                
+                                                                
+                                                           
+                                                            
+                                                            </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                   </div>
+                                                       
+                                                  </div>
+                                                  <div class="tab-pane fade" id="custom-nav-deposition" role="tabpanel" aria-labelledby="custom-nav-deposition-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                        <div class="table-responsive table--no-card m-b-20 table-img">
+                                                        
+                                                            <table class="table table-borderless table-striped table-earning">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td>date</td>
+                                                                    <td>time</td>
+                                                                    <td>user</td>
+                                                                    <td>note</td>
+                                                                    <td>category</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for note in case.case_notes.all %}
+                                                                {% if note.category.name == 'Deposition' %}
+                                                                    
+                                                                
+                                                                    <tr class="hove">
+                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                        <td>{{note.description}}</td>
+                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                            
+                                                                    </tr>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                
+                                                                
+                                                                
+                                                           
+                                                            
+                                                            </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                   </div>
+                                                       
+                                                  </div>
+												</div>
+                                            </div>
+                                        </div>
+									</div>
+								</div>
+                            </div>
+                        </div>
+                      
+                       
+                    <div class="col-lg-6"> 
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2022 Ian Silverthorne</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'BP_resources/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'BP_resources/vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/select2/select2.min.js' %}">
+    </script>
+    <script>
+        /* When the user clicks on the button, 
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Main JS-->
+    <script src="{% static 'BP_resources/js/main.js' %}"></script>
+
+    <script>
+        function calcWidth() {
+            var navwidth = 0;
+            var morewidth = $('#main-2 .more-2').outerWidth(true);
+            $('#main-2 > li:not(.more-2)').each(function() {
+                navwidth += $(this).outerWidth( true );
+            });
+            var availablespace = $('.wrap').outerWidth(true) - morewidth;
+            
+            if (navwidth > availablespace) {
+              var lastItem = $('#main-2 > li:not(.more-2)').last();
+              lastItem.attr('data-width', lastItem.outerWidth(true));
+              lastItem.prependTo($('#main-2 .more-2 ul'));
+              calcWidth();
+            } else {
+              var firstMoreElement = $('#main-2 li.more-2 li').first();
+              if (navwidth + firstMoreElement.data('width') < availablespace) {
+                firstMoreElement.insertBefore($('#main-2 .more-2'));
+              }
+            }
+            
+            if ($('.more-2 li').length > 0) {
+              $('.more-2').css('display','block');
+            } else {
+              $('.more-2').css('display','none');
+            }
+          }
+          $(window).on('resize load',function(){
+            calcWidth();
+          });
+          $(".more-button").click(function(){
+            $(".collapsible-ul").toggle();
+          });
+    </script>
+</body>
+
+</html>
+<!-- end document-->

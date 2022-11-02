@@ -1,0 +1,321 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <!--  meta tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+       
+    
+        <!-- Title Page-->
+        <title>Add Client</title>
+    
+        <!-- Fontfaces CSS-->
+        <link href="{% static 'BP_resources/css/font-face.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Bootstrap CSS-->
+        <link href="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Vendor CSS-->
+        <link href="{% static 'BP_resources/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Main CSS-->
+        <link href="{% static 'BP_resources/css/theme.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/sidebar.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/header.css' %}" rel="stylesheet" media="all">
+        
+ 
+
+    
+</head>
+    
+
+<body >
+    
+    <div >
+
+        
+        <!-- PAGE CONTAINER-->
+        <div >
+            <!-- HEADER DESKTOP-->
+       
+            <!-- HEADER DESKTOP-->
+           
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="container">
+                    <div>
+                        
+                        <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Add a Client</h5>
+                              
+                          <form method="POST">
+                              {% csrf_token %}
+                          
+                              <div class="mb-3 row">
+                                  <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">First Name</label>
+                                  <div class="col-sm-10">
+                                  <input type="text" required class="form-control" name="first_name" id="first_name">
+                                  </div>
+                              </div>
+          
+                              <div class="mb-3 row">
+                                  <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Last Name</label>
+                                  <div class="col-sm-10">
+                                  <input type="text" required  class="form-control" name="last_name" id="last_name">
+                                  </div>
+                              </div>
+                              <div class="mb-3 row">
+                                <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Email</label>
+                                <div class="col-sm-10">
+                                <input type="email"   class="form-control" name="email" id="email">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Phone</label>
+                                <div class="col-sm-10">
+                                <input type="text"   class="form-control" name="phone" id="phone">
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Birthday</label>
+                                <div class="col-sm-10">
+                                <input type="date"  required class="form-control" name="birthday" id="birthday">
+                                </div>
+                            </div>
+          
+                              <!-- <div class="mb-3 row">
+                                  <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Role:</label>
+                                  <div class="col-sm-10">
+                                      <select class="form-select" name="account_type" aria-label="Default select example">
+                                          
+                                          <option selected value="Provider">Medical Provider</option>
+                                          <option value="Attorney">Attorney</option>
+                                          <option value="Marketer">Marketer</option>
+                                          
+                                        </select>
+                                  </div>
+                              </div> -->
+          
+                              <div class="mb-3 row" style="display: none;">
+                                  <label for="inputFirstName" class="col-sm-2 col-form-label fw-bold">Age</label>
+                                  <div class="col-sm-10">
+                                  <input type="text"  class="form-control" name="age" id="age">
+                                  </div>
+                              </div>
+          
+                              <div class="mb-3 row">
+                                <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Gender</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select" name="gender" id="gender" aria-label="Default select example">
+                                        
+                                        
+                                        <option selected value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        
+                                      </select>
+                                </div>
+                                </div>
+
+                            
+                              <div class="mb-3 row">
+                                  <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Incident Date</label>
+                                  <div class="col-sm-10">
+                                  <input type="date" required  class="form-control" name="incident_date" id="incident_date">
+                                  </div>
+                              </div>
+                              <div class="mb-3 row">
+                                <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Case Stage</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select" name="case_stage" id="case_stage" aria-label="Default select example">
+                                        <option value="">--Select Case Stage---</option>
+										{% for case_stage in case_stages %} 
+										<option value="{{case_stage.id}}">{{case_stage.name}}</option> {% endfor %} </select>
+                                      </select>
+                                </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Case Status</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-select" name="case_status" id="case_status" aria-label="Default select example">
+                                            <option value="">--Select Case Status---</option>
+                                          </select>
+                                    </div>
+                                    </div>
+                              <!-- <div class="mb-3 row">
+                                  <label for="inputPassword" class="col-sm-2 col-form-label fw-bold">Case Type</label>
+                                  <div class="col-sm-10">
+                                  <input type="text"   class="form-control" name="case_type" id="case_type">
+                                  </div>
+                              </div> -->
+
+                            <div class="mb-3 row">
+                                <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Case Type</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select" required name="case_type" id="case_type" aria-label="Default select example">
+                                        
+                                        
+                                        <!-- <optgroup label="Personal Injury">
+                                            <option selected value="Auto Accident">Auto Accident</option>
+                                            <option value="Dog Bite">Dog Bite</option>
+                                            <option value="Premises Liability">Premises Liability</option>
+                                            <option value="Food Poisoning">Food Poisoning</option>
+                                            <option value="Worker's Compensation">Worker's Compensation</option>
+                                            <option value="Products Liability">Products Liability</option>
+                                        </optgroup>
+                                        <optgroup label="Employment">
+                                            <option value="Wrongful Termination">Wrongful Termination</option>
+                                            <option value="Sexual Harassment">Sexual Harassment</option>
+                                            <option value="Constructive Termination">Constructive Termination</option>
+                                            <option value="Discrimination">Discrimination</option>
+                                        </optgroup>
+                                        <optgroup label="Taxation">
+                                            <option  value="Property Tax Appeal">Property Tax Appeal</option>
+                                            <option value="General Tax">General Tax</option>
+                                        </optgroup>
+                                        <optgroup label="Estate Planning">
+                                            <option  value="Will">Will</option>
+                                            <option value="Trust">Trust</option>
+                                        </optgroup> -->
+                                        {% for case_type in case_types %}
+                                            <option value="{{case_type.id}}">{{case_type.name}}</option>
+                                        {% endfor %}
+                                      </select>
+                                </div>
+                            </div>
+                              
+                              
+                                    <div class="mb-3 row">
+                                        <label for="inputPassword" class="col-sm-2 col-form-label fw-bold">Address1</label>
+                                        <div class="col-sm-10">
+                                        <input type="text"   class="form-control" name="address1" id="address1">
+                                        </div>
+                                    </div>
+                                  
+
+                                  
+                                    <div class="mb-3 row">
+                                        <label for="inputPassword" class="col-sm-2 col-form-label fw-bold">Address2</label>
+                                        <div class="col-sm-10">
+                                        <input type="text"   class="form-control" name="address2" id="address2">
+                                        </div>
+                                    </div>
+                                  
+
+                              
+                                  <div class="mb-3 row">
+                                      <label for="inputPassword" class="col-sm-2 col-form-label fw-bold">City</label>
+                                      <div class="col-sm-10">
+                                        <input type="text"   class="form-control" name="city" id="city">
+                                      </div>
+                                  </div>
+                                
+
+                                
+                                  <div class="mb-3 row">
+                                      <label for="inputPassword" class="col-sm-2 col-form-label fw-bold">State</label>
+                                      <div class="col-sm-10">
+                                      <input type="text"   class="form-control" name="state" id="state">
+                                    </div>
+                                  </div>
+
+                                  <div class="mb-3 row">
+                                    <label for="inputPassword" class="col-sm-2 col-form-label fw-bold">Zip Code</label>
+                                    <div class="col-sm-10">
+                                    <input type="text"   class="form-control" name="post_code" id="post_code">
+                                  </div>
+                                </div>
+                               
+                                
+          
+                              
+                              <button  class="btn btn-primary" onclick="_age();" type="submit">Add client</button>
+                            </form>
+                            
+                            </div>
+                          </div>
+                            
+                    </div>  
+                       
+        
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+        function _calcAge() {
+            var date = new Date(document.getElementById("birthday").value);
+            var today = new Date();
+
+            var timeDiff = Math.abs(today.getTime() - date.getTime());
+            var age1 = Math.ceil(timeDiff / (1000 * 3600 * 24)) / 365;
+            return age1;
+        }
+        function _age(){
+            
+            var temp_age = _calcAge();
+            console.log(temp_age);
+            document.getElementById('age').value = temp_age.toFixed(2);
+        }
+        
+    </script>
+    
+    <!-- Jquery JS-->
+    <script src="{% static 'BP_resources/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'BP_resources/vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/select2/select2.min.js' %}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static 'BP_resources/js/main.js' %}"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script>
+        $('#case_stage').change(function() {
+        var case_stage_id = $('#case_stage').val();
+        $.ajax({
+            url: '/BP/GetCaseStatus/?case_stage=' + case_stage_id,
+            contentType: 'application/json',
+            method: 'GET',
+            success: function(response) {
+            $('#case_status').empty();
+            $.each(response, function(i, p) {
+                console.log(p);
+                $('#case_status').append($('<option></option>').val(p.id).html(p.name));
+            });
+            }
+        });
+    });
+    </script>
+
+</body>
+
+</html>
+<!-- end document-->

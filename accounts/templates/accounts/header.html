@@ -1,0 +1,94 @@
+{% load static %}
+<style>
+  a:hover{
+    color:#1C6FB2;
+  }
+</style>
+<header class="pb-0 pt-1" style="background-color: white;">
+  <div class="container">
+    <div>
+      {% for message in messages %}
+      <div class="alert {{ message.tags }} alert-dismissible page-alert" role="alert">
+        {{ message | safe }}
+        </button>
+      </div>
+      {% endfor %}
+      <div class="text-md-end">
+        {% if request.user.is_authenticated %}
+        <div class="top-nav-sm d-flex flex-wrap justify-content-md-end" style="padding-top: 3px; padding-bottom: 4px;">
+          
+          {% if request.user.userprofile.account_type == 'Attorney' or request.user.attorneystaff_userprofile.account_type == 'AttorneyStaff' %}
+          <a style="text-decoration: none;" href="/">Welcome {{request.user.first_name}} {{request.user.last_name}}!</a>
+          <a style="text-decoration: none;" class="me-2" href="{% url 'attorney_profile' %}">My Account</a>
+          <a style="text-decoration: none;" href="{% url 'logoutPage' %}" class="me-2">Logout</a>
+          {% elif request.user.userprofile.account_type == 'Provider' or request.user.providerstaff_userprofile.account_type == 'ProviderStaff' %}
+          {% if request.user.userprofile.account_type == 'Provider' %}
+          <a style="text-decoration: none !important; pointer-events: none; " href="/">Welcome {{request.user.first_name}} {{request.user.last_name}} with {{request.user.userprofile.office_name}}!</a>
+          {% else %}
+          <a style="text-decoration: none !important; pointer-events: none;" href="/">Welcome {{request.user.first_name}} {{request.user.last_name}} with {{request.user.providerstaff_userprofile.created_by.providerprofile.office_name}}!</a>
+          {% endif %}
+          
+          <a style=""  href="{% url 'profile' %}">Account</a>
+          
+          <a style="" class="" href="{% url 'case_management' %}">Case Management</a>
+          <a style=""  href="{% url 'TFTodo' %}">To-Do</a>
+          <a style=""  href="{% url 'requestUpdate' %}">Request Update</a>
+          <a style=""  href="{% url 'accounting' %}">Accounting</a>
+          <a style=""  href="{% url 'reports' %}">Reports</a>
+          <a style="text-decoration: none;" href="{% url 'logoutPage' %}" >Logout</a>
+          {% elif request.user.userprofile.account_type == 'Marketer' or request.user.marketerstaff_userprofile.account_type == 'MarketerStaff' %}
+          <a style="text-decoration: none !important; pointer-events: none;" href="/">Welcome {{request.user.first_name}} {{request.user.last_name}} of {{request.user.userprofile.office_name}}!</a>
+          <a style="" class="me-2" href="{% url 'marketer_profile' %}">Account</a>
+          <a style="" class="me-2" href="{% url 'marketer' %}">Marketer Code</a>
+          <a style="" class="me-2" href="{% url 'marketer_profile' %}">Medical Providers Marketed</a>
+          <a style="text-decoration: none !important;" href="{% url 'logoutPage' %}" class="me-2">Logout</a>
+          {% elif request.user.is_superuser or request.user.is_staff %}
+          <a style="text-decoration: none !important; pointer-events: none;" href="/">Welcome {{request.user.username}}!</a>
+          <a style="" href="{% url 'admin_dashboard' %}" class="me-2">Admin Dashboard</a>
+          <a style="text-decoration: none;" href="{% url 'logoutPage' %}" class="me-2">Logout</a>
+          {% endif %}
+        </div>
+        {% else %}
+        <form action="/" method="POST" class="d-inline-flex flex-wrap">
+          {% csrf_token %}
+          <input class="form-control form-control-sm me-3" style="width: 180px;" type="text" name="username" placeholder="Username" aria-label="default input example">
+          <input class="form-control form-control-sm me-3" style="width: 180px;" type="password" placeholder="password" name="password1" aria-label="default input example">
+          <button class="btn btn-sm btn-primary me-2" type="submit" style="background-color: #1C6FB2;"><i class="fas fa-lock"></i></button>
+        </form>
+
+        <a href="{% url 'reset_password' %}" style="text-decoration: none;" class="topIcons me-2">Forgot Login Info?</a>
+        <a href="{% url 'createAccount' %}" class="topIcons" style="text-decoration: none;">Create Account</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+      <a class="navbar-brand" href="{% url 'home' %}">
+        <img src="{% static 'img/logo.png' %}" style="width: 200px;" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item navItems me-2">
+            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+          </li>
+          <li class="nav-item navItems me-2">
+            <a class="nav-link" href="{% url 'aboutus' %}">About Us</a>
+          </li>
+          <li class="nav-item navItems me-2">
+            <a class="nav-link" href="{% url 'attorneyInfo' %}">Attorney Information</a>
+          </li>
+          <li class="nav-item navItems me-2">
+            <a class="nav-link" href="{% url 'medicalProviders' %}">Medical Providers-List Your Office For Free!</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="{% static 'js/accounts.js' %}"></script>

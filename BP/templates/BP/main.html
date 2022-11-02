@@ -1,0 +1,14 @@
+{% extends 'BP/base.html' %}
+
+{% block title %}
+Upload
+{% endblock title %}
+
+{% block content %}
+<form action="{% url 'upload' %}" method="POST" class="dropzone dz" id="my-dropzone">
+    {% csrf_token %}
+    <div class="fallback">
+        <input type="file" name="file" multiple>
+    </div>
+</form>
+{% endblock content %}

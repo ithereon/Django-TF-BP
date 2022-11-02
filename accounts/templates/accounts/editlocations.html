@@ -1,0 +1,240 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% block pagetitle %}
+    Treatment First - Edit Locations
+{% endblock pagetitle %}
+{% block content %}
+
+    {% if request.user.is_staff %}
+        <div>
+            <a class="btn btn-primary" style="float: right;" href="{% url 'admin_editprovider' location.added_by.id%}">Edit Provider Profile</a>
+        </div>
+    {% endif %}
+    <h3 class="text-primary">Edit Location</h3>
+    <br>
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="mb-3 row">
+            <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Address</label>
+            <div class="col-sm-10">
+            <input type="text" required class="form-control" value="{{location.address}}" placeholder="*Start typing the address" name="address1" id="address">
+            </div>
+        </div>
+        
+        <div class="mb-3 row">
+            <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Address2</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" value="{{location.address2}}" name="address3" id="address2">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">City</label>
+            <div class="col-sm-10">
+            <input type="text" required class="form-control" value="{{location.city}}"  name="city1" id="city">
+            </div>
+        </div>
+        
+        <div class="mb-3 row">
+            <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">State</label>
+            <div class="col-sm-10">
+            <input type="text" required class="form-control" value="{{location.state}}" name="state1" id="state">
+            </div>
+        </div>
+    
+        <div class="mb-3 row temp1">
+            <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Country</label>
+            <div class="col-sm-10">
+            <input type="text" required  class="form-control" value="{{location.country}}" name="country1" id="country">
+            </div>
+        </div>
+
+        <div class="mb-3 row temp1">
+            <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Zip Code</label>
+            <div class="col-sm-10">
+            <input type="text"   class="form-control" value="{{location.post_code}}" name="postal1" id="postal">
+            </div>
+        </div>
+
+        <div class="mb-3 row temp1">
+            <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Longitude</label>
+            <div class="col-sm-10">
+            <input  type="text" required  class="form-control" value="{{location.longitude}}" name="longitude1" id="longitude">
+            </div>
+        </div>
+
+        <div class="mb-3 row temp1">
+            <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Latitude</label>
+            <div class="col-sm-10">
+            <input  type="text" required  class="form-control" value="{{location.latitude}}" name="latitude1" id="latitude">
+            </div>
+        </div>
+
+        <div class="mb-3 row temp1">
+            <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Phone</label>
+            <div class="col-sm-10">
+            <input  type="text" class="form-control" value="{{location.phone}}" name="phone1" id="phone">
+            </div>
+        </div>
+
+        <div class="mb-3 row temp1">
+            <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Fax</label>
+            <div class="col-sm-10">
+            <input  type="text" class="form-control" value="{{location.fax}}" name="fax1" id="fax">
+            </div>
+        </div>
+
+        <div class="mb-3 row temp1">
+            <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Email</label>
+            <div class="col-sm-10">
+            <input  type="text" class="form-control" value="{{location.email}}" name="email1" id="email">
+            </div>
+        </div>
+
+        <label  class="mb-3 fw-bold">Add Specialties</label>
+        {% for specialty in specialties %}
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-12">
+                    <div class="form-check">
+                        {% if specialty in location.specialties.all %}
+                        <input class="form-check-input" name="specialties" type="checkbox" value="{{specialty.id}}" checked id="option{{specialty.id}}">
+                        {% else %}
+                        <input class="form-check-input" name="specialties" type="checkbox" value="{{specialty.id}}" id="option{{specialty.id}}">
+                        {% endif %}
+                        <label class="form-check-label" for="{{specialty.id}}">
+                        {{specialty.name}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <!-- <hr>
+        <label  class="mb-3 fw-bold">Medical Bill Request Location</label>
+        <div class="row">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Address</label>
+                <input type="text" class="form-control" id="bill-request-address" value="{{bill_request_location.name}}" name="bill-request-address" placeholder="Enter the Address">
+            </div>
+            <div class="col-lg-6 col-md-5 col-xs-12">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Phone</label>
+                    <input type="text" class="form-control" id="bill-request-phone" value="{{bill_request_location.phone}}" name="bill-request-phone" placeholder="Enter the Phone">
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Address Type</label>
+                    <input type="text" disabled class="form-control" id="bill-request-type" name="bill-request-type" value="Medical Bill Request Location">
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-5 col-xs-12">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Fax</label>
+                    <input type="text" class="form-control" id="bill-request-fax" value="{{bill_request_location.fax}}" name="bill-request-fax" placeholder="Enter the Fax">
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="bill-request-email" value="{{bill_request_location.email}}" name="bill-request-email" placeholder="name@email.com">
+                </div>
+            </div>
+        </div>
+        <hr>
+        <label  class="mb-3 fw-bold">Medical Record Request Location</label>
+        <div class="row">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Address</label>
+                <input type="text" class="form-control" id="record-request-address" value="{{record_request_location.name}}" name="record-request-address" placeholder="Enter the Address">
+            </div>
+            <div class="col-lg-6 col-md-5 col-xs-12">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Phone</label>
+                    <input type="text" class="form-control" id="record-request-phone" value="{{record_request_location.phone}}" name="record-request-phone" placeholder="Enter the Phone">
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Address Type</label>
+                    <input type="text" disabled class="form-control" id="record-request-type" name="record-request-type" value="Medical Record Request Location">
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-5 col-xs-12">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Fax</label>
+                    <input type="text" class="form-control" id="record-request-fax" value="{{record_request_location.fax}}" name="record-request-fax" placeholder="Enter the Fax">
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="record-request-email" value="{{record_request_location.email}}" name="record-request-email" placeholder="name@email.com">
+                </div>
+            </div>
+        </div>
+        <hr>
+        <label  class="mb-3 fw-bold">Medical Bill Request Payment Location</label>
+        <div class="row">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Address</label>
+                <input type="text" class="form-control" id="bill-payment-request-address" value="{{bill_payment_request_location.name}}" name="bill-payment-request-address" placeholder="Enter the Address">
+            </div>
+            <div class="col-lg-6 col-md-5 col-xs-12">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Phone</label>
+                    <input type="text" class="form-control" id="bill-payment-request-phone" value="{{bill_payment_request_location.phone}}" name="bill-payment-request-phone" placeholder="Enter the Phone">
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Address Type</label>
+                    <input type="text" disabled class="form-control" id="bill-payment-request-type"  name="bill-payment-request-type" value="Medical Bill Request Payment Location">
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-5 col-xs-12">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Fax</label>
+                    <input type="text" class="form-control" id="bill-payment-request-fax" value="{{bill_payment_request_location.fax}}" name="bill-payment-request-fax" placeholder="Enter the Fax">
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="bill-payment-request-email" value="{{bill_payment_request_location.email}}" name="bill-payment-request-email" placeholder="name@email.com">
+                </div>
+            </div>
+        </div>
+        <hr>
+        <label  class="mb-3 fw-bold">Medical Record Request Payment Location</label>
+        <div class="row">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Address</label>
+                <input type="text" class="form-control" id="record-payment-request-address" value="{{record_payment_request_location.name}}" name="record-payment-request-address" placeholder="Enter the Address">
+            </div>
+            <div class="col-lg-6 col-md-5 col-xs-12">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Phone</label>
+                    <input type="text" class="form-control" id="record-payment-request-phone" value="{{record_payment_request_location.phone}}" name="record-payment-request-phone" placeholder="Enter the Phone">
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Address Type</label>
+                    <input type="text" disabled class="form-control" id="record-payment-request-type" name="record-payment-request-type" value="Medical Record Request Payment Location">
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-5 col-xs-12">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Fax</label>
+                    <input type="text" class="form-control" id="record-payment-request-fax" value="{{record_payment_request_location.fax}}" name="record-payment-request-fax" placeholder="Enter the Fax">
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="record-payment-request-email" value="{{record_payment_request_location.email}}" name="record-payment-request-email" placeholder="name@email.com">
+                </div>
+            </div>
+        </div> -->
+        <br>
+        <button type="submit" class="btn btn-primary">Edit Address</button>
+    </form>
+
+{% endblock content %}

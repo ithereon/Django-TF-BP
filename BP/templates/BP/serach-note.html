@@ -1,0 +1,367 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+       
+        <!-- Title Page-->
+        <title>Dashboard</title>
+    
+        <!-- Fontfaces CSS-->
+        <link href="{% static 'BP_resources/css/font-face.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Bootstrap CSS-->
+        <link href="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Vendor CSS-->
+        <link href="{% static 'BP_resources/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Main CSS-->
+        <link href="{% static 'BP_resources/css/theme.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/sidebar.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/header.css' %}" rel="stylesheet" media="all">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    </head>
+
+<body class="animsition homepage">
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+ 
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            <header class="header-desktop">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        {% for message in messages %}
+                            <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                                {{ message | safe }}
+                                </button>
+                            </div>
+                        {% endfor %}
+                        <div class="header-wrap">
+            
+                            <a class="logo" href="{% url 'bp-searchclient' %}">
+                                Logo Type
+                             </a>
+                            <div class="account-wrap">
+                                <div class="account-item">
+                                    <div class="image">
+                                        <img src="{% static 'BP_resources/images/icon/avatar-01.jpg' %}" alt="John Doe" />
+                                    </div>
+                                    <div class="content">
+                                        <a class="js-acc-btn" href="{% url 'bp-searchclient' %}">john Smith</a>
+                                    </div>
+                                  
+                                </div>
+                            </div>
+            
+                            
+                            <div class="header-button">
+                                <div class="noti-wrap">
+            
+                                    <div class="noti__item js-item-menu active" onclick="location.href='{% url 'bp-home' %}';">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="39" viewBox="0 0 40 39" fill="none">
+                                            <path d="M20 0.699805C9.6171 0.699805 1.20005 9.11686 1.20005 19.4998C1.20005 29.8828 9.6171 38.2998 20 38.2998C30.383 38.2998 38.8 29.8828 38.8 19.4998C38.789 9.1215 30.3784 0.710899 20 0.699805ZM20 35.6141C11.1004 35.6141 3.88574 28.3995 3.88574 19.4998C3.88574 10.6001 11.1004 3.3855 20 3.3855C28.8997 3.3855 36.1144 10.6001 36.1144 19.4998C36.1048 28.3956 28.8958 35.6045 20 35.6141Z" />
+                                            <path d="M29.1434 9.75332C28.7663 9.56543 28.3229 9.56543 27.9458 9.75332L16.5516 15.4497C16.2912 15.5798 16.0801 15.7909 15.95 16.0514L10.2536 27.4455C9.92286 28.1094 10.1929 28.9156 10.8567 29.2463C11.2338 29.4342 11.6772 29.4342 12.0543 29.2463L23.4485 23.5499C23.7089 23.4198 23.92 23.2087 24.0501 22.9483L29.7465 11.5541C30.0772 10.8903 29.8073 10.0841 29.1434 9.75332ZM14.4581 25.0418L17.5198 18.9183L20.5815 21.9801L14.4581 25.0418ZM22.4803 20.0813L19.4186 17.0196L25.542 13.9578L22.4803 20.0813Z" />
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.800049 19.4998C0.800049 8.89594 9.39619 0.299805 20 0.299805C30.599 0.311135 39.1888 8.90049 39.2 19.4994C39.2 30.1032 30.6039 38.6998 20 38.6998C9.39619 38.6998 0.800049 30.1037 0.800049 19.4998ZM19.9998 1.0998C9.8379 1.09992 1.60005 9.33784 1.60005 19.4998C1.60005 29.6618 9.83801 37.8998 20 37.8998C30.1619 37.8998 38.3998 29.6621 38.4 19.5002C38.3893 9.34258 30.1575 1.11078 19.9998 1.0998ZM20 3.7855C11.3213 3.7855 4.28574 10.821 4.28574 19.4998C4.28574 28.1784 11.321 35.2139 19.9996 35.2141C28.6748 35.2048 35.705 28.1746 35.7144 19.4994C35.7141 10.8208 28.6787 3.7855 20 3.7855ZM3.48574 19.4998C3.48574 10.3792 10.8794 2.9855 20 2.9855C29.1207 2.9855 36.5144 10.3792 36.5144 19.4998C36.5045 28.6161 29.1168 36.0043 20.0005 36.0141C10.8799 36.0141 3.48574 28.6204 3.48574 19.4998ZM27.7674 9.3953C28.2569 9.15144 28.8323 9.15144 29.3218 9.3953C30.1834 9.8246 30.5338 10.8709 30.1046 11.7324L24.408 23.127C24.4079 23.127 24.408 23.1269 24.408 23.127C24.2392 23.4648 23.9652 23.7389 23.6274 23.9076C23.6273 23.9077 23.6274 23.9076 23.6274 23.9076L12.2332 29.6041C11.7437 29.8479 11.1678 29.8482 10.6783 29.6043C9.8168 29.1751 9.46633 28.1288 9.89553 27.2672L15.5921 15.8726C15.5922 15.8726 15.5921 15.8727 15.5921 15.8726C15.7609 15.5348 16.0349 15.2607 16.3727 15.092C16.3728 15.0919 16.3727 15.092 16.3727 15.092L27.7674 9.3953ZM28.1242 10.1113C28.124 10.1114 28.1243 10.1113 28.1242 10.1113L16.7305 15.8075C16.5476 15.8989 16.3992 16.0472 16.3078 16.2301L10.6116 27.6239C10.6115 27.624 10.6117 27.6238 10.6116 27.6239C10.3797 28.09 10.5691 28.6561 11.035 28.8883C11.2997 29.0201 11.6108 29.0202 11.8754 28.8885M11.8754 28.8885L23.2696 23.1921C23.4525 23.1007 23.6009 22.9524 23.6922 22.7695L29.3885 11.3757C29.6207 10.9097 29.4312 10.3436 28.965 10.1113C28.7004 9.97948 28.3889 9.9796 28.1242 10.1113M20.0938 17.1291L22.3707 19.406L24.6476 14.8523L20.0938 17.1291ZM26.4364 13.0634L22.5899 20.7565L18.7433 16.91L26.4364 13.0634ZM17.4102 18.2431L21.2568 22.0896L13.5637 25.9362L17.4102 18.2431ZM17.6294 19.5936L15.3525 24.1473L19.9063 21.8705L17.6294 19.5936Z">
+                                            </svg>
+                                        </div>
+            
+                                        <div class="noti__item js-item-menu" onclick="location.href='{% url 'bp-lawfirmdirectory' %}';">
+                                            <svg width="51" height="50" viewBox="0 0 51 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M44.158 11.7312L28.4098 3.31491C26.3783 2.22828 23.9531 2.22828 21.9193 3.31491L6.17107 11.7312C4.01131 12.8853 2.66821 15.0968 2.66821 17.4996V40.9239C2.66821 44.5483 5.69637 47.4999 9.41745 47.4999H40.9139C44.635 47.4999 47.6631 44.5483 47.6631 40.9217V17.4996C47.6631 15.0968 46.32 12.8853 44.158 11.7312ZM20.6662 43.0004V34.0015C20.6662 31.52 22.6842 29.502 25.1657 29.502C27.6472 29.502 29.6652 31.52 29.6652 34.0015V43.0004H20.6662ZM43.1637 40.9217C43.1637 42.0668 42.1535 43.0004 40.9139 43.0004H34.1647V34.0015C34.1647 29.0385 30.1286 25.0025 25.1657 25.0025C20.2027 25.0025 16.1667 29.0385 16.1667 34.0015V43.0004H9.41745C8.17784 43.0004 7.16771 42.0668 7.16771 40.9217V17.4996C7.16771 16.7594 7.59741 16.071 8.29258 15.6998L24.0408 7.28346C24.3873 7.09898 24.7765 7.0045 25.1657 7.0045C25.5549 7.0045 25.9441 7.09898 26.2906 7.28346L42.0388 15.6998C42.734 16.071 43.1637 16.7594 43.1637 17.4996V40.9217Z" fill=""/>
+                                                </svg>
+                                                
+                                            </div>
+            
+                                            <div class="noti__item js-item-menu" onclick="location.href='{% url 'bp-firmsetting' %}';">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="22" viewBox="0 0 21 22" fill="none">
+                                                    <path d="M19.6716 12.6235L18.8217 11.9239C18.2396 11.4447 18.2406 10.5539 18.8218 10.0757L19.6716 9.37609C20.2763 8.87819 20.431 8.02443 20.0394 7.34595L18.3613 4.43947C17.9696 3.76103 17.1527 3.46817 16.4192 3.74292L15.3884 4.1291C14.6824 4.39355 13.9115 3.94752 13.7878 3.205L13.6069 2.11919C13.4781 1.3465 12.816 0.785645 12.0327 0.785645H8.67657C7.89315 0.785645 7.23107 1.3465 7.10231 2.11923L6.92133 3.205C6.79737 3.94883 6.02548 4.39311 5.32075 4.12914L4.28996 3.74292C3.55649 3.46817 2.73968 3.76107 2.34791 4.43947L0.669884 7.34591C0.278196 8.02431 0.432844 8.87811 1.03767 9.37605L1.88748 10.0756C2.46969 10.5549 2.46853 11.4455 1.88748 11.9238L1.03763 12.6234C0.432844 13.1214 0.278156 13.9752 0.669844 14.6536L2.34791 17.56C2.73964 18.2384 3.55629 18.5313 4.28996 18.2566L5.32071 17.8704C6.02688 17.6059 6.79757 18.0522 6.92129 18.7945L7.10227 19.8803C7.23107 20.6531 7.89315 21.2139 8.67653 21.2139H12.0326C12.816 21.2139 13.4781 20.6531 13.6068 19.8803L13.7878 18.7946C13.9117 18.051 14.6836 17.6064 15.3884 17.8705L16.4192 18.2566C17.1529 18.5314 17.9696 18.2385 18.3613 17.5601L20.0394 14.6536C20.431 13.9752 20.2763 13.1214 19.6716 12.6235ZM16.9791 16.7621L15.9484 16.3759C14.3006 15.7586 12.5023 16.8001 12.2136 18.5322L12.0327 19.618H8.67657L8.49559 18.5322C8.20636 16.7967 6.40544 15.7598 4.76084 16.3759L3.73005 16.7621L2.05202 13.8556L2.90183 13.156C4.26035 12.0377 4.25752 9.95957 2.90183 8.84352L2.05202 8.14393L3.73009 5.23745L4.76084 5.62363C6.40867 6.24087 8.20692 5.19951 8.49559 3.46737L8.67653 2.3816H12.0326L12.2136 3.46737C12.5028 5.20306 14.3038 6.23959 15.9483 5.62363L16.9791 5.23745L18.6575 8.14353C18.6575 8.14353 18.6574 8.14365 18.6571 8.14389L17.8073 8.84348C16.4488 9.96177 16.4516 12.0399 17.8073 13.156L18.6571 13.8556L16.9791 16.7621ZM10.3546 7.06307C8.1839 7.06307 6.41789 8.82908 6.41789 10.9998C6.41789 13.1705 8.1839 14.9365 10.3546 14.9365C12.5253 14.9365 14.2913 13.1705 14.2913 10.9998C14.2913 8.82908 12.5253 7.06307 10.3546 7.06307ZM10.3546 13.3405C9.06391 13.3405 8.01384 12.2905 8.01384 10.9998C8.01384 9.70909 9.06391 8.65903 10.3546 8.65903C11.6453 8.65903 12.6953 9.70909 12.6953 10.9998C12.6953 12.2905 11.6453 13.3405 10.3546 13.3405Z" fill="" stroke="black" stroke-width="0.5"/>
+                                                    </svg>
+                                                </div>
+            
+                                                <div class="noti__item js-item-menu" onclick="location.href='{% url 'bp-addClient' %}';">
+                                                    <img src="{% static 'BP_resources/images/icon/Vector-add.png' %}" alt="Michelle Moreno" />
+                                                    </div>
+            
+                                                    <div class="noti__item js-item-menu" onclick="location.href='#';">
+                                                        <span class="quantity"></span>
+                                                        <img src="{% static 'BP_resources/images/icon/Vector-bell.png' %}" alt="Michelle Moreno" />
+                                                        </div>
+                                                        <div class="noti__item js-item-menu" onclick="location.href='#';">
+                                                            <img src="{% static 'BP_resources/images/icon/Vector-file.png' %}" alt="Michelle Moreno" />
+                                                            </div>
+                                                            <div class="noti__item js-item-menu" onclick="location.href='{% url 'bp-calendar' %}';">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="38" height="37" viewBox="0 0 38 37" fill="none">
+                                                                    <path d="M32.9974 4.35714H29.1402V1.78574C29.1402 1.07563 28.5646 0.5 27.8545 0.5C27.1444 0.5 26.5687 1.07563 26.5687 1.78574V4.35714H11.1402V1.78574C11.1402 1.07563 10.5645 0.5 9.85451 0.5C9.14448 0.5 8.56877 1.07563 8.56877 1.78574V4.35714H4.71163C2.58139 4.35714 0.854492 6.08404 0.854492 8.21428V32.6429C0.854492 34.7731 2.58139 36.5 4.71163 36.5H32.9974C35.1276 36.5 36.8545 34.7731 36.8545 32.6429V8.21428C36.8545 6.08404 35.1276 4.35714 32.9974 4.35714ZM34.283 32.6429C34.283 33.353 33.7074 33.9286 32.9973 33.9286H4.71163C4.00153 33.9286 3.42589 33.353 3.42589 32.6429V15.9286H34.283V32.6429ZM34.283 13.3572H3.42589V8.21428C3.42589 7.50417 4.00153 6.92854 4.71163 6.92854H8.56877V9.49994C8.56877 10.21 9.14441 10.7857 9.85451 10.7857C10.5646 10.7857 11.1402 10.21 11.1402 9.49994V6.92854H26.5688V9.49994C26.5688 10.21 27.1444 10.7857 27.8545 10.7857C28.5647 10.7857 29.1403 10.21 29.1403 9.49994V6.92854H32.9974C33.7075 6.92854 34.2832 7.50417 34.2832 8.21428L34.283 13.3572Z" fill=""/>
+                                                                    <path d="M11.1402 20.1363H8.56877C7.85866 20.1363 7.28303 20.712 7.28303 21.4221C7.28303 22.1322 7.85866 22.7078 8.56877 22.7078H11.1402C11.8503 22.7078 12.4259 22.1322 12.4259 21.4221C12.4259 20.712 11.8503 20.1363 11.1402 20.1363Z" fill=""/>
+                                                                    <path d="M20.1402 20.1363H17.5688C16.8587 20.1363 16.283 20.712 16.283 21.4221C16.283 22.1322 16.8587 22.7078 17.5688 22.7078H20.1402C20.8503 22.7078 21.4259 22.1322 21.4259 21.4221C21.4259 20.712 20.8503 20.1363 20.1402 20.1363Z" fill=""/>
+                                                                    <path d="M29.1402 20.1363H26.5688C25.8586 20.1363 25.283 20.712 25.283 21.4221C25.283 22.1322 25.8586 22.7078 26.5688 22.7078H29.1402C29.8503 22.7078 30.4259 22.1322 30.4259 21.4221C30.4258 20.712 29.8502 20.1363 29.1402 20.1363Z" fill=""/>
+                                                                    <path d="M11.1402 27.1493H8.56877C7.85866 27.1493 7.28303 27.725 7.28303 28.4351C7.28303 29.1452 7.85866 29.7207 8.56877 29.7207H11.1402C11.8503 29.7207 12.4259 29.1451 12.4259 28.435C12.4259 27.7249 11.8503 27.1493 11.1402 27.1493Z" fill=""/>
+                                                                    <path d="M20.1402 27.1493H17.5688C16.8587 27.1493 16.283 27.725 16.283 28.4351C16.283 29.1452 16.8587 29.7208 17.5688 29.7208H20.1402C20.8503 29.7208 21.4259 29.1452 21.4259 28.4351C21.4259 27.725 20.8503 27.1493 20.1402 27.1493Z" fill=""/>
+                                                                    <path d="M29.1402 27.1493H26.5688C25.8586 27.1493 25.283 27.725 25.283 28.4351C25.283 29.1452 25.8586 29.7208 26.5688 29.7208H29.1402C29.8503 29.7208 30.4259 29.1452 30.4259 28.4351C30.4259 27.725 29.8502 27.1493 29.1402 27.1493Z" fill=""/>
+                                                                    <path d="M32.9974 4.35714H29.1402V1.78574C29.1402 1.07563 28.5646 0.5 27.8545 0.5C27.1444 0.5 26.5687 1.07563 26.5687 1.78574V4.35714H11.1402V1.78574C11.1402 1.07563 10.5645 0.5 9.85451 0.5C9.14448 0.5 8.56877 1.07563 8.56877 1.78574V4.35714H4.71163C2.58139 4.35714 0.854492 6.08404 0.854492 8.21428V32.6429C0.854492 34.7731 2.58139 36.5 4.71163 36.5H32.9974C35.1276 36.5 36.8545 34.7731 36.8545 32.6429V8.21428C36.8545 6.08404 35.1276 4.35714 32.9974 4.35714ZM34.283 32.6429C34.283 33.353 33.7074 33.9286 32.9973 33.9286H4.71163C4.00153 33.9286 3.42589 33.353 3.42589 32.6429V15.9286H34.283V32.6429ZM34.283 13.3572H3.42589V8.21428C3.42589 7.50417 4.00153 6.92854 4.71163 6.92854H8.56877V9.49994C8.56877 10.21 9.14441 10.7857 9.85451 10.7857C10.5646 10.7857 11.1402 10.21 11.1402 9.49994V6.92854H26.5688V9.49994C26.5688 10.21 27.1444 10.7857 27.8545 10.7857C28.5647 10.7857 29.1403 10.21 29.1403 9.49994V6.92854H32.9974C33.7075 6.92854 34.2832 7.50417 34.2832 8.21428L34.283 13.3572Z" stroke="black" stroke-width="0.4"/>
+                                                                    <path d="M11.1402 20.1363H8.56877C7.85866 20.1363 7.28303 20.712 7.28303 21.4221C7.28303 22.1322 7.85866 22.7078 8.56877 22.7078H11.1402C11.8503 22.7078 12.4259 22.1322 12.4259 21.4221C12.4259 20.712 11.8503 20.1363 11.1402 20.1363Z" stroke="black" stroke-width="0.4"/>
+                                                                    <path d="M20.1402 20.1363H17.5688C16.8587 20.1363 16.283 20.712 16.283 21.4221C16.283 22.1322 16.8587 22.7078 17.5688 22.7078H20.1402C20.8503 22.7078 21.4259 22.1322 21.4259 21.4221C21.4259 20.712 20.8503 20.1363 20.1402 20.1363Z" stroke="black" stroke-width="0.4"/>
+                                                                    <path d="M29.1402 20.1363H26.5688C25.8586 20.1363 25.283 20.712 25.283 21.4221C25.283 22.1322 25.8586 22.7078 26.5688 22.7078H29.1402C29.8503 22.7078 30.4259 22.1322 30.4259 21.4221C30.4258 20.712 29.8502 20.1363 29.1402 20.1363Z" stroke="black" stroke-width="0.4"/>
+                                                                    <path d="M11.1402 27.1493H8.56877C7.85866 27.1493 7.28303 27.725 7.28303 28.4351C7.28303 29.1452 7.85866 29.7207 8.56877 29.7207H11.1402C11.8503 29.7207 12.4259 29.1451 12.4259 28.435C12.4259 27.7249 11.8503 27.1493 11.1402 27.1493Z" stroke="black" stroke-width="0.4"/>
+                                                                    <path d="M20.1402 27.1493H17.5688C16.8587 27.1493 16.283 27.725 16.283 28.4351C16.283 29.1452 16.8587 29.7208 17.5688 29.7208H20.1402C20.8503 29.7208 21.4259 29.1452 21.4259 28.4351C21.4259 27.725 20.8503 27.1493 20.1402 27.1493Z" stroke="black" stroke-width="0.4"/>
+                                                                    <path d="M29.1402 27.1493H26.5688C25.8586 27.1493 25.283 27.725 25.283 28.4351C25.283 29.1452 25.8586 29.7208 26.5688 29.7208H29.1402C29.8503 29.7208 30.4259 29.1452 30.4259 28.4351C30.4259 27.725 29.8502 27.1493 29.1402 27.1493Z" stroke="black" stroke-width="0.4"/>
+                                                                    </svg>
+                                                                </div>
+                                                                {% if client and case %}
+                                                                    <div class="noti__item js-item-menu" onclick="location.href='{% url 'bp-flaggedcases' client.id case.id %}';">
+                                                                        <span class="quantity"></span>
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="50" viewBox="0 0 51 50" fill="none">
+                                                                            <path d="M37.8156 16.2L43.4256 8.72C43.6707 8.39315 43.82 8.00449 43.8567 7.59757C43.8934 7.19066 43.816 6.78156 43.6333 6.41613C43.4506 6.0507 43.1697 5.74336 42.8222 5.52857C42.4746 5.31377 42.0741 5.2 41.6656 5.2H15.2656C15.2656 4.61652 15.0338 4.05695 14.6212 3.64437C14.2086 3.23178 13.6491 3 13.0656 3C12.4821 3 11.9225 3.23178 11.5099 3.64437C11.0974 4.05695 10.8656 4.61652 10.8656 5.2V42.6H8.66558C8.0821 42.6 7.52252 42.8318 7.10994 43.2444C6.69736 43.6569 6.46558 44.2165 6.46558 44.8C6.46558 45.3835 6.69736 45.9431 7.10994 46.3556C7.52252 46.7682 8.0821 47 8.66558 47H17.4656C18.0491 47 18.6086 46.7682 19.0212 46.3556C19.4338 45.9431 19.6656 45.3835 19.6656 44.8C19.6656 44.2165 19.4338 43.6569 19.0212 43.2444C18.6086 42.8318 18.0491 42.6 17.4656 42.6H15.2656V27.2H41.6656C42.0741 27.2 42.4746 27.0862 42.8222 26.8714C43.1697 26.6566 43.4506 26.3493 43.6333 25.9839C43.816 25.6184 43.8934 25.2093 43.8567 24.8024C43.82 24.3955 43.6707 24.0069 43.4256 23.68L37.8156 16.2ZM33.3056 17.52L37.2656 22.8H15.2656V9.6H37.2656L33.3056 14.88C33.0196 15.2607 32.865 15.7239 32.865 16.2C32.865 16.6761 33.0196 17.1393 33.3056 17.52Z" fill=""/>
+                                                                            </svg>
+                                                                        </div>
+                                                                {% else %}
+                                                                <div class="noti__item js-item-menu" onclick="location.href='{% url 'bp-flaggedcases' 0 0 %}';">
+                                                                    <span class="quantity"></span>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="51" height="50" viewBox="0 0 51 50" fill="none">
+                                                                        <path d="M37.8156 16.2L43.4256 8.72C43.6707 8.39315 43.82 8.00449 43.8567 7.59757C43.8934 7.19066 43.816 6.78156 43.6333 6.41613C43.4506 6.0507 43.1697 5.74336 42.8222 5.52857C42.4746 5.31377 42.0741 5.2 41.6656 5.2H15.2656C15.2656 4.61652 15.0338 4.05695 14.6212 3.64437C14.2086 3.23178 13.6491 3 13.0656 3C12.4821 3 11.9225 3.23178 11.5099 3.64437C11.0974 4.05695 10.8656 4.61652 10.8656 5.2V42.6H8.66558C8.0821 42.6 7.52252 42.8318 7.10994 43.2444C6.69736 43.6569 6.46558 44.2165 6.46558 44.8C6.46558 45.3835 6.69736 45.9431 7.10994 46.3556C7.52252 46.7682 8.0821 47 8.66558 47H17.4656C18.0491 47 18.6086 46.7682 19.0212 46.3556C19.4338 45.9431 19.6656 45.3835 19.6656 44.8C19.6656 44.2165 19.4338 43.6569 19.0212 43.2444C18.6086 42.8318 18.0491 42.6 17.4656 42.6H15.2656V27.2H41.6656C42.0741 27.2 42.4746 27.0862 42.8222 26.8714C43.1697 26.6566 43.4506 26.3493 43.6333 25.9839C43.816 25.6184 43.8934 25.2093 43.8567 24.8024C43.82 24.3955 43.6707 24.0069 43.4256 23.68L37.8156 16.2ZM33.3056 17.52L37.2656 22.8H15.2656V9.6H37.2656L33.3056 14.88C33.0196 15.2607 32.865 15.7239 32.865 16.2C32.865 16.6761 33.0196 17.1393 33.3056 17.52Z" fill=""/>
+                                                                        </svg>
+                                                                    </div>
+                                                                {% endif %}
+                                                                
+                                                                    <div class="noti__item js-item-menu" onclick="location.href='{% url 'bp-checklist' %}';">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                                                                            <path d="M10.9982 1.26672C5.40905 1.26672 0.878174 5.7976 0.878174 11.3867C0.878174 16.9758 5.40905 21.5067 10.9982 21.5067C16.5873 21.5067 21.1182 16.9758 21.1182 11.3867C21.1122 5.8001 16.5848 1.27269 10.9982 1.26672ZM10.9982 20.061C6.20749 20.061 2.32388 16.1774 2.32388 11.3867C2.32388 6.59603 6.20749 2.71242 10.9982 2.71242C15.7889 2.71242 19.6725 6.59603 19.6725 11.3867C19.6673 16.1753 15.7867 20.0558 10.9982 20.061Z" fill=""/>
+                                                                            <path d="M16.5515 7.26137C16.2713 6.9908 15.8272 6.9908 15.5471 7.26137L8.82959 13.9789L6.4492 11.5985C6.17186 11.3113 5.71421 11.3034 5.42709 11.5807C5.13992 11.8581 5.132 12.3157 5.40934 12.6028C5.41514 12.6088 5.42107 12.6148 5.42709 12.6206L8.31854 15.512C8.60079 15.7942 9.05839 15.7942 9.34065 15.512L16.5692 8.28343C16.8466 7.99631 16.8386 7.53871 16.5515 7.26137Z" fill=""/>
+                                                                            <path d="M10.9982 1.26672C5.40905 1.26672 0.878174 5.7976 0.878174 11.3867C0.878174 16.9758 5.40905 21.5067 10.9982 21.5067C16.5873 21.5067 21.1182 16.9758 21.1182 11.3867C21.1122 5.8001 16.5848 1.27269 10.9982 1.26672ZM10.9982 20.061C6.20749 20.061 2.32388 16.1774 2.32388 11.3867C2.32388 6.59603 6.20749 2.71242 10.9982 2.71242C15.7889 2.71242 19.6725 6.59603 19.6725 11.3867C19.6673 16.1753 15.7867 20.0558 10.9982 20.061Z" stroke="white" stroke-width="0.6"/>
+                                                                            <path d="M16.5515 7.26137C16.2713 6.9908 15.8272 6.9908 15.5471 7.26137L8.82959 13.9789L6.4492 11.5985C6.17186 11.3113 5.71421 11.3034 5.42709 11.5807C5.13992 11.8581 5.132 12.3157 5.40934 12.6028C5.41514 12.6088 5.42107 12.6148 5.42709 12.6206L8.31854 15.512C8.60079 15.7942 9.05839 15.7942 9.34065 15.512L16.5692 8.28343C16.8466 7.99631 16.8386 7.53871 16.5515 7.26137Z" stroke="white" stroke-width="0.6"/>
+                                                                            </svg>
+                                                                           
+                                                                            </filter>
+                                                                            </defs>
+                                                                            </svg>
+                                                                    </div>
+                                                                    <div class="noti__item js-item-menu" onclick="location.href='{% url 'bp-logoutPage' %}';">
+                                                                        
+                                                                        <img src="https://img.icons8.com/external-kmg-design-glyph-kmg-design/32/ffffff/external-power-ui-essential-kmg-design-glyph-kmg-design.png"/>
+                                                                    </div>
+                                                                       
+                
+            
+            
+                            </div>
+                   <!--- start tab-->
+                    
+                        </div>
+                        <div class="mid-search">
+                            <form class="form-header" id="search_form"  action="{% url 'bp-advanceSearch' %}" method="POST">
+                                {% csrf_token %}
+                                <span><input class="au-input " size="70" type="text" name="name" id="name" value="{{name}}"  />
+                                    <input type="text" value="Client" id="search_category" name="search_category" hidden>
+                                <button type="submit">Search</button></span>  
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- HEADER DESKTOP-->
+            <form id="orignal_form"   action="{% url 'bp-searchclient' %}" method="POST">
+                {% csrf_token %}
+                <input type="text" name="name" hidden id="letter" />
+                <input type="text" name="check" value="True" hidden>
+                
+            </form>
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-lg-12 top-head">
+                                <div class="main-boxst">
+                                    <div class="text-side">
+                                <h2><img src="{% static 'BP_resources/images/icon/search-img.png' %}">Search</h2></div>
+                                <div class="list-side"> 
+                                    <h5 style="color:grey;">OPEN CLIENTS BY LAST NAME:</h5> 
+                                    <ul>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('A')" >A</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('B')" >B</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('C')" >C</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('D')" >D</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('E')" >E</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('F')" >F</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('G')" >G</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('H')" >H</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('I')" >I</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('J')" >J</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('K')" >K</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('L')" >L</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('M')" >M</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('N')" >N</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('O')" >O</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('P')" >P</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('Q')" >Q</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('R')" >R</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('S')" >S</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('T')" >T</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('U')" >U</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('V')" >V</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('W')" >W</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('X')" >X</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('Y')" >Y</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('Z')" >Z</a></li>
+                                    </ul></div>
+                                </div>
+                                
+                                <ul>
+                                    <li><a onclick="selectCategory('Client')" href="#" >Client</a></li>
+                                    <li><a onclick="selectCategory('Defendant')" href="#">Defendant</a></li>
+                                    <li><a onclick="selectCategory('Witness')" href="#">Witness</a></li>
+                                    <li><a onclick="selectCategory('OtherParty')" href="#">Other Party</a></li>
+                                    <li><a onclick="selectCategory('Note')" href="#" class="active">Note</a></li>
+                                    <li><a onclick="selectCategory('City')" href="#">City</a></li>
+                                    <li><a onclick="selectCategory('Provider')" href="#">Provider</a></li>
+                                </ul>
+                            
+                                <div class="table-responsive table--no-card m-b-40 subpg-table">
+                                    <table class="table table-borderless table-striped table-earning">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: auto !important; text-align: center !important;">#</th>
+                                                <th style="width: auto !important; text-align: center !important;">Client</th>
+                                               
+                                                <th style="width: auto !important; text-align: center !important;">Age</th>
+                                                <th style="width: auto !important; text-align: center !important;">Gender</th>
+                                                <th style="width: auto !important; text-align: center !important;">Incident</th>
+                                                <th style="width: auto !important; text-align: center !important;">note</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% if not notes %}
+                                                <div class="alert alert-danger" role="alert">
+                                                    No such note exists!
+                                                </div>
+                                            {% else %}
+                                                {% for x in notes %}
+                                                    <tr onclick="location.href='{% url 'bp-note' x.note.for_client.id x.note.for_case.id %}';">
+                                                        <td style="width: 5% !important; text-align: center !important;">{{x.index}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;">{{x.note.for_client.last_name}}, {{x.note.for_client.last_name}}</td>
+                                                       
+                                                        <td  style="width: 5% !important; text-align: center !important;">{{x.note.for_client.age}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;">{{x.note.for_client.gender}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;">{{x.note.for_case.incident_date}}</td>
+                                                        <td style="width: auto !important; text-align: center !important;text-transform: none;">{{x.description |safe}}</td>
+                                                        
+                                                    </tr>
+                                                {% endfor %}
+                                            {% endif %}
+                                            </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+                            </div>
+                        </div>  
+                       
+                    <div class="col-lg-6"> 
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2022 Ian Silverthorne</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+    <script>
+        function selectCategory(category){
+            let temp = document.getElementById('search_category')
+            console.log(temp);
+            temp.value = category;
+            console.log(temp.value);
+            document.getElementById("search_form").submit();
+        }
+        function search_by_letter(letter){
+            document.getElementById('letter').value = letter
+            document.getElementById("orignal_form").submit();
+        }
+    </script>
+    <!-- Jquery JS-->
+    <script src="{% static 'BP_resources/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'BP_resources/vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/select2/select2.min.js' %}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static 'BP_resources/js/main.js' %}"></script>
+    <!-- <script>
+        $(document).ready(function(){
+        // $('a').on('click', function () {
+            console.log('hello');
+          
+            $.ajax({
+                url: '/BP/clickRecord/',
+                type: "GET",
+                data: {
+                    "case_id": "{{case.id}}",
+                    "page_id": "{{page.id}}",
+                    "click_id": "22",
+                    "clickIDDescription": "Search Page Selected"
+                },
+               
+                success: function (data) {
+                    var x = JSON.stringify(data);
+                    console.log(x);
+                },
+                // Error handling 
+                error: function (error) {
+                    console.log(`Error ${error}`);
+                }
+            });
+        // });
+    });
+    </script> -->
+
+</body>
+
+</html>
+<!-- end document-->

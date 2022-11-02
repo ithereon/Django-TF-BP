@@ -1,0 +1,87 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% block pagetitle %}
+    Treatment First - Add Law Office
+{% endblock pagetitle %}
+{% block content %}
+
+    <div class="container">
+
+        
+        <div class=" mt-3" style="background-color: white;padding:40px 20px 20px 20px">
+            <h4>Add Law Office</h4>
+        
+            <form method="POST" action="#">
+                {% csrf_token %}
+    
+                
+
+                <div class="mb-3 row">
+                    <!-- <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Office Name</label> -->
+                    <div class="col-sm-6">
+                    <input type="text" placeholder="Office Name"   class="form-control" name="office_name" id="office_name">
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="text" placeholder="Office Phone Number"  class="form-control" name="phone1" id="phone1">
+                    </div>
+                </div>
+
+                
+                    <hr>
+                            <div class="mb-3 row">
+                                <!-- <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Address 1</label> -->
+                                <div class="col-sm-6">
+                                    <input type="text" required class="form-control" placeholder="Enter Address 1" name="address1" data-field="address1">
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" placeholder="Enter the Suite & Office No." name="address3" id="address2" data-field="address2">
+                                </div>
+                            </div>
+
+                            <!-- <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Address 2</label>
+                                
+                            </div> -->
+
+                            <div class="mb-3 row">
+                                <!-- <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">City</label> -->
+                                <div class="col-sm-4">
+                                    <input type="text" placeholder="City" required class="form-control" name="city1" id="city" data-field="city" />
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" placeholder="State" required class="form-control" name="state1" id="state" data-field="state" />
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" placeholder="Zip Code" class="form-control" name="postal1" id="postal" data-field="postal" />
+                                </div>
+                            </div>
+
+                            <h4>Attach Case Firm User</h4>
+                            <div class="mb-3 row">
+                                <!-- <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Address 1</label> -->
+                                <div class="col-sm-4">
+                                    <input type="text" required class="form-control" placeholder="Username" name="firm_username" data-field="firm_username">
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" required class="form-control" placeholder="First Name" name="firm_first_name" data-field="firm_first_name">
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" placeholder="Last Name" name="firm_last_name" id="firm_last_name" data-field="firm_last_name">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <!-- <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Address 1</label> -->
+                                <div class="col-sm-6">
+                                    <input type="text" required class="form-control" placeholder="name@email.com" name="firm_email" data-field="firm_email">
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" placeholder="Phone Ext." name="firm_phone_extension" id="firm_phone_extension" data-field="firm_phone_extension">
+                                </div>
+                            </div>
+                <button  class="btn btn-primary" type="submit">Add Law Office</button>
+                <button style="float: right;" onclick="location.href='{% url 'case_management' %}'"  class="btn btn-warning me-3">Cancel</button>
+                </form>
+        </div>
+        
+    </div>
+{% endblock content %}

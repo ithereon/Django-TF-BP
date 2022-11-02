@@ -1,0 +1,268 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% block pagetitle %}
+    Treatment First
+{% endblock pagetitle %}
+{% block content %}
+
+    <div class="row py-5 px-3">
+        <div class="col-lg-4 col-md-4 col-xs-4">
+            {% if userprofile.providerprofile.account_type == 'Provider' or request.user.providerstaff_userprofile.account_type == 'ProviderStaff' %}
+                <a href="{% url 'accountdetails' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Account Details</a> <br><br>
+                <a href="{% url 'profile' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Locations</a> <br><br>
+                <a href="{% url 'providerdetails' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Provider Details</a><br><br>
+                <a href="{% url 'provider_firm_users' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Firm Users</a> <br><br>
+            {% elif userprofile.attorneyprofile.account_type == 'Attorney' or request.user.attorneystaff_userprofile.account_type == 'AttorneyStaff' %}
+                <a href="{% url 'accountdetails_attorney' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Account Details</a> <br><br>
+                <a href="{% url 'firm_users' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Firm Users</a> <br><br>
+                <a href="{% url 'attorney_profile' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Favorites</a><br><br>
+                <a href="{% url 'blacklist' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Blacklist</a><br><br>
+                <a href="{% url 'flagged_users' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Flagged Providers</a><br><br>
+                <a href="{% url 'provider_reviews' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Provider Reviews</a><br><br>
+            {% elif userprofile.marketerprofile.account_type == 'Marketer' or request.user.marketerstaff_userprofile.account_type == 'MarketerStaff' %}
+                <a href="{% url 'accountdetails_marketer' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Account Details</a> <br><br>
+                <a href="{% url 'marketer_firm_users' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Firm Users</a> <br><br>
+                <a href="{% url 'marketer_profile' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Favorites</a><br><br>
+                <a href="{% url 'marketer_blacklist' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Blacklist</a><br><br>
+                <a href="{% url 'marketer' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Marketer</a><br><br>
+                <a href="{% url 'marketer_provider_reviews' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Provider Reviews</a><br><br>
+            {% endif %}
+            {% if not request.user.marketerstaff_userprofile.account_type == 'MarketerStaff' and not request.user.providerstaff_userprofile.account_type == 'ProviderStaff' and not request.user.attorneystaff_userprofile.account_type == 'AttorneyStaff' %}
+                <a href="{% url 'multipleusers' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Add Users</a> <br><br>
+            {% endif %}
+        </div>
+        <div class="col-lg-8 col-md-8 col-xs-8">
+            
+            <div class="d-flex" style="float:right;align-items: center;">
+                {% if userprofile.providerprofile.account_type == 'Provider' or request.user.providerstaff_userprofile.account_type == 'ProviderStaff' %}
+                    <a href="{% url 'addlocations' %}" class="btn btn-primary me-3">Add Locations</a>
+                    <a href="{% url 'adddoctors' %}" class="btn btn-primary" >Add Doctors</a>
+                {% elif userprofile.attorneyprofile.account_type == 'Attorney' or request.user.attorneystaff_userprofile.account_type == 'AttorneyStaff' %}
+                    <a href="{% url 'attorneylocation' %}" class="btn btn-primary me-3">Add Location</a>
+                    <a href="{% url 'favorites' %}" class="btn btn-primary me-3">Add Favorites</a>
+                {% elif userprofile.marketerprofile.account_type == 'Marketer' or request.user.marketerstaff_userprofile.account_type == 'MarketerStaff' %}
+                    <a href="{% url 'marketerlocation' %}" class="btn btn-primary me-3">Add Location</a>
+                    <a href="{% url 'favorites' %}" class="btn btn-primary me-3">Add Favorites</a>
+                {% endif %}
+                
+            </div>
+            {% if userprofile.providerprofile.account_type == 'Provider' or request.user.providerstaff_userprofile.account_type == 'ProviderStaff' %}
+                <h4>Listed Locations:</h4>
+                <br>
+                {% if not locations %}
+                    <div class="card" style="margin-top: 2%; background-color: #fafafa;">
+                        <div class="card-body">
+                            <strong>You have not added any locations yet!</strong>
+                        </div>
+                    </div>
+                {% else %}
+                    {% for location in locations %}
+                        <div class="card">
+                            <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <a href="{% url 'editlocations' location.id location.added_by.id %}" style="float:right" class="btn btn-sm btn-link pull-right">
+                                    <i class="fa fa-pencil-alt"></i> Edit
+                                </a>
+                                <div>
+                                    {{location.address}}, {{location.city}}, {{location.state}}, {{location.post_code}}, {{location.country}}
+                                </div>
+                                <div>
+                                    <span>{{location.phone}}</span>
+                                    {% if location.fax %} <span><strong>|  Fax: </strong> {{location.fax}}</span>{% endif %}
+                                    {% if location.fax %} <span>| {{location.email}}</span> {% endif %} 
+                                </div>
+                                <div>
+                                    {% for specialty in location.specialties.all %}
+                                        <span style="color:{{specialty.color}}">{{specialty.name}}</span>
+                                    {% endfor %}
+                                </div>
+                                <strong>Doctors:</strong>
+                                {% for doctor in location.doctor_locations.all %}
+                                    <span>{{doctor.first_name}} {{doctor.last_name}} | </span>
+                                {% endfor %}
+                            </li>
+                            </ul>
+                        </div>
+                        
+                        <br><br>
+                    {% endfor %}
+                {% endif %}
+            {% elif userprofile.attorneyprofile.account_type == 'Attorney' or request.user.attorneystaff_userprofile.account_type == 'AttorneyStaff' %}
+                <h4>Favorite Providers:</h4>
+                <br>
+
+                    {% for favorite in favorites %}
+
+                        <div class="card">
+                            
+                            <div class="card-header">
+                                <div class="d-flex">
+                                    <h5 class="card-title d-flex">{{favorite.provider.providerprofile.office_name}}</h5>
+                                    
+                                </div>
+                            
+                            </div>
+                            <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-xs-12">
+                                        <h5>Location: </h5> <p>{{favorite.location.address}}, {{favorite.location.address2}}, {{favorite.location.city}}, {{favorite.location.state}}</p>
+                                        <h5>Specialty: </h5> <p style="color:{{favorite.specialty.color}}">{{favorite.specialty.name}}</p>
+                                        <h5>Phone: </h5> <p>{{favorite.location.phone}}</p>  
+                                    </div> 
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="star-container pl-5">
+                                    <div class="star-back">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="star-front text-warning" style="width: {{favorite.provider.review_percentage}}%;">
+                                        <div class="cover">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h6 style="font-size: 13px;">{{favorite.provider.review_userprofile.count}} Reviews</h6>
+                                
+
+                            </li>
+                            
+                            <div class="card-body">
+                                <a class="btn btn-success" style="float: right;" href="{% url 'provider' favorite.provider.providerprofile.office_name %}">View Provider</a>
+                                <a class="btn btn-danger me-4" style="float: right;" href="{% url 'removeFavorite' favorite.id %}">Remove Provider</a>
+                            </div>
+                        </div>
+                        
+                        <br><br>
+                    {% empty %}
+                            <div class="card" style="margin-top: 2%; background-color: #fafafa;">
+                                <div class="card-body">
+                                    <strong>You don't have any favorite providers yet!</strong>
+                                </div>
+                            </div>
+                            <br>
+                    {% endfor %}
+                <div>
+                    {% if request.user.attorneystaff_userprofile.account_type == 'AttorneyStaff' %}
+                    {% if userprofile.created_by.marketer_code %}
+                        <form action="{% url 'marketer_code' userprofile.id %}" method="POST">
+                            {% csrf_token %}
+                            <p class="fw-bold">Attached Marketer Code:</p>
+                            <div class="d-flex">
+                                <input type="text" disabled class="form-control" value="{{userprofile.created_by.marketer_code}}">
+                                
+                            </div>
+                        </form>
+                    {% else %}
+                        <form action="{% url 'marketer_code' userprofile.id %}" method="POST">
+                            {% csrf_token %}
+                            <div class="d-flex">
+                                <input type="text" required  class="form-control me-4" placeholder="Enter the Marketer Code" name="marketer_code" id="marketer_code">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    {% endif %}
+                    {% else %}
+                    {% if userprofile.marketer_code %}
+                        <form action="{% url 'marketer_code' userprofile.id %}" method="POST">
+                            {% csrf_token %}
+                            <p class="fw-bold">Attached Marketer Code:</p>
+                            <div class="d-flex">
+                                <input type="text" disabled class="form-control" value="{{userprofile.marketer_code}}">
+                                
+                            </div>
+                        </form>
+                    {% else %}
+                        <form action="{% url 'marketer_code' userprofile.id %}" method="POST">
+                            {% csrf_token %}
+                            <div class="d-flex">
+                                <input type="text" required  class="form-control me-4" placeholder="Enter the Marketer Code" name="marketer_code" id="marketer_code">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    {% endif %}
+                    {% endif %}
+                    
+                    
+
+                </div>
+                
+            {% elif userprofile.marketerprofile.account_type == 'Marketer' %}
+                <h4>Favorite Providers:</h4>
+                <br>
+                {% for favorite in userprofile.favorites.all %}
+                    <div class="card">
+                                    
+                        <div class="card-header">
+                            <div class="d-flex">
+                                <h5 class="card-title d-flex">{{favorite.provider.providerprofile.office_name}}</h5>
+                                
+                            </div>
+                    
+                        </div>
+                        <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <h5>Location: </h5> <p>{{favorite.location.address}}, {{favorite.location.address2}}, {{favorite.location.city}}, {{favorite.location.state}}</p>
+                                    <h5>Specialty: </h5> <p style="color:{{favorite.specialty.color}}">{{favorite.specialty.name}}</p>
+                                    <h5>Phone: </h5> <p>{{favorite.location.phone}}</p>  
+                                </div> 
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="star-container pl-5">
+                                <div class="star-back">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <div class="star-front text-warning" style="width: {{favorite.provider.review_percentage}}%;">
+                                    <div class="cover">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 style="font-size: 13px;">{{favorite.provider.review_userprofile.count}} Reviews</h6>
+                            
+
+                        </li>
+                        
+                        <div class="card-body">
+                            <a class="btn btn-success" style="float: right;" href="{% url 'provider' favorite.provider.providerprofile.office_name %}">View Provider</a>
+                            <a class="btn btn-danger me-4" style="float: right;" href="{% url 'removeFavorite' favorite.id %}">Remove Provider</a>
+                        </div>
+                    </div>
+                    
+                    <br><br>
+                {% empty %}
+                    <div class="card" style="margin-top: 2%; background-color: #fafafa;">
+                        <div class="card-body">
+                            <strong>You don't have any favorite providers yet!</strong>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}       
+
+
+        </div>
+        
+    </div>
+            
+{% endblock content %}
+            

@@ -1,0 +1,15 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% block pagetitle %}
+    Treatment First
+{% endblock pagetitle %}
+{% block content %}
+
+    <div class="row" style="text-align: center; justify-content: center;">
+        
+        <div class="col">
+            <a href="{% url 'register' 'Marketer' %}" class="btn btn-primary">Marketers- Create Your Account to Promote Your Clients!</a>
+        </div>
+    </div>
+                
+{% endblock content %}

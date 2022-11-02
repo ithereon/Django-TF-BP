@@ -1,0 +1,26 @@
+{% load static %}
+<div class="example-critical-note">
+    {% if critical_note %}
+    <span class="critical-heading">CRITICAL CASE NOTE: </span> <p class="critical-actual-note">{{critical_note.description}}!</p> <span class="critical-note-details">
+        <p> {{critical_note.created_by.username}}</p>, <p>{{critical_note.created_at}}</p>
+    </span>
+    {% else %}
+    <span class="critical-heading"> </span> <p class="critical-actual-note"></p> <span class="critical-note-details">
+        <p> </p>, <p></p>, <p></p>
+    </span>
+    {% endif %}
+</div>
+<form method="POST" id="notes-form" action="{% url 'bp-addNotes' client.id case.id %}"> {% csrf_token %}
+    <div class="footer-line mr-2">
+        {% for page in pages %} {% if page.name == 'New Critical Note' %}
+     <button form="notes-form" onclick="newNoteFunctionDirect({{page.id}},{{page.id}})" type="submit" class="ml-0">New <br> Critical<br> Note</button>
+     {% endif %} {% endfor %}
+    </div>
+    <textarea id="w3review" required name="description" placeholder="Case Note:.."></textarea>
+    <div class="footer-line">
+        {% for page in pages %} {% if page.name == 'Update Case Status' %}
+        <button form="notes-form" onclick="newNoteFunctionDirect({{page.id}},{{page.id}})" type="submit" class="ml-2">Update<br> Case<br> Status</button>
+        {% endif %} {% endfor %}
+    </div>
+    <input hidden type="text" id="category" name="category"> 
+</form>

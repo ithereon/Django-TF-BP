@@ -1,0 +1,1135 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% block pagetitle %}
+   Treatment First - Add Law Office
+{% endblock pagetitle %}
+{% block content %}
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+<style>
+   dt{
+      color:grey !important;
+   }
+   .inline-label { 
+    white-space: nowrap;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    float:left;     
+    }
+    label{
+        color:grey;
+    }
+</style>
+<!-- Modal -->
+
+<div class="modal fade" id="addTreatmentDates" tabindex="-1" aria-labelledby="addTreatmentDates" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Provider Treatment</h5>
+         </div>
+         <div class="modal-body bg-light small border-bottom">
+            <div>Name: <span class="provider-first-name"></span> <span class="provider-last-name"></span></div>
+            <div>Email: <span class="provider-email"></span></div>
+            <div>Address: <span class="provider-address"></span></div>
+         </div>
+         <div class="modal-body">
+            <form method="POST" id="form12" action="{% url 'addTFTreatmentDates' %}">
+               {% csrf_token %}
+               <div class="row">
+                  <div class="col-sm-12 mb-3">
+                     <label class="text-muted">Name</label>
+                     <input type="text" class="form-control" name="name">
+                  </div>
+                  <div class="col-sm-12 mb-3">
+                     <label class="text-muted">Address</label>
+                     <input type="text" class="form-control" name="address">
+                  </div>
+                  <div class="col-sm-6 mb-3">
+                     <label class="text-muted">Phone</label>
+                     <input type="text" class="form-control" name="phone">
+                  </div>
+                  <div class="col-sm-6 mb-3">
+                     <label class="text-muted">Fax</label>
+                     <input type="text" class="form-control" name="fax">
+                  </div>
+               </div>
+               <hr>
+               <div class="mb-3 row">
+                  <div class="col-sm-4">
+                     <label class="text-muted">First Visit</label>
+                     <input type="date" class="form-control" name="first_date" id="first_date">
+                  </div>
+                  <div class="col-sm-4">
+                     <label class="text-muted">Last Visit</label>
+                     <input type="date" class="form-control" name="second_date" id="second_date">
+                  </div>
+                  <div class="col-sm-4">
+                     <label class="text-muted">Visits</label>
+                     <input type="number" placeholder="Total Visits" class="form-control" name="visits" id="visits">
+                  </div>
+               </div>
+               <input type="text" name="case_provider_id" id="case_provider_id" hidden>
+               <input type="text" name="case_id" id="case_id" hidden>
+               <input type="text" name="treatmentDate" id="treatmentDate" hidden>
+               <hr>
+               <div class="mb-3 row">
+                  <div class="col-sm-6">
+                     <label style="font-weight: 400 !important; color:grey;" for="tf_case_status" class="fw-bold mb-1">Case Status</label>
+                     <select name="tf_case_status" id="" style="min-width: 100%;">
+                        <option value="None" style="text-align: center;">---Select Case Status---</option>
+                        {% for x in tf_case_status %}
+                        <option style="text-align: center;" value="{{x.id}}">{{x.name}}</option>
+                        {% endfor %}
+                     </select>
+                  </div>
+                  <div class="col-sm-6">
+                     <label style="font-weight: 400 !important; color:grey;" for="tf_case_status" class="fw-bold mb-1">Open/Close</label>
+                     <div class="d-flex">
+                        <div class="form-check me-5">
+                           <input class="form-check-input" type="radio" name="tf_stage" id="tf_stage1" checked value="open">
+                           <label class="form-check-label" for="tf_stage1">
+                              Open
+                           </label>
+                         </div>
+                         <div class="form-check">
+                           <input class="form-check-input" type="radio" name="tf_stage" id="tf_stage2" value="close">
+                           <label class="form-check-label" for="tf_stage2">
+                             Close
+                           </label>
+                         </div>
+                     </div>
+                  </div>
+               </div>
+               
+               
+               
+            </form>
+         </div>
+         <div class="modal-body border-top bg-light">
+            To change or edit the Treatment Location or Specialty, first input a new Provider Treatment entry by clicking the Add Provider Treatment button and choose the correct specialty and treatment.  After saving, a Delete button will appear on the Add or Edit Provider Treatment popup for either of the new entries.  The Delete function is only available when two or more Provider Treatment entries have been made by the logged-in provider.
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-secondary me-auto" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" form="form12" class="btn btn-success">Save</button>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add New Firm</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <form method="POST" id="form1" action="{% url 'addNewFirm' client.id case.id %}">
+               {% csrf_token %}
+               <div class="mb-3 row">
+                  <div class="col-sm-6">
+                     <input type="text" placeholder="Enter the Office Number" class="form-control" name="office_name" id="office_name">
+                  </div>
+                  <div class="col-sm-6">
+                     <input type="text" class="form-control" placeholder="Enter the Username" name="username1" id="username1">
+                  </div>
+               </div>
+               <div class="mb-3 row">
+                  <div class="col-sm-6">
+                     <input type="email" class="form-control" placeholder="Enter the email" name="email" id="email">
+                  </div>
+                  <div class="col-sm-6">
+                     <input type="password" class="form-control" placeholder="Password" name="password" id="password">
+                  </div>
+               </div>
+               <div class="mb-3 row">
+                  <div class="col-sm-12">
+                     <input type="text" required class="form-control" placeholder="Enter Address 1" name="address1" data-field="address1">
+                  </div>
+               </div>
+               <div class="mb-3 row">
+                  <div class="col-sm-6">
+                     <input type="text" class="form-control" placeholder="Enter the Suite & Office No." name="address2" id="address2" data-field="address2">
+                  </div>
+                  <div class="col-sm-6">
+                     <select class="form-select" name="user_type1" id="user_type" aria-label="Default select example">
+                        <option value="no_option">
+                           ---Select User Type---
+                        </option>
+                        {% for type in user_types %}
+                        <option value="{{ type.id }}">
+                           {{ type.name }}
+                        </option>
+                        {% endfor %}
+                     </select>
+                  </div>
+               </div>
+               <div class="mb-3 row">
+                  <div class="col-sm-4">
+                     <input type="text" placeholder="City" required class="form-control" name="city" id="city" data-field="city" />
+                  </div>
+                  <div class="col-sm-4">
+                     <input type="text" placeholder="State" required class="form-control" name="state" id="state" data-field="state" />
+                  </div>
+                  <div class="col-sm-4">
+                     <input type="text" class="form-control" placeholder="Zip Code" name="post_code" id="postal" data-field="postal" />
+                  </div>
+               </div>
+               <h5>Add Firm User</h5>
+               <div class="mb-3 row">
+                  <div class="col-sm-4">
+                     <input type="text" class="form-control" placeholder="Enter the Username" name="username" id="username">
+                  </div>
+                  <div class="col-sm-4">
+                     <input type="text" placeholder="First Name" required class="form-control" name="first_name" id="first_name" />
+                  </div>
+                  <div class="col-sm-4">
+                     <input type="text" placeholder="Last Name" required class="form-control" name="last_name" id="last_name" />
+                  </div>
+               </div>
+               <div class="mb-3 row">
+                  <div class="col-sm-6">
+                     <input type="email" class="form-control" placeholder="Enter the email" name="email1" id="email">
+                  </div>
+                  <div class="col-sm-6">
+                     <input type="password" class="form-control" placeholder="Password" name="password1" id="password">
+                  </div>
+               </div>
+               <div class="mb-3 row">
+                  <div class="col-sm-6">
+                     <input type="text" placeholder="Phone Extension" required class="form-control" name="phone_extension" id="phone_extension" />
+                  </div>
+                  <div class="col-sm-6">
+                     <select class="form-select" name="user_type" id="user_type" aria-label="Default select example">
+                        <option value="no_option">
+                           ---Select User Type---
+                        </option>
+                        {% for type in user_types %}
+                        <option value="{{ type.id }}">
+                           {{ type.name }}
+                        </option>
+                        {% endfor %}
+                     </select>
+                  </div>
+               </div>
+            </form>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" form="form1" class="btn btn-primary">Add New Firm</button>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="modal fade" id="addNotes" tabindex="-1" aria-labelledby="addNotesLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="addNotesLabel">Add Notes & To-Dos</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <form method="POST" id="addTFToDo" action="{% url 'addTFToDo' client.id case.id %}">
+               {% csrf_token %}
+               
+               <div class="mb-3 row">
+                  <div class="col-sm-12">
+                     <textarea type="text" class="form-control" placeholder="Enter Notes" name="description" id="orig_description" data-field="description"></textarea>
+                  </div>
+                  
+               </div>
+               <div class="mb-3 row">
+                  <label class="col-sm-2 col-form-label ">To-Do for</label>
+                  <div class="col-sm-4">
+                     <select class="form-select" name="user_type" aria-label="Default select example">
+                        
+                        {% for provider_user in provider_users %}
+                        
+                              <option value="{{provider_user.user.id}}">Staff-{{provider_user.user.first_name}} {{provider_user.user.last_name}}</option>
+                        
+                        {% endfor %}
+                        {% if request.user.userprofile.account_type == 'Provider' %}
+                           <option value="{{request.user.id}}">Provider-{{request.user.first_name}} {{request.user.last_name}}</option>
+                        {% elif request.user.providerstaff_userprofile.account_type == 'ProviderStaff' %}
+                           <option value="{{request.user.providerstaff_userprofile.created_by.providerprofile.user.id}}">Provider-{{request.user.providerstaff_userprofile.created_by.providerprofile.user.first_name}} {{request.user.providerstaff_userprofile.created_by.providerprofile.user.last_name}}</option>
+                        {% endif %}
+                        </select>
+                  </div>
+                  <label class="col-sm-2 col-form-label ">Due in</label>
+                  <div class="col-sm-4">
+                     <select class="form-select" name="due_date">
+                        <option value="Now">Now</option>
+                        <option value="1 day">1 day</option>
+                        <option selected value="2 days">2 days</option>
+                        <option value="3 days">3 days</option>
+                        <option value="4 days">4 days</option>
+                        <option value="5 days">5 days</option>
+                        <option value="6 days">6 days</option>
+                        <option value="1 week">1 week</option>
+                        <option value="2 weeks">2 weeks</option>
+                        <option value="1 month">1 month</option>
+                        <option value="2 months">2 months</option>
+                        <option value="6 months">6 months</option>
+                     </select>
+                  </div>
+                  
+               </div>
+            </form>
+            <form method="post" action="{% url 'addTFNotes' client.id case.id %}" id="addTFNotes" >
+               <hr>
+               {% csrf_token %}
+               <div class="mb-3 row">
+                  <label class="col-sm-2 col-form-label ">Category</label>
+                  <input type="text" id="temp_description" name="note_description" hidden>
+                  <div class="col-sm-4">
+                     <select class="form-select" name="category">
+                        <option value="Treatment">Treatment</option>
+                        <option value="Billing">Billing</option>
+                        
+                     </select>
+                  </div>
+               </div>
+            </form>
+         </div>
+         <div class="modal-footer">
+            <button type="submit" form="addTFToDo" class="btn btn-primary">Add To-Do</button>
+            <button type="submit" form="addTFNotes" onclick="addNoteDescription()" class="btn btn-primary">Add Note</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="modal fade" id="editRecords" tabindex="-1" aria-labelledby="addClientLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addClientLabel">Edit Billing and Payment Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form-786" action="{% url 'editAccounting' %}" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="mb-1">
+                                
+                                <input disabled type="text" class="form-control" id="original"  placeholder="Original Cost" data-field="phone" />
+                            </div>
+                            <div class="mb-1">
+                                
+                                <input disabled type="text" required class="form-control" placeholder="HI Paid" id="hi_paid"  data-field="hi_paid">
+                            </div>
+                            <div class="mb-1">  
+                                <input disabled type="text" class="form-control" placeholder="HI Reduction"  id="hi_reduction" data-field="hi_reduction" />
+                            </div>
+                            <div class="mb-1">
+                                
+                                <input disabled type="text" placeholder="Reduction" required class="form-control"  id="reduction" data-field="incident_date" />
+                            </div>
+                            <div class="mb-1">  
+                                <input disabled type="text" placeholder="MP Paid" required class="form-control"  id="mp_paid" data-field="incident_date" />
+                            </div>
+                            <div class="mb-1">  
+                                <input disabled type="date"  class="form-control"  id="payment_received_date" data-field="incident_date" />
+                            </div>
+                            <div class="mb-1">  
+                                <input disabled type="text" placeholder="MP Paid" required class="form-control"  id="patient_payment_value" data-field="incident_date" />
+                            </div>
+                            <div class="mb-1">  
+                                <input disabled type="text"  class="form-control"  id="check_number" data-field="incident_date" />
+                            </div>
+                           <input type="text" name="tf_accounting_id" id="tf_accounting_id" hidden>
+                           
+                        </div>
+                        <div class="col-8">
+                            <div class="mb-1 form-group d-flex">
+                                
+                                <label for="" width="100%" class="col-5 text-end me-2" style="vertical-align: middle;align-self: center; justify-self: center;">Original:</label>
+                                
+                                <input type="text" value="0.00" class="form-control"  name="original" placeholder="Original Cost" data-field="phone" />
+                            </div>
+                            <div class="mb-1 form-group d-flex">
+                                <label for="" class="col-5 text-end me-2" style="vertical-align: middle;align-self: center; justify-self: center;">Health Insurance Paid:</label>
+                                <input type="text" value="0.00" required class="form-control" placeholder="HI Paid" name="hi_paid" data-field="hi_paid">
+                            </div>
+                            <div class="mb-1 form-group d-flex">  
+                                <label for="" class="col-5 text-end me-2" style="vertical-align: middle;align-self: center; justify-self: center;">Health Insurance Reduction:</label>
+                                <input type="text" value="0.00" class="form-control" placeholder="HI Reduction" name="hi_reduction"  data-field="hi_reduction" />
+                            </div>
+                            <div class="mb-1 form-group d-flex">
+                                <label for="" class="col-5 text-end me-2" style="vertical-align: middle;align-self: center; justify-self: center;">Reduction:</label>
+                                <input type="text" value="0.00" placeholder="Reduction" required class="form-control" name="reduction"  data-field="incident_date" />
+                            </div>
+                            <div class="mb-1 form-group d-flex">  
+                                <label for="" class="col-5 text-end me-2" style="vertical-align: middle;align-self: center; justify-self: center;">MedPay or PIP Paid:</label>
+                                <input type="text" value="0.00" placeholder="MP Paid" required class="form-control" name="mp_paid"  data-field="incident_date" />
+                            </div>
+                            <div class="mb-1 form-group d-flex">
+                                <label for="" class="col-5 text-end me-2" style="vertical-align: middle;align-self: center; justify-self: center;">Payment Received Date:</label>  
+                                <input type="date"  class="form-control" name="payment_received_date"  data-field="incident_date" />
+                            </div>
+                            <div class="mb-1 form-group d-flex"> 
+                                <label for="" class="col-5 text-end me-2" style="vertical-align: middle;align-self: center; justify-self: center;">Patient Paid:</label> 
+                                <input type="text" value="0.00" placeholder="Patient Paid" required class="form-control" name="patient_payment_value"  data-field="incident_date" />
+                            </div>
+                            <div class="mb-1 form-group d-flex">
+                                <label for="" class="col-5 text-end me-2" style="vertical-align: middle;align-self: center; justify-self: center;">Check Number:</label>  
+                                <input type="text" value=""  class="form-control" placeholder="Check Number" name="check_number"  data-field="incident_date" />
+                            </div>
+                           
+                           
+                        </div>
+                        <!-- <div class="col-4">
+                            <div class="mb-1">
+                                <label for="original" class="inline-label">Original:</label>
+                                
+                            </div>
+                            <div class="mb-1">
+                                <label for="hi_paid" class="inline-label">Health Insurance Paid:</label>
+                            </div>
+                            <div class="mb-1">  
+                                <label for="hi_reduction" class="inline-label">Health Insurance Reduction:</label>
+                            </div>
+                            <div class="mb-1">
+                                <label for="reduction" class="inline-label">Reduction:</label>
+                            </div>
+                            <div class="mb-1">  
+                                <label for="mp_paid" class="inline-label">MedPay or PIP Paid:</label>
+                            </div>
+                            <div class="mb-1">  
+                                <label for="payment_received_date" class="inline-label">Payment Received Date:</label>
+                            </div>
+                            <div class="mb-1">  
+                                <label for="patient_payment_value" class="inline-label">Patient Paid:</label>
+                            </div>
+                            <div class="mb-1">  
+                                <label for="check_number" class="inline-label">Check #:</label>
+                            </div>
+                           
+                           
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-1">
+                                
+                                <input type="text" class="form-control"  name="original" placeholder="Original Cost" data-field="phone" />
+                            </div>
+                            <div class="mb-1">
+                                
+                                <input type="text" required class="form-control" placeholder="HI Paid" name="hi_paid" data-field="hi_paid">
+                            </div>
+                            <div class="mb-1">  
+                                <input type="text" class="form-control" placeholder="HI Reduction" name="hi_reduction"  data-field="hi_reduction" />
+                            </div>
+                            <div class="mb-1">
+                                
+                                <input type="text" placeholder="Reduction" required class="form-control" name="reduction"  data-field="incident_date" />
+                            </div>
+                            <div class="mb-1">  
+                                <input type="text" placeholder="MP Paid" required class="form-control" name="mp_paid"  data-field="incident_date" />
+                            </div>
+                            <div class="mb-1">  
+                                <input type="date"  class="form-control" name="payment_received_date"  data-field="incident_date" />
+                            </div>
+                            <div class="mb-1">  
+                                <input type="text" placeholder="Patient Paid" required class="form-control" name="patient_payment_value"  data-field="incident_date" />
+                            </div>
+                            <div class="mb-1">  
+                                <input type="text"  class="form-control" placeholder="Check Number" name="check_number"  data-field="incident_date" />
+                            </div>
+                           
+                           
+                        </div> -->
+                    </div>
+                    
+
+                </form>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" style="float:left; margin-right:auto;" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit"  form="form-786" class="btn btn-success" data-bs-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+   <div>
+      <div class="card mb-3">
+         <div class="card-body">
+            <a href="{% url 'accounting' %}" class="float-end position-absolute btn-link" style="right: 20px; text-decoration: none;"><i class="fa fa-chevron-left"></i> Back to Accounting</a>
+            <div class="row">
+               <div class="col-md-6">
+                  <h5 class="mb-3">{{ client.last_name }}, {{ client.first_name }} <span class="text-muted">accounting details for the</span> {{ case.incident_date }} {{case.case_type.name}} <span class="text-muted">case</span></h5>
+                  <dl class="row dl-horizontal mb-0 dl-condensed">
+                     <dt class="col-md-3">Phone</dt>
+                     <dd class="col-md-9"> {{ client.phone }} </dd>
+                     <dt class="col-md-3">Email</dt>
+                     <dd class="col-md-9"> {{ client.email }} </dd>
+                     <dt class="col-md-3">Birthday</dt>
+                     <dd class="col-md-9"> {{ client.birthday }} </dd>
+                  </dl>
+               </div>
+               <div class="col-md-6 bg-light pt-2 rounded-3" style="margin-top: -8px;">
+                  <div>
+                     {% if not client.created_by %}
+                     <h5 class="mb-3">Attorney Details</h5>
+                     <form action="{% url 'AttachAttorneyCaseManagement' %}" onsubmit="ajaxFormSubmit(event)">
+                        {% csrf_token %}
+                        <input type="hidden" name="client_id" value="{{ client.id }}">
+                        <input type="hidden" name="case_id" value="{{ case.id }}">
+                        <div>
+                           <div class="mb-3 row">
+                              <div class="col-md-4 text-md-end col-form-label"></div>
+                              <div class="col-md-8">
+                                 <button type="submit" class="btn btn-primary">Submit</button>
+                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="btnAddFirm">
+                                    Add New Firm
+                                 </button>
+                                 
+                              </div>
+                           </div>
+                        </div>
+                     </form>
+                     {% else %}
+                     <h5 class="mb-3">Represented by {{client.created_by.attorneyprofile.office_name}}</h5>
+                     <dl class="row dl-horizontal mb-0 dl-condensed">
+                        {% if not firm_user %}
+                           <dt class="col-md-3">Case Manager</dt>
+                           <dd class="col-md-8"> - </dd>
+                           <dt class="col-md-3">Phone Ext.</dt>
+                           <dd class="col-md-8"> - </dd>
+                        {% else %}
+                           <dt class="col-md-3 text-end">Case Manager :</dt>
+                           <dd class="col-md-8">{{firm_user.user.first_name}} {{firm_user.user.last_name}}
+                              <a href="#" class="small ms-2" data-bs-toggle="modal" data-bs-target="#editLawOffice"><i class="fa fa-pen small"></i> Edit</a>
+                           </dd>
+                           <dt class="col-md-3"></dt>
+                           <dd class="col-md-8">{{firm_user.phone_extension}}</dd>
+                        {% endif %}
+                        <dt class="col-md-3 text-end">Update :</dt>
+                        <dd class="col-md-8"> 
+                           {% for x in provider_cases %}
+                           <tr>
+                                 <td>"{{x.recent_status|slice:":100"}}" <span style="color:grey;">by</span></td>
+                                 <td class="td-autosize">{{x.case_manager.first_name}} {{x.case_manager.last_name}} <span style="color:grey;">on</span></td>
+                                 <td class="td-autosize">{{x.status_date}}</td>
+                                 {% if x.temp_check and x.request_count < 3 %}
+                                 <td class="td-autosize"><a href="{% url 'addRequestUpdate' x.id %}" class="btn btn-success">Request Update</a></td>
+                                 {% elif x.temp_check and x.request_count >= 3 %}
+                                 <td class="td-autosize"><a href="{% url 'addRequestUpdate' x.id %}" class="btn btn-success">Update Ignored</a></td>
+                                 {% elif x.isRequested %}
+                                 <td class="td-autosize"><button class="btn btn-warning" >Update Requested</button></td>
+                                 {% else %}
+                                 <td class="td-autosize"><button class="btn btn-seconday" disabled >Request Update</button></td>
+                                 {% endif %}
+                              </tr>
+                           {% endfor %}
+                        </dd>
+                     </dl>
+                     {% endif %}
+                  </div>
+               </div>
+            </div>
+            
+            <div class="mt-4">
+               
+
+               <table class="table table-striped table-hover table-borderless align-middle mb-0">
+                  <thead>
+                     
+                        <tr>
+                           <th></th>
+                           <th style="font-weight: 400 !important;color:grey;"></th>
+                           <th style="font-weight: 400 !important;color:grey;">Original</th>
+                           <th style="font-weight: 400 !important;color:grey;">HI Paid</th>
+                           <th style="font-weight: 400 !important;color:grey;">HI Reduc.</th>
+                           <th style="font-weight: 400 !important;color:grey;">MP Paid</th>
+                           <th style="font-weight: 400 !important;color:grey;">Client Paid</th>
+                           <th style="font-weight: 400 !important;color:grey;">Reduc.</th>
+                           <th style="font-weight: 400 !important;color:grey;">Lien</th>
+                           <th style="font-weight: 400 !important;color:grey;">Final</th>
+                           <th style="font-weight: 400 !important;color:grey;" colspan="2">Check Copies</th>
+                           <th style="font-weight: 400 !important;color:grey;">Check #</th>
+                           <th style="font-weight: 400 !important;color:grey;">Received</th>
+                        </tr>
+                     
+                  </thead>
+                  
+                  
+                    <tr 
+                    data-original="{{tf_accounting.original}}"
+                    data-hi_paid="{{tf_accounting.hi_paid}}"
+                    data-hi_reduction="{{tf_accounting.hi_reduction}}"
+                    data-mp_paid="{{tf_accounting.mp_paid}}"
+                    data-reduction="{{tf_accounting.reduction}}"
+                    data-patient_payment_value="{{tf_accounting.patient_payment_value}}"
+                    data-check_number="{{tf_accounting.check_number}}"
+                    data-payment_received_date="{{tf_accounting.payment_received_date}}"
+                    data-tf_accounting="{{tf_accounting.id}}"
+                    onclick="editRecords(event)"
+                    >
+                    <td class="td-autosize">1</td>
+                    <td class="td-autosize"><div class="badge-specialty col-3" style="background-color: {{tf_accounting.for_case_provider.specialty.color}}" title="{{name}}">{{tf_accounting.for_case_provider.specialty.name.0}}</div></td>
+                    
+                    <td >${{tf_accounting.original}}</td>
+                    <td >${{tf_accounting.hi_paid}}</td>
+                    <td >${{tf_accounting.hi_reduction}}</td>
+                    <td >${{tf_accounting.mp_paid}}</td>
+                    <td >${{tf_accounting.patient_payment_value}}</td>
+                    <td >${{tf_accounting.reduction}}</td>
+                    <td >${{tf_accounting.liens}}</td>
+                    <td >${{tf_accounting.final}}</td>
+                    
+                    
+                    
+                    <td style="padding-right: 0px;width: 62px;">
+                        {% if accounting_doc_1.check == 'False' %}
+                        <div >
+                            <form style="padding-right:5px; padding-left:5px;width: 62px;" onclick="editRecordsDate(event, 'False')" action="{% url 'TFUpload' client.id case.id accounting_doc_1.id %}" method="POST" class="dropzone dz dz-xs mb-0 me-0 text-dark d-block" data-dropzone>
+                                {% csrf_token %}
+                                <input type="hidden" name="name" value=".." />
+                                <div class="dz-message" data-dz-message style="display:grid;width:50px;margin:auto;">
+                                    <i class="icon-file-text" style="color:grey;font-size:20px;text-align: center;"></i>
+                                    <span style="font-size: 14px;text-align: center;">Paid</span>
+                                </div>
+                                <div class="fallback"><input type="file" name="file"></div>
+                                
+                            </form>
+                        </div>
+                        {% else %}
+                        <div>
+                            <a style="padding-right:5px; padding-left:5px;width: 62px;" href="{% url 'open_file' accounting_doc_1.id %}" target="_blank" class="dropzone dz dz-xs mb-0 me-0 text-dark d-block" data-doc-id="{{ accounting_doc_2.id }}" data-client-id="{{ x.client.id }}" data-case-id="{{ case.id }}" data-note-id="" data-doc-name="{{ accounting_doc_2.file_name }}" onclick="event.stopPropagation()">
+                                <div class="dz-preview dz-file-preview dz-processing dz-success dz-complete">
+                                <div>
+                                    <div style="display:grid;min-width:50px;">
+                                        <i class="icon-file-text" style="color:green;font-size:20px;text-align: center;padding:0;margin:0"></i>
+                                        <div class="dz-filename"  style="text-align: center;padding:0; margin:0;"><span style="font-size: 14px;text-align: center !important;">Paid</span></div>
+                                    </div>
+                                </div>
+                                </div>
+                            </a>
+                        </div>
+                        {% endif %}
+                    </td>
+                    <td style="width: 62px;">
+                        {% if accounting_doc_2.check == 'False' %}
+                        
+                        <div >
+                            <form style="padding-right:5px; padding-left:5px;width: 62px;"  onclick="editRecordsDate(event, 'False')" action="{% url 'TFUpload' client.id case.id accounting_doc_2.id %}" method="POST" class="dropzone dz dz-xs mb-0 me-0 text-dark d-block" data-dropzone>
+                                {% csrf_token %}
+                                <input type="hidden" name="name" value=".." />
+                                <div class="dz-message" data-dz-message style="display:grid;width:50px;margin:auto;">
+                                    <i class="icon-file-text" style="color:grey;font-size:20px;text-align: center;padding:0;margin:0"></i>
+                                    <span style="font-size: 14px;text-align: center;padding:0;margin:0;">Cleared</span>
+                                </div>
+                                <div class="fallback"><input type="file" name="file"></div>
+                                
+                            </form>
+                        </div>
+                        {% else %}
+                        <div>
+                            <a  style="padding-right:5px; padding-left:5px;width: 62px;"href="{% url 'open_file' accounting_doc_2.id %}" target="_blank" class="dropzone dz dz-xs mb-0 me-0 text-dark d-block" data-doc-id="{{ accounting_doc_2.id }}" data-client-id="{{ x.client.id }}" data-case-id="{{ case.id }}" data-note-id="" data-doc-name="{{ accounting_doc_2.file_name }}" onclick="event.stopPropagation()">
+                                <div class="dz-preview dz-file-preview dz-processing dz-success dz-complete" >
+                                <div class=" " >
+                                                            
+                                                                            
+                                    <div class="" style="display:grid;min-width:50px;">
+                                        <i class="icon-file-text" style="color:green;font-size:20px;text-align: center;padding:0;margin:0"></i>
+                                        <div class="dz-filename"  style="text-align: center;padding:0; margin:0;"><span style="font-size: 14px;text-align: center !important;">Cleared</span></div>
+                                    </div>
+                                </div>
+                                </div>
+                            </a>
+                        </div>
+                        {% endif %}
+                        
+                    </td>
+                    <td >{{tf_accounting.check_number}}</td>
+                    <td >{{tf_accounting.payment_received_date}}</td>
+                    </tr>
+                  
+                  
+                 
+               </table>
+            </div>
+            <div class="mt-4 position-relative">
+               <button class="btn btn-primary position-absolute top-0 right-0" data-bs-toggle="modal" data-bs-target="#addNotes">Add Notes and To-Dos</button>
+               <ul class="nav nav-tabs " role="tablist">
+                  <li class="nav-link active"><a href="#all" role="tab" data-toggle="tab">All Note Categories</a></li>
+                  <li><a style="text-decoration:none !important;" class="nav-link" href="#treatment" role="tab" data-toggle="tab">Treatment</a></li>
+                  <li><a style="text-decoration:none !important;" class="nav-link" href="#billing" role="tab" data-toggle="tab">Billing</a></li>
+                </ul>
+            </div>
+            
+            
+             
+             <!-- Tab panes -->
+             <div class="tab-content">
+               <div class="tab-pane active" id="all">
+                  <div class="col-lg-12">
+                     <div class="row">
+                         <div class="table-responsive table--no-card m-b-40 m-t-20">
+                             <table class="table table-borderless table-striped table-earning">
+                                 <thead>
+                                     <tr>
+                                         <td class="text-muted">Date</td>
+                                         <td class="text-muted">Time</td>
+                                         <td class="text-muted">User</td>
+                                         <td class="text-muted">Note</td>
+                                         <td class="text-muted">Category</td>
+                                     </tr>
+                                 </thead>
+                                 <tbody> {% for note in tf_notes %} {% if empty %}
+                                     <div class="alert alert-danger" role="alert"> A simple danger alert—check it out! </div> {% endif %}
+                                     <tr class="hove">
+                                         <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                         <td class="td-autosize">{{note.created_at|time}}</td>
+                                         <td class="td-autosize">{{note.created_by.first_name}} {{note.created_by.last_name}}</td>
+                                         <td style="color:black !important">{{note.description}}</td>
+                                         <td class="td-autosize">{{note.category}}</td>
+                                     </tr> {% endfor %} </tbody>
+                             </table>
+                         </div>
+                     </div>
+                 </div>
+               </div>
+               <div class="tab-pane" id="treatment">
+                  
+                     <div class="col-lg-12">
+                        <div class="row">
+                            <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                <table class="table table-borderless table-striped table-earning">
+                                    <thead>
+                                        <tr>
+                                            <td>Date</td>
+                                            <td>Time</td>
+                                            <td>User</td>
+                                            <td>Note</td>
+                                            <td>Category</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody> {% for note in tf_notes %} {% if empty %}
+                                        <div class="alert alert-danger" role="alert"> A simple danger alert—check it out! </div> {% endif %}
+                                        {% if note.category == 'Treatment' %}
+                                        <tr class="hove">
+                                            <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                            <td class="td-autosize">{{note.created_at|time}}</td>
+                                            <td class="td-autosize">{{note.created_by.first_name}} {{note.created_by.last_name}}</td>
+                                            <td style="color:black !important">{{note.description}}</td>
+                                            <td class="td-autosize">{{note.category}}</td>
+                                        </tr> {% endif %}{% endfor %} </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+               <div class="tab-pane" id="billing">
+                  <div class="col-lg-12">
+                     <div class="row">
+                         <div class="table-responsive table--no-card m-b-40 m-t-20">
+                             <table class="table table-borderless table-striped table-earning">
+                                 <thead>
+                                     <tr>
+                                         <td>Date</td>
+                                         <td>Time</td>
+                                         <td>User</td>
+                                         <td>Note</td>
+                                         <td>Category</td>
+                                     </tr>
+                                 </thead>
+                                 <tbody> {% for note in tf_notes %} {% if empty %}
+                                     <div class="alert alert-danger" role="alert"> A simple danger alert—check it out! </div> {% endif %}
+                                     {% if note.category == 'Billing' %}
+                                     <tr class="hove">
+                                         <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                         <td class="td-autosize">{{note.created_at|time}}</td>
+                                         <td class="td-autosize">{{note.created_by.first_name}} {{note.created_by.last_name}}</td>
+                                         <td style="color:black !important">{{note.description}}</td>
+                                         <td class="td-autosize">{{note.category}}</td>
+                                     </tr> {% endif %}{% endfor %} </tbody>
+                             </table>
+                         </div>
+                     </div>
+                 </div>
+               </div>
+               
+         </div>
+      </div>
+   </div>
+</div>
+
+{% verbatim %}
+<script type="text/template" id="dz-template">
+   <div class="dz-preview dz-file-preview">
+         <div class="d-flex align-items-center">
+            <div class="px-1"><i class="fa fa-file-pdf text-danger"></i></div>
+            <div>
+               <div class="dz-filename"><span data-dz-name></span></div>
+               <!-- <img data-dz-thumbnail /> -->
+            </div>
+         </div>
+         <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+         <div class="dz-success-mark"><span>✔</span></div>
+         <div class="dz-error-mark"><span>✘</span></div>
+         <div class="dz-error-message"><span data-dz-errormessage></span></div>
+   </div>
+</script>
+<script type="text/template" id="doc-preview-template">
+   <div class="px-4 py-4 doc-preview-sidebar">
+         <span data-close="sidebar-right" onclick="hideRightSidebar()"><i class="fa fa-times"></i></span>
+         <h4 class="mb-3 text-secondary">Document: {{docName}}</h4>
+         <div class="img-thumbnail">
+            <embed src="/BP/open/{{docId}}/" width="100%" height="400px" />
+         </div>
+   </div>
+</script>
+{% endverbatim %}
+<div class="modal fade" id="docModal" tabindex="-1" aria-labelledby="docModalLabel" role="dialog">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="editLawOfficeLabel">Name and Save Document Title</h5>
+            <button type="button" class="btn-close" onclick="hideDocName()"></button>
+         </div>
+         <div class="modal-body bg-light border-bottom small">
+            This document will be available for the attorney attached to this client's case.  Be sure you have legal authority to send this Medical Record to the attorney that is attached here.  Review any HIPAA rules and regulations before you upload and save this document.  Removing the document will remove it from access by the attorney attached to this client's case.
+         </div>
+         <div class="modal-body">
+            <form onsubmit="submitDocName()">
+               <div class="mb-3">
+                  <div class="form-group">
+                     <label> Documet Name </label>
+                     <input id="docName" type="text" class="form-control" required />
+                  </div>
+               </div>
+               <hr>
+               <button type="submit" class="btn btn-success me-auto"> Save Document  </button>
+               <button type="button" class="btn btn-secondary" onclick="hideDocName()"> Cancel </button>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+
+<!-- Modal -->
+<div class="modal fade" id="editLawOffice" tabindex="-1" aria-labelledby="editLawOfficeLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="editLawOfficeLabel">Add or Edit Law Office and Contact</h5>
+         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+       </div>
+       <div class="modal-body" id="panel-search">
+         <div id="panel-1">
+            <div class="panel-1-body">
+               <div class="mb-3 row">
+                  <div class="col-md-4 text-md-end col-form-label">Attorney</div>
+                  <div class="col-md-8">
+                     <input type="text" id="search_attorneys" class="form-control" />
+                     <input type="hidden" name="attorney_id" id="attorney_id" />
+                  </div>
+               </div>
+               <a href="#" onclick="attorneyNotFoundSelected()" class="pull-right">Law Firm Not Found?</a>
+            </div>
+         </div>
+
+         <div id="panel-2" style="display: none;">
+            <h6 class="mt-4">Case Managers</h6>
+            <div class="panel-2-body">
+               <table class="table table-sm table-hover" id="table-case-managers">
+                  <thead class="text-muted small">
+                     <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                     </tr>
+                  </thead>
+                  <tbody></tbody>
+               </table>
+
+               <script type="text/template" id="template-case-manager-row">
+                  <tr class="pointer" onclick="selectCaseManager()" data-json="{{json}}">
+                     <td>{{user.first_name}} {{user.last_name}}</td>
+                     <td>{{user.email}}</td>
+                     <td>{{phone_extension}}</td>
+                  </tr>
+               </script>
+            </div>
+
+            <div>
+               <div class="mb-3">
+                  <label class="text-muted">First Name</label>
+                  <input type="text" name="first_name" class="form-control" required />
+               </div>
+               <div class="mb-3">
+                  <label class="text-muted">Last Name</label>
+                  <input type="text" name="last_name" class="form-control" required />
+               </div>
+               <div class="mb-3">
+                  <label class="text-muted">Phone Number</label>
+                  <input type="text" name="phone_no" class="form-control" required />
+               </div>
+               <div class="mb-3">
+                  <label class="text-muted">Extension</label>
+                  <input type="text" name="extension" class="form-control" />
+               </div>
+               <div class="mb-3">
+                  <label class="text-muted">Email</label>
+                  <input type="email" name="email" class="form-control" required />
+               </div>
+
+               <button type="button" class="btn btn-primary" onclick="addFirmOfNotFound()">Add Law Firm and Case Manager to Case</button>
+            </div>
+
+         </div>
+       </div>
+
+         <!-- Law Firm -->
+         <div id="panel-law-firm" style="display: none;">
+            <div class="modal-body">
+               <h3>Law Firm</h3>
+
+               <div class="mb-3">
+                  <label class="text-muted">Email</label>
+                  <input type="email" name="email" class="form-control" required />
+               </div>
+               <div class="mb-3">
+                  <label class="text-muted">Address 1</label>
+                  <input type="text" name="address1" class="form-control" required />
+               </div>
+               <div class="mb-3">
+                  <label class="text-muted">Address 2</label>
+                  <input type="text" name="address2" class="form-control" />
+               </div>
+               <div class="mb-3">
+                  <label class="text-muted">City</label>
+                  <input type="text" name="city" class="form-control" required />
+               </div>
+               <div class="mb-3">
+                  <label class="text-muted">State</label>
+                  <input type="text" name="state" class="form-control" required />
+               </div>
+               <div class="mb-3">
+                  <label class="text-muted">Zip Code</label>
+                  <input type="text" name="zipcode" class="form-control" required />
+               </div>
+               <div class="mb-3">
+                  <label class="text-muted">Phone number</label>
+                  <input type="text" name="phone_no" class="form-control" required />
+               </div>
+               <div class="mb-3">
+                  <label class="text-muted">Fax</label>
+                  <input type="text" name="fax" class="form-control" required />
+               </div>
+
+               <h4>Case Manager</h4>
+               <div class="mb-3">
+                  <label class="text-muted">First Name</label>
+                  <input type="text" name="case_manager_fname" class="form-control" required />
+               </div>
+               <div class="mb-3">
+                  <label class="text-muted">Last Name</label>
+                  <input type="text" name="case_manager_lname" class="form-control" required />
+               </div>
+               <div class="mb-3">
+                  <label class="text-muted">Extension</label>
+                  <input type="text" name="case_manager_extension" class="form-control" required />
+               </div>
+               <div class="mb-3">
+                  <label class="text-muted">Email</label>
+                  <input type="email" name="case_manager_email" class="form-control" required />
+               </div>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+               <button type="button" class="btn btn-success me-auto">Add Law Firm and Case Manager to Case</button>
+            </div>
+         </div>
+     </div>
+   </div>
+ </div>
+
+ <script>
+    function editRecords(ev) {
+        var $modal = $('#editRecords');
+        var $tr = $(ev.target).closest('tr');
+
+        $modal.find('[id="original"]').val($tr.attr('data-original'));
+        $modal.find('[id="hi_reduction"]').val($tr.attr('data-hi_reduction'));
+        $modal.find('[id="hi_paid"]').val($tr.attr('data-hi_paid'));
+        $modal.find('[id="mp_paid"]').val($tr.attr('data-mp_paid'));
+        $modal.find('[id="reduction"]').val($tr.attr('data-reduction'));
+        $modal.find('[id="patient_payment_value"]').val($tr.attr('data-patient_payment_value'));
+        $modal.find('[id="payment_received_date"]').val($tr.attr('data-payment_received_date'));
+        $modal.find('[id="check_number"]').val($tr.attr('data-check_number'));
+        $modal.find('[id="tf_accounting_id"]').val($tr.attr('data-tf_accounting'));
+        
+        $modal.modal('show');
+    }
+</script>
+<script>
+   function editRecordsDate(ev=null, xTemp){
+      var $modal = $('#addTreatmentDates');
+      
+      if(xTemp == 'True'){
+         var $tr = $(ev.target).closest('tr');
+
+         $modal.find('.provider-first-name').html($tr.attr('data-provider-first-name'));
+         $modal.find('.provider-last-name').html($tr.attr('data-provider-last-name'));
+         $modal.find('.provider-email').html($tr.attr('data-provider-email'));
+         $modal.find('.provider-address').html($tr.attr('data-provider-address'));
+
+         $modal.find('[name="case_provider_id"]').val($tr.attr('data-case_provider_id'));
+         $modal.find('[name="case_id"]').val($tr.attr('data-case_id'));
+         $modal.find('[name="treatmentDate"]').val($tr.attr('data-treatmentDate'));
+         $modal.find('[name="first_date"]').val($tr.attr('data-first_date'));
+         $modal.find('[name="second_date"]').val($tr.attr('data-second_date'));
+         $modal.find('[name="visits"]').val($tr.attr('data-visits'));
+         $('#addTreatmentDates').modal('show');
+      }else{
+         $('#addTreatmentDates').modal('hide');
+         console.log('Hellalala');
+      }
+      
+     
+   }
+</script>
+<script type="text/javascript">
+   function document_section(){
+      console.log('hello');
+      $("#addTreatmentDates").modal('hide');
+      console.log('done');
+      
+   }
+</script>
+<script type="text/javascript">
+   var attorneySearched = false;
+
+   function attorneyNotFoundSelected() {
+      $('#panel-2').show();
+   }
+
+   function addFirmOfNotFound() {
+      $('#panel-law-firm').show();
+      $('#panel-1').hide();
+      $('#panel-2').hide();
+      $('#panel-search').hide();
+   }
+
+   function attorneySelected() {
+      $('#panel-2').show();
+   }
+
+   $(document).ready(function() {
+
+      refreshAddFirmBtn();
+
+      function refreshAddFirmBtn() {
+         $('#btnAddFirm').removeClass('disabled').removeAttr('disabled');
+         if(!attorneySearched) $('#btnAddFirm').attr('disabled', true);
+      }
+
+      var editLawOfficeModal = document.getElementById('editLawOffice')
+
+      editLawOfficeModal.addEventListener('shown.bs.modal', function () {
+            
+         $('#search_attorneys').typeahead(null, {
+            name: 'attorney',
+            display: 'text',
+            async: true,
+            source: debounce(function(query, process, process_async) {
+               $.ajax({
+                  url: '/AttorneyAutoCompleteSearch/',
+                  contentType: 'application/json',
+                  method: 'GET',
+                  data: { attorney_name: query },
+                  success: function(data) {
+                     var result = data.map(function(item) {
+                        return { text: item.attorneyprofile.office_name, value: item }
+                     });
+                     attorneySearched = true;
+                     refreshAddFirmBtn();
+                     return process_async(result);
+                  }
+               });
+            }, 250),
+
+         })
+            .bind('typeahead:select', function(ev, data) { 
+               $('#search_attorneys').data('tt-value', data.value); $('#attorney_id').val(data.value.id); 
+               attorneySelected();
+               refreshUsers(); 
+            })
+            .bind('typeahead:change', function(ev, data) {
+               if(!data) { $('#search_attorneys').data('tt-value', null); $('#attorney_id').val(null); refreshUsers(); }
+            });
+
+      });
+
+      var templateCaseManagerRow = Handlebars.compile($('#template-case-manager-row').html());
+
+      function refreshUsers() {
+         var attorney_id = $('#attorney_id').val();
+         $.ajax({
+            url: '/GetFirmUserCaseManagement/',
+            method: 'GET',
+            contentType: 'application/json',
+            data: { attorney_id: attorney_id },
+            success: function(response) {
+               $('#table-case-managers tbody').empty();
+               $.each(response, function(i, p) {
+                  p.json = JSON.stringify(p);
+                  var $row = $(templateCaseManagerRow(p));
+                  $('#table-case-managers tbody').append($row);
+               });
+            }
+         })
+      }
+
+      $('#address').change(function() {
+         var addressId = $('#address').val();
+         $.ajax({
+            url: '/getSpecialties/?location_id=' + addressId,
+            contentType: 'application/json',
+            method: 'GET',
+            success: function(response) {
+               $('#specialty').empty();
+               $.each(response, function(i, p) {
+                  console.log(p);
+                  $('#specialty').append($('<option></option>').val(p.id).html(p.name));
+               });
+            }
+         });
+      });
+   })
+
+   function ajaxFormSubmit(ev) {
+      ev.preventDefault();
+      $.ajax({
+         url: $(ev.target).attr('action'),
+         method: 'GET',
+         data: readForm(ev.target),
+         success: function(result) {
+            window.location.reload();
+         }
+      })
+      return false;
+   }
+</script>
+<script>
+   function addNoteDescription(){
+      temp_description = document.getElementById('temp_description');
+      description = document.getElementById('orig_description').value;
+      temp_description.value = description;
+      console.log(description);
+   }
+</script>
+{% endblock content %}

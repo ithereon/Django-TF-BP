@@ -1,0 +1,624 @@
+{% extends "BP/baseBPTopNav.html" %}
+{% load static %}
+{% block pagetitle %}Dashboard{% endblock pagetitle %}
+{% block content %}
+
+<!-- Main CSS-->
+<!-- <link href="{% static 'BP_resources/css/theme.css' %}" rel="stylesheet" media="all"> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.11.0/main.min.css' rel='stylesheet' />
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.11.0/main.min.js'></script>
+
+<style>
+  #external-events {
+    z-index: 2;
+    padding: 10px 10px;
+    border: 1px solid #ccc;
+    background: #eee;
+    
+  }
+
+  #external-events .fc-event {
+    cursor: move;
+    margin: 3px 0;
+  }
+
+  #calendar-container {
+    position: relative;
+    z-index: 1;
+
+  }
+
+  #calendar {
+    margin: 20px auto;
+    
+  }
+</style>
+<script>
+  var curCalenderEv = null;
+  $(document).ready(function(){
+    $('.modal-fc').each(function (i, m) {
+      $(m).on('hidden.bs.modal', function (e) {
+        if(curCalenderEv) { curCalenderEv.revert(); curCalenderEv = null; }
+      });
+    });
+  })
+
+  document.addEventListener('DOMContentLoaded', function() {
+
+    var Draggable = FullCalendar.Draggable;
+
+    var containerEl = document.getElementById('external-events');
+    var calendarEl = document.getElementById('calendar');
+
+
+    // initialize the external events
+    // -----------------------------------------------------------------
+
+    new Draggable(containerEl, {
+      itemSelector: '.fc-event',
+      eventData: function(eventEl) {
+        return {
+          title: eventEl.innerText,
+
+          // extendedProps: {
+          //         my_name: "Ali Usama Nawaz",
+
+          //     }
+        };
+      }
+    });
+
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      droppable: true,
+      slotMinTime: "06:00:00",
+      slotMaxTime: "18:00:00",
+      aspectRatio: 1.5,
+      timeZone: 'local',
+      headerToolbar: {
+        left: '',
+        center: 'prev title next',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        // right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      },
+      selectable: true,
+      selectHelper: true,
+      editable: true,
+      // customButtons: {
+      //   myCustomButton: {
+      //     text: 'Add New Event',
+      //     click: function() {
+      //       var $modal = $('#addEventCalendar');
+      //       $modal.modal('show');
+      //     }
+      //   }
+      // },
+      resources: [
+        {% for x in events %}
+              {
+        title: "{{x.title}}",
+        id: "{{x.ID}}",
+
+
+      },
+      {% endfor %}
+          ],
+    events: [
+    {% for x in events %}
+  {
+    title: "{{x.title}}",
+      start: "{{x.start_date}}" + 'T' + "{{x.start_time}}",
+        id: "{{x.ID}}",
+          url: "{{x.url}}",
+            allDay: "{{x.allDay}}" ? true : false,
+              end: "{{x.end_date}}" + 'T' + "{{x.end_time}}",
+                resourceId: "{{x.ID}}",
+                  extendedProps: {
+      case_id: "{{x.case_id}}",
+                
+              }
+
+  },
+  {% endfor %}
+          
+          ],
+  // drop: function(info) {
+  //   console.log(info.event);
+  //   alert('this is great!')
+  // },
+  eventReceive: function(info) {
+    console.log('eventReceive', info);
+    curCalenderEv = info;
+    var start = info.event.start;
+    var $start = moment(start);
+
+    if (info.event.title == 'Litigation Events') {
+      var $modal = $('#addEventLitigation');
+
+      var temp_start = ("0"+(start.getHours())).slice(-2)+":"+("0"+(start.getMinutes())).slice(-2)+":"+("0"+(start.getSeconds())).slice(-2);
+      
+      $modal.find('[name="start_date"]').val($start.format('YYYY-MM-DD'));
+      $modal.find('[name="start_time"]').val($start.format('HH:mm:ss'));
+      $modal.find('[name="end_date"]').val($start.format('YYYY-MM-DD'));
+      if(temp_start == '00:00:00'){
+        $modal.find('[name="end_time"]').val($start.format('HH:mm:ss'));
+      }else{
+        $modal.find('[name="end_time"]').val($start.add(60, 'minutes').format('HH:mm:ss'));
+      }
+      
+      $modal.modal('show');
+    } else if (info.event.title == 'To-Do Events') {
+      var start = info.event.start;
+      console.log(start);
+      var $modal = $('#addEventToDo');
+      $modal.find('[name="due_date"]').val($start.format('YYYY-MM-DD'));
+      $modal.find('[name="start_time"]').val($start.format('HH:mm:ss'));
+
+      $modal.modal('show');
+    } else if (info.event.title == 'Statute Events') {
+      var start = info.event.start;
+      console.log(start);
+      var $modal = $('#addEventStatute');
+      $modal.find('[name="statute_date"]').val($start.format('YYYY-MM-DD'));
+      $modal.modal('show');
+    }
+
+  },
+  eventDrop: function (info) {
+    console.log('drop', info);
+    curCalenderEv = info;
+    var start = info.event.start;
+    var $start = moment(start);
+    
+    var start_date = $start.format('YYYY-MM-DD')
+    var start_time = $start.format('HH:mm:ss');
+    var eventObj = info.event;
+    var url = eventObj.url;
+    var title = eventObj.title;
+    var id = eventObj.id;
+    var case_id = eventObj.extendedProps.case_id;
+
+    // var id = event.id;
+    $.ajax({
+      type: "GET",
+      url: "{% url 'bp-redirectCalendarEvent' %}",
+      data: { 'title': title, 'url': url, 'id': id, 'case_id': case_id, 'start_date': start_date, 'start_time': start_time },
+      dataType: "json",
+      success: function(data) {
+        $('#calendar').fullCalendar('refetchEvents');
+        alert('Event Update');
+      },
+      error: function(data) {
+        alert('Operations Failed!');
+      }
+    });
+    console.log(eventObj);
+  }
+        
+        });
+  calendar.render();
+      });
+</script>
+
+<div class="modal fade modal-fc" id="addEventLitigation" tabindex="-1" role="dialog" aria-labelledby="addEventLitigationLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="incident_report_request_chequeLabel">Add Litigation Event</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3 ">
+
+          <div class="custom-tab firm-setting">
+            <!-- <nav>
+                          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                              
+                              <a class="nav-item nav-link active" id="custom-nav-litigation-tab" data-toggle="tab" href="#custom-nav-litigation" role="tab" aria-controls="custom-nav-template"
+                              aria-selected="false">Litigation Events</a>
+
+                              <a class="nav-item nav-link" id="custom-nav-todo-tab" data-toggle="tab" href="#custom-nav-todo" role="tab" aria-controls="custom-nav-template"
+                              aria-selected="false">ToDo Events</a>
+
+                              <a class="nav-item nav-link" id="custom-nav-todo-tab" data-toggle="tab" href="#custom-nav-todo" role="tab" aria-controls="custom-nav-template"
+                              aria-selected="false">Settlement Events</a>
+
+                              <a class="nav-item nav-link" id="custom-nav-todo-tab" data-toggle="tab" href="#custom-nav-todo" role="tab" aria-controls="custom-nav-template"
+                              aria-selected="false">Medical Events</a>
+                              
+                          </div>
+                      </nav> -->
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="custom-nav-litigation" role="tabpanel" aria-labelledby="custom-nav-litigation-tab">
+
+                <div class="col-lg-12">
+
+                  <form id="form123" action="{% url 'bp-addNewEventsCalendar' %}" method="post">
+                    {% csrf_token %}
+                    <div class="row g-3 align-items-center">
+                      <div class="col-4">
+                        <label for="inputPassword6" class="col-form-label">Case:</label>
+                      </div>
+                      <div class="col">
+                        <select name="case_id" id="" class="form-control">
+                          <option value="">--Select Case--</option>
+                          {% for case in cases %}
+                          <option value="{{case.id}}">{{case.incident_date}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+
+                    </div>
+
+                    <div class="row g-3 align-items-center mt-2">
+                      <div class="col-4">
+                        <label for="" class="col-form-label">Event:</label>
+                      </div>
+                      <div class="col">
+                        <select name="litigation_type" id="" class="form-control">
+                          <option value="">--Select Litigation Type--</option>
+
+                          <option value="Hearing">Hearing</option>
+                          <option value="Trials">Trials</option>
+                          <option value="Deadlines">Deadlines</option>
+                          <option value="Motions">Motions</option>
+                          <option value="Discovery">Discovery</option>
+
+                        </select>
+                      </div>
+
+                    </div>
+                    <div class="row g-3 align-items-center mt-2">
+                      <div class="col-4">
+                        <label for="" class="col-form-label">Description:</label>
+                      </div>
+                      <div class="col">
+                        <textarea class="form-control" cols="30" name="description" id="" placeholder="Description"></textarea>
+                      </div>
+
+                    </div>
+                    
+                    <div class="row g-3 align-items-center mt-2">
+                      <div class="col-4">
+                        <label for="" class="col-form-label">Conference Link:</label>
+                      </div>
+                      <div class="col">
+                        <textarea type="text" name="zoom_link" class="form-control" placeholder="Conference Link"></textarea>
+                      </div>
+
+                    </div>
+                    <div class="row g-3 align-items-center mt-2">
+                      <div class="col-4">
+                        <label for="" class="col-form-label">Start Date:</label>
+                      </div>
+                      <div class="col">
+                        <input type="text" class="form-control" name="start_date" placeholder="Zoom Link">
+                      </div>
+
+                    </div>
+                    <div class="row g-3 align-items-center mt-2">
+                      <div class="col-4">
+                        <label for="" class="col-form-label">End Date:</label>
+                      </div>
+                      <div class="col">
+                        <input type="text" class="form-control" name="end_date" placeholder="Zoom Link">
+                      </div>
+
+                    </div>
+
+
+                    <div class="row g-3 align-items-center mt-2">
+                      <div class="col-4">
+                        <label for="" class="col-form-label">Start Time:</label>
+                      </div>
+                      <div class="col">
+                        <input type="time" class="form-control" name="start_time" placeholder="Zoom Link">
+                      </div>
+
+                    </div>
+
+                    <div class="row g-3 align-items-center mt-2">
+                      <div class="col-4">
+                        <label for="" class="col-form-label">End Time:</label>
+                      </div>
+                      <div class="col">
+                        <input type="time" class="form-control" name="end_time" placeholder="Zoom Link">
+                      </div>
+
+                    </div>
+
+                    
+                    <input type="text" name="event_type" hidden value="Litigation Events">
+                  </form>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="submit" form="form123" class="btn btn-success">Add Event</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade modal-fc" id="addEventToDo" tabindex="-1" role="dialog" aria-labelledby="addEventToDoLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="incident_report_request_chequeLabel">Add To-Do Event</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3 ">
+
+          <div class="custom-tab firm-setting">
+            <!-- <nav>
+                          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                              
+                              <a class="nav-item nav-link active" id="custom-nav-litigation-tab" data-toggle="tab" href="#custom-nav-litigation" role="tab" aria-controls="custom-nav-template"
+                              aria-selected="false">Litigation Events</a>
+
+                              <a class="nav-item nav-link" id="custom-nav-todo-tab" data-toggle="tab" href="#custom-nav-todo" role="tab" aria-controls="custom-nav-template"
+                              aria-selected="false">ToDo Events</a>
+
+                              <a class="nav-item nav-link" id="custom-nav-todo-tab" data-toggle="tab" href="#custom-nav-todo" role="tab" aria-controls="custom-nav-template"
+                              aria-selected="false">Settlement Events</a>
+
+                              <a class="nav-item nav-link" id="custom-nav-todo-tab" data-toggle="tab" href="#custom-nav-todo" role="tab" aria-controls="custom-nav-template"
+                              aria-selected="false">Medical Events</a>
+                              
+                          </div>
+                      </nav> -->
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="custom-nav-litigation" role="tabpanel" aria-labelledby="custom-nav-litigation-tab">
+
+                <div class="col-lg-12">
+
+                  <form id="formToDO" action="{% url 'bp-addNewEventsCalendar' %}" method="post">
+                    {% csrf_token %}
+                    <div class="row g-3 align-items-center">
+                      <div class="col-4">
+                        <label for="inputPassword6" class="col-form-label">Select Case</label>
+                      </div>
+                      <div class="col">
+                        <select name="case_id" id="" class="form-control">
+                          <option value="">--Select Case--</option>
+                          {% for case in cases %}
+                          <option value="{{case.id}}">{{case.incident_date}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+
+                    </div>
+
+                    <div class="row g-3 align-items-center">
+                      <div class="col-4">
+                        <label for="inputPassword6" class="col-form-label">Select Firm User</label>
+                      </div>
+                      <div class="col">
+                        <select name="firm_user" id="" class="form-control">
+                          <option value="">--Select Firm User--</option>
+                          {% for firm_user in firm_users %}
+                          <option value="{{firm_user.id}}">{{firm_user.user_type.name}} {{firm_user.user.first_name}} {{firm_user.user.last_name}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+
+                    </div>
+
+
+                    <div class="row g-3 align-items-center">
+                      <div class="col-4">
+                        <label for="" class="col-form-label">Note</label>
+                      </div>
+                      <div class="col">
+                        <textarea class="form-control" cols="30" name="note" id="" placeholder="Note"></textarea>
+                      </div>
+
+                    </div>
+                    <br>
+                    <div class="row g-3 align-items-center">
+                      <div class="col-4">
+                        <label for="" class="col-form-label">Due Date</label>
+                      </div>
+                      <div class="col">
+                        <input type="text" class="form-control" name="due_date" placeholder="Due Date">
+                      </div>
+
+                    </div>
+
+                    <div class="row g-3 align-items-center mt-2">
+                      <div class="col-4">
+                        <label for="" class="col-form-label">Time</label>
+                      </div>
+                      <div class="col">
+                        <input type="time" class="form-control" name="start_time" placeholder="Zoom Link">
+                      </div>
+
+                    </div>
+
+                    <!-- <div class="row g-3 align-items-center mt-2">
+                                    <div class="col-4">
+                                      <label for="" class="col-form-label">Date</label>
+                                    </div>
+                                    <div class="col-auto">
+                                      <input type="text" class="form-control" name="start_date" placeholder="Zoom Link">
+                                    </div>
+                                    
+                                  </div> -->
+                    <input type="text" name="event_type" hidden value="ToDo Events">
+                  </form>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+        </div>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="submit" form="formToDO" class="btn btn-success">Add Event</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade modal-fc" id="addEventStatute" tabindex="-1" role="dialog" aria-labelledby="addEventStatuteLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="incident_report_request_chequeLabel">Add Statute Event</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3 ">
+
+          <div class="custom-tab firm-setting">
+            <!-- <nav>
+                          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                              
+                              <a class="nav-item nav-link active" id="custom-nav-litigation-tab" data-toggle="tab" href="#custom-nav-litigation" role="tab" aria-controls="custom-nav-template"
+                              aria-selected="false">Litigation Events</a>
+
+                              <a class="nav-item nav-link" id="custom-nav-todo-tab" data-toggle="tab" href="#custom-nav-todo" role="tab" aria-controls="custom-nav-template"
+                              aria-selected="false">ToDo Events</a>
+
+                              <a class="nav-item nav-link" id="custom-nav-todo-tab" data-toggle="tab" href="#custom-nav-todo" role="tab" aria-controls="custom-nav-template"
+                              aria-selected="false">Settlement Events</a>
+
+                              <a class="nav-item nav-link" id="custom-nav-todo-tab" data-toggle="tab" href="#custom-nav-todo" role="tab" aria-controls="custom-nav-template"
+                              aria-selected="false">Medical Events</a>
+                              
+                          </div>
+                      </nav> -->
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="custom-nav-litigation" role="tabpanel" aria-labelledby="custom-nav-litigation-tab">
+
+                <div class="col-lg-12">
+
+                  <form id="formStatute" action="{% url 'bp-addNewEventsCalendar' %}" method="post">
+                    {% csrf_token %}
+                    <div class="row g-3 align-items-center">
+                      <div class="col-4">
+                        <label for="inputPassword6" class="col-form-label">Select Case</label>
+                      </div>
+                      <div class="col">
+                        <select name="case_id" id="" class="form-control">
+                          <option value="">--Select Case--</option>
+                          {% for case in cases %}
+                          <option value="{{case.id}}">{{case.incident_date}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+
+                    </div>
+
+                    <div class="row g-3 align-items-center">
+                      <div class="col-4">
+                        <label for="" class="col-form-label">Statute Date</label>
+                      </div>
+                      <div class="col">
+                        <input type="text" class="form-control" name="statute_date" placeholder="Statute Date">
+                      </div>
+
+                    </div>
+
+                    <!-- <div class="row g-3 align-items-center mt-2">
+                                    <div class="col-4">
+                                      <label for="" class="col-form-label">Time</label>
+                                    </div>
+                                    <div class="col">
+                                      <input type="text" class="form-control" name="start_time" placeholder="Zoom Link">
+                                    </div>
+                                    
+                                  </div> -->
+
+                    <!-- <div class="row g-3 align-items-center mt-2">
+                                    <div class="col-4">
+                                      <label for="" class="col-form-label">Date</label>
+                                    </div>
+                                    <div class="col">
+                                      <input type="text" class="form-control" name="start_date" placeholder="Zoom Link">
+                                    </div>
+                                    
+                                  </div> -->
+                    <input type="text" name="event_type" hidden value="Statute Events">
+                  </form>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+        </div>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="submit" form="formStatute" class="btn btn-success">Add Event</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if not check %}
+<div class="main-content px-3" style="padding-top: 110px !important;">
+
+  <div class="d-flex">
+    <div class="mr-3">
+      <div id='external-events' style="text-align:center;justify-content: center;">
+        <p>
+          <strong>Add New Event</strong>
+        </p>
+
+        <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+          <div class='fc-event-main'>Litigation Events</div>
+        </div>
+        <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+          <div class='fc-event-main'>To-Do Events</div>
+        </div>
+        <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+          <div class='fc-event-main'>Statute Events</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="flex-fill">
+      <div id='calendar'></div>
+    </div>
+  </div>
+</div>
+{% else %}
+
+<div class="alert alert-danger" role="alert" style="margin-top: 131px">
+  This page is only for Firm Users!
+</div>
+{% endif %}
+
+
+{% endblock content %}

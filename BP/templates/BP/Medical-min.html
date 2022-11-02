@@ -1,0 +1,1153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+       
+        <!-- Title Page-->
+        <title>Dashboard</title>
+    
+        <!-- Fontfaces CSS-->
+        <link href="{% static 'BP_resources/css/font-face.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    
+        <!-- Bootstrap CSS-->
+        <link href="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Vendor CSS-->
+        <link href="{% static 'BP_resources/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Main CSS-->
+        <link href="{% static 'BP_resources/css/theme.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/sidebar.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/header.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/medicalTreatment.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/MedMinView.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/client.css' %}" rel="stylesheet" media="all">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    
+    </head>
+
+<body class="animsition client-page photos-page">
+    <!-- Panel popups starts here --> 
+    <div class="modal generic-popup fade bd-example-modal-lg zoom-in" id="treatment-location-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 1000px" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title mx-auto">Treatment Location</h5>
+            </div>
+            <div class="modal-body">
+                <form id="editClientForm2" action="{% url 'bp-editClientInfo2' client.id case.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Absolute Health Chiropractic</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Records Requested  :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter Records Requested" class="form-control">                       
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Absolute Health Chiropractic</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Records Received  :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter Records Received" class="form-control">                       
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Montgomery, Alabama</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Address 1 :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter Address 1" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Sacramento, California</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Address 2 :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter Address 2" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Phoenix</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">City :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter City" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Arizona</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">State :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter State" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">85001</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">ZIP :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter Zip" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">(031) 123-23232</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Phone :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter Phone" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">(112) 121-1 </p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Fax :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter fax" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">saffs@hsdfsd.com</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Email :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter Email" class="form-control">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0 justify-content-between pt-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button form="editClientForm2" type="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- Panel popups ends here --> 
+    <div class="modal fade zoom-in" id="phone-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+                <form action="{% url 'bp-editClientInfo1' client.id case.id %}" method="post" id="editClientForm1">
+                    {% csrf_token %}
+                    <div class="modal-content-row">
+                        <p>{{client.phone}}</p>
+                        <p>Phone Number</p>
+                        
+                        <input type="text" name="client_phone" class="form-control" placeholder="Enter Phone....">
+                        
+                    </div>
+                    <div class="modal-content-row mt-2">
+                        <p>{{client.email}}</p>
+                        <p>Email address</p>
+                        
+                        <input type="email" name="client_email" class="form-control" placeholder="Enter Email....">
+                        
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button form="editClientForm1" type="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade zoom-in" id="dob-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+                <form id="editClientForm2" action="{% url 'bp-editClientInfo2' client.id case.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="modal-content-row">
+                        <p>{{client.birthday}}</p>
+                        <p>DOB</p>
+                        
+                        <input type="date" name="client_dob" class="form-control" placeholder="Enter DOB....">
+                        
+                    </div>
+                    <div class="modal-content-row mt-2">
+                        <p>{{client.ssn}}</p>
+                        <p>ssn</p>
+                        
+                        <input type="number" name="client_ssn" class="form-control" placeholder="Enter SSN....">
+                        
+                    </div>
+                    <div class="modal-content-row mt-2">
+                        <p>{{client.driver_license_number}}, {{client.driver_license_state}}</p>
+                        <p>dl#</p>
+                        
+                        <input type="text" name="client_driver_license" class="form-control" placeholder="Enter DL#....">
+                        
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button form="editClientForm2" type="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addparty" tabindex="-1" aria-labelledby="addparty" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+           <div class="modal-content">
+              <div class="modal-header">
+                 <h5 class="modal-title" id="exampleModalLabel">Add Party</h5>
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet velit ab consectetur eius dignissimos nostrum</p>
+              </div> 
+              <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" style="float:left; margin-right:auto;" data-dismiss="modal">Cancel</button>
+                 <button type="submit" form="form12" class="btn btn-success">Save</button>
+              </div>
+           </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addwitness" tabindex="-1" aria-labelledby="addwitness" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+           <div class="modal-content">
+              <div class="modal-header">
+                 <h5 class="modal-title" id="exampleModalLabel">Add Witness</h5>
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet velit ab consectetur eius dignissimos nostrum</p>
+              </div> 
+              <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" style="float:left; margin-right:auto;" data-dismiss="modal">Cancel</button>
+                 <button type="submit" form="form12" class="btn btn-success">Save</button>
+              </div>
+           </div>
+        </div>
+    </div>
+     <div class="page-wrapper">
+
+        <!-- MENU SIDEBAR-->
+       {% include 'BP/SideBar.html' %}
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP NEW-->
+            {% include 'BP/header.html' %}
+            <!-- HEADER DESKTOP NEW-->
+            <div class="top-panel-wrapper">
+                <div class="panel-page-title">
+                    <p>Medical Treatment</p>
+                </div>
+                <div class="three-view-icons">
+                    <span class="three-icons active"  onclick="location.href='{% url 'bp-medicalmin' client.id case.id %}';">
+                        <img src="{% static 'BP_resources/images/icon/standard.svg' %}" width="35">
+                    </span>
+                    <span class="three-icons" onclick="location.href='{% url 'bp-medicaltreatment' client.id case.id %}';">
+                        <img src="{% static 'BP_resources/images/icon/detailed.svg' %}" width="35">
+                    </span>
+                    <span class="three-icons" onclick="location.href='{% url 'bp-medicalcollapse' client.id case.id %}';">
+                        <img src="{% static 'BP_resources/images/icon/dates.svg' %}" width="35">
+                    </span>
+                </div>
+                <div class="add-button">
+                    <input type="submit" class="btn" value="Add Party" data-toggle="modal" data-target="#addparty">
+                </div>
+                <div class="add-button add-button-second">
+                    <input type="submit" class="btn" value="Add New Witness" data-toggle="modal" data-target="#addwitness">
+                </div>
+            </div>
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content medical-pg " style="padding-top: 0px !important; margin-top: -18px !important">
+                <div class="section__content section__content--p30 top-head">
+                    <div class="clienthead">
+              <div class="top-pane" style="position:absolute;right:355px !important;top:-81px !important">
+              <img src="{% static 'BP_resources/images/icon/flag-icon-red-bg-gray.svg' %}" width="46">
+              </div>
+                        {% if not client_providers %}
+                        <div class="alert alert-danger" role="alert">
+                            No Attached Medical Provider!
+                        </div>
+                        {% else %}
+                         <div style="margin-bottom:20px"></div>
+                        {% for client_provider in client_providers %}
+
+                        <div class="flexStart wf" style="width:100%;border-radius: 8px;margin-bottom: 5px; border:solid 5px {{client_provider.specialty.color}};overflow: hidden">
+                            <div class="innerContentContainer" style="margin-left: 0px;width:100%;">
+                            <div class="panelHeaderContainer row pb-0 wf" style="position: relative; height:49px;width:100%;margin-left:0px;margin-top:3px;margin-bottom: 8px">
+                                <div class="Row flexStart" style="height:40px;margin-left:5px">
+                                    <h2 style="color:{{client_provider.specialty.color}}">
+                                        {{client_provider.specialty.name}} 
+                                        <img src="{% static 'BP_resources/images/icon/Subtract.png' %}"></h2>
+                                </div>
+
+                                <div  
+                                  style="height:35px"
+                                  id="treatmentDates{{client_provider.id}}" class="col-lg-6" 
+                                  data-first_date="{{client_provider.first_date}}"
+                                  data-second_date="{{client_provider.second_date}}"
+                                  data-visits="{{client_provider.visits}}"
+                                  data-case_provider="{{client_provider.id}}"
+                                  onclick="editRecordsDate({{client_provider.id}})">
+                                
+                                    {% for tf_treatment_date in tf_treatment_dates %}
+                                        {% if client_provider.id == tf_treatment_date.for_case_provider.id %}
+                                            {% if tf_treatment_date.first_date != '_/_/_' or tf_treatment_date.first_date != '_/_/_' or tf_treatment_date.visits != '__' %}
+                                                {% if tf_treatment_date.first_date != '_/_/_' and tf_treatment_date.first_date != '_/_/_' and tf_treatment_date.visits != '__' and client_provider.first_date == '_/_/_' and client_provider.first_date == '_/_/_' and client_provider.visits == '__' %}
+                                                <div style="display: flex !important;" >
+                                                    <p class="mr-4" data-toggle="modal" data-target="#addTreatmentDates" style="color: grey !important;font-size: 14px;">Provider treated from <b>{{tf_treatment_date.first_date}}</b> completing on <b>{{tf_treatment_date.second_date}}</b> with <b>{{tf_treatment_date.visits}}</b> visits.</p>
+                                                    <a data-toggle="modal" data-target="#copyProviderDetails" onclick="copyProviderDetails({{tf_treatment_date.id}}, {{client_provider.id}})" class="btn btn-success btn-sm" style="color:white; text-transform:none;padding-top:1px !important;padding-bottom: 1px !important;margin-top:-2px; " >copy</a>
+                                                </div>
+                                                {% else %}
+                                                <div data-toggle="modal" data-target="#addTreatmentDates" >
+                                                    <p style="color: grey !important;font-size: 14px">Provider treated from <b>{{tf_treatment_date.first_date}}</b> completing on <b>{{tf_treatment_date.second_date}}</b> for <b>{{tf_treatment_date.visits}}</b> visits.</p>
+                                                </div>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    <p data-toggle="modal" data-target="#addTreatmentDates" style="color: grey !important; margin-left:100px;font-size: 14px;margin-top:2px;display:inline-block">First Visit: <span style="color:black; font-weight:bold; margin-right:50px;">{{client_provider.first_date}}</span> Last visit: <span style="color:black; font-weight:bold">{{client_provider.second_date}}</span> for <span style="color:black; font-weight:bold">{{client_provider.visits}}</span> visits.</p>
+                                </div>
+
+                                <div class="col" style="height:39px" >
+                                    {% comment %} <a class="btn btn-primary" style="color:white;font-size: 14px;margin-top: 0px" href="{% url 'bp-addVisits' client.id case.id  %}">Edit</a> {% endcomment %}
+                                    &nbsp;
+                                </div>
+                                
+                                <div style="position:relative;top:-5.5px;width:250px; height:53px;margin-left:5px;border:none;display: flex;justify-content: flex-end;align-items: flex-end;">
+                                    <div class="checklistAngle textcol" >
+                                        
+                                        {% for key, value in total_panelmarked.items %}
+                                            {% if key == client_provider.id %}
+                                                <p style="margin-right: 10px;margin-left: 18px;" >{{value}}/{{total_panelchecklists}}</p>
+                                            {% endif %}
+                                        {% endfor %}
+                                        <div class="nt-box" >
+                                            {% for key, value in checklist_panelpercentage.items %}
+                                                {% if key == client_provider.id %}
+                                                <div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:{{value}}"></div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        <div class="dropdown6">
+                                            <button onclick="myFunction6({{client_provider.id}})" class="dropbtn"><i class="fa fa-check" aria-hidden="true"></i> Checklist <i class="fa fa-chevron-down" aria-hidden="true"></i></button>
+                                        </div>
+                                    </div>
+                                </div> 
+
+
+                                <div class="checklist-section checklist-pink">
+                                    <p class="text-darker">0/2</p>
+                                    <div class="circle-wrap">
+                                        <div class="circle">
+                                        <div class="mask full">
+                                            <div class="fill"></div>
+                                        </div>
+                                        <div class="mask half">
+                                            <div class="fill"></div>
+                                        </div>
+                                        <div class="inside-circle"> 100% </div>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown6">
+                                        <button onclick="myFunction6({{client_provider.id}})" class="dropbtn text-darker" style="background-color: #F5E8E9;"> 
+                                            <img src="/static/BP_resources/images/icon/check-green.svg" alt="Double arrow down" class="green-check"> Checklist <img src="/static/BP_resources/images/icon/angles-down-blue.svg" alt="Double arrow down" class="double-arrow-down"></button>
+                                            
+                                            <div id="myDropdown{{client_provider.id}}" class="dropdown-content">
+                                                <div class="checklist-multi-dropdowns pink-checklist-multi-dropdowns">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                        <label class="form-check-label" for="gridCheck1">
+                                                          Check Item example
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                        <label class="form-check-label" for="gridCheck1">
+                                                          Check Item example
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                        <label class="form-check-label" for="gridCheck1">
+                                                          Check Item example
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                        <label class="form-check-label" for="gridCheck1">
+                                                          Check Item example
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+
+                                <div class="chiroLineWrap" style="width:100%"  >
+                                    <div class="chiroLine" > </div>
+                                </div>
+                            </div>
+
+
+                            <div class="columnsContainer2"  data-toggle="modal" data-target="#treatment-location-modal"> 
+                                    <div class="flexStart" onMouseOver="this.style.backgroundColor='#eee'"
+                                    onMouseOut="this.style.backgroundColor='#fff'" style="height:121px">
+                                        
+                                        <p class="columnsTitle"> {{client_provider.location.added_by.providerprofile.office_name}} </p>
+                                        <div class="colTitleUnderline"></div>
+
+                                        <div class="colFonts colFont" style="margin-bottom: 0px;font:14px poppins;color:black"> {{client_provider.location.address}}, {{client_provider.location.address2}} </div>
+                                        <div class="colFonts colFont" style="margin-top: 0px;margin-bottom: 5px;font:14px poppins" > {{client_provider.location.city}},{{client_provider.location.state}}, {{client_provider.location.post_code}} </div>
+                                        <form  method="POST" action="{% url 'bp-fillTemplate' %}">
+                                            {% csrf_token %}
+                                            <div>
+                                                <input  type="text" hidden name="provider_id" value="{{client_provider.id}}">
+                                                <div>
+                                                    <select  onchange="this.form.submit()" style="color:grey; font:14px poppins;width: 100%;text-align: center;" class="form-select" name="template_id" id="template_id" aria-label="Default select example">
+                                                        <option selected style="color:grey; font-size:14px;" value="no_option">Select Letter Template</option>
+                                                        {% for template in templates %}
+                                                        <option value="{{template.id}}" style="color:grey; font:14px poppins;">{{template.template_name}}</option>
+                                                       
+                                                        {% endfor %}
+                                                      </select>
+                                                </div>
+                                            </div>
+                                        </form>  
+                                    </div> 
+                                    <div class="flexStart" onMouseOver="this.style.backgroundColor='#eee'"
+                                    onMouseOut="this.style.backgroundColor='#fff'" style="height:121px">
+                                                <p style="color:#D3D3D3;margin-bottom: 5px;font: 12px poppins;">&nbsp;</p>
+
+                                                <p class="columnsTitle" style="margin-top: -18px;">&nbsp; </p>
+                                                <div class="colTitleUnderline" ></div>                    
+                                                    <p class="colText colFont" style="color:black;" ><small style="margin-bottom: 0px;font:14px poppins">(</small>{{client_provider.location.phone|slice:":3"}}<small style="font: 14px poppins">)</small> {{client_provider.location.phone|slice:"3:6"}}-{{client_provider.location.phone|slice:"6:"}} </p>
+                                                    <p class="colText colFont" ><small style="font: 14px poppins">(</small>{{client_provider.location.fax|slice:":3"}}<small style="font: 14px poppins">)</small> {{client_provider.location.fax|slice:"3:6"}}-{{client_provider.location.fax|slice:"6:"}} <small class="ml-2" style="font: 14px poppins">fax</small></p>
+                                                    <p class="colText colFont">{{client_provider.location.email}}</p>
+                                            </div>
+                                            <div class="grayPanelWrap wf w-100"  style="height:100px; background-color: #F7F8FA;width: 100% !important">
+                                                <div style="display:flex;justify-content: space-evenly;align-items: center">
+                                                    <div style="width:17%;height:90%">
+                
+                                                    </div>
+                                                    <div class="col padding-right grayPanelHeadings">
+                                                        original
+                                                    </div>
+                                                    <div class="col padding-right grayPanelHeadings" >
+                                                        hi paid
+                                                    </div>
+                                                    <div class="col padding-right grayPanelHeadings" >
+                                                        hi reduc
+                                                    
+                                                    </div>
+                                                    <div class="col padding-right grayPanelHeadings" >
+                                                        medpay/pip
+                                                    
+                                                    </div>
+                                                    <div class="col padding-right grayPanelHeadings" >
+                                                        reduc
+                                                
+                                                    </div>
+                                                    <div class="col padding-right grayPanelHeadings">
+                                                        final  
+                                                    </div>
+                                                </div>
+                
+                
+                                                {% for x in accounting_exists %}
+                                                        {% if x.case_provider.id == client_provider.id %}
+                                                            {% if x.check %}
+                                                                {% for tf_account in tf_accounting %}
+                                                                    {% if tf_account.for_case_provider.id == client_provider.id %}
+                                                                    
+                                                                    <div class="row" id="client_provider_accounting"
+                                                                    data-case_provider_id="{{client_provider.id}}"
+                                                                    data-original="{{tf_account.original}}"
+                                                                    data-hi_paid="{{tf_account.hi_paid}}"
+                                                                    data-hi_reduction="{{tf_account.hi_reduction}}"
+                                                                    data-mp_paid="{{tf_account.mp_paid}}"
+                                                                    data-reduction="{{tf_account.reduction}}"
+                                                                    
+                                                                    >   
+                                                                    
+                                                                        <div class="col-lg-2">
+                
+                                                                            <!-- <p><img src="{% static 'BP_resources/images/icon/pin-icon.png' %}">{{client_provider.total_visits}} visits<span><img src="{% static 'BP_resources/images/icon/icon-calender.png' %}">from {{client_provider.visit_from}} to {{client_provider.visit_to}}</span></p> -->
+                                                                            <p style="font-size:medium">{{client_provider.provider.providerprofile.office_name}}</p>
+                                                                            
+                
+                
+                                                                        </div>
+                                                                        
+                                                                        <div class="col padding-left" style="text-align: right; font-size: 14px;">
+                                                                            
+                                                                            <p >${{tf_account.original}}</p>
+                                                                        </div>
+                
+                
+                                                                        <div class="col" style="text-align: right;font-size:14px;">
+                                                                            
+                                                                            <p >-${{tf_account.hi_paid}}</p>
+                
+                                                                        </div>
+                                                                        <div class="col" style="text-align: right;font-size:14px;">
+                                                                            
+                                                                            <p >-${{tf_account.hi_reduction}}</p>
+                
+                
+                                                                        </div>
+                
+                                                                        <div class="col" style="text-align: right;font-size:14px;">
+                                                                        
+                                                                            <p >-${{tf_account.mp_paid}}</p>
+                
+                
+                                                                        </div>
+                                                                        <div class="col" style="text-align: right;font-size:14px;">
+                                                                        
+                                                                            <p >-${{tf_account.reduction}}</p>
+                
+                
+                                                                        </div>
+                                                                        <div class="col" style="text-align: right;font-size:14px;">
+                                                                        
+                                                                            <p style="font-weight:bold;">${{tf_account.final}}</p>
+                
+                
+                                                                        </div>
+                                                                    </div>
+                                                                        
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            {% else %}
+                                                                <div class="row" id="client_provider_accounting"
+                                                                data-case_provider_id="{{client_provider.id}}"
+                                                                data-original="{{tf_account.original}}"
+                                                                data-hi_paid="{{tf_account.hi_paid}}"
+                                                                data-hi_reduction="{{tf_account.hi_reduction}}"
+                                                                data-mp_paid="{{tf_account.mp_paid}}"
+                                                                data-reduction="{{tf_account.reduction}}"
+                                                                
+                                                                >   
+                                                                
+                                                                    <div class="col-lg-2">
+                                                                        <p style="font-size:medium">{{client_provider.provider.providerprofile.office_name}}</p>
+                                                                    </div>
+                                                                
+                                                                    <div class="col padding-left" style="text-align: right; font-size: 14px;">
+                                                                        <p ></p>
+                                                                    </div>
+                
+                
+                                                                    <div class="col" style="text-align: right;font-size:14px;">
+                                                                        <p ></p>
+                                                                    </div>
+                                                                    <div class="col" style="text-align: right;font-size:14px;">
+                                                                        
+                                                                        <p ></p>
+                
+                
+                                                                    </div>
+                
+                                                                    <div class="col" style="text-align: right;font-size:14px;">
+                                                                    
+                                                                        <p ></p>
+                
+                
+                                                                    </div>
+                                                                    <div class="col" style="text-align: right;font-size:14px;">
+                                                                    
+                                                                        <p ></p>
+                
+                
+                                                                    </div>
+                                                                    <div class="col" style="text-align: right;font-size:14px;">
+                                                                    
+                                                                        <p style="font-weight:bold;"></p>
+                
+                
+                                                                    </div>
+                                                                </div>
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                
+                
+                
+                                                <div>
+                                                    <div class="col-lg-2">
+                
+                                            
+                                                        <p style="font-size:medium">{{client_provider.for_case.for_client.created_by.attorneyprofile.office_name}}</p>
+                
+                
+                                                    </div>
+                                                    
+                                                    <div class="col padding-left">
+                                                        
+                                                        <p style=" color:black;text-align:right;font-size:14px;">${{client_provider.bp_case_provider_accounting.original}}</p>
+                                                    </div>
+                
+                
+                                                    <div class="col">
+                                                        
+                                                        <p style=" color:black;text-align:right;font-size:14px;">-${{client_provider.bp_case_provider_accounting.hi_paid}}</p>
+                
+                                                    </div>
+                                                    <div class="col">
+                                                        
+                                                        <p style=" color:black;text-align:right;font-size:14px;">-${{client_provider.bp_case_provider_accounting.hi_reduction}}</p>
+                
+                
+                                                    </div>
+                
+                                                    <div class="col">
+                                                    
+                                                        <p style=" color:black;text-align:right;font-size:14px;">-${{client_provider.bp_case_provider_accounting.mp_paid}}</p>
+                
+                
+                                                    </div>
+                                                    <div class="col">
+                                                    
+                                                        <p style=" color:black;text-align:right;font-size:14px;">-${{client_provider.bp_case_provider_accounting.reduction}}</p>
+                
+                
+                                                    </div>
+                                                    <div class="col">
+                                                    
+                                                        <p style="font-weight:bold; color:black;text-align:right;font-size:14px;">${{client_provider.bp_case_provider_accounting.final}}</p>
+                
+                
+                                                    </div>
+                                                    
+                
+                                                </div>
+                
+                                            </div>
+
+                                    </div>
+
+
+                            <!-- <div class="columnsContainer row flexStart wf">
+
+                                <div class="secondColumnsContainer col-lg-12 medi-bottom flexStart wf">
+                                    <div class="thirdColumnsContainer row flexStart wf">
+                                        <div class="standardSpc colWidth" style="margin-left:4px;border:dashed 3px blue" >
+
+                                            <p class="mt-0 pt-0" style="color:#D3D3D3;">Treatment Location</p>
+
+                                            <p style="font:bold 13px arial;color:#222;margin-bottom: 16px;text-transform: uppercase;" > {{client_provider.location.added_by.providerprofile.office_name}} </p>
+                                            <div class="colTitleUnderline"></div>
+                                            
+                                            
+                                            <p style="color:black;">{{client_provider.location.address}},
+                                                {{client_provider.location.address2}}</p>
+                                            <p style="color:black;">{{client_provider.location.city}},
+                                                {{client_provider.location.state}}, {{client_provider.location.post_code}}
+                                            </p>
+
+                                            <p style="color:black;" ><small style="font-size: 14px; color:grey;">(</small>{{client_provider.location.phone|slice:":3"}}<small style="font-size: 14px; color:grey;">)</small> {{client_provider.location.phone|slice:"3:6"}}-{{client_provider.location.phone|slice:"6:"}} </p>
+                                            <p class="mb-2" style="color:black;" ><small style="font-size: 14px; color:grey;">(</small>{{client_provider.location.fax|slice:":3"}}<small style="font-size: 14px; color:grey;">)</small> {{client_provider.location.fax|slice:"3:6"}}-{{client_provider.location.fax|slice:"6:"}} <small class="ml-2" style="color:grey;font-size:14px;">fax</small></p>
+                                            <p class="noneMargin" style="color:black">{{client_provider.location.email}}</p>
+
+                                            <form class="mt-3" method="POST" action="{% url 'bp-fillTemplate' %}">
+                                                {% csrf_token %}
+                                                <div >
+                                                    <input  type="text" hidden name="provider_id" value="{{client_provider.id}}">
+                                                    
+                                                    <div >
+                                                        <select  onchange="this.form.submit()" style="color:grey; font-size:14px;width: 100%;text-align: center;" class="form-select" name="template_id" id="template_id" aria-label="Default select example">
+                                                            <option selected style="color:grey; font-size:14px;" value="no_option">Select Letter Template</option>
+                                                            {% for template in templates %}
+                                                            <option value="{{template.id}}" style="color:grey; font-size:14px;">{{template.template_name}}</option>
+                                                           
+                                                            {% endfor %}
+                                                          </select>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        
+                                        {% for other_location in client_provider.location.added_by.other_locations.all %}
+                                        <div class="colWidth" style="margin-right:5px" >
+                                            <p class="mt-0 pt-0" style="color:#D3D3D3">{{other_location.address_type}}</p>
+
+
+                                            <p style="font:bold 13px arial;color:#222;margin-bottom: 16px" > BILLING </p>
+                                            <div class="colTitleUnderline" ></div>
+                                            
+                                                <p style="color:black;">{{other_location.address}}, {{other_location.address2}}</p>
+                                                <p style="color:black;">{{other_location.city}},{{other_location.state}}, {{other_location.post_code}} </p>
+
+                                                <p style="color:black;" ><small style="font-size: 14px; color:grey;">(</small>{{other_location.phone|slice:":3"}}<small style="font-size: 14px; color:grey;">)</small> {{other_location.phone|slice:"3:6"}}-{{other_location.phone|slice:"6:"}} </p>
+                                                <p class="mb-2" style="color:black;" ><small style="font-size: 14px; color:grey;">(</small>{{other_location.fax|slice:":3"}}<small style="font-size: 14px; color:grey;">)</small> {{other_location.fax|slice:"3:6"}}-{{client_provider.location.fax|slice:"6:"}} <small class="ml-2" style="color:grey;font-size:14px;">fax</small></p>
+                                                <p style="color:black;">{{other_location.email}}</p>
+
+                                                <form class="mt-3" method="POST" action="{% url 'bp-fillTemplate' %}">
+                                                {% csrf_token %}
+                                                    <div >
+                                                        <input type="text" hidden name="provider_id" value="{{client_provider.id}}">
+                                                    
+                                                        <div >
+                                                            <select style="color:grey;font-size:14px;width: 100%;text-align: center;" onchange="this.form.submit()" class="form-select" name="template_id" id="template_id" aria-label="Default select example">
+                                                                <option selected value="no_option">Select Letter Template</option>
+                                                                {% for template in templates %}
+                                                                <option value="{{template.id}}">{{template.template_name}}</option>
+                                                               
+                                                                {% endfor %}
+                                                              </select>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                        </div>
+                                        {% endfor %}
+
+                                        <div class="colWidth" style="margin-right: 5px" >
+
+                                            <p class="mt-0" style="color:#D3D3D3">Lien Holder Contact</p>
+
+                                            <p style="font:bold 13px arial;color:#222;margin-bottom: 16px" > BILLING </p>
+                                            <div class="colTitleUnderline" ></div>
+                                                                                        
+                                            <p style="color:black;">{{client_provider.location.address}},
+                                                {{client_provider.location.address2}}</p>
+
+                                            <p style="color:black;">{{client_provider.location.city}},
+                                                {{client_provider.location.state}}, {{client_provider.location.post_code}}
+                                            </p>
+                                            
+                                            <p style="color:black" ><small style="font-size: 14px; color:grey;">(</small>{{client_provider.location.phone|slice:":3"}}<small style="font-size: 14px; color:grey;">)</small> {{client_provider.location.phone|slice:"3:6"}}-{{client_provider.location.phone|slice:"6:"}} </p>
+                                            <p class="mb-2" style="color:black;" ><small style="font-size: 14px; color:grey;">(</small>{{client_provider.location.fax|slice:":3"}}<small style="font-size: 14px; color:grey;">)</small> {{client_provider.location.fax|slice:"3:6"}}-{{client_provider.location.fax|slice:"6:"}} <small class="ml-2" style="color:grey;font-size:14px;">fax</small></p>
+                                            <p class="noneMargin" style="color:black">{{client_provider.location.email}}</p>
+
+                                            <form class="mt-3" method="POST" action="{% url 'bp-fillTemplate' %}">
+                                                {% csrf_token %}
+                                                <div>
+                                                    <div style="margin-left:2px" >
+                                                        <select style="margin-left:0px;color:grey;font-size:14px;width: 100%; text-align: center;" onchange="this.form.submit()" class="form-select" name="template_id" id="template_id" aria-label="Default select example">
+                                                            <option selected value="no_option">Select Letter Template</option>
+                                                            {% for template in templates %}
+                                                            <option value="{{template.id}}">{{template.template_name}}</option>
+                                                           
+                                                            {% endfor %}
+                                                          </select>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="row dtn-re">
+                                <div  style="width:100%;display: flex;justify-content:center" >
+                                    
+                                    <div class="d-flex flex-wrap" style="margin-left: 0px;width:100%;display: flex;justify-content: space-evenly;">
+                                        {% for document in client_provider.provider_docs.all|dictsort:"id"  %}
+                                            {% if document.check == 'False' %}
+                                            {% if document.document_no == 'TF Bills' %}
+
+                                              <div class="documentIcon" style="background-color: {{specialty.secondary_color}}">
+                                                <form action="{% url 'upload' client.id case.id document.id %}" method="POST" class="docIconForm" data-aaa>
+                                                  <i class="icon-file-text" style="font-size: 20px;margin-bottom: 1px;"></i>
+                                                  <div class="iconTextWrap" >
+                                                      <div> {{document.document_no}} </div>
+                                                  </div>                                                    
+                                                </form>
+                                              </div>
+
+                                            {% elif document.document_no == 'TF Rec' %}
+
+                                              <div class="documentIcon">
+                                                  <form action="{% url 'upload' client.id case.id document.id %}" method="POST" class="docIconForm" data-aaa>
+                                                    <i class="icon-file-text" style="font-size: 20px;margin-bottom:1px"></i>
+                                                    <div class="iconTextWrap" >
+                                                        <div> {{document.document_no}} </div>
+                                                    </div>                                                    
+                                                  </form>
+                                              </div>
+                                            
+                                            {% else %}
+                                                <!-- <div style="height: 62px;border:dashed"  >
+                                                    <form action="{% url 'upload' client.id case.id document.id %}" method="POST" class="dropzone dz dz-xs" data-dropzone >
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="name" value=".."  />
+                                                        <div class="dz-message" data-dz-message style="display:grid;width:78px;height:46px">
+                                                            <i class="icon-file-text" style="color:grey;font-size:20px;text-align: center;"></i>
+                                                            <span style="font-size: 14px;text-align: center;">  {{document.document_no}}</span>
+                                                        </div>
+                                                        <div class="fallback"><input type="file" name="file"></div>
+                                                        
+                                                    </form>
+                                                </div> -->
+
+                                                <div class="documentIcon">
+                                                    <form action="{% url 'upload' client.id case.id document.id %}" method="POST" class="docIconForm" data-aaa>
+                                                        {% csrf_token %}
+                                                      <i class="icon-file-text" style="font-size: 20px;margin-bottom:1px" ></i>
+                                                      <div class="iconTextWrap">
+                                                        {% if document.document_no == 'Document 3' or document.document_no == 'Document 4'  %} 
+                                                            <div> Open </div>
+                                                        {% else %}
+                                                            <div> {{document.document_no}} </div>
+                                                        {% endif %}
+                                                      </div>
+                                                    </form>
+                                                </div>
+
+                                            {% endif %}
+                                            
+                                            {% else %}
+                                                <div>
+                                                    <div class="dropzone dz dz-xs" data-doc-id="{{document.id}}" data-client-id="{{client.id}}" data-case-id="{{case.id}}" data-note-id="" data-doc-name="{{document.file_name}}" onclick="toggleDocPreview(this, event)">
+                                                        
+                                                        <div class="dz-preview dz-file-preview dz-processing dz-success dz-complete">
+                                                            <div class=" ">
+                                                                
+                                                                              
+                                                                <div class="" style="display:grid;min-width:100px;">
+                                                                    <i class="icon-file-text" style="color:{{client_provider.specialty.color}};font-size:20px;text-align: center;"></i>
+                                                                    <div class="dz-filename"  style="text-align: center;"><span style="font-size: 14px;text-align: center !important;">{{document.file_name}}</span></div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                        
+                                    </div>
+                                    
+                                    <br>
+
+                                    <div class="pdfcontainer">
+                                        <div class="pdfViewer"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% comment %} <div class="Row redtd2">
+                                <div style="display: flex;justify-content:flex-start;width:100%" >
+                                    <div class="table-responsive table--no-card" style="width:100%;box-shadow: 0px 0px 1px 0.5px lightgray;">
+
+                                        <table class="table table-borderless table-striped table-earning" style="width:100%;font-size: 14px">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th style="color:grey;padding-top:5px;padding-bottom:5px" class="pr-3">Office</th>
+                                                    <th style="color:grey;padding-top:5px;padding-bottom:5px">Date</th>
+                                                    
+                                                    <th style="color:grey;padding-top:5px;padding-bottom:5px" colspan="2">Treatment Note<span><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#addTreatmentDate1" onclick="setProviderID({{client_provider.id}})" style="color:white;background-color:{{client_provider.specialty.color}};margin-left:35%; margin:right:50%;">Add New Treatment Date For {{client_provider.provider.providerprofile.office_name}}</a></span></th>
+                                                    
+                                                    <th style="color:grey;padding-top:5px;padding-bottom:5px;" class="pr-3">Record</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody  >
+
+                                                {% for treatment_note in client_provider.bp_treatment_notes.all %}
+
+                                                <tr
+                                                id="client_provider_treatment_date"
+                                                data-treatment_date_id1="{{treatment_note.id}}"
+                                                data-description="{{treatment_note.description}}"
+                                                data-date="{{treatment_note.date}}"
+                                                data-client_provider_id="{{client_provider.id}}"
+                                                onclick="editTreatmentNoteRecords()"
+                                                onmouseover="this.style.color: {{client_provider.specialty.color}}"
+                                                style="color:black; "
+                                                >
+                                                    <td style="padding-top:7px ; padding-bottom: 5px;color: white !important; font-weight: bold !important; background-color:{{client_provider.specialty.color}} !important;line-height: 26px;" width="5px;">{{client_provider.specialty.name.0}}</td>
+                                                    <td style="padding-top:7px ; padding-bottom: 5px;color:black !important;" class="pr-3" width="50px;">{{client_provider.location.added_by.providerprofile.office_name}}</td>
+                                                    <td style="padding-top:7px ; padding-bottom: 5px;color:black !important;" width="15px;">{{treatment_note.date}}</td>
+                                                    
+                                                    <td style="padding-top:7px ; padding-bottom: 5px;color:black !important;;line-height: 26px;">{{treatment_note.description}}</td>
+                                                    <td style="padding-top:7px ; padding-bottom: 5px;color:black !important;;line-height: 26px;" ></td>
+                                                    <!-- <td class="pr-3"><img width="30px;" src="{% static 'BP_resources/images/icon/file.png' %}">Document</td> -->
+                                                    {% if treatment_note.document.check == 'False' %}
+                                                        <td class="py-2" style="width: 30px;padding-top:5px ; padding-bottom: 5px;">
+                                                            <form action="{% url 'upload' client.id case.id treatment_note.document.id %}" method="POST" class=" mb-0" data-dropzone>
+                                                                {% csrf_token %}
+                                                                <input type="hidden" name="name" value=".." />
+                                                                
+                                                                <div class="dz-message" data-dz-message>
+                                                                    <i class="icon-file-text" style="color:grey;font-size:14px;text-align: center;"></i>
+                                                                </div>
+                                                                <div class="fallback"><input type="file" name="file"></div>
+                                                            </form>
+                                                        </td>
+                                                    {% else %}
+                                                        <td class="py-2" style="width: 30px;padding-top:5px ; padding-bottom: 5px;">
+                                                            <div>
+                                                                <div class=" mb-0" data-doc-id="{{treatment_note.document.id}}" data-client-id="{{client.id}}" data-case-id="{{case.id}}" data-note-id="{{treatment_note.id}}" data-doc-name="{{treatment_note.document.file_name}}" onclick="toggleDocPreview(this, event)">
+                                                                    
+                                                                    <div class="dz-preview dz-file-preview dz-processing dz-success dz-complete">
+                                                                        <div class=" align-items-center">
+                                                                            <i class="icon-file-text" style="color:{{client_provider.specialty.color}};font-size:14px;text-align: center;"></i>              
+                                                                           
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        
+                                                    {% endif %}
+                                                    
+
+
+                                                </tr>
+
+
+                                                {% endfor %}
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div> {% endcomment %}
+                        </div>    
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                       
+  
+                    </div>
+                    <div class="col-lg-12 p-0">
+                        <form method="POST" action="{% url 'bp-addNotes' client.id case.id %}">
+                            {% csrf_token %}
+                            <textarea id="w3review"  name="description" placeholder="Medical Min Note:.."></textarea>
+                            <input hidden type="text" id="category" name="category" value="Medical Min">
+                            <button class="btn btn-primary" style="background-color: #0A3761;" type="submit">Add Note</button>
+                        </form>
+                                    <div class="footer-line">
+                                        <div class="row">
+                                        <div class="col-lg-7">
+                                    To-Do for
+                                        <select name="case manager" id="cars">
+                                          <option value="case manager">case manager</option>
+                                          <option value="case manager2">case manager</option>
+                                          <option value="case manager3">case manager</option>
+                                          <option value="case manager4">case manager</option>
+                                        </select>
+                                        due in
+                                        <select name="case manager" id="cars">
+                                            <option value="case manager">3 Days</option>
+                                            <option value="case manager2">3 Days</option>
+                                            <option value="case manager3">3 Days</option>
+                                            <option value="case manager4">3 Days</option>
+                                          </select>
+
+                                          <button type="button">New To-Do</button>
+                                        </div>
+                                        <div class="col-lg-5">
+
+                                          <select name="case manager" class="right" id="cars">
+                                            <option value="case manager">Medical Treatment</option>
+                                            <option value="case manager2">Client</option>
+                                            <option value="case manager3">Client</option>
+                                            <option value="case manager4">Client</option>
+                                        </select>
+                                            <button type="button">New To-Do</button>
+                                        </div>
+                                    </div>
+                                    </div>
+                            </div>
+
+
+                            
+                        </div>  
+                     </div>
+                    <div class="col-lg-6"> 
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2022 Ian Silverthorne</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'BP_resources/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'BP_resources/vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/select2/select2.min.js' %}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static 'BP_resources/js/main.js' %}"></script>
+
+
+</body>
+
+</html>
+<!-- end document-->
+
+<script>
+    /* When the user clicks on the button, 
+    toggle between hiding and showing the dropdown content */
+    function myFunction() {
+      document.getElementById("myDropdown").classList.toggle("show");
+    }
+    
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+    </script>
+    <script>
+        function myFunction2() {
+          document.getElementById("myDropdown2").classList.toggle("show");
+        }
+        
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+          if (!event.target.matches('.dropbtn')) {
+            var dropdowns2 = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns2.length; i++) {
+              var openDropdown = dropdowns2[i];
+              if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+              }
+            }
+          }
+        }
+        </script>
+
+<script>
+    function myFunction3() {
+      document.getElementById("myDropdown3").classList.toggle("show");
+    }
+    
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropbtn')) {
+        var dropdowns3 = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns3.length; i++) {
+          var openDropdown = dropdowns3[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+    </script>
+    <script>
+        function myFunction4() {
+          document.getElementById("myDropdown4").classList.toggle("show");
+        }
+        
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+          if (!event.target.matches('.dropbtn')) {
+            var dropdowns4 = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns4.length; i++) {
+              var openDropdown = dropdowns4[i];
+              if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+              }
+            }
+          }
+        }
+        </script>
+
+<script>
+    function myFunction5() {
+      document.getElementById("myDropdown5").classList.toggle("show");
+    }
+    
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropbtn')) {
+        var dropdowns5 = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns5.length; i++) {
+          var openDropdown = dropdowns5[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+    </script>

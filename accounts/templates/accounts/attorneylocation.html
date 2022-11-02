@@ -1,0 +1,230 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% block pagetitle %}
+    Treatment First - Add Location
+{% endblock pagetitle %}
+{% block content %}
+
+    <script>
+        var searchInput = 'address';
+
+        $(document).ready(function () {
+            var autocomplete;
+            autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
+                types: ['geocode'],
+            });
+
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                var near_place = autocomplete.getPlace();
+            
+                for (var i = 0; i < near_place.address_components.length; i++) {
+                    for (var j = 0; j < near_place.address_components[i].types.length; j++) {
+                        if (near_place.address_components[i].types[j] == "country") {
+
+                            document.getElementById('country').value = near_place.address_components[i].long_name;
+                        }
+                        if (near_place.address_components[i].types[j] == "postal_code") {
+
+                            document.getElementById('postal').value = near_place.address_components[i].long_name;
+                        }
+                        if (near_place.address_components[i].types[j] == "locality") {
+
+                            document.getElementById('city').value = near_place.address_components[i].long_name;
+                        }
+                        if (near_place.address_components[i].types[j] == "administrative_area_level_1") {
+
+                            document.getElementById('state').value = near_place.address_components[i].long_name;
+                        }
+                    }
+                }
+
+                // document.getElementById('latitude_view').innerHTML = near_place.geometry.location.lat();
+                // document.getElementById('longitude_view').innerHTML = near_place.geometry.location.lng();
+            });
+        });
+
+        $(document).on('change', '#' + searchInput, function () {
+            
+            document.getElementById('country').value = '';
+            document.getElementById('postal').value = '';
+            document.getElementById('city').value = '';
+            document.getElementById('state').value = '';
+            // document.getElementById('latitude_view').innerHTML = '';
+            // document.getElementById('longitude_view').innerHTML = '';
+        });
+    </script>
+
+    <h3 class="mb-3 text-primary"><i class="fa fa-map-marker"></i> Add Location</h3>
+    {% if userprofile.marketerprofile.account_type == 'Marketer' or request.user.marketerstaff_userprofile.account_type == 'MarketerStaff' %}
+        <form method="POST" action="{% url 'marketerlocation' %}">
+            {% csrf_token %}
+
+            <div id="manual-address" class="card copysection mb-3">
+                <div class="card-body">
+
+                    <div class="mb-3 row">
+                        <label for="inputUsername" class="col-sm-3 col-form-label fw-bold">Select Address</label>
+                        <div class="col-sm-9">
+                            <input type="text" required class="form-control" placeholder="*Start typing the address" name="address1" autocomplete="off" id="address">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inputUsername" class="col-sm-3 col-form-label fw-bold">Address 1</label>
+                        <div class="col-sm-9">
+                            <input type="text" required class="form-control" placeholder="Enter Address 1" name="address1" data-field="address1">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="inputUsername" class="col-sm-3 col-form-label fw-bold">Address 2</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Enter the Suite & Office No." name="address3" id="address2" data-field="address2">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="inputUsername" class="col-sm-3 col-form-label fw-bold">City</label>
+                        <div class="col-sm-9">
+                            <input type="text" required class="form-control" name="city1" id="city" data-field="city" />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="inputUsername" class="col-sm-3 col-form-label fw-bold">State</label>
+                        <div class="col-sm-9">
+                            <input type="text" required class="form-control" name="state1" id="state" data-field="state" />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row temp1">
+                        <label for="inputEmail" class="col-sm-3 col-form-label fw-bold">Country</label>
+                        <div class="col-sm-9">
+                            <input type="text" required class="form-control" name="country1" id="country" data-field="country" />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row temp1">
+                        <label for="inputEmail" class="col-sm-3 col-form-label fw-bold">Zip Code</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="postal1" id="postal" data-field="postal" />
+                        </div>
+                    </div>
+
+                
+                    <div class="mb-3 row temp1">
+                        <label for="inputEmail" class="col-sm-3 col-form-label fw-bold">Phone</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="phone1" id="phone" data-field="phone" />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row temp1">
+                        <label for="inputEmail" class="col-sm-3 col-form-label fw-bold">Fax</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="fax1" id="fax" data-field="fax" />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row temp1">
+                        <label for="inputEmail" class="col-sm-3 col-form-label fw-bold">Email</label>
+                        <div class="col-sm-9">
+                            <input type="email" class="form-control" name="email1" id="email" data-field="email" />
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+
+            
+            <button type="submit" class="btn btn-primary">Add Address</button>
+        </form>
+    {% elif userprofile.attorneyprofile.account_type == 'Attorney' or request.user.attorneystaff_userprofile.account_type == 'AttorneyStaff' %}
+    <form method="POST">
+        {% csrf_token %}
+
+        <div id="manual-address" class="card copysection mb-3">
+            <div class="card-body">
+
+                <div class="mb-3 row">
+                    <label for="inputUsername" class="col-sm-3 col-form-label fw-bold">Select Address</label>
+                    <div class="col-sm-9">
+                        <input type="text" required class="form-control" placeholder="*Start typing the address" name="address1" autocomplete="off" id="address">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="inputUsername" class="col-sm-3 col-form-label fw-bold">Address 1</label>
+                    <div class="col-sm-9">
+                        <input type="text" required class="form-control" placeholder="Enter Address 1" name="address1" data-field="address1">
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label for="inputUsername" class="col-sm-3 col-form-label fw-bold">Address 2</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="Enter the Suite & Office No." name="address3" id="address2" data-field="address2">
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label for="inputUsername" class="col-sm-3 col-form-label fw-bold">City</label>
+                    <div class="col-sm-9">
+                        <input type="text" required class="form-control" name="city1" id="city" data-field="city" />
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label for="inputUsername" class="col-sm-3 col-form-label fw-bold">State</label>
+                    <div class="col-sm-9">
+                        <input type="text" required class="form-control" name="state1" id="state" data-field="state" />
+                    </div>
+                </div>
+
+                <div class="mb-3 row temp1">
+                    <label for="inputEmail" class="col-sm-3 col-form-label fw-bold">Country</label>
+                    <div class="col-sm-9">
+                        <input type="text" required class="form-control" name="country1" id="country" data-field="country" />
+                    </div>
+                </div>
+
+                <div class="mb-3 row temp1">
+                    <label for="inputEmail" class="col-sm-3 col-form-label fw-bold">Zip Code</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="postal1" id="postal" data-field="postal" />
+                    </div>
+                </div>
+
+            
+                <div class="mb-3 row temp1">
+                    <label for="inputEmail" class="col-sm-3 col-form-label fw-bold">Phone</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="phone1" id="phone" data-field="phone" />
+                    </div>
+                </div>
+
+                <div class="mb-3 row temp1">
+                    <label for="inputEmail" class="col-sm-3 col-form-label fw-bold">Fax</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="fax1" id="fax" data-field="fax" />
+                    </div>
+                </div>
+
+                <div class="mb-3 row temp1">
+                    <label for="inputEmail" class="col-sm-3 col-form-label fw-bold">Email</label>
+                    <div class="col-sm-9">
+                        <input type="email" class="form-control" name="email1" id="email" data-field="email" />
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+
+        
+        <button type="submit" class="btn btn-primary">Add Address</button>
+    </form>
+    {% endif %}
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyBqxc6kyS-LoyaHvVca125NQMefYWI3bn8"></script>
+
+{% endblock content %}

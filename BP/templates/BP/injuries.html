@@ -1,0 +1,400 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Dashboard</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="{% static 'BP_resources/css/font-face.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{% static 'BP_resources/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{% static 'BP_resources/css/theme.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/css/sidebar.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/css/header.css' %}" rel="stylesheet" media="all">
+
+</head>
+
+<body class="animsition homepage">
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+ 
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP NEW-->
+            <header class="header-main-wrapper">
+                {% for message in messages %}
+                <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                    {{ message | safe }}
+                    </button>
+                </div>
+                {% endfor %}
+                <div class="header-row">
+                    <div class="client-details">
+                        <div class="client-image">
+                            <img src="{% static 'BP_resources/images/icon/avatar-01.jpg' %}" alt="John Doe" />
+                        </div>
+                        <div class="client-info overflow-hidden">
+                            <span class="case-name"><a class="js-acc-btn clientTabFont" href="{% url 'bp-searchclient' %}"><b class="text-blue font-weight-normal">Court Name </b><b class="text-gray font-weight-normal">Case #:</b> <b class="text-blue font-weight-normal">12786</b></a></span>
+                            <span class="client-name">
+                                <a class="clientTabFont d-block" href="{% url 'bp-searchclient' %}">{{client.last_name}} {{client.first_name}} </a>
+                            </span>
+                            <span class="accident-type"><a class="js-acc-btn clientTabFont" href="{% url 'bp-searchclient' %}">Auto Accident</a></span>
+                            <span class="ml-3 accident-date"><a class="js-acc-btn clientTabFont" href="{% url 'bp-searchclient' %}"><b class="text-gray font-weight-normal">DOI: </b>2/13/2022</a></span>
+                            <i class="fa fa-chevron-down" aria-hidden="true" ></i>
+                            
+                        </div>
+                    </div>
+                    <div class="bar">
+                        <div class="wrap stacked-icons">
+                            <ul id='main-2'>
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/case-navigator-logo.svg' %}" alt="John Doe" />   
+                                            <small>Case Navigator</small>                                  
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/worklist-logo-icon.svg' %}" alt="John Doe" />   
+                                            <small>Work List</small>                                  
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/calendar-logo-icon.svg' %}" alt="John Doe" /> 
+                                            <small>Calendar</small>                                    
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/speedometer-logo-icon.svg' %}" alt="John Doe" />   
+                                            <small>Speedometer</small>                             
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/chat-logo-icon.svg' %}" alt="John Doe" />   
+                                            <small>Chat</small>                             
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/flagged-cases-logo-icon.svg' %}" alt="John Doe" />    
+                                            <small>Flagged Cases</small>                                 
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/chat-logo-icon.svg' %}" alt="John Doe" />   
+                                            <small>Chat</small>                             
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/directory-logo-icon.svg' %}" alt="John Doe" />  
+                                            <small>Directory</small>                                   
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li class="more-2 hidden" data-width="80">
+                                    <a href="#" class="more-button">
+                                            <img src="{% static 'BP_resources/images/icon/down-arrow.png' %}" alt="John Doe" width="20" /> </a>
+                                    <ul class="collapsible-ul"></ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <form class="search-form" method="POST">
+                        <input type="text" class="form-control" />
+                        <div class="search-btn">
+                            <input type="submit" class="btn" value="Search" />
+                        </div>
+                    </form> 
+                </div>
+                <div class="checklist-section">
+                    <p class="text-white">{{total_marked}}/{{total_checklists}}</p>
+                    <div class="circle-wrap">
+                        <div class="circle">
+                        <div class="mask full">
+                            <div class="fill"></div>
+                        </div>
+                        <div class="mask half">
+                            <div class="fill"></div>
+                        </div>
+                        <div class="inside-circle"> 100% </div>
+                        </div>
+                    </div>
+                    <div class="dropdown" >
+                        <button onclick="myFunction()" class="dropbtn" style="background-color: #093761;"> 
+                            <img src="/static/BP_resources/images/icon/check-green.svg" alt="Double arrow down" class="green-check"> Checklist <img src="/static/BP_resources/images/icon/angles-down-blue.svg" alt="Double arrow down" class="double-arrow-down"></button>
+                        <div id="myDropdown" class="dropdown-content dropdown-content2">
+                            {% comment %} <div class="row">
+                                <div class="col-lg-12" >
+                                    <div class="checklist-cont" >
+                                        {% for checklist in overall_checklist %}
+                                            {% if not checklist.status  %}
+                                                <div><input type="checkbox" onclick="location.href='{% url 'bp-markChecklist' checklist.id client.id case.id  %}';" id="vehicle1" name="vehicle1" value="Bike">
+                                                    <label for="vehicle1">{{checklist.name}}</label><br>
+                                                </div>
+                                            {% else %}
+                                                <div><input type="checkbox" onclick="location.href='{% url 'bp-uncheckChecklist' checklist.case_checklist_id %}';" checked id="vehicle1" name="vehicle1" value="Bike">
+                                                    <label for="vehicle1">{{checklist.name}}</label><br>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                        
+                                    </div>
+                                </div>
+                                
+                                <div class="checkbottom" >
+                                    <div class="col-lg-2">
+                                        <p>{{total_marked}}/{{total_checklists}}</p>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:{{checklist_percentage}}"></div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <button onclick="myFunction()" class="dropbtn"><i class="fa fa-check" aria-hidden="true"></i> Checklist <i class="fa fa-angle-up" aria-hidden="true"></i></button>
+                                    </div>
+                                </div>
+                            </div> {% endcomment %}
+                            <div class="checklist-multi-dropdowns">
+                                <div class="checklist-section checklist-dropdown">
+                                    <p class="text-white">{{total_marked}}/{{total_checklists}}</p>
+                                    <div class="circle-wrap">
+                                        <div class="circle">
+                                        <div class="mask full">
+                                            <div class="fill"></div>
+                                        </div>
+                                        <div class="mask half">
+                                            <div class="fill"></div>
+                                        </div>
+                                        <div class="inside-circle"> 100% </div>
+                                        </div>
+                                    </div>
+                                    <img src="/static/BP_resources/images/icon/check-green.svg" alt="Double arrow down" class="green-check"> <p class="text-white">Checklist</p> <img src="/static/BP_resources/images/icon/angles-down-blue.svg" alt="Double arrow down" class="double-arrow-down">
+                                </div>
+                                <div class="checklist-section checklist-dropdown">
+                                    <p class="text-white">{{total_marked}}/{{total_checklists}}</p>
+                                    <div class="circle-wrap">
+                                        <div class="circle">
+                                        <div class="mask full">
+                                            <div class="fill"></div>
+                                        </div>
+                                        <div class="mask half">
+                                            <div class="fill"></div>
+                                        </div>
+                                        <div class="inside-circle"> 100% </div>
+                                        </div>
+                                    </div>
+                                    <img src="/static/BP_resources/images/icon/check-green.svg" alt="Double arrow down" class="green-check"> <p class="text-white">Checklist</p> <img src="/static/BP_resources/images/icon/angles-down-blue.svg" alt="Double arrow down" class="double-arrow-down">
+                                </div>
+                                <div class="checklist-section checklist-dropdown">
+                                    <p class="text-white">{{total_marked}}/{{total_checklists}}</p>
+                                    <div class="circle-wrap">
+                                        <div class="circle">
+                                        <div class="mask full">
+                                            <div class="fill"></div>
+                                        </div>
+                                        <div class="mask half">
+                                            <div class="fill"></div>
+                                        </div>
+                                        <div class="inside-circle"> 100% </div>
+                                        </div>
+                                    </div>
+                                    <img src="/static/BP_resources/images/icon/check-green.svg" alt="Double arrow down" class="green-check"> <p class="text-white">Checklist</p> <img src="/static/BP_resources/images/icon/angles-down-blue.svg" alt="Double arrow down" class="double-arrow-down">
+                                </div>
+                                <div class="checklist-section checklist-dropdown">
+                                    <p class="text-white">{{total_marked}}/{{total_checklists}}</p>
+                                    <div class="circle-wrap">
+                                        <div class="circle">
+                                        <div class="mask full">
+                                            <div class="fill"></div>
+                                        </div>
+                                        <div class="mask half">
+                                            <div class="fill"></div>
+                                        </div>
+                                        <div class="inside-circle"> 100% </div>
+                                        </div>
+                                    </div>
+                                    <img src="/static/BP_resources/images/icon/check-green.svg" alt="Double arrow down" class="green-check"> <p class="text-white">Checklist</p> <img src="/static/BP_resources/images/icon/angles-down-blue.svg" alt="Double arrow down" class="double-arrow-down">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- HEADER DESKTOP NEW-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <form action="{% url 'bp-navigator' %}" method="post" id="myform">
+                            {% csrf_token %}
+                            <input type="text" name="name1" id="name1" hidden>
+                        </form>
+                        <div class="row">
+                            <div class="col-lg-12 top-head">
+                                <h2><img src="{% static 'BP_resources/images/icon/Vector-nav.png' %}">Case Navigator <span>/ Click A Number on The Grid To See Cases in That Category</span></h2>
+                                <ul>
+                                <li><a href="#" onclick="clickButton('Case Age')">Case Age</a></li>
+                                <li><a href="#" onclick="clickButton('Case Type')">Case Type</a></li>
+                                <li><a href="#" onclick="clickButton('Case Category')">Case Category</a></li>
+                                <li><a href="#" onclick="clickButton('Case Value')">Case Value</a></li>
+                                <li><a href="#" class="active"  onclick="clickButton('Case Injuries')">Injuries</a></li>
+                                <li><a href="#" onclick="clickButton('Total Damages')">Total Damages</a></li>
+                                <li><a href="#" onclick="clickButton('Medical Providers')">Medical Providers</a></li>
+                                <li><a href="#" onclick="clickButton('Case Stage')">Case Stage</a></li>
+                                </ul>
+                                <h2 class="title-1 m-b-25">Injuries</h2>
+                                <div class="table-responsive table--no-card m-b-40">
+                                    {% if check %}
+                                        <div class="alert alert-danger" role="alert">
+                                            This page is for Firm users only!
+                                        </div>
+                                    {% else %}
+                                        <table class="table table-borderless table-striped table-earning">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    {% for key, value in data.items %}
+                                                        <th class="text-center">{{key}}</th>
+                                                    {% endfor %}
+                                                    <!-- <th>5 Days</th>
+                                                    <th>1 week</th> -->
+                                                    <!-- <th class="text-right">2 weeks</th>
+                                                    <th class="text-right">3 weeks</th>
+                                                    <th class="text-right">1 Month</th>
+                                                    <th class="text-right">2 Months</th>
+                                                    <th class="text-right">3 Months</th>
+                                                    <th class="text-right">6 Months</th>
+                                                    <th class="text-right">1 Year</th>
+                                                    <th class="text-right">2 Years</th>
+                                                    <th class="text-right">2 Years or More</th> -->
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>{{user_type}}</td>
+                                                    {% for col in columns %}
+                                                        {% for key, value in data.items %}
+                                                            {% if key == col %}
+                                                                <td class="text-center">{{value}}</td>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    {% endfor %}
+                                                    
+                                                </tr>
+                                                
+                                            
+                                            </tbody>
+                                        </table>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                        </div>
+
+                            </div>
+                        </div>  
+                       
+                    <div class="col-lg-6"> 
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2022 Ian Silverthorne</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'BP_resources/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'BP_resources/vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/select2/select2.min.js' %}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static 'BP_resources/js/main.js' %}"></script>
+    <script>
+        function clickButton(temp){
+            
+            document.getElementById('name1').value = temp
+            console.log(document.getElementById('name1').value);
+            document.getElementById("myform").submit();
+        }
+    </script>
+
+</body>
+
+</html>
+<!-- end document-->

@@ -1,0 +1,262 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% block pagetitle %}
+    Treatment First - Admin Dashbaord
+{% endblock pagetitle %}
+{% block content %}
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Provider</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-1" action="{% url 'addProviderIndividual' %}" method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <input type="text" required class="form-control" placeholder="*Start typing the address" name="address1" autocomplete="off" id="address">
+                        </div>
+                        <div class="mb-3 ">
+                            <input type="text" class="form-control" id="office_name" name="office_name" placeholder="Enter the Office Name" data-field="phone" />
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" required class="form-control" placeholder="Enter Address 1" name="address1" data-field="address1">
+                        </div>
+                        <div class="mb-3 ">
+                            <input type="text" class="form-control" placeholder="Enter the Suite & Office No." name="address3" id="address2" data-field="address2">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" placeholder="Enter City" required class="form-control" name="city1" id="city" data-field="city" />
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" placeholder="Enter State" required class="form-control" name="state1" id="state" data-field="state" />
+                        </div>
+                        <div class="mb-3 temp1">
+                            <input type="text" placeholder="Enter Zip Code" class="form-control" name="postal1" id="postal" data-field="postal" />
+                        </div>
+                        <div class="mb-3  temp1">
+                            <input type="text" placeholder="Enter Phone" class="form-control" name="phone1" id="phone" data-field="phone" />
+                        </div>
+                        <div class="mb-3  temp1">
+                            <input type="text" placeholder="Enter Fax" class="form-control" name="fax1" id="fax" data-field="fax" />
+                        </div>
+                        <div class="mb-3  temp1">
+                            <input type="email" placeholder="name@email.com" class="form-control" name="email1" id="email" data-field="email" />
+                        </div>
+                        <div class="mb-3  temp1">
+                            <input type="text" placeholder="Longitude" required class="form-control" name="longitude1" id="longitude">
+                        </div>
+                        <div class="mb-3  temp1">
+                            <input type="text" required placeholder="Latitude" class="form-control" name="latitude1" id="latitude">
+                        </div>
+
+                        <div class="mb-3 ">
+                            {% for specialty in specialties %}
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" name="specialties" type="checkbox" value="{{specialty.id}}" id="option{{specialty.id}}">
+                                        <label class="form-check-label" for="{{specialty.id}}">
+                                            {{specialty.name}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" form="form-1" class="btn btn-primary">Add Provider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <div>
+                <div class="py-4 container">
+                    <form action="{% url 'admin_importproviders' %}"
+                          method="post"
+                          enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <div class="row">
+                                <div class="col-md-2 text-primary mt-2 mb-2 fw-bold">Upload CSV</div>
+                                <div class="col-md-10">
+                                    <div class="row">
+                                        <div class="col-md mb-2">
+                                            <input class="form-control" type="file" id="file1" name="document" required>
+                                        </div>
+                                        <div class="col-md">
+                                            <button type="submit" class="btn btn-success">
+                                                <i class="fa fa-file me-3"  aria-hidden="true"></i>Import
+                                            </button>
+                                        </div>
+                                        <div class="col-md">
+                                            <button type="button"
+                                                    class="btn btn-primary"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal">
+                                            </i>Add Provider
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <form method="POST" action="{% url 'admin_searchbyoffice' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="search" value="basic" />
+                    <input type="hidden" name="page" value="0" />
+                    <div class="mb-3">
+                        <div class="row">
+                            <h6 class="col-md-2 text-primary mt-2 mb-2">Search by office name</h6>
+                            <div class="col-md-10">
+                                <div class="row">
+                                    <div class="col mb-2">
+                                        <input type="text"
+                                               class="form-control"
+                                               name="name"
+                                               id="name"
+                                               placeholder="Enter the Office name of the provider">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <form method="POST" action="{% url 'admin_searchbyaddress' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="search" value="basic" />
+                    <input type="hidden" name="page" value="0" />
+                    <div class="mb-3">
+                        <div class="row">
+                            <h6 class="col-md-2 text-primary mt-2 mb-2">Search by Address</h6>
+                            <div class="col-md-10">
+                                <div class="row">
+                                    <div class="col mb-2">
+                                        <input type="text"
+                                               class="form-control"
+                                               name="name"
+                                               id="name"
+                                               placeholder="Enter the address">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="mt-4 py-4 px-md-5 bg-white">
+            <h4 class="text-primary text-center">All Filtered Locations</h4>
+            <div class="mt-3">
+                <div>
+                    {% for x in locations %}
+                        <a href="{% url 'editlocations' x.location.id x.location.added_by %}"
+                           class="px-3 py-2 card-hover">
+                            <div class="row align-items-center py-2 g-0">
+                                <div class="col-md-1 d-md-block d-none" style="max-width: 55px;">
+                                    <span></i>{{ forloop.counter }}</span>
+                                </div>
+                                <div class="col-md">
+                                    <div>{{ x.location.added_by.providerprofile.office_name }}</div>
+                                </div>
+                                <div class="col-md text-md-center" style="min-width: 155px;">
+                                    <div class="star-container">
+                                        <div class="star-back">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <div class="star-front text-warning"
+                                             style="width: {{ x.location.added_by.review_percentage }}%;">
+                                            <div class="cover">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>{{ x.location.added_by.review_userprofile.count }} review</div>
+                                </div>
+                                <div class="col-md" style="max-width: 140px;">
+                                    <div>{{ x.location.phone }}</div>
+                                </div>
+                                <div class="col-md text-md-end" style="min-width: 300px;">
+                                    <div>
+                                        {{ x.location.address }}, {{ x.location.address2 }}
+                                        <br>
+                                        {{ x.location.city }}, {{ x.location.state }} {{ x.location.post_code }}
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyBqxc6kyS-LoyaHvVca125NQMefYWI3bn8"></script>
+<script>
+    var searchInput = 'address';
+
+    $(document).ready(function () {
+        var autocomplete;
+        autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
+            types: ['geocode'],
+        });
+
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            var near_place = autocomplete.getPlace();
+            document.getElementById('latitude').value = near_place.geometry.location.lat();
+            document.getElementById('longitude').value = near_place.geometry.location.lng();
+            for (var i = 0; i < near_place.address_components.length; i++) {
+                for (var j = 0; j < near_place.address_components[i].types.length; j++) {
+                    if (near_place.address_components[i].types[j] == "postal_code") {
+                        document.getElementById('postal').value = near_place.address_components[i].long_name;
+                    }
+                    if (near_place.address_components[i].types[j] == "locality") {
+                        document.getElementById('city').value = near_place.address_components[i].long_name;
+                    }
+                    if (near_place.address_components[i].types[j] == "administrative_area_level_1") {
+                        document.getElementById('state').value = near_place.address_components[i].long_name;
+                    }
+                }
+            }
+        });
+
+        $(document).on('change', '#' + searchInput, function () {
+            document.getElementById('latitude').value = '';
+            document.getElementById('longitude').value = '';
+        
+            document.getElementById('postal').value = '';
+            document.getElementById('city').value = '';
+            document.getElementById('state').value = '';
+        });
+    });
+</script>
+{% endblock content %}

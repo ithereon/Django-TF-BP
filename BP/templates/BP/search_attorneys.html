@@ -1,0 +1,256 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+       
+        <!-- Title Page-->
+        <title>Dashboard</title>
+    
+        <!-- Fontfaces CSS-->
+        <link href="{% static 'BP_resources/css/font-face.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Bootstrap CSS-->
+        <link href="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Vendor CSS-->
+        <link href="{% static 'BP_resources/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Main CSS-->
+        <link href="{% static 'BP_resources/css/theme.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/sidebar.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/header.css' %}" rel="stylesheet" media="all">
+    
+    </head>
+
+<body class="animsition homepage">
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+ 
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+           {% include 'BP/header.html' %}
+            <!-- HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content lawfirmdir">
+                <div class="section__content section__content--p30 photos-page">
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-lg-12 top-head">
+                                <table class="table table-borderless table-striped table-earning">
+                                    <thead>
+                                        <tr>
+                                            
+                                        <td width="40%"><h2> <svg xmlns="http://www.w3.org/2000/svg" width="51" height="50" viewBox="0 0 51 50" fill="none">
+                                                <path d="M44.158 11.7312L28.4098 3.31491C26.3783 2.22828 23.9531 2.22828 21.9193 3.31491L6.17107 11.7312C4.01131 12.8853 2.66821 15.0968 2.66821 17.4996V40.9239C2.66821 44.5483 5.69637 47.4999 9.41745 47.4999H40.9139C44.635 47.4999 47.6631 44.5483 47.6631 40.9217V17.4996C47.6631 15.0968 46.32 12.8853 44.158 11.7312ZM20.6662 43.0004V34.0015C20.6662 31.52 22.6842 29.502 25.1657 29.502C27.6472 29.502 29.6652 31.52 29.6652 34.0015V43.0004H20.6662ZM43.1637 40.9217C43.1637 42.0668 42.1535 43.0004 40.9139 43.0004H34.1647V34.0015C34.1647 29.0385 30.1286 25.0025 25.1657 25.0025C20.2027 25.0025 16.1667 29.0385 16.1667 34.0015V43.0004H9.41745C8.17784 43.0004 7.16771 42.0668 7.16771 40.9217V17.4996C7.16771 16.7594 7.59741 16.071 8.29258 15.6998L24.0408 7.28346C24.3873 7.09898 24.7765 7.0045 25.1657 7.0045C25.5549 7.0045 25.9441 7.09898 26.2906 7.28346L42.0388 15.6998C42.734 16.071 43.1637 16.7594 43.1637 17.4996V40.9217Z" fill="black"/>
+                                                </svg>Search Attorneys</h2></td>
+                                               <td> <div class="mid-search">
+                                                    <form class="form-header" action="" method="POST">
+                                                        {% csrf_token %}
+                                                 <span><input class="au-input au-input--xl" type="text" name="search" placeholder="Search by Office Name"><i class="fa fa-search"></i> <button type="submit">Search</button></span>  
+                                                     </form>
+                                                    </div>
+                                                </td>
+                                        </tr>
+                                    </thead>
+                                </table>
+                                
+                                   
+                                <div class="custom-tab">
+
+                                    <nav>
+                                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                            <a class="nav-item nav-link active" id="custom-nav-home-tab" data-toggle="tab" href="#custom-nav-home" role="tab" aria-controls="custom-nav-home"
+                                             aria-selected="true">Firm Search Results</a>
+                                            <!-- <a class="nav-item nav-link" id="custom-nav-profile-tab" data-toggle="tab" href="#custom-nav-profile" role="tab" aria-controls="custom-nav-profile"
+                                             aria-selected="false">Example firm</a>
+                                             <a class="nav-item nav-link" id="custom-nav-profile-tab" data-toggle="tab" href="#custom-nav-profile" role="tab" aria-controls="custom-nav-profile"
+                                             aria-selected="false">Your Firm</a>
+                                             <a class="nav-item nav-link" id="custom-nav-profile-tab" data-toggle="tab" href="#custom-nav-profile" role="tab" aria-controls="custom-nav-profile"
+                                             aria-selected="false">That firm</a>
+                                             <a class="nav-item nav-link" id="custom-nav-profile-tab" data-toggle="tab" href="#custom-nav-profile" role="tab" aria-controls="custom-nav-profile"
+                                             aria-selected="false">Litigating firm</a> -->
+                                            
+
+                                        </div>
+                                    </nav>
+                                    <div class="tab-content" id="nav-tabContent">
+                                        <div class="tab-pane fade show active" id="custom-nav-home" role="tabpanel" aria-labelledby="custom-nav-home-tab">
+                                          <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="table-responsive table--no-card m-b-40 subpg-table">
+                                                    <table class="table table-borderless table-striped table-earning startrating">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Location</th>
+                                                                <th>Contacts</th>
+                                                               
+                                                                <th colspan="1"></th>
+                                                                
+                                                                
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% if not bp_attorneys %}
+                                                                <div class="alert alert-danger" role="alert">
+                                                                    No such attorney exists!
+                                                                </div>
+                                                            {% else %}
+                                                            {% for bp_attorney in bp_attorneys %}
+                                                            <tr>
+                                                                <td>{{forloop.counter}}</td>
+                                                                {% for location in bp_attorney.bp_location_attorney.all %}
+                                                                    {% if bp_attorney.bp_location_attorney.all|first %}
+                                                                    <td>{{bp_attorney.attorneyprofile.office_name}}<br>
+                                                                        {{location.address}} {{location.address2}}<br>
+                                                                        {{location.city}}, {{location.state}}, {{location.post_code}}</td>
+                                                                    <td>{{location.phone}}<br>
+                                                                        {{location.fax}} - fax<br>
+                                                                        {{location.email}}
+                                                                        </td>
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                                
+                                                                <!-- <td>Personal Injury, Car<br> Accident, Dog Bite, Slip and<br> Fall, Plaintiff’s Employment,<br> General Litigation</td>
+                                                                <td class="heart-icon"><span><svg xmlns="http://www.w3.org/2000/svg" width="50" height="51" viewBox="0 0 50 51" fill="none">
+                                                                    <g clip-path="url(#clip0_390_8145)">
+                                                                    <path d="M25 47.1233C24.7471 47.1233 24.4942 47.058 24.2677 46.9271C24.0216 46.7851 18.1748 43.3904 12.2442 38.2754C8.72914 35.2438 5.92329 32.237 3.90474 29.3386C1.29263 25.588 -0.020939 21.9804 0.000252352 18.6158C0.025057 14.7008 1.4273 11.019 3.94897 8.24846C6.51323 5.43128 9.93529 3.87991 13.585 3.87991C18.2624 3.87991 22.5389 6.50003 25.0001 10.6506C27.4613 6.50012 31.7378 3.87991 36.4152 3.87991C39.8633 3.87991 43.153 5.27972 45.6788 7.82151C48.4506 10.6109 50.0255 14.5521 49.9997 18.6344C49.9785 21.9931 48.6403 25.5952 46.0224 29.3406C43.9976 32.2376 41.1957 35.243 37.6944 38.2737C31.7854 43.3882 25.9807 46.7829 25.7364 46.9249C25.5088 47.0571 25.2543 47.1233 25 47.1233ZM13.5849 6.8096C10.7702 6.8096 8.11762 8.02092 6.11557 10.2205C4.0814 12.4554 2.95005 15.4435 2.92993 18.6344C2.8898 24.986 8.99525 31.599 14.1242 36.0281C18.6546 39.9403 23.2497 42.8771 24.9974 43.9482C26.736 42.8754 31.2987 39.9396 35.8102 36.0298C40.9247 31.5972 47.0298 24.978 47.0701 18.6159C47.091 15.3082 45.8264 12.1266 43.6006 9.88664C41.629 7.90246 39.0771 6.80969 36.4152 6.80969C31.9364 6.80969 27.9091 9.95969 26.394 14.6482C26.1986 15.2528 25.6355 15.6625 25.0002 15.6625C24.3646 15.6625 23.8017 15.2527 23.6064 14.6481C22.091 9.95969 18.0638 6.8096 13.5849 6.8096Z" fill=""/>
+                                                                    </g>
+                                                                    <defs>
+                                                                    <clipPath id="clip0_390_8145">
+                                                                    <rect width="50" height="50" fill="white" transform="translate(0 0.501587)"/>
+                                                                    </clipPath>
+                                                                    </defs>
+                                                                    </svg></span></td>
+                                                                <td><span class="fa fa-star checked"></span>
+                                                                    <span class="fa fa-star checked"></span>
+                                                                    <span class="fa fa-star checked"></span>
+                                                                    <span class="fa fa-star checked"></span>
+                                                                    <span class="fa fa-star"></span>
+                                                                    <p>4.75 (263 reviews)</p></td>
+                                                                <td>12 Pending<br>
+                                                                    23 Referred<br>
+                                                                    11 Complete
+                                                                    </td>
+                                                                <td><button>Review for Case Referral</button></td>  -->
+                                                                
+                                                            </tr>
+                                                            {% endfor %}
+                                                            {% endif %}
+                                                          
+                                                           
+                
+                                                        </tbody>
+                                                    </table>
+                                                </div> 
+                                        </div>
+                                        </div>      
+                                       </div>
+                               
+                                        
+                                     </div>
+                                    </div>
+
+                            </div>
+
+                        </div>
+
+                            </div>
+                        </div>  
+                       
+                    <div class="col-lg-6"> 
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2022 Ian Silverthorne</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'BP_resources/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'BP_resources/vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/select2/select2.min.js' %}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static 'BP_resources/js/main.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+        // $('a').on('click', function () {
+            console.log('hello');
+          
+            $.ajax({
+                url: '/BP/clickRecord/',
+                type: "GET",
+                data: {
+                    "case_id": "{{case.id}}",
+                    "page_id": "{{page.id}}",
+                    "click_id": "22",
+                    "clickIDDescription": "Search Page Selected"
+                },
+               
+                success: function (data) {
+                    var x = JSON.stringify(data);
+                    console.log(x);
+                },
+                // Error handling 
+                error: function (error) {
+                    console.log(`Error ${error}`);
+                }
+            });
+        // });
+    });
+    </script>
+
+
+
+</body>
+
+</html>
+<!-- end document-->

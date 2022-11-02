@@ -1,0 +1,95 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% block pagetitle %}
+    Treatment First - Reviews
+{% endblock pagetitle %}
+{% block content %}
+
+    <div class="row py-5 px-3">
+        <div class="col-lg-4 col-md-4 col-xs-4">
+            {% if userprofile.providerprofile.account_type == 'Provider' or request.user.providerstaff_userprofile.account_type == 'ProviderStaff' %}
+                <a href="{% url 'accountdetails' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Account Details</a> <br><br>
+                <a href="{% url 'profile' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Locations</a> <br><br>
+                <a href="{% url 'providerdetails' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Provider Details</a><br><br>
+                <a href="{% url 'provider_firm_users' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Firm Users</a> <br><br>
+            {% elif userprofile.attorneyprofile.account_type == 'Attorney' or request.user.attorneystaff_userprofile.account_type == 'AttorneyStaff' %}
+                <a href="{% url 'accountdetails_attorney' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Account Details</a> <br><br>
+                <a href="{% url 'firm_users' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Firm Users</a> <br><br>
+                <a href="{% url 'attorney_profile' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Favorites</a><br><br>
+                <a href="{% url 'blacklist' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Blacklist</a><br><br>
+                <a href="{% url 'flagged_users' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Flagged Providers</a><br><br>
+                <a href="{% url 'provider_reviews' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Provider Reviews</a><br><br>
+            {% elif userprofile.marketerprofile.account_type == 'Marketer' or request.user.marketerstaff_userprofile.account_type == 'MarketerStaff' %}
+                <a href="{% url 'accountdetails_marketer' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Account Details</a> <br><br>
+                <a href="{% url 'marketer_firm_users' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Firm Users</a> <br><br>
+                <a href="{% url 'marketer_profile' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Favorites</a><br><br>
+                <a href="{% url 'marketer_blacklist' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Blacklist</a><br><br>
+                <a href="{% url 'marketer' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Marketer</a><br><br>
+                <a href="{% url 'marketer_provider_reviews' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Provider Reviews</a><br><br>
+            {% endif %}
+            {% if not request.user.marketerstaff_userprofile.account_type == 'MarketerStaff' and not request.user.providerstaff_userprofile.account_type == 'ProviderStaff' and not request.user.attorneystaff_userprofile.account_type == 'AttorneyStaff' %}
+                <a href="{% url 'multipleusers' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Add Users</a> <br><br>
+            {% endif %}
+        </div>
+        <div class="col-lg-8 col-md-8 col-xs-8">
+            
+            
+            
+            <h4>Provider Reviews:</h4>
+            <br>
+            {% if not reviews %}
+                <div class="card" style="margin-top: 2%; background-color: #fafafa;">
+                    <div class="card-body">
+                        <strong>You don't have any provider reviews yet!</strong>
+                    </div>
+                </div>
+            {% else %}
+            {% for review in reviews %}{% for rating in temp_rat %}
+            {% if forloop.counter == forloop.parentloop.counter %}
+                <div class="card">
+                    <div class="card-body">
+                    <h5 class="card-title">{{review.given_to.providerprofile.office_name}}</h5>
+                    <div class="card-subtitle mb-2 text-muted">
+                        
+                    <div class="col-md">
+                        
+                        <div class="star-container pl-5">
+                            <div class="star-back">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="star-front text-warning" style="width: {{rating}}%;">
+                                <div class="cover">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p style="font-size: 15px;color:#a6a6a6;">Review given by you ({{review.created_on|timesince}} ago)</p>
+                        
+                        
+                    </div>
+                    
+                    <hr>
+                    
+                    </div>
+                    <p class="card-text">{{review.description}}</p>
+                    
+                    </div>
+                </div>
+                <br>
+            {% endif %}
+            {% endfor %}{% endfor %}
+            {% endif %}
+
+        </div>
+    </div>
+
+{% endblock content %}

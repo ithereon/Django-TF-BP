@@ -1,0 +1,16 @@
+/* farrukh code */
+#phone-modal .modal-dialog, #dob-modal .modal-dialog{
+  min-width: 700px;
+  max-width: 900px;
+}
+#phone-modal .modal-dialog .modal-content-row, #phone-modal .modal-dialog .modal-footer, #dob-modal .modal-dialog .modal-content-row, #dob-modal .modal-dialog .modal-footer{
+  display: flex;
+  justify-content: space-between;
+}
+#phone-modal .modal-dialog .modal-body .form-control{
+  border: 1px solid #ccc;
+}
+#phone-modal .modal-dialog .modal-body p, #dob-modal .modal-dialog .modal-body p{
+  color: #000;
+  min-width: 270px;
+}

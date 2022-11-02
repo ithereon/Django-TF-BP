@@ -1,0 +1,73 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% block pagetitle %}
+   Treatment First - ToDos
+{% endblock pagetitle %}
+{% block content %}
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Complete ToDo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="complete-form" method="POST" action="{% url 'todoCompleted' %}"> {% csrf_token %}
+                    <textarea class="form-control" id="w3review" required name="note" placeholder="Note"></textarea>
+                    <input type="text" hidden name="todo_id" id="todo_id"> </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" form="complete-form" class="btn btn-success">Done</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+  
+    <table class="table">
+        <thead>
+          <tr style="color:gray">
+            
+            <td style="color:gray" scope="col"></td>
+            <td style="color:gray" scope="col"></td>
+            <td style="color:gray" scope="col">Patient</td>
+            
+            <td style="color:gray">Due Date</td>
+            <td style="color:gray"></td>
+            <td style="color:gray"></td>
+
+          </tr>
+        </thead>
+        <tbody>
+           {% for todo in todos %} 
+          <tr>
+           
+            <td class="td-autosize" >{{forloop.counter}}</td>
+            <td class="td-autosize" >{{todo.created_at|date:"m/d/Y"}}</td>
+            {% if request.user.userprofile.account_type == 'Provider' %}
+            <td class="td-autosize" >{{todo.for_case.for_client.last_name}} {{todo.for_case.for_client.first_name}}</td>
+            
+            {% elif request.user.providerstaff_userprofile.account_type == 'ProviderStaff' %}
+            <td class="td-autosize" >{{todo.for_case.for_client.last_name}} {{todo.for_case.for_client.first_name}}</td>
+            
+            {% endif %}
+            
+            <td class="td-autosize" >{{todo.due_date}}</td>{% if todo.status == 'Not Completed' %}
+            <td  >{{todo.notes}}</td>
+            <td class="td-autosize"><a style="color:white" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="selectID({{todo.id}})" data-bs-toggle="modal" onclick="" data-bs-target="#exampleModal">Mark done</a></td> {% else %}
+            <td >{{todo.notes}}: DONE by {{todo.created_by.first_name}} {{todo.created_by.last_name}} on {{todo.completed_at}}, "{{todo.completed_note}}"</td>
+			<td class="td-autosize"><a style="color:white" class="btn btn-secondary">Completed</a></td> {% endif %}
+          </tr>
+          {% endfor %}
+      </table>
+      
+</div>
+<script>
+    function selectID(todo_id) {
+		var temp = document.getElementById('todo_id');
+		temp.value = todo_id;
+        console.log(temp.value);
+	}
+</script>
+{% endblock %}

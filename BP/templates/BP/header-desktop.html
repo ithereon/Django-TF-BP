@@ -1,0 +1,218 @@
+{% load static %}
+
+
+            <!-- HEADER DESKTOP NEW-->
+            <header class="header-main-wrapper">
+                {% for message in messages %}
+                <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                    {{ message | safe }}
+                    </button>
+                </div>
+                {% endfor %}
+                <div class="header-row">
+                    <div class="client-details">
+                        <div class="right-skew" style="transform: skew(11deg, 0deg)"></div>
+                        <div class="left-skew" style="transform: skew(-11deg, 0deg)"></div>
+                        <div class="client-image">
+                            <img src="{% static 'BP_resources/images/icon/avatar-01.jpg' %}" alt="John Doe" />
+                        </div>
+                        <div class="client-info">
+                            <span class="case-name"><a class="js-acc-btn clientTabFont" href="{% url 'bp-searchclient' %}"><b class="text-blue font-weight-normal">(888) 888-8888</b></a></span>
+                            <span class="client-name">
+                                <a class="clientTabFont d-block" href="{% url 'bp-searchclient' %}">{{client.last_name}} {{client.first_name}} </a>
+                            </span>
+                            <span class="accident-type"><a class="js-acc-btn clientTabFont" href="{% url 'bp-searchclient' %}">Auto Accident</a></span>
+                            <span class="ml-3 accident-date"><a class="js-acc-btn clientTabFont" href="{% url 'bp-searchclient' %}"><b class="text-gray font-weight-normal">DOI: </b>2/13/2022</a></span>
+                                <i class="fa fa-chevron-down" id="clients-dropdown" aria-hidden="true" ></i>
+                            
+                        </div>
+                    </div>
+                    <div class="bar">
+                        <div class="wrap stacked-icons">
+                            <ul id='main-2'>
+                                <li>    
+                                    <a href="{% url 'bp-home'%}">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/case-navigator-logo.svg' %}" alt="John Doe" />   
+                                            <small>Case Navigator</small>                                  
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'bp-firmsetting' %}">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/worklist-logo-icon.svg' %}" alt="John Doe" />   
+                                            <small>Work List</small>                                  
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'bp-calendar' %}">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/calendar-logo-icon.svg' %}" alt="John Doe" /> 
+                                            <small>Calendar</small>                                    
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'bp-checklist' %}">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/speedometer-logo-icon.svg' %}" alt="John Doe" />   
+                                            <small>Speedometer</small>                             
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/chat-logo-icon.svg' %}" alt="John Doe" />   
+                                            <small>Chat</small>                             
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/flagged-cases-logo-icon.svg' %}" alt="John Doe" />    
+                                            <small>Flagged Cases</small>                                 
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'bp-addClient' %}">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/chat-logo-icon.svg' %}" alt="John Doe" />   
+                                            <small>Add Client</small>                             
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'bp-lawfirmdirectory' %}">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/directory-logo-icon.svg' %}" alt="John Doe" />  
+                                            <small>Directory</small>                                   
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'bp-bpAccounting' %}">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/accounting-logo-icon.svg' %}" alt="John Doe" />  
+                                            <small>Accounting</small>                                   
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/library-logo-icon.svg' %}" alt="John Doe" />  
+                                            <small>Library</small>                                   
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/help-logo-icon.svg' %}" alt="John Doe" />  
+                                            <small>Help</small>                                   
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/settings-logo-icon.svg' %}" alt="John Doe" />  
+                                            <small>Settings</small>                                   
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/logout-logo-icon.svg' %}" alt="John Doe" />  
+                                            <small>Logout</small>                                   
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li class="more-2 hidden" data-width="80">
+                                    <a href="#" class="more-button">
+                                            <img src="{% static 'BP_resources/images/icon/down-arrow.png' %}" alt="John Doe" width="20" /> </a>
+                                    <ul class="collapsible-ul"></ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="margin-right: 25px; margin-top: 11px; display: inline-block; height: 35px">
+                        <a href="javascript:void(0)">
+                            <div class="inbox-icon inbox-icon-2 text-center" style="margin-right: 15px">
+                                <img src="{% static 'BP_resources/images/icon/add-new-case-logo-icon.svg' %}" alt="John Doe" />
+                                <small class="d-block">Add New Case</small>                                   
+                            </div>  
+                        </a> 
+                        <a href="javascript:void(0)">
+                            <div class="inbox-icon text-center">
+                                <img src="{% static 'BP_resources/images/icon/inbox-logo-icon.svg' %}" alt="John Doe" />
+                                <small class="d-block">Inbox</small>                                   
+                            </div>  
+                        </a> 
+                    </div>
+                    <form class="search-form" method="POST">
+                        <input type="text" class="form-control" />
+                        <div class="search-btn">
+                            <input href="bp-advanceSearch" type="submit" class="btn" value="Search" />
+                            <div class="right-skew" style="right: 0px;transform: skew(-11.31deg, 0deg);width: 5px;z-index: 1;background-color: #093761;"></div>
+                            <div class="left-skew" style="left: -5px;transform: skew(-11.31deg, 0deg);width: 5px;z-index: 1;background-color: #093761;"></div>
+                        </div>
+                        <div class="right-skew" style="right: 0;transform: skew(-11.31deg, 0deg);"></div>
+                        <div class="left-skew" style="left: -7px"></div>
+                    </form> 
+                </div>
+                <div class="checklist-section">
+                    <p class="text-white">{{total_marked}}/{{total_checklists}}</p>
+                    <div class="nt-box">
+                        <div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:{{checklist_percentage}}"></div>
+                    </div>
+                    <div class="dropdown" >
+                        <button onclick="myFunction()" class="dropbtn" style="background-color: #093761;"> 
+                            <img src="/static/BP_resources/images/icon/check-green.svg" alt="Double arrow down" class="green-check"> Checklist <img src="/static/BP_resources/images/icon/angles-down-blue.svg" alt="Double arrow down" class="double-arrow-down"></button>
+                        {% comment %} <div id="myDropdown" class="dropdown-content dropdown-content2">
+                            <div class="row">
+                                <div class="col-lg-12" >
+                                    <div class="checklist-cont" >
+                                        {% for checklist in overall_checklist %}
+                                            {% if not checklist.status  %}
+                                                <div><input type="checkbox" onclick="location.href='{% url 'bp-markChecklist' checklist.id client.id case.id  %}';" id="vehicle1" name="vehicle1" value="Bike">
+                                                    <label for="vehicle1">{{checklist.name}}</label><br>
+                                                </div>
+                                            {% else %}
+                                                <div><input type="checkbox" onclick="location.href='{% url 'bp-uncheckChecklist' checklist.case_checklist_id %}';" checked id="vehicle1" name="vehicle1" value="Bike">
+                                                    <label for="vehicle1">{{checklist.name}}</label><br>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                        
+                                    </div>
+                                </div>
+                            </div> 
+                        </div> {% endcomment %}
+                    </div>
+                    <div class="right-skew" style="left: -4px"></div>
+                </div> 
+                <div class="checklist-multi-dropdowns">
+                    <div class="checklist-section checklist-dropdown">
+                        <div class="checklist-cont"> {% for checklist in final_checklist %} {% if not checklist.status %}
+                            <div>
+                                <input type="checkbox" onclick="location.href='{% url 'bp-markChecklist' checklist.id client.id case.id  %}';" id="vehicle1" name="vehicle1" value="Bike">
+                                <label for="vehicle1">{{checklist.name}}</label>
+                                <br> 
+                            </div> {% else %}
+                            <div>
+                                <input type="checkbox" onclick="location.href='{% url 'bp-uncheckChecklist' checklist.id client.id case.id %}';" checked id="vehicle1" name="vehicle1" value="Bike">
+                                <label for="vehicle1">{{checklist.name}}</label>
+                                <br> 
+                            </div> {% endif %} {% endfor %} 
+                        </div>
+                    </div>
+                </div> 
+            </header>
+            <!-- HEADER DESKTOP NEW-->

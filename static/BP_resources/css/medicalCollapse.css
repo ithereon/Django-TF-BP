@@ -1,0 +1,68 @@
+/* farrukh code */
+.text-darker{
+    color: #000 !important;
+}
+.checklist-pink{
+    top: -5px !important;
+    width: 302px !important;
+    margin-right: -20px;
+}
+.checklist-pink{
+    background-color: #F5E8E9 !important;
+}
+.checklist-pink::after {
+    border-top: 52px solid #F5E8E9 !important;
+  }
+  .three-icons, .three-icons img {
+    display: inline-block;
+    width: 22px !important;
+    padding: 0 !important;
+  }
+  .checklist-pink .double-arrow-down,   .checklist-pink .green-check{
+    filter: brightness(0) invert(0) !important;
+  }
+  #myDropdown86, #myDropdown87{
+    top: 54px !important;
+    position: absolute;
+  }
+  .photos-page .section__content--p30 {
+    padding: 0 5px !important;
+  }
+  .checklist-pink {
+    top: -5px !important;
+    width: 296px !important;
+    margin-right: 6px !important;
+  }
+  .main-content {
+    padding-top: 117px !important;
+    min-height: 100vh !important;
+  }
+  .pink-checklist-multi-dropdowns {
+    right: 16px !important;
+    width: 283px !important;
+  }
+  .top-pane {
+    position: absolute;
+    right: 350px;
+    top: -112px;
+  }
+  .top-head h2 {
+    margin-left: -15px;
+    position: relative;
+  }
+  .three-icons, .three-icons img{
+    display: inline-block;
+    width: 36px !important;
+    padding: 0 !important;
+  }
+  .table-responsive.table--no-card{
+    margin-bottom: 5px;
+  }
+  
+  .three-view-icons{
+    position: absolute;
+    left: 49%;
+    top: 40%;
+    transform: translate(-27%, -102%);
+    z-index: 1000;
+  }

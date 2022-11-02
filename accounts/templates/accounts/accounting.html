@@ -1,0 +1,679 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% block pagetitle %}
+    Treatment First - Add Law Office
+{% endblock pagetitle %}
+{% block content %}
+
+    {% if request.user.providerstaff_userprofile.permission == 'Yes' or request.user.userprofile.account_type == 'Provider' %}
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Law Office</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Please perform a search before adding a new provider.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addClient" tabindex="-1" aria-labelledby="addClientLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addClientLabel">Add Client</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-1" action="{% url 'addBPClient' %}" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="inputUsername" class="fw-bold">First Name</label>
+                                    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter the First Name" data-field="phone" />
+                                </div>
+                                <input type="text" hidden  class="form-control" name="age" id="age">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="inputUsername" class="fw-bold">Last Name</label>
+                                    <input type="text" required class="form-control" placeholder="Enter Last Name" name="last_name" data-field="last_name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="inputUsername" class="fw-bold">Birthday</label>
+                                    <input type="text" class="form-control" placeholder="mmddyyyy" name="birthday" id="birthday" data-field="birthday" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="incident_date" class="fw-bold">Incident Date</label>
+                                    <input type="text" placeholder="mmddyyyy" required class="form-control" name="incident_date" id="incident_date" data-field="incident_date" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="case_status" class="fw-bold">Case Status</label>
+                                    <div>
+                                        <select class="form-select" name="case_status" id="case_status" aria-label="Default select example">
+                                            <option selected value="Treating">Treating</option>
+                                            {% for status in client_statuses %}
+                                                <option value="{{status.name}}">{{status.name}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="address" class="fw-bold">Address</label>
+                                    <div>
+                                        <select class="form-select" name="address" id="address" aria-label="Address">
+                                            <option>-- select --</option>
+                                            {% for x in locations %}
+                                                <option value="{{x.id}}">{{x.address}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="specialty" class="fw-bold">Specialty</label>
+                                    <div>
+                                        <select class="form-select" required name="specialty" id="specialty" aria-label="Specialty">
+                                            <option>-- SELECT --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="case_type" class="fw-bold">Case Type</label>
+                                    <div>
+                                        <select class="form-select" required name="case_type" id="case_type" aria-label="Default select example">
+                                            <!-- <optgroup label="Personal Injury">
+                                                <option selected value="Auto Accident">Auto Accident</option>
+                                                <option value="Dog Bite">Dog Bite</option>
+                                                <option value="Premises Liability">Premises Liability</option>
+                                                <option value="Food Poisoning">Food Poisoning</option>
+                                                <option value="Worker's Compensation">Worker's Compensation</option>
+                                                <option value="Products Liability">Products Liability</option>
+                                            </optgroup>
+                                            <optgroup label="Employment">
+                                                <option value="Wrongful Termination">Wrongful Termination</option>
+                                                <option value="Sexual Harassment">Sexual Harassment</option>
+                                                <option value="Constructive Termination">Constructive Termination</option>
+                                                <option value="Discrimination">Discrimination</option>
+                                            </optgroup>
+                                            <optgroup label="Taxation">
+                                                <option value="Property Tax Appeal">Property Tax Appeal</option>
+                                                <option value="General Tax">General Tax</option>
+                                            </optgroup>
+                                            <optgroup label="Estate Planning">
+                                                <option value="Will">Will</option>
+                                                <option value="Trust">Trust</option>
+                                            </optgroup> -->
+                                        {% for case_type in case_types %}
+                                            <option value="{{case_type.id}}">{{case_type.name}}</option>
+                                        {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" onclick="_age()" form="form-1" class="btn btn-primary" data-bs-dismiss="modal">Add Client</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="attachAttorney" tabindex="-1" aria-labelledby="attachAttorneyLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="attachAttorneyLabel">Attach Firm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3 ">
+                        <form id="attachAttorneyForm" action="{% url 'attachAttorney' %}" method="POST">
+                            {% csrf_token %}
+                            <label for="inputEmail" class="col-sm-12 col-form-label fw-bold">Select the Firm</label>
+                            <div class="col-sm-12">
+                                <input type="text" hidden name="client_id" id="client_id">
+                                <select class="form-select" name="attorney" id="attorney" aria-label="Default select example">
+                                    {% for x in temp_attorneys %}
+                                        <option selected value="{{ x.id }}">{{ x.attorneyprofile.office_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" form="attachAttorneyForm" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editRecords" tabindex="-1" aria-labelledby="addClientLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addClientLabel">Edit Billing and Payment Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-786" action="{% url 'editAccounting' %}" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label style="color:grey;" for="original" class="fw-bold">Original Billing</label>
+                                    <input type="text" class="form-control" id="original" name="original" placeholder="Original Cost" data-field="phone" />
+                                </div>
+                               <input type="text" name="case_provider_id" hidden>
+                               <input type="text" name="case_id" hidden>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label style="color:grey;" for="hi_paid" class="fw-bold">Health Insurance Paid</label>
+                                    <input type="text" required class="form-control" placeholder="HI Paid" name="hi_paid" data-field="hi_paid">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label style="color:grey;" for="hi_reduction" class="fw-bold">Health Insurance Reduction</label>
+                                    <input type="text" class="form-control" placeholder="HI Reduction" name="hi_reduction" id="hi_reduction" data-field="hi_reduction" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label style="color:grey;" for="reduction" class="fw-bold">Provider Reduction</label>
+                                    <input type="text" placeholder="Reduction" required class="form-control" name="reduction" id="reduction" data-field="incident_date" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label style="color:grey;" for="reduction" class="fw-bold">MedPay or PIP Payments</label>
+                                    <input type="text" placeholder="MP Paid" required class="form-control" name="mp_paid" id="mp_paid" data-field="incident_date" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label style="color:grey;" for="reduction" class="fw-bold">Payment Received Date</label>
+                                    <input type="date"  class="form-control" name="payment_received_date" id="payment_received_date" data-field="incident_date" />
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label style="color:grey;" for="reduction" class="fw-bold">Patient Payment Value</label>
+                                    <input type="text" placeholder="MP Paid" required class="form-control" name="patient_payment_value" id="patient_payment_value" data-field="incident_date" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label style="color:grey;" for="reduction" class="fw-bold">Check Number</label>
+                                    <input type="text"  class="form-control" name="check_number" id="check_number" data-field="incident_date" />
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        
+                        
+                        
+                    
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" style="float:left; margin-right:auto;" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit"  form="form-786" class="btn btn-success" data-bs-dismiss="modal">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if userprofile.providerprofile.account_type == 'Provider' or request.user.providerstaff_userprofile.account_type == 'ProviderStaff' %}
+        <div class="mt-3">
+            <div class="d-flex align-items-center float-end">
+                <!-- Modal -->
+                <button type="button" data-bs-toggle="modal" data-bs-target="#addClient" class="btn btn-primary me-2">Add Patient</button>
+                <button onclick="location.href='{% url 'case_add_attorney' %}'" class="btn btn-primary me-2">Request Update</button>
+                
+                <button onclick="location.href='{% url 'case_add_attorney' %}'" class="btn btn-primary me-2">Attorney Contact</button>
+                {% if  check %}
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Law Office</button>
+                {% else %}
+                    <button onclick="location.href='{% url 'case_add_attorney' %}'" class="btn btn-primary me-2">Add Law Office</button>
+                {% endif %}
+            </div>
+            <h4>Screen by Attorney Name:</h4>
+            <br>
+            <form method="POST" action="{% url 'case_management' %}">
+                {% csrf_token %}
+                <div class="mb-3 row gx-2">
+                    <div class="col-sm-6 offset-sm-6">
+                        <div class="d-flex gap-2 w-100">
+                            <div class="flex-fill">
+                                <input type="text" placeholder="Search Patients" class="form-control me-2" name="search_clients" id="search_clients" autocomplete="off"/>
+                            </div>
+                            <div class="flex-fill">
+                                <input type="text" placeholder="Search Attorneys by Office Name" class="form-control me-2" name="search" id="search_attorneys" autocomplete="off"/>
+                            </div>
+                            <div>
+                                <button type="button" id="btnsearch" class="btn btn-primary" style="background-color: #1C6FB2;">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                            <input type="text" hidden value="True" name="value" />
+                            <input type="hidden" name="client_id" id="client_id" />
+                            <input type="hidden" name="attorney_id" id="attorney_id" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="row py-5 px-3">
+                <div class="col-lg-2 col-md-4 col-xs-4 filter-container">
+                    <a href="#" data-id="{{x.id}}" onclick="filterTFCaseStatusAll(event)" class="filter-item-all">All Patients</a>
+
+                    <div class="mb-3">
+                        <label class="me-2">
+                            <input name="open_close" value="Open" type="checkbox" class="me-1" onchange="filterTFCaseStatusRefresh(event)" checked/>Open
+                        </label>
+                        <label>
+                            <input name="open_close" value="Close" name="open_close" type="checkbox" class="me-1" onchange="filterTFCaseStatusRefresh(event)"  checked/>Closed
+                        </label>
+                    </div>
+                    {% for x in tf_case_status %}
+                        <a href="#" data-id="{{x.id}}" onclick="filterTFCaseStatus(event)" style="text-decoration: none; " class="filter-item active">{{x.name}}</a>
+                    {% endfor %}
+                </div>
+                <div class="col-lg-10 col-md-8 col-xs-8">
+                    <table class="table table-striped table-hover table-borderless table-th-norm" style="justify-content: center;" id="table-data">
+                        <thead>
+                            <tr class="text-secondary">
+                                <th></th>
+                                <th></th>
+                                
+                                <th>Patient</th>
+                               
+                                <th>Original</th>
+                                
+                                <th>Payments</th>
+                                <th>Reductions</th>
+                                <th>Lien</th>
+                                <th>Total</th>
+                                <th>Check #</th>
+                                <th>Received</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% verbatim %}
+        <script type="text/template" id="dz-template">
+            <div class="dz-preview dz-file-preview">
+                <div class="d-flex align-items-center">
+                    <div class="px-1"><i class="fa fa-file-pdf text-danger"></i></div>
+                    <div>
+                        <div class="dz-filename"><span data-dz-name></span></div>
+                        <!-- <img data-dz-thumbnail /> -->
+                    </div>
+                </div>
+                <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+                <div class="dz-success-mark"><span>✔</span></div>
+                <div class="dz-error-mark"><span>✘</span></div>
+                <div class="dz-error-message"><span data-dz-errormessage></span></div>
+            </div>
+        </script>
+        <script type="text/template" id="doc-preview-template">
+            <div class="px-4 py-4 doc-preview-sidebar">
+                <span data-close="sidebar-right" onclick="hideRightSidebar()"><i class="fa fa-times"></i></span>
+                <h4 class="mb-3 text-secondary">Document: {{docName}}</h4>
+                <div class="img-thumbnail">
+                    <embed src="/BP/open/{{docId}}/" width="100%" height="400px" />
+                </div>
+            </div>
+        </script>
+        <script type="text/template" id="table-data-template">
+            <tr class="pointer" style="vertical-align: middle;"
+            data-original="{{original}}"
+            data-hi_paid="{{hi_paid}}"
+            data-hi_reduction="{{hi_reduction}}"
+            data-mp_paid="{{mp_paid}}"
+            data-reduction="{{reduction}}"
+            data-patient_payment_value="{{patient_payment_value}}"
+            data-check_number="{{check_number}}"
+            data-case_provider_id="{{case_provider}}"
+            data-case_id="{{id}}"
+            
+            onclick="accountingDetail({{id}}, {{tf_accounting_id}})">
+                <td class="td-autosize">{{i}}</td>
+                <td class="td-autosize"><div class="badge-specialty col-3" style="background-color: {{specialty.color}}" title="{{name}}">{{specialty.name}}</div></td>
+                <td scope="row">{{client_name}}</td>
+                
+                <td>${{original}}</td>
+                <td>${{payments}}</td>
+                <td>${{reductions}}</td>
+                <td>${{liens}}</td>
+                <td>${{final}}</td>
+                <td>{{check_number}}</td>
+                <td>{{payment_received_date}}</td>
+                
+            </tr>
+        </script>
+        <script type="text/template" id="table-nodata-template">
+            <tr>
+                <td colspan="12" class="text-center">No records to display</td>
+            </tr>
+        </script>
+    {% endverbatim %}
+    <div class="modal fade" id="docModal" tabindex="-1" aria-labelledby="docModalLabel" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form onsubmit="submitDocName()">
+                        <button type="button" class="btn-close float-end" onclick="hideDocName()"></button>
+                        <h5 class="modal-title" id="docModalLabel">Enter Document Name</h5>
+                        <div class="py-4">
+                            <div class="form-group">
+                                <label>Documet Name</label>
+                                <input id="docName" type="text" class="form-control" required />
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-secondary" onclick="hideDocName()">Close</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function addClientID(client_id){
+            client = document.getElementById('client_id')
+            client.value = client_id
+            console.log(client_id);
+        }
+        function _calcAge() {
+            var text = document.getElementById("birthday").value
+            let result = text.slice(0, 2) + '-' + text.slice(2,4) + '-' + text.slice(4);
+            var date = new Date(result);
+            var today = new Date();
+
+            var timeDiff = Math.abs(today.getTime() - date.getTime());
+            var age1 = Math.ceil(timeDiff / (1000 * 3600 * 24)) / 365;
+            return age1;
+        }
+        function _age(){
+            
+            var temp_age = _calcAge();
+            console.log(temp_age);
+            document.getElementById('age').value = temp_age.toFixed(2);
+        }
+        
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    
+    <script>
+        /* When the user clicks on the button, 
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        function editRecords(ev) {
+            var $modal = $('#editRecords');
+            var $tr = $(ev.target).closest('tr');
+
+            $modal.find('[name="original"]').val($tr.attr('data-original'));
+            $modal.find('[name="hi_reduction"]').val($tr.attr('data-hi_reduction'));
+            $modal.find('[name="hi_paid"]').val($tr.attr('data-hi_paid'));
+            $modal.find('[name="mp_paid"]').val($tr.attr('data-mp_paid'));
+            $modal.find('[name="reduction"]').val($tr.attr('data-reduction'));
+            $modal.find('[name="patient_payment_value"]').val($tr.attr('data-patient_payment_value'));
+            $modal.find('[name="check_number"]').val($tr.attr('data-check_number'));
+            $modal.find('[name="case_provider_id"]').val($tr.attr('data-case_provider_id'));
+            $modal.find('[name="case_id"]').val($tr.attr('data-case_id'));
+            $modal.modal('show');
+        }
+    </script>
+    <script>
+        function myFunction6() {
+            document.getElementById("myDropdown6").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns6 = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns6.length; i++) {
+                    var openDropdown = dropdowns6[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+        function filterTFCaseStatusAll(ev){
+            $(ev.target).closest('.filter-container').find('.filter-item').removeClass('active').addClass('active');
+            $(ev.target).closest('.filter-container').find('[name="open_close"]').attr('checked',true);
+            filterTFCaseStatusRefresh(ev);
+        }
+        function filterTFCaseStatus(ev){
+            $(ev.target).toggleClass('active');
+            filterTFCaseStatusRefresh(ev);
+        }
+        function filterTFCaseStatusRefresh(ev){
+            var ids = $(ev.target).closest('.filter-container').find('a.active').map((i,x)=>$(x).attr('data-id')).toArray();
+            var open_close = $(ev.target).closest('.filter-container').find('input[name="open_close"]:checked').map((i,x)=>$(x).val()).toArray();
+            var tf_case_status = ids.join(',');
+            $.ajax({
+                url: '/FilterTFCaseStatus/',
+                data:{
+                    tf_case_status: tf_case_status,
+                    open_close: open_close.length>1?'':open_close[0],
+                    accounting: 'True'
+                },
+                method: 'GET',
+                contentType: 'application/json',
+                success: function(data){ setTableData1(data.response); },
+                error: function(){ setTableData1([]); }
+            })
+        }
+        var data_template = Handlebars.compile($('#table-data-template').html());
+        var nodata_template = Handlebars.compile($('#table-nodata-template').html());
+
+        function setTableData1(data) {
+                var $tbody = $('#table-data tbody');
+                $tbody.html('');
+                if(data && data.length) {
+                    for (var i = 0; i < data.length; i++) {
+                        var item = data[i];
+                        item.i = i+1;
+                        item.specialty.name = item.specialty.name[0],
+                        item.csrfmiddlewaretoken = $('[name="csrfmiddlewaretoken"]').val();
+                        item.doc_1.ischeck = item.doc_1.check == 'False';
+                        item.doc_2.ischeck = item.doc_2.check == 'False';
+                        item.specialties = item.attached_specialties;
+                        item.specialties.map(x=>x.name_0=x.name[0]);
+                        $tr = $(data_template(item));
+                        initDropzoneFor($tr);
+                        $tbody.append($tr);
+                    }
+                }
+                else{
+                    $tbody.append($(nodata_template()));
+                }
+            }
+        $(document).ready(function(){
+
+            refreshData();
+
+            $('#address').change(function(){
+                var addressId = $('#address').val();
+                $.ajax({
+                    url: '/getSpecialties/?location_id='+addressId,
+                    contentType: 'application/json',
+                    method: 'GET',
+                    success: function(response)
+                    {
+                        $('#specialty').empty();
+                        $.each(response, function(i, p) {
+                            $('#specialty').append($('<option></option>').val(p.name).html(p.name));
+                        });
+                    }
+                });
+            });
+
+            $('#search_clients').typeahead(null, {
+                    name: 'clients',
+                    display: 'text',
+                    async: true,
+                    source: debounce(function (query, process, process_async) {
+                        $.ajax({
+                            url: '/ClientAutoCompleteSearch/',
+                            contentType: 'application/json',
+                            method: 'GET',
+                            data: { client_name: query },
+                            success: function (data) {
+                                var result = data.map(function(item){
+                                    return { text: `${item.first_name} ${item.last_name}`, value: item }
+                                });
+                                return process_async(result);
+                            }
+                        });
+                    }, 250),
+
+                })
+                .bind('typeahead:select', function(ev, data){ $('#search_clients').data('tt-value', data.value); refreshData() })
+                .bind('typeahead:change', function(ev, data){ 
+                    if(!data) { $('#search_clients').data('tt-value', null); refreshData(); }
+                });
+
+            $('#search_attorneys').typeahead(null, {
+                    name: 'clients',
+                    display: 'text',
+                    async: true,
+                    source: debounce(function (query, process, process_async) {
+                        $.ajax({
+                            url: '/AttorneyAutoCompleteSearch/',
+                            contentType: 'application/json',
+                            method: 'GET',
+                            data: { attorney_name: query },
+                            success: function (data) {
+                                var result = data.map(function(item){
+                                    return { text: item.attorneyprofile.office_name, value: item }
+                                });
+                                return process_async(result);
+                            }
+                        });
+                    }, 250),
+
+                })
+                .bind('typeahead:select', function(ev, data){ $('#search_attorneys').data('tt-value', data.value); refreshData() })
+                .bind('typeahead:change', function(ev, data){ 
+                    if(!data) { $('#search_attorneys').data('tt-value', null); refreshData(); }
+                });
+
+            $('#btnsearch').click(function(){refreshData()});
+
+            function refreshData() { 
+                var client = $('#search_clients').data('tt-value');
+                var attorney = $('#search_attorneys').data('tt-value');
+                var client_id = client ? client.id:'';
+                var attorney_id = attorney ? attorney.id:'';
+
+                console.log('client_id', client_id, attorney_id);
+                $.ajax({
+                    url: '/ListPatientsCaseManagement/?client_id='+client_id+'&attorney_id='+attorney_id+'&accounting=True',
+                    method: 'GET',
+                    contentType: 'application/json',
+                    success: function(data){ setTableData(data.response); },
+                    error: function(){ setTableData([]); }
+                })
+            }
+
+            var data_template = Handlebars.compile($('#table-data-template').html());
+            var nodata_template = Handlebars.compile($('#table-nodata-template').html());
+
+            function setTableData(data) {
+                var $tbody = $('#table-data tbody');
+                $tbody.html('');
+                if(data && data.length) {
+                    for (var i = 0; i < data.length; i++) {
+                        var item = data[i];
+                        item.i = i+1;
+                        item.specialty.name = item.specialty.name[0],
+                        item.csrfmiddlewaretoken = $('[name="csrfmiddlewaretoken"]').val();
+                        item.doc_1.ischeck = item.doc_1.check == 'False';
+                        item.doc_2.ischeck = item.doc_2.check == 'False';
+                        item.counter = i+1;
+                        $tr = $(data_template(item));
+                        initDropzoneFor($tr);
+                        $tbody.append($tr);
+                    }
+                }
+                else{
+                    $tbody.append($(nodata_template()));
+                }
+            }
+        })
+
+        function accountingDetail(id, tf_accounting_id) {
+            window.location.href = "/accountingDetail/"+id+"/"+tf_accounting_id;
+            return false;
+        }
+    </script>
+    {% else %}
+    <div class="alert alert-danger" role="alert">
+        You are not authorized to view this page.
+    </div>
+    {% endif %}
+{% endblock content %}

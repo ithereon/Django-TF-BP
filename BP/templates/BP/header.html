@@ -1,0 +1,751 @@
+{% load static %}
+{% load time_of_note %}
+{% load date_of_note %}
+{% if client %}
+<div class="modal fade zoom-in" id="dob-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form id="editClientFormTopForm" action="{% url 'bp-editClientInfo2' client.id case.id %}"
+                    method="post">
+                    {% csrf_token %}
+                    <div class="modal-content-row">
+                        <p>{{client.birthday}}</p>
+                        <p>DOB</p>
+
+                        <input type="date" name="client_dob" class="form-control" placeholder="Enter DOB....">
+
+                    </div>
+                    <div class="modal-content-row mt-2">
+                        <p>{{client.ssn}}</p>
+                        <p>ssn</p>
+
+                        <input type="number" name="client_ssn" class="form-control" placeholder="Enter SSN....">
+
+                    </div>
+                    <div class="modal-content-row mt-2">
+                        <p>{{client.driver_license_number}}, {{client.driver_license_state}}</p>
+                        <p>dl#</p>
+
+                        <input type="text" name="client_driver_license" class="form-control"
+                            placeholder="Enter DL#....">
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button form="editClientFormTopForm" type="submit" class="btn btn-success">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+<header class="header-main-wrapper">
+    {% for message in messages %}
+    <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+        {{ message | safe }}
+        </button>
+    </div>
+    {% endfor %}
+    <div class="header-row">
+        <div class="client-details">
+            <div class="right-skew" style="transform: skew(11deg, 0deg)"></div>
+            <div class="left-skew" style="transform: skew(-11deg, 0deg)"></div>
+            <div class="client-image">
+                <img src="{% static 'BP_resources/images/icon/avatar-01.jpg' %}" alt="John Doe" />
+            </div>
+            <div class="client-info">
+                <span class="case-name"><a class="js-acc-btn clientTabFont"><b
+                            class="text-blue font-weight-normal">({{current_case.for_client.phone|slice:":3"}})
+                            {{current_case.for_client.phone|slice:"3:6"}}-{{current_case.for_client.phone|slice:"6:"}}</b></a></span>
+                <span class="client-name">
+                    <a class="clientTabFont d-block">{{current_case.for_client.last_name}}
+                        {{current_case.for_client.first_name}} </a>
+                </span>
+                <span class="accident-type"><a
+                        class="js-acc-btn clientTabFont">{{current_case.case_type.name}}</a></span>
+                <span class="ml-3 accident-date"><a class="js-acc-btn clientTabFont"><b
+                            class="text-gray font-weight-normal">DOI: </b>{{current_case.incident_date}}</a></span>
+                <i class="fa fa-chevron-down" id="clients-dropdown" aria-hidden="true"></i>
+
+            </div>
+        </div>
+
+        <div class="previous-client" id="previous-client">
+            {% if last_accessed_cases %}
+            {% for temp in last_accessed_cases %}
+
+            <div class="client-details" onclick="location.href='{% url 'bp-case' temp.for_client.id temp.id  %}'">
+                <div class="client-image">
+                    <img src="{% static 'BP_resources/images/icon/avatar-01.jpg' %}" alt="John Doe" />
+                </div>
+                <div class="client-info overflow-hidden">
+                    <span class="case-name"><a class="js-acc-btn clientTabFont"><b
+                                class="text-blue font-weight-normal">({{temp.for_client.phone|slice:":3"}})
+                                {{temp.for_client.phone|slice:"3:6"}}-{{temp.for_client.phone|slice:"6:"}}</b></a></span>
+                    <span class="client-name">
+                        <a class="clientTabFont d-block">{{temp.for_client.last_name}} {{temp.for_client.first_name}}
+                        </a>
+                    </span>
+                    <span class="accident-type"><a class="js-acc-btn clientTabFont">{{temp.case_type.name}}</a></span>
+                    <span class="ml-3 accident-date"><a class="js-acc-btn clientTabFont"><b
+                                class="text-gray font-weight-normal">DOI: </b>{{temp.incident_date}}</a></span>
+                    <div class="position-relative">
+                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                    </div>
+
+                </div>
+            </div>
+
+            {% endfor %}
+            {% endif %}
+        </div>
+
+
+
+        <div class="bar position-relative">
+            <div class="wrap stacked-icons">
+                <ul id='main-2'>
+                    <li>
+                        <a href="{% url 'bp-home'%}">
+                            <div class="single-icon">
+                                <img src="{% static 'BP_resources/images/icon/home-page-logo-icon.svg' %}"
+                                    alt="John Doe" />
+                                <small>Home Page</small>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'bp-navigator'%}">
+                            <div class="single-icon">
+                                <img src="{% static 'BP_resources/images/icon/case-navigator-logo.svg' %}"
+                                    alt="John Doe" />
+                                <small>Case Navigator</small>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="single-icon">
+                                <img src="{% static 'BP_resources/images/icon/worklist-logo-icon.svg' %}"
+                                    alt="John Doe" />
+                                <small>Work List</small>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'bp-calendar' %}">
+                            <div class="single-icon">
+                                <img src="{% static 'BP_resources/images/icon/calendar-logo-icon.svg' %}"
+                                    alt="John Doe" />
+                                <small>Calendar</small>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'bp-checklist' %}">
+                            <div class="single-icon">
+                                <img src="{% static 'BP_resources/images/icon/speedometer-logo-icon.svg' %}"
+                                    alt="John Doe" />
+                                <small>Speedometer</small>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'bp-message_page' client.id case.id %}">
+                            <div class="single-icon">
+                                <img src="{% static 'BP_resources/images/icon/chat-logo-icon.svg' %}" alt="John Doe" />
+                                <small>Chat</small>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'bp-flaggedcases' client.id case.id %}">
+                            <div class="single-icon">
+                                <img src="{% static 'BP_resources/images/icon/flagged-cases-logo-icon.svg' %}"
+                                    alt="John Doe" />
+                                <small>Flagged Cases</small>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'bp-addClient' %}">
+                            <div class="single-icon">
+                                <img src="{% static 'BP_resources/images/icon/reports-logo-icon.svg' %}"
+                                    alt="John Doe" />
+                                <small>Reports</small>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'bp-lawfirmdirectory' %}">
+                            <div class="single-icon">
+                                <img src="{% static 'BP_resources/images/icon/directory-logo-icon.svg' %}"
+                                    alt="John Doe" />
+                                <small>Directory</small>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'bp-bpAccounting' %}">
+                            <div class="single-icon">
+                                <img src="{% static 'BP_resources/images/icon/accounting-logo-icon.svg' %}"
+                                    alt="John Doe" />
+                                <small>Accounting</small>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <div class="single-icon">
+                                <img src="{% static 'BP_resources/images/icon/library-logo-icon.svg' %}"
+                                    alt="John Doe" />
+                                <small>Library</small>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <div class="single-icon">
+                                <img src="{% static 'BP_resources/images/icon/help-logo-icon.svg' %}" alt="John Doe" />
+                                <small>Help</small>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'bp-firmsetting'%}">
+                            <div class="single-icon">
+                                <img src="{% static 'BP_resources/images/icon/settings-logo-icon.svg' %}"
+                                    alt="John Doe" />
+                                <small>Settings</small>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'bp-logoutPage'%}">
+                            <div class="single-icon">
+                                <img src="{% static 'BP_resources/images/icon/logout-logo-icon.svg' %}"
+                                    alt="John Doe" />
+                                <small>Logout</small>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="more-2 hidden" data-width="80">
+                        <a href="#" class="more-button">
+                            <img src="{% static 'BP_resources/images/icon/down-arrow.png' %}" alt="John Doe"
+                                width="20" /> </a>
+                        <ul class="collapsible-ul"></ul>
+                    </li>
+                </ul>
+            </div>
+
+
+        </div>
+        <div style="margin-right: 25px; margin-top: 11px; display: inline-block; height: 35px">
+            <a href="{% url 'bp-addNewCase' client.id case.id %}">
+                <div class="inbox-icon inbox-icon-2 text-center" style="margin-right: 15px">
+                    <img src="{% static 'BP_resources/images/icon/add-new-case-logo-icon.svg' %}" alt="John Doe" />
+                    <small class="d-block">Add New Case</small>
+                </div>
+            </a>
+            <a href="{% url 'bp-inbox' client.id case.id %}">
+                <div class="inbox-icon text-center">
+                    <img src="{% static 'BP_resources/images/icon/inbox-logo-icon.svg' %}" alt="John Doe" />
+                    <small class="d-block">Inbox</small>
+                </div>
+            </a>
+        </div>
+        <form class="search-form" method="POST">
+            {% csrf_token %}
+            <input type="text" class="form-control" />
+            <div class="search-btn">
+                <input href="bp-advanceSearch" type="submit" class="btn" value="Search" />
+                <div class="right-skew"
+                    style="right: 0px;transform: skew(-11.31deg, 0deg);width: 5px;z-index: 1;background-color: #093761;">
+                </div>
+                <div class="left-skew"
+                    style="left: -5px;transform: skew(-11.31deg, 0deg);width: 5px;z-index: 1;background-color: #093761;">
+                </div>
+            </div>
+            <div class="right-skew" style="right: 0;transform: skew(-11.31deg, 0deg);"></div>
+            <div class="left-skew" style="left: -7px"></div>
+        </form>
+    </div>
+    <div class="checklist-section header-checklist-section">
+        <p class="text-white">{{total_marked}}/{{total_checklists}}</p>
+        <!--<div class="nt-box" id="demo">
+            <div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:{{checklist_percentage}}"></div>
+        </div>-->
+        <div class="nt-box">
+            <div class="circlechart" data-percentage="{{checklist_percentage}}"></div>
+        </div>
+        <div class="dropdown">
+            <button onclick="showHeaderDropdown()" class="dropbtn" style="background-color: #093761;">
+                <img src="/static/BP_resources/images/icon/check-green.svg" alt="Double arrow down" class="green-check">
+                Checklist <img src="/static/BP_resources/images/icon/angles-down-blue.svg" alt="Double arrow down"
+                    class="double-arrow-down"></button>
+            <!-- {% comment %} <div id="myDropdown" class="dropdown-content dropdown-content2">
+                <div class="row">
+                    <div class="col-lg-12" >
+                        <div class="checklist-cont" >
+                            {% for checklist in overall_checklist %}
+                                {% if not checklist.status  %}
+                                    <div><input type="checkbox" onclick="location.href='{% url 'bp-markChecklist' checklist.id client.id case.id  %}';" id="vehicle1" name="vehicle1" value="Bike">
+                                        <label for="vehicle1">{{checklist.name}}</label><br>
+                                    </div>
+                                {% else %}
+                                    <div><input type="checkbox" onclick="location.href='{% url 'bp-uncheckChecklist' checklist.case_checklist_id %}';" checked id="vehicle1" name="vehicle1" value="Bike">
+                                        <label for="vehicle1">{{checklist.name}}</label><br>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            
+                        </div>
+                    </div>
+                </div> 
+            </div> {% endcomment %} -->
+        </div>
+        <div class="right-skew" style="left: -4px"></div>
+    </div>
+    <div class="checklist-multi-dropdowns">
+        <div class="checklist-section checklist-dropdown header-checklist-dropdown">
+            <!-- <div class="checklist-cont"> 
+                {% for checklist in final_checklist %} {% if not checklist.status %}
+                <div>
+                    <input type="checkbox" onclick="location.href='{% url 'bp-markChecklist' checklist.id client.id case.id  %}';" id="vehicle1" name="vehicle1" value="Bike">
+                    <label for="vehicle1">{{checklist.name}}</label>
+                    <br> 
+                </div> 
+                {% else %}
+                <div>
+                    <input type="checkbox" onclick="location.href='{% url 'bp-uncheckChecklist' checklist.id client.id case.id %}';" checked id="vehicle1" name="vehicle1" value="Bike">
+                    <label for="vehicle1">{{checklist.name}}</label>
+                    <br> 
+                </div> 
+                {% endif %} {% endfor %} 
+            </div> -->
+            <div class="checklist-row">
+                <div class="checklist-row-header">
+                    <div class="header-icon">
+                        <img src="{% static 'BP_resources/images/icon/case-icon-color.svg' %}" alt="Icon">
+                    </div>
+                    <span class="row-title">
+                        Case Page
+                    </span>
+                </div>
+                <div class="checklist-row-content">
+                    <p class="text-darker">88/88</p>
+                    <div class="nt-box">
+                        <div class="circlechart" data-percentage="{{checklist_percentage}}"></div>
+                    </div>
+                    <button onclick="showHeaderRowDropdown(1)" class="dropbtn">
+                        <img src="/static/BP_resources/images/icon/check-green.svg" alt="Double arrow down"class="green-check"> Checklist 
+                        <img src="/static/BP_resources/images/icon/angles-down-blue.svg" alt="Double arrow down" class="double-arrow-down">
+                    </button>
+                </div>
+                <div class="checklist-row-dropdown">
+                    <div class="checkbox-line">
+                        <input type="checkbox" id="check11" name="check11">
+                        <label for="check11">Work Unit Name 1</label>
+                    </div>
+                    <div class="checkbox-line">
+                        <input type="checkbox" id="check12" name="check12">
+                        <label for="check12">Work Unit Name longer 2</label>
+                    </div> 
+                    <div class="checkbox-line">
+                        <input type="checkbox" id="check13" name="check13">
+                        <label for="check13">Work Unit Name variety 3</label>
+                    </div> 
+                    <div class="checkbox-line">
+                        <input type="checkbox" id="check14" name="check14">
+                        <label for="check14">Work Unit 4</label>
+                    </div> 
+                    <div class="checkbox-line">
+                        <input type="checkbox" id="check15" name="check15">
+                        <label for="check15">Work 5</label>
+                    </div> 
+                </div>
+            </div>
+            <div class="checklist-row">
+                <div class="checklist-row-header">
+                    <div class="header-icon">
+                        <img src="{% static 'BP_resources/images/icon/client-icon-color.svg' %}" alt="Icon">
+                    </div>
+                    <span class="row-title">
+                        Client Page
+                    </span>
+                </div>
+                <div class="checklist-row-content">
+                    <p class="text-darker">88/88</p>
+                    <div class="nt-box">
+                        <div class="circlechart" data-percentage="{{checklist_percentage}}"></div>
+                    </div>
+                    <button onclick="showHeaderRowDropdown(2)" class="dropbtn">
+                        <img src="/static/BP_resources/images/icon/check-green.svg" alt="Double arrow down"class="green-check"> Checklist 
+                        <img src="/static/BP_resources/images/icon/angles-down-blue.svg" alt="Double arrow down" class="double-arrow-down">
+                    </button>
+                </div>
+                <div class="checklist-row-dropdown">
+                    <div class="checkbox-line">
+                        <input type="checkbox" id="check21" name="check21">
+                        <label for="check21">Work Unit Name 1</label>
+                    </div>
+                    <div class="checkbox-line">
+                        <input type="checkbox" id="check22" name="check22">
+                        <label for="check22">Work Unit Name longer 2</label>
+                    </div> 
+                    <div class="checkbox-line">
+                        <input type="checkbox" id="check23" name="check23">
+                        <label for="check23">Work Unit Name variety 3</label>
+                    </div> 
+                    <div class="checkbox-line">
+                        <input type="checkbox" id="check24" name="check24">
+                        <label for="check24">Work Unit 4</label>
+                    </div> 
+                    <div class="checkbox-line">
+                        <input type="checkbox" id="check25" name="check25">
+                        <label for="check25">Work 5</label>
+                    </div> 
+                </div>
+            </div>
+            <div class="checklist-row">
+                <div class="checklist-row-header">
+                    <div class="header-icon">
+                        <img src="{% static 'BP_resources/images/icon/car-accident-icon-color.svg' %}" alt="Icon">
+                    </div>
+                    <span class="row-title">
+                        Car Accident Page
+                    </span>
+                </div>
+                <div class="checklist-row-content">
+                    <p class="text-darker">88/88</p>
+                    <div class="nt-box">
+                        <div class="circlechart" data-percentage="{{checklist_percentage}}"></div>
+                    </div>
+                    <button onclick="showHeaderRowDropdown(3)" class="dropbtn">
+                        <img src="/static/BP_resources/images/icon/check-green.svg" alt="Double arrow down"class="green-check"> Checklist 
+                        <img src="/static/BP_resources/images/icon/angles-down-blue.svg" alt="Double arrow down" class="double-arrow-down">
+                    </button>
+                </div>
+                <div class="checklist-row-dropdown">
+                    <div class="checkbox-line">
+                        <input type="checkbox" id="check31" name="check31">
+                        <label for="check31">Work Unit Name 1</label>
+                    </div>
+                    <div class="checkbox-line">
+                        <input type="checkbox" id="check32" name="check32">
+                        <label for="check32">Work Unit Name longer 2</label>
+                    </div> 
+                    <div class="checkbox-line">
+                        <input type="checkbox" id="check33" name="check33">
+                        <label for="check33">Work Unit Name variety 3</label>
+                    </div> 
+                    <div class="checkbox-line">
+                        <input type="checkbox" id="check34" name="check34">
+                        <label for="check34">Work Unit 4</label>
+                    </div> 
+                    <div class="checkbox-line">
+                        <input type="checkbox" id="check35" name="check35">
+                        <label for="check35">Work 5</label>
+                    </div> 
+                </div>
+            </div>
+            <div class="checklist-row">
+                <div class="checklist-row-header">
+                    <div class="header-icon">
+                        <img src="{% static 'BP_resources/images/icon/defendants-icon-color.svg' %}" alt="Icon">
+                    </div>
+                    <span class="row-title">
+                        Defendant Vader, Darth
+                    </span>
+                </div>
+                <div class="checklist-row-content">
+                    <p class="text-darker">88/88</p>
+                    <div class="nt-box">
+                        <div class="circlechart" data-percentage="{{checklist_percentage}}"></div>
+                    </div>
+                    <button onclick="showHeaderRowDropdown(4)" class="dropbtn">
+                        <img src="/static/BP_resources/images/icon/check-green.svg" alt="Double arrow down"class="green-check"> Checklist 
+                        <img src="/static/BP_resources/images/icon/angles-down-blue.svg" alt="Double arrow down" class="double-arrow-down">
+                    </button>
+                </div>
+                <div class="checklist-row-dropdown">
+                    <div class="checkbox-line">
+                        <input type="checkbox" id="check41" name="check41">
+                        <label for="check41">Work Unit Name 1</label>
+                    </div>
+                    <div class="checkbox-line">
+                        <input type="checkbox" id="check42" name="check42">
+                        <label for="check42">Work Unit Name longer 2</label>
+                    </div> 
+                    <div class="checkbox-line">
+                        <input type="checkbox" id="check43" name="check43">
+                        <label for="check43">Work Unit Name variety 3</label>
+                    </div> 
+                    <div class="checkbox-line">
+                        <input type="checkbox" id="check44" name="check44">
+                        <label for="check44">Work Unit 4</label>
+                    </div> 
+                    <div class="checkbox-line">
+                        <input type="checkbox" id="check45" name="check45">
+                        <label for="check45">Work 5</label>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="client-details-wrap">
+    <div class="client-details-inner">
+        <div class="first-col">
+            <!--<a href="javascript:void(0)" data-toggle="modal" data-target="#phone-modal" class="d-block">{{client.phone}}</a>
+            <a href="javascript:void(0)" data-toggle="modal" data-target="#phone-modal"  class="d-block email">{{client.email}}</a>-->
+
+            <a href="javascript:void(0)" data-toggle="modal" data-target="#dob-modal">
+                <div class="d-block check-detail-items" style="overflow: hidden">
+                    <small class="d-block">
+                        <div class="d-inline-block" style="width: 60px;margin-right: 2px;text-align: right"><i
+                                class="font-weight-bold">email </i><em
+                                style="float: right;font-style: normal;margin-left: 1px;color: #D5D5D5">:</em></div>
+                        {{client.email}}
+                    </small>
+                    <small class="d-block">
+                        <div class="d-inline-block" style="width: 60px;margin-right: 2px;text-align: right"><i
+                                class="font-weight-bold">case # </i><em
+                                style="float: right;font-style: normal;margin-left: 1px;color: #D5D5D5">:</em></div>
+                        19STCVFD2234
+                    </small>
+                    <small class="d-block">
+                        <div class="d-inline-block" style="width: 60px;margin-right: 2px;text-align: right"><i
+                                class="font-weight-bold">court  </i><em
+                                style="float: right;font-style: normal;margin-left: 1px;color: #D5D5D5">:</em></div>San
+                        Bernardino Country Court
+                    </small>
+                </div>
+            </a>
+        </div>
+        <div class="second-col">
+            <a href="javascript:void(0)" data-toggle="modal" data-target="#dob-modal">
+                <div class="d-block check-detail-items" style="overflow: hidden">
+                    <small class="d-block">
+                        <div class="d-inline-block" style="width: 30px;margin-right: 2px;text-align: right"><i
+                                class="font-weight-bold">DOB </i><em
+                                style="float: right;font-style: normal;margin-left: 1px;color: #D5D5D5">:</em></div>
+                        {{client.birthday}}
+                    </small>
+                    <small class="d-block">
+                        <div class="d-inline-block" style="width: 30px;margin-right: 2px;text-align: right"><i
+                                class="font-weight-bold">SSN </i><em
+                                style="float: right;font-style: normal;margin-left: 1px;color: #D5D5D5">:</em></div>
+                        {{client.ssn}}
+                    </small>
+                    <small class="d-block">
+                        <div class="d-inline-block" style="width: 30px;margin-right: 2px;text-align: right"><i
+                                class="font-weight-bold">DL# </i><em
+                                style="float: right;font-style: normal;margin-left: 1px;color: #D5D5D5">:</em></div>
+                        {{client.driver_license_number}}, {{client.driver_license_state}}
+                    </small>
+                </div>
+            </a>
+        </div>
+        <div class="third-col">
+            <small class="d-block">
+                <div class="d-inline-block float-left" style="width: 54px;margin-right: 2px;text-align: right"><i
+                        class="font-weight-bold">Update </i><em
+                        style="float: right;font-style: normal;margin-left: 1px;color: #D5D5D5">:</em></div>
+                <p class="d-block overflow-hidden">{% if update_case_status %}
+                    {{update_case_status.description|truncatechars:120}} {% else %}Client is continued to treat, would
+                    like to see an orthpedist, not sure how much of a trip he can make this month. {% endif %}</p>
+            </small>
+            <small class="d-block">
+                <div class="d-inline-block" style="width: 54px;margin-right: 2px;text-align: right"><i
+                        class="font-weight-bold">By </i><em
+                        style="float: right;font-style: normal;margin-left: 1px;color: #D5D5D5">:</em></div>
+                        {% if update_case_status %}{{update_case_status.created_by.username}}{% else %}{% endif %}<i
+                    class="font-weight-bold"> at </i><em style="font-style: normal;margin-left: 1px;color: #000">
+                        {% if update_case_status %} {{update_case_status.created_at|time_of_note}} {% else %} 9:00 am{% endif %}</em> <i class="font-weight-bold"> on </i><em
+                    style="font-style: normal;margin-left: 1px;color: #000">
+                    {% if update_case_status %}{{update_case_status.created_at|date_of_note}}{% else %}8/29/2023{% endif %}</em>
+            </small>
+        </div>
+        <div class="fourth-col last-row-details">
+            <small class="d-block float-left">
+                <div class="d-inline-block float-left" style="width: 55px;margin-right: 2px;text-align: right"><i
+                        class="font-weight-bold">Stage </i><em
+                        style="float: right;font-style: normal;margin-left: 1px;color: #D5D5D5">:</em></div>
+                {% if case %}
+                <p class="d-block overflow-hidden">
+                    {% for stage in case.auto_case_stage.all %}
+                    {{stage.name}},
+                    {% endfor %}
+                </p>
+                {% endif %}
+
+            </small>
+            <small class="d-block float-left">
+                <div class="d-inline-block float-left" style="width: 55px;margin-right: 2px;text-align: right"><i
+                        class="font-weight-bold">Status </i><em
+                        style="float: right;font-style: normal;margin-left: 1px;color: #D5D5D5">:</em></div>
+                {% if case %}
+                <p class="d-block overflow-hidden">
+                    {% for status in case.auto_case_status.all %}
+                    {{status.name}},
+                    {% endfor %}
+                </p>
+                {% endif %}
+            </small>
+        </div>
+        <div class="fifth-col position-relative">
+            <small style="position: absolute;
+            top: 0%;text-align: center"><i
+                    style="display: block; font-size: 18px; font-weight: bold; text-transform: Capitalize">To-Dos </i>
+                <div class="d-inline-block font-weight-bold" style="font-size: 30px;margin-top: 9px">{{current_todos}}
+                </div>
+            </small>
+        </div>
+    </div>
+    <div class="flagged-icon-wrap">
+        {% if flagPage %}
+        <div class="top-pane" onclick="location.href='{% url 'bp-removeFlagPage' client.id case.id flagPage.id %}';">
+            <img src="{% static 'BP_resources/images/icon/flag-icon-red-bg-gray.svg' %}" width="46px">
+        </div> {% else %}
+        <div class="top-pane" onclick="location.href='{% url 'bp-flagPage' client.id case.id 'Client' 'bp-client' %}';">
+            <img src="{% static 'BP_resources/images/icon/flag-icon-bg-gray.svg' %}" width="46px">
+        </div> {% endif %}
+    </div>
+</div>
+<script>
+    // $(".dropdown").click(function () {
+    //     $(".checklist-multi-dropdowns").toggle();
+    //     $(".double-arrow-down").toggleClass("inverted");
+    // });
+</script>
+<script>
+    $(document).ready(function () {
+        $("#clients-dropdown").click(function () {
+            $("#previous-client").toggle();
+        });
+    });
+</script>
+<script>
+    /* When the user clicks on the button, 
+            toggle between hiding and showing the dropdown content */
+    function showHeaderDropdown() {
+        $(".checklist-multi-dropdowns").toggle();
+        $(".header-checklist-section .double-arrow-down").toggleClass("inverted");
+    }
+    function showHeaderRowDropdown(num) {
+        $(".header-checklist-dropdown .checklist-row:nth-child("+num+") .checklist-row-dropdown").toggle();
+        $(".header-checklist-dropdown .checklist-row:nth-child("+num+") .double-arrow-down").toggleClass("inverted");
+    }
+    
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function (event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>
+<script>
+    function addClickRecord(page_id) {
+        // $('a').on('click', function () {
+        console.log('hello');
+        console.log('FUnction loaded!')
+        $.ajax({
+            url: '/BP/clickRecord/',
+            type: "GET",
+            data: {
+                "case_id": "{{case.id}}",
+                "page_id": page_id,
+                "click_id": "0",
+
+            },
+
+            success: function (data) {
+                var x = JSON.stringify(data);
+                console.log(x);
+            },
+            // Error handling 
+            error: function (error) {
+                console.log(`Error ${error}`);
+            }
+        });
+        // });
+    };
+</script>
+
+<script>
+    function calcWidth() {
+        var navwidth = 0;
+        var morewidth = $('#main-2 .more-2').outerWidth(true);
+        $('#main-2 > li:not(.more-2)').each(function () {
+            navwidth += $(this).outerWidth(true);
+        });
+        var availablespace = $('.wrap').outerWidth(true) - morewidth;
+
+        if (navwidth > availablespace) {
+            var lastItem = $('#main-2 > li:not(.more-2)').last();
+            lastItem.attr('data-width', lastItem.outerWidth(true));
+            lastItem.prependTo($('#main-2 .more-2 ul'));
+            calcWidth();
+        } else {
+            var firstMoreElement = $('#main-2 li.more-2 li').first();
+            if (navwidth + firstMoreElement.data('width') < availablespace) {
+                firstMoreElement.insertBefore($('#main-2 .more-2'));
+            }
+        }
+
+        if ($('.more-2 li').length > 0) {
+            $('.more-2').css('display', 'block');
+        } else {
+            $('.more-2').css('display', 'none');
+        }
+    }
+    $(window).on('resize load', function () {
+        calcWidth();
+    });
+    $(".more-button").click(function () {
+        $(".collapsible-ul").toggle();
+    });
+</script>
+
+{% comment %}
+<script>
+    function myFunction6(x) {
+        var temp = 'myDropdown' + x;
+
+        document.getElementById(temp).classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function (event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns6 = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns6.length; i++) {
+                var openDropdown = dropdowns6[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script> {% endcomment %}
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="{% static 'BP_resources/js/progresscircle.js' %}"></script>
+<script>
+    $('.circlechart').circlechart(); // Initialization
+</script>

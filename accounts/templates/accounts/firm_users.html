@@ -1,0 +1,86 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% block pagetitle %}
+    Treatment First - Firm Users
+{% endblock pagetitle %}
+{% block content %}
+
+    <div class="row py-5 px-3">
+        <div class="col-lg-4 col-md-4 col-xs-4">
+            {% if userprofile.providerprofile.account_type == 'Provider' or request.user.providerstaff_userprofile.account_type == 'ProviderStaff' %}
+                <a href="{% url 'accountdetails' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Account Details</a> <br><br>
+                <a href="{% url 'profile' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Locations</a> <br><br>
+                <a href="{% url 'providerdetails' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Provider Details</a><br><br>
+                <a href="{% url 'provider_firm_users' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Account Users</a> <br><br>
+            {% elif userprofile.attorneyprofile.account_type == 'Attorney' or request.user.attorneystaff_userprofile.account_type == 'AttorneyStaff' %}
+                <a href="{% url 'accountdetails_attorney' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Account Details</a> <br><br>
+                <a href="{% url 'firm_users' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Account Users</a> <br><br>
+                <a href="{% url 'attorney_profile' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Favorites</a><br><br>
+                <a href="{% url 'blacklist' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Blacklist</a><br><br>
+                <a href="{% url 'flagged_users' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Flagged Providers</a><br><br>
+                <a href="{% url 'provider_reviews' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Provider Reviews</a><br><br>
+            {% elif userprofile.marketerprofile.account_type == 'Marketer' or request.user.marketerstaff_userprofile.account_type == 'MarketerStaff' %}
+                <a href="{% url 'accountdetails_marketer' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Account Details</a> <br><br>
+                <a href="{% url 'marketer_firm_users' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Account Users</a> <br><br>
+                <a href="{% url 'marketer_profile' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Favorites</a><br><br>
+                <a href="{% url 'marketer_blacklist' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Blacklist</a><br><br>
+                <a href="{% url 'marketer' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Marketer</a><br><br>
+                <a href="{% url 'marketer_provider_reviews' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Provider Reviews</a><br><br>
+            {% endif %}
+            {% if not request.user.marketerstaff_userprofile.account_type == 'MarketerStaff' and not request.user.providerstaff_userprofile.account_type == 'ProviderStaff' and not request.user.attorneystaff_userprofile.account_type == 'AttorneyStaff' %}
+                <a href="{% url 'multipleusers' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Add Account Users</a> <br><br>
+            {% endif %}
+        </div>
+        <div class="col-lg-8 col-md-8 col-xs-8">
+            
+            
+            
+            <h4>Firm Users:</h4>
+            <br>
+            {% if not multipleusers %}
+                <div class="card" style="margin-top: 2%; background-color: #fafafa;">
+                    <div class="card-body">
+                        <strong>You don't have any firm users yet!</strong>
+                    </div>
+                </div>
+            {% else %}
+                {% for x in multipleusers %}
+                    <div class="card">
+                                    
+                        <div class="card-header">
+                        <h5 class="card-title">{{x.user.first_name}} {{x.user.last_name}}</h5>
+                        
+                        </div>
+                        <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                    <h5>Username: </h5> <p>{{x.user.username}}</p>
+                                    <h5>Email: </h5> <p>{{x.user.email}}</p>
+                                    <h5>Created At: </h5> <p>{{x.created_at|timesince}} ago</p>
+                                    <h5>Account Type: </h5> <p>{{x.account_type}}</p>
+                                </div>
+                                
+                            </div>
+                        </li>
+                        
+                        
+
+                        </ul>
+                        {% if not request.user.marketerstaff_userprofile.account_type == 'MarketerStaff' and not request.user.providerstaff_userprofile.account_type == 'ProviderStaff' and not request.user.attorneystaff_userprofile.account_type == 'AttorneyStaff' %}
+                            <div class="card-body">
+                            
+                                <a href="{% url 'editmultipleuser' x.user.id %}" style="float:right" class="card-link btn btn-secondary">Edit User</a>
+                                <a href="{% url 'deletemultipleuser' x.user.id %}" style="float:right" class="card-link btn btn-danger me-4">Delete User</a>
+                            
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <br><br>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock content %}

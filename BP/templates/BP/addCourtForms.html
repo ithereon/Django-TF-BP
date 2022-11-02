@@ -1,0 +1,172 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <!--  meta tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+       
+    
+        <!-- Title Page-->
+        <title>Add Court Forms</title>
+    
+        <!-- Fontfaces CSS-->
+        <link href="{% static 'BP_resources/css/font-face.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Bootstrap CSS-->
+        <link href="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Vendor CSS-->
+        <link href="{% static 'BP_resources/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Main CSS-->
+        <link href="{% static 'BP_resources/css/theme.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/sidebar.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/header.css' %}" rel="stylesheet" media="all">
+        
+ 
+
+    
+</head>
+    
+
+<body >
+    
+    <div >
+
+        
+        <!-- PAGE CONTAINER-->
+        <div >
+            <!-- HEADER DESKTOP-->
+       
+            <!-- HEADER DESKTOP-->
+           
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="container">
+                    <div>
+                        
+                        <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Court Forms</h5>
+                              
+                          <form method="POST" action=".">
+                              {% csrf_token %}
+                          
+   
+                              <!-- <div class="mb-3 row">
+                                  <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Role:</label>
+                                  <div class="col-sm-10">
+                                      <select class="form-select" name="account_type" aria-label="Default select example">
+                                          
+                                          <option selected value="Provider">Medical Provider</option>
+                                          <option value="Attorney">Attorney</option>
+                                          <option value="Marketer">Marketer</option>
+                                          
+                                        </select>
+                                  </div>
+                              </div> -->
+          
+                            <div class="mb-3 row">
+                                <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Select Forms</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select" onchange="this.form.submit()" required name="form" id="form" aria-label="Default select example">
+                                        <option value="">---Select Form---</option>
+                                        {% for form in forms %}
+                                            <option value="{{form.id}}">{{form.form_name}}</option>
+                                        {% endfor %}
+                                        
+                                      </select>
+                                </div>
+                            </div>
+                            
+                            
+                            </form>
+                            {% if temp_form_context %}
+                            <div class="container p-5 mt-4" style="margin: auto; justify-content: center; background-color:rgb(224, 224, 224)">
+                                <form method="post" action="{% url 'bp-downloadCourtForm' client.id case.id litigation.id form_id %}">
+                                    {% csrf_token %}
+                                    {% for x in temp_form_context %}
+                                    <div class="mb-3 row">
+                                        {% if x.checkbox != '' %}
+                                        <div class="col-sm-1">
+                                            <input type="checkbox" name="{{x.checkbox}}">
+                                        </div>
+                                        {% endif %}
+                                        {% if x.text != '' %}
+                                            <div class="col-sm-7" >
+                                                
+                                            <h5>{{x.text}}</h5>
+                                               
+        
+                                            </div>
+                                        {% endif %}
+                                        {% if x.field != '' %}
+                                            <div class="col-sm-4" style="margin: auto; justify-content: center; text-align: center;">
+                                                <input class="form-control" type="text" required placeholder="Enter the Value" name="{{x.field}}" >
+                                            </div>
+                                        {% endif %}
+                                        <input type="text" hidden value="{{form_id}}" name="form_id">
+                                    </div>
+                                        
+                                    {% endfor %}
+                                    <button class="btn btn-success">Download Court Form</button>
+                                </form>
+                            </div>
+                            {% else %}
+                            <div class="alert alert-danger mt-3" role="alert">
+                                Please select the form.
+                              </div>
+                            {% endif %}
+                            </div>
+                          </div>
+                            
+                    </div>  
+                       
+        
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    
+    <!-- Jquery JS-->
+    <script src="{% static 'BP_resources/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'BP_resources/vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/select2/select2.min.js' %}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static 'BP_resources/js/main.js' %}"></script>
+
+
+</body>
+
+</html>
+<!-- end document-->

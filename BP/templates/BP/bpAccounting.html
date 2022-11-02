@@ -1,0 +1,616 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Dashboard</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="{% static 'BP_resources/css/font-face.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{% static 'BP_resources/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{% static 'BP_resources/css/theme.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/css/sidebar.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/css/header.css' %}" rel="stylesheet" media="all">
+
+</head>
+<style>
+    td{
+        color:black !important;
+        font-weight: 400 !important;
+    }
+</style>
+<body class="animsition homepage">
+    <div class="modal fade" id="editRequestCheque" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Mark Check Cleared by Inputting Cleared Date.</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3 ">
+                    <form id="form-786" action="{% url 'bp-editbpAccounting' %}" method="post">
+                        {% csrf_token %}
+                        
+                        <div class="form-group">
+                            <label for="cheque_number1">Check #</label>
+                            <input type="text" class="form-control" style="color:black" disabled placeholder="Check Number" name="cheque_number" id="cheque_number1">
+                            
+                          </div>
+                         
+                         <div class="mb-3 row">
+                             
+                            <div class="col-sm-12">
+                               <input type="date" class="form-control" placeholder="Cleared Date" name="cleared_date" id="cleared_date1">
+                            </div>
+                            
+                         </div>
+                         <input type="text" hidden value="Paid" name="type">
+                         <input type="text" name="record_id1" id="record_id1" hidden>
+                    </form>
+                    
+                    
+                    </div>
+            </div>
+            <!-- <form action="{% url 'bp-deleteIncidentReport' %}" method="post" id="deleteForm" hidden>
+                {% csrf_token %}
+                <input type="text" name="record_id2" id="record_id2" hidden>
+                
+            </form> -->
+            <div class="modal-footer">
+            <!-- <button type="submit" style="float:left !important; margin-right:auto" form="deleteForm" class="btn btn-danger">Delete</button> -->
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="submit" form="form-786" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="editRequestCheque2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Check Request</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3 ">
+                    <form id="form-7861" action="{% url 'bp-editbpAccounting' %}" method="post">
+                        {% csrf_token %}
+                        
+                        
+                         <div class="mb-3 row">
+                             
+                            <div class="col-sm-12">
+                               <input type="text" required class="form-control" placeholder="Check Number" name="cheque_number" id="cheque_number2">
+                            </div>
+                            
+                         </div>
+                         <div class="mb-3 row">
+                             
+                            <div class="col-sm-12">
+                               <input type="date" required class="form-control" placeholder="Check Date" name="check_date" id="check_date2">
+                            </div>
+                            
+                         </div>
+                         <input type="text" hidden value="Requested" name="type">
+                         <input type="text" name="record_id1" id="record_id2" hidden>
+                    </form>
+                    
+                    
+                    </div>
+            </div>
+            <!-- <form action="{% url 'bp-deleteIncidentReport' %}" method="post" id="deleteForm" hidden>
+                {% csrf_token %}
+                <input type="text" name="record_id2" id="record_id2" hidden>
+                
+            </form> -->
+            <div class="modal-footer">
+            <!-- <button type="submit" style="float:left !important; margin-right:auto" form="deleteForm" class="btn btn-danger">Delete</button> -->
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="submit" form="form-7861" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+ 
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            <div class="logo">
+                
+            </div>
+            
+            <div class="menu-sidebar__content">
+                <nav class="navbar-sidebar position-relative">
+                    <ul class="list-unstyled navbar__list">
+                        
+                        
+                        
+                        <li class="Row  active" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(1, '0')" href="/BP/client/50/43/">
+                                <img src="/static/BP_resources/images/icon/menu-icon3.png">Client
+                            </a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(2, '0')" style="font:14px poppins" href="/BP/medicaltreatment/50/43/">
+                               <img src="/static/BP_resources/images/icon/medical-treatment-icon-color.svg">Medical Treatment
+                            </a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li style="100%" class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(3, '0')" class="js-arrow" href="/BP/case/50/43/">
+                               <img src="/static/BP_resources/images/icon/case-icon-color.svg">Case</a>
+                               <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(4, '0')" href="/BP/todo/50/43/">
+                                <img src="/static/BP_resources/images/icon/to-do-icon-color.svg">To-Do</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(5, '0')" href="/BP/defendants/50/43/">
+                            <img src="/static/BP_resources/images/icon/defendants-icon-color.svg">Defendants</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="has-sub Row " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(6, '0')" href="/BP/caraccident/50/43/">
+                            <img src="/static/BP_resources/images/icon/menu-icon5.png">Car Accident</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(7, '0')" href="/BP/photo/50/43/">
+                              <img src="/static/BP_resources/images/icon/menu-icon6.png">Photo</a>
+                              <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(8, '0')" href="/BP/injuriessub/50/43/">
+                            <img src="/static/BP_resources/images/icon/injuries-icon-color.svg">Injuries</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(9, '0')" href="/BP/otherparties/50/43/">
+                            <img src="/static/BP_resources/images/icon/other-parties-icon-color.svg">Other Parties</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(10, '0')" href="/BP/witnesses/50/43/">
+                            <img src="/static/BP_resources/images/icon/witnesses-icon-color.svg">Witnesses</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(11, '0')" href="/BP/insurance/50/43/">
+                            <img src="/static/BP_resources/images/icon/insurance-icon-color.svg">Insurance</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(12, '0')" href="#">
+                            <img src="/static/BP_resources/images/icon/employment-icon-color.svg">Employment</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(13, '0')" href="/BP/recordings/50/43/">
+                             <img src="/static/BP_resources/images/icon/menu-icon13.png">Recordings</a>
+                             <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(14, '0')" href="/BP/incidentreport/50/43/">
+                             <img src="/static/BP_resources/images/icon/incident-folder-icon-color.svg">Incident Report</a>
+                             <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(15, '0')" href="/BP/documents/50/43/">
+                             <img src="/static/BP_resources/images/icon/menu-icon15.png">Documents</a>
+                             <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(16, '0')" href="/BP/costs/50/43/">
+                            <img src="/static/BP_resources/images/icon/costs-icon-color.svg">Costs</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(17, '0')" href="/BP/caseloan/50/43/">
+                            <img src="/static/BP_resources/images/icon/case-loans-icon-color.svg">Case Loans</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(18, '0')" href="/BP/settlement/50/43/">
+                            <img src="/static/BP_resources/images/icon/menu-icon18.png">Settlement</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(19, '0')" href="/BP/litigation/50/43/">
+                              <img src="/static/BP_resources/images/icon/menu-icon19.png">Litigation</a>
+                              <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(20, '0')" href="/BP/discovery/50/43/">
+                             <img src="/static/BP_resources/images/icon/menu-icon20.png">Discovery</a>
+                             <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(21, '0')" href="/BP/depositions/50/43/">
+                               <img src="/static/BP_resources/images/icon/menu-icon21.png">Depositions</a>
+                               <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(22, '0')" href="/BP/note/50/43/">
+                             <img src="/static/BP_resources/images/icon/notes-icon-color.svg">Notes</a>
+                             <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+        
+                    </ul>
+                </nav>
+                <div class="sidebar-bottom">
+                </div>
+                
+            </div>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container" style="padding-left: 190px">
+
+            <!-- HEADER DESKTOP-->
+            {% include 'BP/header-desktop.html' %}
+            <!-- HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30" style="margin-top: 66px">
+                    <div class="container-fluid">
+                        {% if permission %}
+                        <form action="{% url 'bp-bpAccounting' %}" method="post" id="myform">
+                            {% csrf_token %}
+                            <input type="text" name="name1" id="name1" hidden>
+                        </form>
+                        <div class="row">
+                            <div class="col-lg-12 top-head">
+                                <h2><img src="{% static 'BP_resources/images/icon/Vector-nav.png' %}">Accounting</h2>
+                                <ul>
+                                
+                                {% if cheque_type == 'Requested' %}
+                                <li style="float:right;margin-left:auto;"><a href="#"  onclick="clickButton('Paid')">Checks Paid</a></li>
+                                <li style="float:right;margin-left:auto;"><a href="#" class="active"  onclick="clickButton('Requested')">Checks Requested</a></li>
+                                <li style="float:right;margin-left:auto;"><a href="#"  onclick="clickButton('Cleared')">Checks Cleared</a></li>
+                                {% elif cheque_type == 'Paid' %}
+                                <li style="float:right;margin-left:auto;"><a href="#" class="active" onclick="clickButton('Paid')">Checks Paid</a></li>
+                                <li style="float:right;margin-left:auto;"><a href="#"  onclick="clickButton('Requested')">Checks Requested</a></li>
+                                <li style="float:right;margin-left:auto;"><a href="#"  onclick="clickButton('Cleared')">Checks Cleared</a></li>
+                                {% elif cheque_type == 'Cleared' %}
+                                <li style="float:right;margin-left:auto;"><a href="#"  onclick="clickButton('Paid')">Checks Paid</a></li>
+                                <li style="float:right;margin-left:auto;"><a href="#"  onclick="clickButton('Requested')">Checks Requested</a></li>
+                                <li style="float:right;margin-left:auto;"><a href="#" class="active" onclick="clickButton('Cleared')">Checks Cleared</a></li>
+                                {% endif %}
+                                
+                                </ul>
+                                <h2 class="title-1 m-b-25">{{cheque_type}}</h2>
+                                <div class="table-responsive table--no-card m-b-40 subpg-table">
+                                    <table class="table table-borderless table-striped table-earning ">
+                                        <thead>
+                                            <tr>
+                                                
+                                                <th style="width: auto !important; text-align: center !important;">Request</th>
+                                                
+                                                <th style="width: auto !important; text-align: center !important;">Client</th>
+                                                <th style="width: auto !important; text-align: center !important;">Incident</th>
+                                                <th style="width: auto !important; text-align: center !important;">Requester</th>
+                                                <th style="width: auto !important; text-align: center !important;">Account</th>
+
+                                                <th style="width: auto !important; text-align: center !important;">Payee</th>
+                                                <th style="width: auto !important; text-align: center !important;">Amount</th>
+                                                <th style="width: auto !important; text-align: center !important;">Check</th>
+                                                <th style="width: auto !important; text-align: center !important;">Memo</th>
+
+                                                <th style="width: auto !important; text-align: center !important;">Number</th>
+                                                <th style="width: auto !important; text-align: center !important;">Cleared</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                                {% if cheque_type == 'Cleared' %}
+                                                {% for request in requests %}
+                                                    
+                                                    <tr >
+                                                        
+                                                        <td style="width: 5% !important; text-align: center !important;">{{request.date_requested|date:"Y-m-d"}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;">{{request.for_case.for_client.last_name}}, {{request.for_case.for_client.first_name}}</td>
+                                                        
+                                                        <td style="width: 5% !important; text-align: center !important;">{{request.for_case.incident_date}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;">{{request.created_by.user.first_name}} {{request.created_by.user.last_name}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;">{{request.cheque_type.name}}</td>
+
+                                                        <td style="width: 10% !important; text-align: center !important;">{{request.payee}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;">{{request.amount}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;">{{request.cheque_date}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;">{{request.memo}}</td>
+
+                                                        <td style="width: auto !important; text-align: center !important;">{{request.cheque_number}}</td>
+                                                        <td style="width: auto !important; text-align: center !important;">{{request.cleared_date}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;" class="py-2">
+                                                            <form  method="POST" class="dropzone dz dz-xs d-inline-block pr-5 mb-0" data-dropzone>
+                                                                {% csrf_token %}
+                                                                <input type="hidden" name="name" value=".." />
+                                                                
+                                                                <div class="dz-message" data-dz-message>
+                                                                    <span><img src="{% static 'BP_resources/images/blank_check.jpg' %}" style="height: 20px;"> Image</span>
+                                                                </div>
+                                                                <!-- <div class="fallback"><input type="file" name="file"></div> -->
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                {% elif cheque_type == 'Paid' %}
+                                                {% for request in requests %}
+                                                    
+                                                    <tr 
+                                                    class="forEditingPopUp"
+                                                    data-id="{{request.id}}"
+                                                    data-cheque_number="{{request.cheque_number}}"
+                                                    
+                                                    onclick="editRequestCheque(event)"
+                                                    >
+                                                        
+                                                        <td style="width: 5% !important; text-align: center !important;">{{request.date_requested|date:"Y-m-d"}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;">{{request.for_case.for_client.last_name}}, {{request.for_case.for_client.first_name}}</td>
+                                                        
+                                                        <td style="width: 5% !important; text-align: center !important;">{{request.for_case.incident_date}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;">{{request.created_by.user.first_name}} {{request.created_by.user.last_name}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;">{{request.cheque_type.name}}</td>
+
+                                                        <td style="width: 10% !important; text-align: center !important;">{{request.payee}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;">{{request.amount}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;">{{request.cheque_date}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;">{{request.memo}}</td>
+
+                                                        <td style="width: auto !important; text-align: center !important;">{{request.cheque_number}}</td>
+                                                        <td style="width: auto !important; text-align: center !important;">{{request.cleared_date}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;" class="py-2">
+                                                            <form  method="POST" class="dropzone dz dz-xs d-inline-block pr-5 mb-0" data-dropzone>
+                                                                {% csrf_token %}
+                                                                <input type="hidden" name="name" value=".." />
+                                                                
+                                                                <div class="dz-message" data-dz-message>
+                                                                    <span><img src="{% static 'BP_resources/images/blank_check.jpg' %}" style="height: 20px;"> Image</span>
+                                                                </div>
+                                                                <!-- <div class="fallback"><input type="file" name="file"></div> -->
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                {% elif cheque_type == 'Requested' %}
+                                                {% for request in requests %}
+                                                    
+                                                    <tr 
+                                                    class="forEditingPopUp1"
+                                                    data-id="{{request.id}}"
+                                                    data-cheque_number="{{request.cheque_number}}"
+                                                    
+                                                    onclick="editRequestCheque1(event)"
+                                                    >
+                                                        
+                                                        <td style="width: 5% !important; text-align: center !important;">{{request.date_requested|date:"Y-m-d"}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;">{{request.for_case.for_client.last_name}}, {{request.for_case.for_client.first_name}}</td>
+                                                        
+                                                        <td style="width: 5% !important; text-align: center !important;">{{request.for_case.incident_date}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;">{{request.created_by.user.first_name}} {{request.created_by.user.last_name}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;">{{request.cheque_type.name}}</td>
+
+                                                        <td style="width: 10% !important; text-align: center !important;">{{request.payee}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;">{{request.amount}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;">{{request.cheque_date}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;">{{request.memo}}</td>
+
+                                                        <td style="width: auto !important; text-align: center !important;">{{request.cheque_number}}</td>
+                                                        <td style="width: auto !important; text-align: center !important;">{{request.cleared_date}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;" class="py-2">
+                                                            <form  method="POST" class="dropzone dz dz-xs d-inline-block pr-5 mb-0" data-dropzone>
+                                                                {% csrf_token %}
+                                                                <input type="hidden" name="name" value=".." />
+                                                                
+                                                                <div class="dz-message" data-dz-message>
+                                                                    <span><img src="{% static 'BP_resources/images/blank_check.jpg' %}" style="height: 20px;"> Image</span>
+                                                                </div>
+                                                                <!-- <div class="fallback"><input type="file" name="file"></div> -->
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                {% endif %} 
+                                                    
+                                                
+                                          
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                        {% else %}
+                        <div class="alert alert-danger" role="alert">
+                            You are not authorized to view this page!
+                          </div>
+                        {% endif %}
+                            </div>
+                        </div>  
+                       
+                    <div class="col-lg-6"> 
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2022 Ian Silverthorne</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+    <script>
+        function editRequestCheque(ev){
+            console.log(ev);
+            var $modal = $('#editRequestCheque');
+            
+            var $tr = $(ev.target).closest('.forEditingPopUp');
+            console.log($tr.attr('data-id'));
+            
+            $modal.find('[id="cheque_number1"]').val($tr.attr('data-cheque_number'));
+            $modal.find('[id="cleared_date1"]').val($tr.attr('data-cleared_date'));
+            $modal.find('[id="record_id1"]').val($tr.attr('data-id'));
+            
+            $modal.modal('show');
+        }
+
+        function editRequestCheque1(ev){
+            console.log(ev);
+            var $modal = $('#editRequestCheque2');
+            
+            var $tr = $(ev.target).closest('.forEditingPopUp1');
+            console.log($tr.attr('data-id'));
+            
+            $modal.find('[id="cheque_number2"]').val($tr.attr('data-cheque_number'));
+            $modal.find('[id="check_date2"]').val($tr.attr('data-cleared_date'));
+            $modal.find('[id="record_id2"]').val($tr.attr('data-id'));
+            
+            $modal.modal('show');
+        }
+        
+    </script>
+    <!-- Jquery JS-->
+    <script src="{% static 'BP_resources/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'BP_resources/vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/select2/select2.min.js' %}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static 'BP_resources/js/main.js' %}"></script>
+    <script>
+        function clickButton(temp){
+            
+            document.getElementById('name1').value = temp
+            console.log(document.getElementById('name1').value);
+            document.getElementById("myform").submit();
+        }
+    </script>
+
+</body>
+
+</html>
+<!-- end document-->

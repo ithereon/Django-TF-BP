@@ -1,0 +1,331 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% block pagetitle %}
+    {{provider.providerprofile.office_name}} - TF
+{% endblock pagetitle %}
+{% block content %}
+
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3 class="text-primary">{{provider.providerprofile.office_name}}</h3>
+                    <a href="{{provider.website}}" class="text-primary">{{provider.website}}</a>
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <!-- <div class="col-md-4 col-6 mb-2 mb-md-0">
+                            <img src="https://www.championchiropractic.com/wp-content/uploads/2017/03/champion-chiropractic-social.jpg" class="w-100" style="max-height: 150px;" />
+                        </div> -->
+                        <div class="col-md-8" style="max-height: 150px; overflow: hidden;">
+                            {{provider.description}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2>{{provider.providerprofile.office_name}}</h2>
+    <div class="row">
+        <div class="col-md-4 mt-5">
+            {% if request.user.userprofile.account_type == 'Attorney' or request.user.attorneystaff_userprofile.account_type == 'AttorneyStaff' %}
+                <form action="{% url 'addBlacklist' provider.id %}" method="POST">
+                    {% csrf_token %}
+                    {% if provider in userprofile.blacklist.all %}
+                        
+                        <a href="#" class="btn btn-light btn-outline-secondary w-100 text-start ps-3 mb-2">
+                            <input class="form-check-input me-4" onChange="this.form.submit()" name="blacklists" type="checkbox" value="{{provider.id}}" checked id="option{{provider.id}}"> Marked as Blacklist
+                        </a>
+                        
+                    {% else %}
+                        
+                        <a href="#" class="btn btn-light btn-outline-secondary w-100 text-start ps-3 mb-2">
+                            <input class="form-check-input me-4" onChange="this.form.submit()" name="blacklists" type="checkbox" value="{{provider.id}}" id="option{{provider.id}}"> Add to Blacklist
+                        </a>
+                        
+                    {% endif %}
+                </form>
+                {% if provider in temp_provider %}
+                <a href="#" class="btn btn-danger w-100 text-start ps-3 mb-2">
+                    <i class="fa fa-flag me-2"></i> Marked as Flagged!
+                </a>
+                {% else %}
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-light btn-outline-danger w-100 text-start ps-3 mb-2">
+                        <i class="fa fa-flag me-2"></i> Flag Provider
+                    </a>
+                {% endif %}
+                
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <form action="{% url 'addFlagged' provider.id %}" method="POST">
+                        {% csrf_token %}
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title text-primary" id="exampleModalLabel">{{provider.providerprofile.office_name}}</h5>
+                            
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Use the form below to warn about this provider for any reason.</p>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlTextarea1" class="form-label">Reason for flagging</label>
+                                    <textarea class="form-control" placeholder="Enter the reason..." name="flag" id="flag"  rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                        </div>
+                    </form> 
+                </div>
+            {% endif %}
+            {% for location in provider.location_userprofile.all %}
+            <div class="card mt-4">
+                <div class="card-body">
+
+                    <div>
+                        <div>
+                            <a href="http://www.google.com/maps/place/{{location.latitude}},{{location.longitude}}" class="btn btn-sm btn-primary float-end">Map</a>
+                            <h6>
+                                <i class="fa fa-map-marker me-1"></i>
+                                <span class="text-primary">{{location.city}}</span> Location
+                            </h6>
+                        </div>
+                        <div class="mt-3 ps-3">
+                            <div>{{location.address}}, {{location.address2}}</div>
+                            <div>{{location.city}}, {{location.state}} {{location.post_code}}</div>
+                            <div>{{location.phone}}</div>
+                            <div>{{location.fax}}</div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <div>
+                            <h6><i class="fa fa-clock me-1"></i> Hours</h6>
+                        </div>
+                        <div class="mt-1 ps-3">
+                            <table class="table table-sm no-border">
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 50px;">Sun</td>
+                                        <td>--</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mon</td>
+                                        <td>--</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tue</td>
+                                        <td>--</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Wed</td>
+                                        <td>--</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Thu</td>
+                                        <td>--</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fri</td>
+                                        <td>--</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sat</td>
+                                        <td>--</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    {% for x in location.other_locations.all %}
+                        {% if x.address_type == 'Medical Bill Request Location' %}
+                            <div class="mt-4">
+                                <div>
+                                    <h6>
+                                        <i class="fa fa-map-marker me-1"></i>
+                                        Billing request address
+                                    </h6>
+                                </div>
+                                <div class="mt-1 ps-3">
+                                    <div>{{x.name}}</div>
+                                    
+                                </div>
+                            </div>
+                        {% elif x.address_type == 'Medical Record Request Location' %}
+                            <div class="mt-4">
+                                <div>
+                                    <h6>
+                                        <i class="fa fa-map-marker me-1"></i>
+                                        Billing request address
+                                    </h6>
+                                </div>
+                                <div class="mt-1 ps-3">
+                                    <div>{{x.name}}</div>
+                                    
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+
+                    
+
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+        
+            <div class="col-md-7 offset-md-1 mt-5">
+                {% if request.user.userprofile.account_type == 'Attorney' or request.user.attorneystaff_userprofile.account_type == 'AttorneyStaff' %}
+                    <h4 class="text-primary">Flags</h4>
+                    {% for flag in provider_flags %}
+                        <div class="col-md">
+
+                            <div class="alert alert-danger" role="alert">
+                                {{flag.description}}
+                            </div>
+                            <br>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                {% if request.user.userprofile.account_type == 'Attorney' or request.user.userprofile.account_type == 'Marketer' or request.user.attorneystaff_userprofile.account_type == 'AttorneyStaff'  or request.user.marketerstaff_userprofile.account_type == 'MarketerStaff' %}
+                {% if reviews.count == 0 %}
+                    <h5>Be the first one to review!</h5>
+                {% else %}
+                    <h4 class="text-primary">Reviews</h4>
+                    {% for review in reviews %}{% for rating in temp_rat %}
+                    {% if forloop.counter == forloop.parentloop.counter %}
+                    <div class="col-md">
+                        
+                        <div class="star-container pl-5">
+                            <div class="star-back">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="star-front text-warning" style="width: {{rating}}%;">
+                                <div class="cover">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        {% if review.post_as == "anonymous" %}
+                            <p style="font-size: 15px;color:#a6a6a6;">Review given by Anonymous User ({{review.created_on|timesince}} ago)</p>
+                        {% else %}
+                            <p style="font-size: 15px;color:#a6a6a6;">Review given by {{review.given_by.attorneyprofile.first_name}} {{review.given_by.attorneyprofile.last_name}} ({{review.created_on|timesince}} ago)</p>
+                        {% endif %}
+                        
+                    </div>
+                    {{review.description}}
+                    <hr>
+                    
+                    {% endif %}
+                    {% endfor %}{% endfor %}
+                {% endif %}
+            
+                {% if request.user.userprofile.account_type == 'Attorney' or request.user.attorneystaff_userprofile.account_type == 'AttorneyStaff' %}
+                <div>
+                    <h4 class="text-primary">Leave a Review</h4>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="input-group mb-3">
+                            
+                            <input type="hidden" id="rating-input" name="rating" min="1" max="5" />
+                            <div class="rating" role="optgroup">
+                                <!-- in Rails just use 1.upto(5) -->
+                                <i class="fa fa-star fa-2x rating-star" data-rating="1" tabindex="0" aria-label="Rate as one out of 5 stars" role="radio"></i>
+                                <i class="fa fa-star fa-2x rating-star" data-rating="2" tabindex="0" aria-label="Rate as two out of 5 stars" role="radio"></i>
+                                <i class="fa fa-star fa-2x rating-star" data-rating="3" tabindex="0" aria-label="Rate as three out of 5 stars" role="radio"></i>
+                                <i class="fa fa-star fa-2x rating-star" data-rating="4" tabindex="0" aria-label="Rate as four out of 5 stars" role="radio"></i>
+                                <i class="fa fa-star fa-2x rating-star" data-rating="5" tabindex="0" aria-label="Rate as five out of 5 stars" role="radio"></i>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="input-group mb-4">
+                            <textarea rows="7" cols="100" name="description" id="description" placeholder="Comments" class="form-control"></textarea>
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" name="anonymous" type="checkbox" value="anonymous" id="optionanonymous">
+                                <label class="form-check-label" for="optionanonymous">
+                                    Post review as Anonymous User
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group mb-4">
+                            <button type="submit" class="btn btn-primary">Submit Review</button>
+                        </div>
+                    </form>
+                    
+                </div>
+                {% elif not request.user.is_authenticated %}
+                <div class="card" style="margin-top: 2%; background-color: #fafafa;">
+                    <div class="card-body">
+                        <strong>You must Login to give a review!</strong>
+                    </div>
+                </div>
+                {% endif %}
+                {% else %}
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                <div>
+                You are not allowed to see the reviews!
+                </div>
+            </div>
+        {% endif %}
+            </div>
+        
+    </div>
+
+    <script>
+
+        function setRating(rating) {
+            $('#rating-input').val(rating);
+            $('.rating-star').addClass('selected');
+            $('.rating-star[data-rating="' + rating + '"] ~ .rating-star').removeClass('selected');
+        }
+
+        $(document).ready(function () {
+            $('.star-container').hover(function () {
+                $(this).addClass('.rating-hover');
+            }, function () {
+                $(this).removeClass('.rating-hover');
+            });
+
+            $('.rating-star')
+                .on('mouseover', function (e) {
+                    var rating = $(e.target).data('rating');
+                    $('.rating-star').removeClass('fa-star-o').addClass('text-warning');
+                    $('.rating-star[data-rating="' + rating + '"] ~ .rating-star').removeClass('text-warning');
+                })
+                .on('mouseleave', function (e) {
+                    $('.rating-star').removeClass('text-warning');
+                })
+                .on('click', function (e) {
+                    var rating = $(e.target).data('rating');
+                    setRating(rating);
+                })
+                .on('keyup', function (e) {
+                    if (e.keyCode === 32) {
+                        var rating = $(e.target).data('rating');
+                        setRating(rating);
+                    }
+                });
+        })
+    </script>
+
+{% endblock content %}

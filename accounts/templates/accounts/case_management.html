@@ -1,0 +1,630 @@
+{% extends "accounts/base_noad.html" %}
+{% load static %}
+{% block pagetitle %}
+    Treatment First - Add Law Office
+{% endblock pagetitle %}
+{% block content %}
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Law Office</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Please perform a search before adding a new provider.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addClient" tabindex="-1" aria-labelledby="addClientLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addClientLabel">Add New Patient</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-header bg-light">
+                    Add a New Patient by inputting the information below.  If the patient is represented by an attorney you can add their law firm through the directory on the patient details page after saving the New Patient.  Click on the New Patient row entry to get to the Patient Details page for that Patient.
+                </div>
+                <div class="modal-body">
+                    <form id="form-1" action="{% url 'addBPClient' %}" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="inputUsername" class="text-muted">First Name</label>
+                                    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter the First Name" data-field="phone" />
+                                </div>
+                                <input type="text" hidden  class="form-control" name="age" id="age">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="inputUsername" class="text-muted">Last Name</label>
+                                    <input type="text" required class="form-control" placeholder="Enter Last Name" name="last_name" data-field="last_name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="inputUsername" class="text-muted">Birthday</label>
+                                    <input type="text" class="form-control" placeholder="mmddyyyy" name="birthday" id="birthday" data-field="birthday" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="incident_date" class="text-muted">Incident</label>
+                                    <input type="text" placeholder="mmddyyyy" required class="form-control" name="incident_date" id="incident_date" data-field="incident_date" />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label for="case_status" class="text-muted">Status</label>
+                                    <div>
+                                        <select class="form-select" name="case_status" id="case_status" aria-label="Default select example">
+                                            <option selected value="Treating">Treating</option>
+                                            {% for status in client_statuses %}
+                                                <option value="{{status.name}}">{{status.name}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mb-3 mt-4">
+                                    <div>
+                                        <select class="form-select" name="OpenClose" id="case_openclose">
+                                            <option selected value="Open">Open</option>
+                                            <option value="Close">Close</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label for="address" class="text-muted">Location</label>
+                                    <div>
+                                        <select class="form-select" name="address" id="address" aria-label="Address">
+                                            <option value="">-- select --</option>
+                                            {% for x in locations %}
+                                                <option value="{{x.id}}">{{x.address}}, {{x.city}}, {{x.state}}, {{x.post_code}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="specialty" class="text-muted">Specialty</label>
+                                    <div>
+                                        <select class="form-select" required name="specialty" id="specialty" aria-label="Specialty">
+                                            <option>-- SELECT --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="case_type" class="text-muted">Type</label>
+                                    <div>
+                                        <select class="form-select" required name="case_type" id="case_type" aria-label="Default select example">
+                                            <!-- <optgroup label="Personal Injury">
+                                                <option selected value="Auto Accident">Auto Accident</option>
+                                                <option value="Dog Bite">Dog Bite</option>
+                                                <option value="Premises Liability">Premises Liability</option>
+                                                <option value="Food Poisoning">Food Poisoning</option>
+                                                <option value="Worker's Compensation">Worker's Compensation</option>
+                                                <option value="Products Liability">Products Liability</option>
+                                            </optgroup>
+                                            <optgroup label="Employment">
+                                                <option value="Wrongful Termination">Wrongful Termination</option>
+                                                <option value="Sexual Harassment">Sexual Harassment</option>
+                                                <option value="Constructive Termination">Constructive Termination</option>
+                                                <option value="Discrimination">Discrimination</option>
+                                            </optgroup>
+                                            <optgroup label="Taxation">
+                                                <option value="Property Tax Appeal">Property Tax Appeal</option>
+                                                <option value="General Tax">General Tax</option>
+                                            </optgroup>
+                                            <optgroup label="Estate Planning">
+                                                <option value="Will">Will</option>
+                                                <option value="Trust">Trust</option>
+                                            </optgroup> -->
+                                        {% for case_type in case_types %}
+                                            <option value="{{case_type.id}}">{{case_type.name}}</option>
+                                        {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary me-auto" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" onclick="_age()" form="form-1" class="btn btn-success" data-bs-dismiss="modal">Add New Patient</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="attachAttorney" tabindex="-1" aria-labelledby="attachAttorneyLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="attachAttorneyLabel">Attach Firm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3 ">
+                        <form id="attachAttorneyForm" action="{% url 'attachAttorney' %}" method="POST">
+                            {% csrf_token %}
+                            <label for="inputEmail" class="col-sm-12 col-form-label fw-bold">Select the Firm</label>
+                            <div class="col-sm-12">
+                                <input type="text" hidden name="client_id" id="client_id">
+                                <select class="form-select" name="attorney" id="attorney" aria-label="Default select example">
+                                    {% for x in temp_attorneys %}
+                                        <option selected value="{{ x.id }}">{{ x.attorneyprofile.office_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" form="attachAttorneyForm" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if userprofile.providerprofile.account_type == 'Provider' or request.user.providerstaff_userprofile.account_type == 'ProviderStaff' %}
+        <div>
+            <form method="POST" action="{% url 'case_management' %}">
+                {% csrf_token %}
+                <div class="mt-1 row gx-2">
+                    <div class="col-sm-6">
+                        <h4>Patient Case Management</h4>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="d-flex gap-2 w-100">
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#addClient" class="btn btn-primary">Add New Patient</button>
+                            <div class="flex-fill">
+                                <input type="text" placeholder="Screen by Patient Name" class="form-control me-2" name="search_clients" id="search_clients" autocomplete="off"/>
+                            </div>
+                            <div class="flex-fill">
+                                <input type="text" placeholder="Screen by Law Firm Name" class="form-control me-2" name="search" id="search_attorneys" autocomplete="off"/>
+                            </div>
+                            <input type="text" hidden value="True" name="value" />
+                            <input type="hidden" name="client_id" id="client_id" />
+                            <input type="hidden" name="attorney_id" id="attorney_id" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="row py-2 px-3">
+                <div class="col-lg-2 col-md-4 col-xs-4 filter-container">
+                    <!-- <a href="{% url 'newLead' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">New Lead</a><br><br>
+                    <a href="{% url 'treating' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Treating</a><br><br>
+                    <a href="{% url 'treatmentDone' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Treatment Done</a><br><br>
+                    <a href="{% url 'litigation' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Litigation</a><br><br>
+                    <a href="{% url 'settlement' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Settlement</a><br><br>
+                    <a href="{% url 'settled' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Settled</a><br><br>
+                    <a href="{% url 'paid' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Paid</a><br><br>
+                    <a href="{% url 'open' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Open</a><br><br>
+                    <a href="{% url 'close' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Closed</a><br><br> -->
+                    <a href="#" data-id="{{x.id}}" onclick="filterTFCaseStatusAll(event)" class="filter-item-all">All Patients</a>
+
+                    <div class="mb-3">
+                        <label class="me-2">
+                            <input name="open_close" value="Open" type="checkbox" class="me-1" onchange="filterTFCaseStatusRefresh(event)" checked/>Open
+                        </label>
+                        <label>
+                            <input name="open_close" value="Close" name="open_close" type="checkbox" class="me-1" onchange="filterTFCaseStatusRefresh(event)"  checked/>Closed
+                        </label>
+                    </div>
+                    {% for x in tf_case_status %}
+                        <a href="#" data-id="{{x.id}}" onclick="filterTFCaseStatus(event)" style="text-decoration: none; " class="filter-item active">{{x.name}}</a>
+                    {% endfor %}
+                </div>
+                <div class="col-lg-10 col-md-8 col-xs-8">
+                    <table class="table table-striped table-hover table-borderless" style="justify-content: center;" id="table-data">
+                        <thead>
+                            <tr class="text-secondary">
+                                <th></th>
+                                <th style="font-weight: 400;">Patient</th>
+                                <th style="font-weight: 400;" style="width: 110px;">Birthday</th>
+                                <th style="font-weight: 400;">Open/Closed</th>
+                                <th style="font-weight: 400;">Specialties</th>
+                                <th style="font-weight: 400;" style="width: 110px;">Incident</th>
+                                <th style="font-weight: 400;">Law Firm</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% verbatim %}
+        <script type="text/template" id="dz-template">
+            <div class="dz-preview dz-file-preview">
+                <div class="d-flex align-items-center">
+                    <div class="px-1"><i class="fa fa-file-pdf text-danger"></i></div>
+                    <div>
+                        <div class="dz-filename"><span data-dz-name></span></div>
+                        <!-- <img data-dz-thumbnail /> -->
+                    </div>
+                </div>
+                <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+                <div class="dz-success-mark"><span>✔</span></div>
+                <div class="dz-error-mark"><span>✘</span></div>
+                <div class="dz-error-message"><span data-dz-errormessage></span></div>
+            </div>
+        </script>
+        <script type="text/template" id="doc-preview-template">
+            <div class="px-4 py-4 doc-preview-sidebar">
+                <span data-close="sidebar-right" onclick="hideRightSidebar()"><i class="fa fa-times"></i></span>
+                <h4 class="mb-3 text-secondary">Document: {{docName}}</h4>
+                <div class="img-thumbnail">
+                    <embed src="/BP/open/{{docId}}/" width="100%" height="400px" />
+                </div>
+            </div>
+        </script>
+        <script type="text/template" id="table-data-template">
+            <tr class="pointer" style="vertical-align: middle;" onclick="patientDetails({{id}}, {{client_id}})">
+                <td class="text-muted td-autosize">{{i}}</td>
+                <th scope="row">{{client_name}}</th>
+                <td>{{birthday}}</td>
+                <td>{{status}}</td>
+                <!-- <td class="td-autosize">
+                    {{#if doc_1.ischeck}}
+                        <div>
+                            <form action="/BP/upload/{{client_id}}/{{id}}/{{doc_1.id}}/" method="POST" class="dropzone dz dz-xs mb-0 me-0 d-inline-block" data-dropzone>
+                                <input type="hidden" name="csrfmiddlewaretoken" value="{{csrfmiddlewaretoken}}" />
+                                <input type="hidden" name="name" value=".." />
+                                <div class="dz-message" data-dz-message>
+                                    <span><img src="/static/BP_resources/images/icon/file.png" style="height: 20px;"> {{doc_1.document_no}}</span>
+                                </div>
+                                <div class="fallback"><input type="file" name="file"></div>
+                            </form>
+                        </div>
+                    {{else}}
+                        <div>
+                            <a href="/openfile/{{doc_1.id}}" target="_blank" class="dropzone dz dz-xs mb-0 me-0 text-dark d-inline-block" data-doc-id="{{doc_1.id}}" data-client-id="{{client_id}}" data-case-id="{{id}}" data-note-id="" data-doc-name="{{doc_1.file_name}}" onclick="event.stopPropagation()">
+                                <div class="dz-preview dz-file-preview dz-processing dz-success dz-complete">
+                                    <div class="d-flex align-items-center">
+                                        <div class="px-1"><i class="fa fa-file-pdf text-danger"></i></div>                
+                                        <div>
+                                            <div class="dz-filename"><span>{{doc_1.file_name}}</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {{/if}}
+                </td>
+                <td class="td-autosize">
+                    {{#if doc_2.ischeck}}
+                        <div>
+                            <form action="/BP/upload/{{client_id}}/{{id}}/{{doc_2.id}}/" method="POST" class="dropzone dz dz-xs mb-0 me-0 d-inline-block" data-dropzone>
+                                <input type="hidden" name="csrfmiddlewaretoken" value="{{csrfmiddlewaretoken}}" />
+                                <input type="hidden" name="name" value=".." />
+                                <div class="dz-message" data-dz-message>
+                                    <span><img src="/static/BP_resources/images/icon/file.png" style="height: 20px;"> {{doc_2.document_no}}</span>
+                                </div>
+                                <div class="fallback"><input type="file" name="file"></div>
+                            </form>
+                        </div>
+                    {{else}}
+                        <div>
+                            <a href="/openfile/{{doc_2.id}}" target="_blank" class="dropzone dz dz-xs mb-0 me-0 text-dark" data-doc-id="{{doc_2.id}}" data-client-id="{{client_id}}" data-case-id="{{id}}" data-note-id="" data-doc-name="{{doc_2.file_name}}" onclick="event.stopPropagation()">
+                                <div class="dz-preview dz-file-preview dz-processing dz-success dz-complete">
+                                    <div class="d-flex align-items-center">
+                                        <div class="px-1"><i class="fa fa-file-pdf text-danger"></i></div>                
+                                        <div>
+                                            <div class="dz-filename"><span>{{doc_2.file_name}}</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {{/if}}
+                </td> -->
+                <td class="py-1 td-autosize">
+                    <div class="d-flex flex-wrap gap-1" style="width: 120px; height: 55px">
+                    {{#each specialties}}
+                        <div class="badge-specialty col-3" style="background-color: {{color}}" title="{{name}}">{{name_0}}</div>
+                    {{/each}}
+                    </div>
+                </td>
+                <td>{{incident_date}}</td>
+                <td class="py-0 small">
+                    {{office_name}}
+                    <div class="text-muted">{{attorney_phone_number}}</div>
+                </td>
+            </tr>
+        </script>
+        <script type="text/template" id="table-nodata-template">
+            <tr>
+                <td colspan="8" class="text-center">No records to display</td>
+            </tr>
+        </script>
+    {% endverbatim %}
+    <div class="modal fade" id="docModal" tabindex="-1" aria-labelledby="docModalLabel" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form onsubmit="submitDocName()">
+                        <button type="button" class="btn-close float-end" onclick="hideDocName()"></button>
+                        <h5 class="modal-title" id="docModalLabel">Enter Document Name</h5>
+                        <div class="py-4">
+                            <div class="form-group">
+                                <label>Documet Name</label>
+                                <input id="docName" type="text" class="form-control" required />
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-secondary" onclick="hideDocName()">Close</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function addClientID(client_id){
+            client = document.getElementById('client_id')
+            client.value = client_id
+            console.log(client_id);
+        }
+        function _calcAge() {
+            var text = document.getElementById("birthday").value
+            let result = text.slice(0, 2) + '-' + text.slice(2,4) + '-' + text.slice(4);
+            var date = new Date(result);
+            var today = new Date();
+
+            var timeDiff = Math.abs(today.getTime() - date.getTime());
+            var age1 = Math.ceil(timeDiff / (1000 * 3600 * 24)) / 365;
+            return age1;
+        }
+        function _age(){
+            
+            var temp_age = _calcAge();
+            console.log(temp_age);
+            document.getElementById('age').value = temp_age.toFixed(2);
+        }
+        
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    
+    <script>
+        /* When the user clicks on the button, 
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <script>
+        function myFunction6() {
+            document.getElementById("myDropdown6").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns6 = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns6.length; i++) {
+                    var openDropdown = dropdowns6[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+        function filterTFCaseStatusAll(ev){
+            $(ev.target).closest('.filter-container').find('.filter-item').removeClass('active').addClass('active');
+            $(ev.target).closest('.filter-container').find('[name="open_close"]').attr('checked',true);
+            filterTFCaseStatusRefresh(ev);
+        }
+        function filterTFCaseStatus(ev){
+            $(ev.target).toggleClass('active');
+            filterTFCaseStatusRefresh(ev);
+        }
+        function filterTFCaseStatusRefresh(ev){
+            var ids = $(ev.target).closest('.filter-container').find('a.active').map((i,x)=>$(x).attr('data-id')).toArray();
+            var open_close = $(ev.target).closest('.filter-container').find('input[name="open_close"]:checked').map((i,x)=>$(x).val()).toArray();
+            var tf_case_status = ids.join(',');
+            $.ajax({
+                url: '/FilterTFCaseStatus/',
+                data:{
+                    tf_case_status: tf_case_status,
+                    open_close: open_close.length>1?'':open_close[0]
+                },
+                method: 'GET',
+                contentType: 'application/json',
+                success: function(data){ setTableData1(data.response); },
+                error: function(){ setTableData1([]); }
+            })
+        }
+        var data_template = Handlebars.compile($('#table-data-template').html());
+        var nodata_template = Handlebars.compile($('#table-nodata-template').html());
+
+        function setTableData1(data) {
+                var $tbody = $('#table-data tbody');
+                $tbody.html('');
+                console.log(data)
+                if(data && data.length) {
+                    for (var i = 0; i < data.length; i++) {
+                        var item = data[i];
+                        item.csrfmiddlewaretoken = $('[name="csrfmiddlewaretoken"]').val();
+                        item.doc_1.ischeck = item.doc_1.check == 'False';
+                        item.doc_2.ischeck = item.doc_2.check == 'False';
+                        item.specialties = item.attached_specialties;
+                        item.specialties.map(x=>x.name_0=x.name[0]);
+                        $tr = $(data_template(item));
+                        initDropzoneFor($tr);
+                        $tbody.append($tr);
+                    }
+                }
+                else{
+                    $tbody.append($(nodata_template()));
+                }
+            }
+
+        $(document).ready(function(){
+
+            refreshData();
+
+            $('#address').change(function(){
+                var addressId = $('#address').val();
+                $.ajax({
+                    url: '/getSpecialties/?location_id='+addressId,
+                    contentType: 'application/json',
+                    method: 'GET',
+                    success: function(response)
+                    {
+                        $('#specialty').empty();
+                        $.each(response, function(i, p) {
+                            var $el = $(`<option style="color:${p.color}" data-color="${p.color}"></option>`).val(p.name).html(p.name);
+                            $('#specialty').append($el);
+                        });
+                        $('#specialty').change();
+                    }
+                });
+            });
+
+            $('#specialty').change(function(){
+                var selected = $('#specialty').val();
+                if(!selected) $('#specialty').css('color', '');
+                else{
+                    var selectedColor = $('#specialty').find(`option[value="${selected}"]`).attr('data-color');
+                    $('#specialty').css('color',selectedColor);
+                }
+            });
+
+            $('#search_clients').typeahead(null, {
+                    name: 'clients',
+                    display: 'text',
+                    async: true,
+                    source: debounce(function (query, process, process_async) {
+                        $.ajax({
+                            url: '/ClientAutoCompleteSearch/',
+                            contentType: 'application/json',
+                            method: 'GET',
+                            data: { client_name: query },
+                            success: function (data) {
+                                var result = data.map(function(item){
+                                    return { text: `${item.first_name} ${item.last_name}`, value: item }
+                                });
+                                return process_async(result);
+                            }
+                        });
+                    }, 250),
+
+                })
+                .bind('typeahead:select', function(ev, data){ $('#search_clients').data('tt-value', data.value); refreshData() })
+                .bind('typeahead:change', function(ev, data){ 
+                    if(!data) { $('#search_clients').data('tt-value', null); refreshData(); }
+                });
+
+            $('#search_attorneys').typeahead(null, {
+                    name: 'clients',
+                    display: 'text',
+                    async: true,
+                    source: debounce(function (query, process, process_async) {
+                        $.ajax({
+                            url: '/AttorneyAutoCompleteSearch/',
+                            contentType: 'application/json',
+                            method: 'GET',
+                            data: { attorney_name: query },
+                            success: function (data) {
+                                var result = data.map(function(item){
+                                    return { text: item.attorneyprofile.office_name, value: item }
+                                });
+                                return process_async(result);
+                            }
+                        });
+                    }, 250),
+
+                })
+                .bind('typeahead:select', function(ev, data){ $('#search_attorneys').data('tt-value', data.value); refreshData() })
+                .bind('typeahead:change', function(ev, data){ 
+                    if(!data) { $('#search_attorneys').data('tt-value', null); refreshData(); }
+                });
+
+            $('#btnsearch').click(function(){refreshData()});
+            
+            
+
+            function refreshData() { 
+                var client = $('#search_clients').data('tt-value');
+                var attorney = $('#search_attorneys').data('tt-value');
+                var client_id = client ? client.id:'';
+                var attorney_id = attorney ? attorney.id:'';
+
+                console.log('client_id', client_id, attorney_id);
+                $.ajax({
+                    url: '/ListPatientsCaseManagement/?client_id='+client_id+'&attorney_id='+attorney_id,
+                    method: 'GET',
+                    contentType: 'application/json',
+                    success: function(data){ setTableData(data.response); },
+                    error: function(){ setTableData([]); }
+                })
+            }
+
+            var data_template = Handlebars.compile($('#table-data-template').html());
+            var nodata_template = Handlebars.compile($('#table-nodata-template').html());
+
+            function setTableData(data) {
+                var $tbody = $('#table-data tbody');
+                $tbody.html('');
+                if(data && data.length) {
+                    for (var i = 0; i < data.length; i++) {
+                        var item = data[i];
+                        item.i = i+1;
+                        item.csrfmiddlewaretoken = $('[name="csrfmiddlewaretoken"]').val();
+                        item.doc_1.ischeck = item.doc_1.check == 'False';
+                        item.doc_2.ischeck = item.doc_2.check == 'False';
+                        item.specialties = item.attached_specialties;
+                        item.specialties.map(x=>x.name_0=x.name[0]);
+                        $tr = $(data_template(item));
+                        initDropzoneFor($tr);
+                        $tbody.append($tr);
+                    }
+                }
+                else{
+                    $tbody.append($(nodata_template()));
+                }
+            }
+        })
+
+        function patientDetails(id, client_id) {
+            window.location.href = "/patientDetail/"+client_id+"/"+id;
+            return false;
+        }
+    </script>
+
+{% endblock content %}

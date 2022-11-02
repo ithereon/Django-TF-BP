@@ -1,0 +1,409 @@
+/* farrukh code */
+.checklist-section::after {
+  border-top: 53px solid #093761;
+  border-left: 12px solid white;
+}
+.text-darker{
+    color: #000 !important;
+}
+.checklist-pink{
+    top: -5px !important;
+    width: 302px !important;
+    margin-right: -20px;
+}
+.checklist-pink{
+    background-color: #F5E8E9 !important;
+}
+.checklist-pink::after {
+    border-top: 53px solid #F5E8E9 !important;
+  }
+  .checklist-pink .double-arrow-down,   .checklist-pink .green-check{
+    filter: brightness(0) invert(0) !important;
+  }
+  #myDropdown86, #myDropdown87{
+    top: 54px !important;
+    position: absolute;
+  }
+  .photos-page .section__content--p30 {
+    padding: 0 5px !important;
+  }
+  .checklist-pink {
+    top: -5px !important;
+    width: 296px !important;
+    margin-right: 6px !important;
+  }
+  .main-content {
+    padding-top: 117px !important;
+    min-height: 100vh !important;
+  }
+  .pink-checklist-multi-dropdowns {
+    right: 16px !important;
+    width: 283px !important;
+  }
+  .top-pane {
+    position: absolute;
+    right: 350px;
+    top: -53px !important;
+  }
+  .top-head h2 {
+    margin-left: -15px;
+    position: relative;
+  }
+  .main-content {
+    padding-top: 0px !important;
+  }
+  .client-page .page-container {
+    padding-left: 190px;
+    background: #fff;
+  }
+  .section__content--p30 {
+    padding: 0 5px !important;
+    margin-top: -20px !important;
+  }
+  .client-details-wrap{
+    padding: 5px;
+    padding-bottom: 0px;
+  }
+  .client-details-wrap a{
+    color: #000;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .client-details-wrap .email{
+    color: #0a3761 !important;
+  }
+  .client-details-wrap small{
+    font-size: 13px !important;
+    color: #000 !important;
+    line-height: 16px !important;
+    margin-top: -2px !important;
+  }
+  
+  .client-details-wrap small i{
+    color: #999;
+    font-style: normal;
+    font-weight: 600;
+  }
+  .last-row-details small i{
+    float: left;
+    overflow: hidden;
+    text-align: right;
+    width: 80px;
+  }
+  .clienthead{
+    padding: 0 !important;
+  }
+  .columnsContainer2 p {
+    margin-bottom: 0px !important;
+  }
+  .columnsContainer2 > div form {
+    position: relative !important;
+  }
+  .client-page .table-earning tbody td {
+    padding: 5px 15px !important;
+  }
+  #w3review {
+    height: 53px;
+    padding-left: 5px !important;
+    padding-top: 2px !important;
+  }
+  .table-earning tbody tr td:nth-child(1) {
+    color: #808080;
+  }
+  .photos-page .nav-link.active {
+    color: #0a3761;
+    text-decoration: underline;
+  }
+  .columnsContainer2{
+    padding: 0 5px;
+  }
+
+  /* Defendants and other pages css */
+  .top-input-field .form-control {
+    height: 45px;
+    width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding-left: 15px;
+    padding-top: 6px;
+    display: inline-block;
+  }
+  .top-input-field{
+    margin: 7px 5px;
+  }
+  .top-input-field button {
+    background: #0a3761;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 40px;
+    margin-left: 20px;
+  }
+  .super-hero-img{
+    width: 140px;
+    height: 110px;
+  }
+  .super-hero-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .checklist-pink::after {
+    border-top: 53px solid #F5E8E9 !important;
+  }
+  .checklist-pink {
+    margin-right: 0px !important;
+  }
+  .add-button {
+    position: absolute;
+    right: 47% !important;
+    top: 6px !important;
+    bottom: 7px;
+    transform: translateX(-50%) !important;
+  }
+  .add-button::before {
+    display: inline-block;
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: 19px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-right: 10px solid #093761;
+    position: absolute;
+    left: -9px;
+    top: -1px;
+    z-index: 1000;
+  }
+  .add-button::after {
+    display: inline-block;
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: 19px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 10px solid #093761;
+    position: absolute;
+    right: -9px;
+    top: 0px;
+    z-index: 1000;
+  }
+  .add-button .btn {
+    background-color: #093761;
+    color: #fff;
+    border-radius: 0px;
+  }
+
+  .photos-section{
+    padding: 0 5px !important;
+  }
+  .photos-page .nav-link.active {
+    color: #fff !important;
+    background-color: #093761;
+    text-decoration: none ;
+  }
+  .custom-tab nav{
+    border-bottom: 1px solid #ccc;
+    margin-left: 5px;
+  }
+  .card{
+    margin-bottom: 5px !important;
+  }
+  .custom-tab .card{
+    margin: 5px !important;
+    padding: 0 !important;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid #ccc;
+  }
+  .photos-page .tab-pane .card:hover {
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4) !important;
+    cursor: pointer;
+  }
+  .custom-tab .card .card-image{
+    width: 100%;
+    height: 300px;
+    position: relative;
+  }
+  .custom-tab .card .card-image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .card-body{
+    padding: 15px;
+    position: relative;
+  }
+  .card-body span{
+    display: inline-block;
+    overflow: hidden;
+  }
+  .card-body hr{
+    margin: 5px 0;
+  }
+  .card-body span{
+    display: block;
+  }
+  .card-body span h4,.card-body span h5{
+    margin: 0;
+    font-weight: normal;
+    display: inline-block;
+  }
+  .card-body span h5{
+    float: right;
+  }
+.card-body span p{
+  color: #666;
+  font-size: 14px;
+  display: inline-block;
+}
+.card-icons{
+  display: inline-flex;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.card-icons a {
+  margin-left: 5px;
+}
+.card-icons a i{
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background-color: #093761;
+  color: #fff;
+  border-radius: 50%;
+}
+.photos-page .tab-pane .card::after{
+  display: none;
+}
+.card:hover > .card-icons{
+  display: block;
+}
+.cards-wrapper{
+  display: flex !important;
+  flex-flow: row wrap !important;
+}
+.card{
+  flex-basis: 19%;
+  flex-grow: 1;
+  min-width: 240px;
+}
+.date-details {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  text-align: left !important;
+  padding: 5px 10px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+.date-details p{
+  display: inline-block;
+}
+.dot-border{
+  width: 5px;
+  height: 5px;
+  display: inline-block;
+  background-color: #999;
+  border-radius: 50%;
+  margin: 1px 5px 0 5px;
+}
+.form-check-input{
+  transform: scale(1.5);
+}
+.navigation {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menuToggle {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  border-radius: 40px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+}
+
+
+.menuToggle.active::before {
+  transform: rotate(315deg);
+}
+
+.menu {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  background: #fff;
+  border-radius: 70px;
+  z-index: -1;
+  transition: transform 0.5s, width 0.5s, height 0.5s;
+  transition-delay: 1s, 0.5s, 0.5s;
+  transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.menuToggle.active ~ .menu {
+  width: auto;
+  height: 55px;
+  z-index: 1;
+  transform: translateY(-50px);
+  transition-delay: 0s, 0.5s, 0.5s;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+  padding: 5px 5px;
+  border: 1px solid #ccc;
+}
+.menu::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  left: calc(50% - 8px);
+  bottom: 4px;
+  transform: rotate(45deg);
+  border-radius: 2px;
+  transition: 0.5s;
+}
+
+.menuToggle.active~.menu::before {
+  transition-delay: 0.5s;
+  bottom: -6px;
+}
+
+.menu ul {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 46px;
+  gap: 10px;
+}
+
+.menu ul li {
+  list-style: none;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-30px);
+  transition: 0.25s;
+  transition-delay: calc(0s + var(--i));
+}
+
+.menuToggle.active~.menu ul li {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0px);
+  transition-delay: calc(0.75s + var(--i));
+}
+
+.menu ul li a {
+  display: block;
+  font-size: 2.2em;
+  padding: 0;
+  margin: 0;
+}

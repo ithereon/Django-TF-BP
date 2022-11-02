@@ -1,0 +1,724 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+       
+        <!-- Title Page-->
+        <title>Dashboard</title>
+    
+        <!-- Fontfaces CSS-->
+        <link href="{% static 'BP_resources/css/font-face.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Bootstrap CSS-->
+        <link href="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Vendor CSS-->
+        <link href="{% static 'BP_resources/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Main CSS-->
+        <link href="{% static 'BP_resources/css/theme.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/sidebar.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/header.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/client.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/medicalCollapse.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/medicalTreatment.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Upload Stuff JS &  CSS-->
+        <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+    
+        <link rel="stylesheet" href="{% static 'BP/kendo/styles/kendo.common.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'BP/kendo/styles/kendo.default.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'BP/kendo/styles/kendo.default.mobile.min.css' %}" />
+    
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+        <script src="{% static 'js/main.js' %}" defer></script>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    </head>
+
+<body class="animsition client-page photos-page">
+    <div class="modal fade zoom-in" id="phone-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+                <form action="{% url 'bp-editClientInfo1' client.id case.id %}" method="post" id="editClientForm1">
+                    {% csrf_token %}
+                    <div class="modal-content-row">
+                        <p>{{client.phone}}</p>
+                        <p>Phone Number</p>
+                        
+                        <input type="text" name="client_phone" class="form-control" placeholder="Enter Phone....">
+                        
+                    </div>
+                    <div class="modal-content-row mt-2">
+                        <p>{{client.email}}</p>
+                        <p>Email address</p>
+                        
+                        <input type="email" name="client_email" class="form-control" placeholder="Enter Email....">
+                        
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button form="editClientForm1" type="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade zoom-in" id="dob-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+                <form id="editClientForm2" action="{% url 'bp-editClientInfo2' client.id case.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="modal-content-row">
+                        <p>{{client.birthday}}</p>
+                        <p>DOB</p>
+                        
+                        <input type="date" name="client_dob" class="form-control" placeholder="Enter DOB....">
+                        
+                    </div>
+                    <div class="modal-content-row mt-2">
+                        <p>{{client.ssn}}</p>
+                        <p>ssn</p>
+                        
+                        <input type="number" name="client_ssn" class="form-control" placeholder="Enter SSN....">
+                        
+                    </div>
+                    <div class="modal-content-row mt-2">
+                        <p>{{client.driver_license_number}}, {{client.driver_license_state}}</p>
+                        <p>dl#</p>
+                        
+                        <input type="text" name="client_driver_license" class="form-control" placeholder="Enter DL#....">
+                        
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button form="editClientForm2" type="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editTreatmentDate" tabindex="-1" aria-labelledby="editTreatmentDate" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editTreatmentDate">Edit or Delete Treatment Date Entry</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-2149612" action="{% url 'bp-addTreatmentNotes' client.id case.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label style="color:grey;" for="treatment_date1" class="fw-bold">Treatment Date</label>
+                                    <input type="date" class="form-control" placeholder="Treatment Date" name="treatment_date1" id="treatment_date12" data-field="treatment_date1" />
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label style="color:grey;" for="treatment_note1" class="fw-bold">Treatment Note</label>
+                                    <textarea type="text" placeholder="Treatment Note" required class="form-control" name="treatment_note1" id="treatment_note12"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                        <hr>
+                        Deleting a Treatment Date Entry Will Remove the Entry, and Download any Documents to Your Local Computer so They Are Not Lost.
+                        <input type="text" hidden name="treatment_date_id1" id="treatment_date_id12">
+                        <input type="text" hidden name="case_provider_id1" id="temp_client_provider_id12">
+                    
+                    </form>
+                    <form id="DeleteTreatmentNote" action="{% url 'bp-deleteTreatmentNote' %}" method="post">
+                        {% csrf_token %}
+                        <input type="text" hidden name="treatment_date_id1" id="deleteTreatmentNote1">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" style="float:left; margin-right:auto;" data-dismiss="modal">Cancel</button>
+                    
+                    <button type="submit" form="DeleteTreatmentNote" class="btn btn-danger" style="margin-right: 120px;" onclick="setDeleteTreatmentNoteID()"  >Delete</button>
+                 <button type="submit" form="form-2149612" class="btn btn-success">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addparty" tabindex="-1" aria-labelledby="addparty" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+           <div class="modal-content">
+              <div class="modal-header">
+                 <h5 class="modal-title" id="exampleModalLabel">Add Party</h5>
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet velit ab consectetur eius dignissimos nostrum</p>
+              </div> 
+              <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" style="float:left; margin-right:auto;" data-dismiss="modal">Cancel</button>
+                 <button type="submit" form="form12" class="btn btn-success">Save</button>
+              </div>
+           </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addwitness" tabindex="-1" aria-labelledby="addwitness" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+           <div class="modal-content">
+              <div class="modal-header">
+                 <h5 class="modal-title" id="exampleModalLabel">Add Witness</h5>
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet velit ab consectetur eius dignissimos nostrum</p>
+              </div> 
+              <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" style="float:left; margin-right:auto;" data-dismiss="modal">Cancel</button>
+                 <button type="submit" form="form12" class="btn btn-success">Save</button>
+              </div>
+           </div>
+        </div>
+    </div>
+    <div class="page-wrapper">
+
+        <!-- MENU SIDEBAR-->
+        {% include 'BP/SideBar.html' %}
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP NEW-->
+            {% include 'BP/header.html' %}
+            <!-- HEADER DESKTOP NEW-->
+            <div class="top-panel-wrapper">
+                <div class="panel-page-title">
+                    <p>Medical Treatment</p>
+                </div>
+                <div class="three-view-icons">
+                    <span class="three-icons" onclick="location.href='{% url 'bp-medicalmin' client.id case.id %}';">
+                        <img src="{% static 'BP_resources/images/icon/standard.svg' %}" width="35">
+                    </span>
+                    <span class="three-icons" onclick="location.href='{% url 'bp-medicaltreatment' client.id case.id %}';">
+                        <img src="{% static 'BP_resources/images/icon/detailed.svg' %}" width="35">
+                    </span>
+                    <span class="three-icons active" onclick="location.href='{% url 'bp-medicalcollapse' client.id case.id %}';">
+                        <img src="{% static 'BP_resources/images/icon/dates.svg' %}" width="35">
+                    </span>
+                </div>
+                <div class="add-button">
+                    <input type="submit" class="btn" value="Add Party" data-toggle="modal" data-target="#addparty">
+                </div>
+                <div class="add-button add-button-second">
+                    <input type="submit" class="btn" value="Add New Witness" data-toggle="modal" data-target="#addwitness">
+                </div>
+            </div>
+            <!-- MAIN CONTENT-->
+            <div class="main-content medical-pg " style="padding-top: 0px !important; margin-top: 18px !important">
+                <div class="section__content section__content--p30 top-head">
+                    <div class="container-fluid clienthead">
+                        {% if flagPage %}
+                            <div class="top-pane" style="position:absolute;right:355px !important;top:-83px !important;" onclick="location.href='{% url 'bp-removeFlagPage' client.id case.id flagPage.id %}';">
+                                <img src="{% static 'BP_resources/images/icon/flag-icon-red-bg-gray.svg' %}" width="46px">
+                            </div>
+                        {% else %}
+                            <div class="top-pane" style="position:absolute;right:355px !important;top:-83px !important;"  onclick="location.href='{% url 'bp-flagPage' client.id case.id 'Medical Treatment' 'bp-medicaltreatment' %}';">
+                                <img src="{% static 'BP_resources/images/icon/flag-icon-bg-gray.svg' %}" width="46px">
+                            </div>
+                        {% endif %}
+                        {% comment %} <div class="check-circle">
+                            <p>{{total_marked}}/{{total_checklists}}</p>
+                            <div class="nt-box">
+                                <div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:{{checklist_percentage}}"></div>
+                            </div>
+                            <div class="dropdown">
+                                <button onclick="myFunction()" class="dropbtn"><i class="fa fa-check" aria-hidden="true"></i> Checklist <i class="fa fa-chevron-down" aria-hidden="true"></i></button>
+                                <div id="myDropdown" class="dropdown-content">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="checklist-cont">
+                                                {% for checklist in overall_checklist %}
+                                                    {% if not checklist.status  %}
+                                                        <div><input type="checkbox" onclick="location.href='{% url 'bp-markChecklist' checklist.id client.id case.id  %}';" id="vehicle1" name="vehicle1" value="Bike">
+                                                            <label for="vehicle1">{{checklist.name}}</label>
+                                                        </div>
+                                                    {% else %}
+                                                        <div><input type="checkbox" onclick="location.href='{% url 'bp-uncheckChecklist' checklist.case_checklist_id %}';" checked id="vehicle1" name="vehicle1" value="Bike">
+                                                            <label for="vehicle1">{{checklist.name}}</label>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="checkbottom">
+                                            <div class="col-lg-2">
+                                                <p>{{total_marked}}/{{total_checklists}}</p>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:{{checklist_percentage}}"></div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <button onclick="myFunction()" class="dropbtn"><i class="fa fa-check" aria-hidden="true"></i> Checklist <i class="fa fa-angle-up" aria-hidden="true"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div> {% endcomment %}
+                        {% comment %} <div class="checklist-section checklist-pink">
+                            <p class="text-darker">0/2</p>
+                            <div class="circle-wrap">
+                                <div class="circle">
+                                <div class="mask full">
+                                    <div class="fill"></div>
+                                </div>
+                                <div class="mask half">
+                                    <div class="fill"></div>
+                                </div>
+                                <div class="inside-circle"> 100% </div>
+                                </div>
+                            </div>
+                            <div class="dropdown6">
+                                <button onclick="myFunction6(86)" class="dropbtn text-darker" style="background-color: #F5E8E9;"> 
+                                    <img src="/static/BP_resources/images/icon/check-green.svg" alt="Double arrow down" class="green-check"> Checklist <img src="/static/BP_resources/images/icon/angles-down-blue.svg" alt="Double arrow down" class="double-arrow-down"></button>
+                                    
+                                    <div id="myDropdown86" class="dropdown-content">
+                                        <div class="checklist-multi-dropdowns pink-checklist-multi-dropdowns">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                <label class="form-check-label" for="gridCheck1">
+                                                  Check Item example
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                <label class="form-check-label" for="gridCheck1">
+                                                  Check Item example
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                <label class="form-check-label" for="gridCheck1">
+                                                  Check Item example
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                <label class="form-check-label" for="gridCheck1">
+                                                  Check Item example
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div> {% endcomment %}
+                        <div class="" style="margin-top: -15px;">   
+                            <div class="row redtd" style="width: 100%;margin-left: 0px !important">
+                                <div class="col-lg-12 p-0">
+                                    <div>
+                                        <div class=" mb-1" style="margin-left:auto; float:right;">
+                                            <form action="." method="post" class="d-flex">
+                                                {% csrf_token %}
+                                                <p style="color:grey;">SHOW GAPS IN THE TREATMENT DATES LONGER THAN</p>
+                                                <select name="timeFrame" onchange="this.form.submit()" class="ml-2">
+                                                    <option selected value="1 week">1 week</option>
+                                                    <option value="2 weeks">2 weeks</option>
+                                                    <option value="3 weeks">3 weeks</option>
+                                                    <option value="30 days">30 days</option>
+                                                    <option value="60 days">60 days</option>
+                                                    <option value="90 days">90 days</option>
+                                                    <option value="180 days">180 days</option>
+                                                    <option value="1 year">1 year</option>
+                                                    <option value="-">Do Not Show Gaps</option>
+                    
+                                                </select>
+                                            </form>
+                                            
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="table-responsive table--no-card">
+
+                                        <table class="table table-borderless table-striped table-earning table-notes" style="font-size: 14px;">
+
+
+                                            <thead>
+                                                <tr >
+                                                    <th></th>
+                                                    
+                                                    <th style="color:grey;padding-top:5px;padding-bottom:5px;" class="pr-3">Medical Provider</th>
+                                                    <th style="color:grey;padding-top:5px;padding-bottom:5px;">Date</th>
+                                                    <th style="color:grey;padding-top:5px;padding-bottom:5px;" colspan="2">Treatment Note</th>
+                                                    
+                                                    
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                
+                                                {% for treatment_note in treatment_gaps %}
+                                                {% if not treatment_note.gap %}
+                                                <tr
+                                                id="client_provider_treatment_date"
+                                                data-treatment_date_id1="{{treatment_note.treatment_date.id}}"
+                                                data-description="{{treatment_note.treatment_date.description}}"
+                                                data-date="{{treatment_note.treatment_date.date}}"
+                                                data-client_provider_id="{{treatment_note.client_provider.id}}"
+                                                onclick="editTreatmentNoteRecords()"
+                                                style="color:black;">
+                                                <td style="padding-top:5px ; padding-bottom: 5px;line-height: 26px;" class="td-autosize px-1" width="5px;">
+                                                    <div class="badge-specialty" style="background-color:{{treatment_note.client_provider.specialty.color}}">{{treatment_note.client_provider.specialty.name.0}}</div>
+                                                </td>
+                                                
+                                                    <td style="padding-top:5px ; padding-bottom: 5px;color:black !important;line-height: 26px;" class="pr-3" width="50px;">{{treatment_note.client_provider.location.added_by.providerprofile.office_name}}</td>
+                                                    <td style="padding-top:5px ; padding-bottom: 5px;color:black !important;line-height: 26px;" width="15px;">{{treatment_note.treatment_date.date}}</td>
+                                                    
+                                                    <td colspan="3" style="padding-top:5px ; padding-bottom: 5px;color:black !important;line-height: 26px;">{{treatment_note.treatment_date.description}}</td>
+                                                    <td style="padding-top:5px ; padding-bottom: 5px;color:black !important;line-height: 26px;" ></td>
+                                                    <!-- <td class="pr-3"><img width="30px;" src="{% static 'BP_resources/images/icon/file.png' %}">Document</td> -->
+                                                    {% if treatment_note.treatment_date.document.check == 'False' %}
+                                                        <td class="pt-2 pb-0 text-end" style="width: 30px;text-align: end;">
+                                                            <form action="{% url 'upload' client.id case.id treatment_note.treatment_date.document.id %}" method="POST" class=" mb-0" data-dropzone>
+                                                                {% csrf_token %}
+                                                                <input type="hidden" name="name" value=".." />
+                                                                
+                                                                <div class="dz-message" data-dz-message>
+                                                                    <i class="icon-file-text" style="color:grey;font-size:20px;text-align: center;"></i>
+                                                                </div>
+                                                                <div class="fallback"><input type="file" name="file"></div>
+                                                            </form>
+                                                        </td>
+                                                    {% else %}
+                                                        <td class="pt-2 pb-0 text-end" style="width: 30px;text-align: end;">
+                                                            <div>
+                                                                <div class=" mb-0" data-doc-id="{{treatment_note.treatment_date.document.id}}" data-client-id="{{client.id}}" data-case-id="{{case.id}}" data-note-id="{{treatment_note.treatment_date.id}}" data-doc-name="{{treatment_note.treatment_date.document.file_name}}" onclick="toggleDocPreview(this, event)">
+                                                                    
+                                                                    <div class="dz-preview dz-file-preview dz-processing dz-success dz-complete">
+                                                                        <div class=" align-items-center">
+                                                                            <i class="icon-file-text" style="color:{{client_provider.specialty.color}};font-size:14px;text-align: center;"></i>              
+                                                                           
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        
+                                                    {% endif %}
+                                                    
+
+
+                                                </tr>
+                                                {% else %}
+                                                <tr
+                                                id="client_provider_treatment_date"
+                                                data-treatment_date_id1="{{treatment_note.treatment_date.id}}"
+                                                data-description="{{treatment_note.treatment_date.description}}"
+                                                data-date="{{treatment_note.treatment_date.date}}"
+                                                data-client_provider_id="{{treatment_note.client_provider.id}}"
+                                                onclick="editTreatmentNoteRecords()"
+                                                style="color:black;">
+                                                    <td></td>
+                                                    <td style="padding-top:5px ; padding-bottom: 5px;color:black !important;" class="pr-3" width="50px;">{{treatment_note.treatment_date.days}} Day treatment gap from:</td>
+                                                    <td style="padding-top:5px ; padding-bottom: 5px;color:black !important;" width="15px;">{{treatment_note.treatment_date.first_date}}</td>
+                                                    
+                                                    <td colspan="3" style="padding-top:5px ; padding-bottom: 5px;color:black !important;">to {{treatment_note.treatment_date.second_date}}</td>
+                                                    <td style="padding-top:5px ; padding-bottom: 5px;color:black !important;" ></td>
+                                                    <!-- <td class="pr-3"><img width="30px;" src="{% static 'BP_resources/images/icon/file.png' %}">Document</td> -->
+                                                    {% if treatment_note.treatment_date.doc.check == 'False' %}
+                                                        <td class="pt-2 pb-0 text-end" style="width: 30px;text-align: end;">
+                                                            <form action="{% url 'upload' client.id case.id treatment_note.treatment_date.doc.id %}" method="POST" class=" mb-0" data-dropzone>
+                                                                {% csrf_token %}
+                                                                <input type="hidden" name="name" value=".." />
+                                                                
+                                                                <div class="dz-message" data-dz-message>
+                                                                    <i class="icon-file-text" style="color:grey;font-size:20px;text-align: center;"></i>
+                                                                </div>
+                                                                <div class="fallback"><input type="file" name="file"></div>
+                                                            </form>
+                                                        </td>
+                                                    {% else %}
+                                                        <td class="pt-2 pb-0 text-end" style="width: 30px;text-align: end;">
+                                                            <div>
+                                                                <div class=" mb-0" data-doc-id="{{treatment_note.treatment_date.doc.id}}" data-client-id="{{client.id}}" data-case-id="{{case.id}}" data-note-id="{{treatment_note.treatment_date.id}}" data-doc-name="{{treatment_note.treatment_date.doc.file_name}}" onclick="toggleDocPreview(this, event)">
+                                                                    
+                                                                    <div class="dz-preview dz-file-preview dz-processing dz-success dz-complete">
+                                                                        <div class=" align-items-center">
+                                                                            <i class="icon-file-text" style="color:{{client_provider.specialty.color}};font-size:14px;text-align: center;"></i>              
+                                                                           
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        
+                                                    {% endif %}
+                                                    
+
+
+                                                </tr>
+                                                {% endif %}
+
+                                                {% endfor %}
+                                             
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            <form method="POST" action="{% url 'bp-addNotes' client.id case.id %}">
+                                {% csrf_token %}
+                                <textarea id="w3review" name="description" placeholder="Medical Collapse Note:.."></textarea>
+                                <input hidden type="text" id="category" name="category" value="Medical Collapse">
+                                <button class="btn btn-primary" style="background-color: #0A3761;" type="submit">Add Note</button>
+                            </form>
+                            <div class="footer-line">
+                                <div class="row">
+                                    <div class="col-lg-7">
+                                        To-Do for
+                                        <select name="case manager" id="cars">
+                                            <option value="case manager">case manager</option>
+                                            <option value="case manager2">case manager</option>
+                                            <option value="case manager3">case manager</option>
+                                            <option value="case manager4">case manager</option>
+                                        </select>
+                                        due in
+                                        <select name="case manager" id="cars">
+                                            <option value="case manager">3 Days</option>
+                                            <option value="case manager2">3 Days</option>
+                                            <option value="case manager3">3 Days</option>
+                                            <option value="case manager4">3 Days</option>
+                                        </select>
+
+                                        <button type="button">New To-Do</button>
+                                    </div>
+                                    <div class="col-lg-5">
+
+                                        <select name="case manager" class="right" id="cars">
+                                            <option value="case manager">Medical Treatment</option>
+                                            <option value="case manager2">Client</option>
+                                            <option value="case manager3">Client</option>
+                                            <option value="case manager4">Client</option>
+                                        </select>
+                                        <button type="button">New To-Do</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="copyright">
+                            <p>Copyright © 2022 Ian Silverthorne</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END MAIN CONTENT-->
+    {% verbatim %}
+    <script type="text/template" id="dz-template">
+        <div class="dz-preview dz-file-preview">
+            <div class="d-flex align-items-center">
+                <div class="px-1">
+                    <i class="fa fa-file-pdf text-danger"></i>
+                </div>
+                <div>
+                    <div class="dz-filename"><span data-dz-name></span></div>
+                    <!-- <img data-dz-thumbnail /> -->
+                </div>
+            </div>
+            <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+            <div class="dz-success-mark"><span>✔</span></div>
+            <div class="dz-error-mark"><span>✘</span></div>
+            <div class="dz-error-message"><span data-dz-errormessage></span></div>
+        </div>
+    </script>
+
+    <script type="text/template" id="doc-preview-template">
+        <div class="px-4 py-4 doc-preview-sidebar">
+            <span data-close="sidebar-right" onclick="hideRightSidebar()"><i class="fa fa-times"></i></span>
+            <div class="img-thumbnail">
+                <embed src="" width="100%" height="400px" />
+            </div>
+        </div>
+    </script>
+{% endverbatim %}
+<div class="modal fade" id="docModal" tabindex="-1" aria-labelledby="docModalLabel" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-body">
+            <form onsubmit="submitDocName()">
+                <button type="button" class="close" onclick="hideDocName()">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title" id="docModalLabel">Enter Document Name</h5>
+                <div class="py-4">
+                    <div class="form-group">
+                        <label>Documet Name</label>
+                        <input id="docName" type="text" class="form-control" required />
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-secondary" onclick="hideDocName()">Close</button>
+            </form>
+        </div>
+        </div>
+    </div>
+    </div>
+    <!-- END PAGE CONTAINER-->
+    </div>
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'BP_resources/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'BP_resources/vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/select2/select2.min.js' %}">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script>
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
+    <script src="{% static 'BP/kendo/js/kendo.all.min.js' %}"></script>
+
+    <!-- Main JS-->
+    <script src="{% static 'BP_resources/js/main.js' %}"></script>
+    <script>
+        function editTreatmentNoteRecords() {
+                var $modal = $('#editTreatmentDate');
+                temp = '#client_provider_treatment_date';
+                var $tr = $(temp);
+    
+                $modal.find('[id="treatment_date12"]').val($tr.attr('data-date'));
+                $modal.find('[id="treatment_note12"]').val($tr.attr('data-description'));
+                $modal.find('[id="treatment_date_id12"]').val($tr.attr('data-treatment_date_id1'));
+                $modal.find('[id="temp_client_provider_id12"]').val($tr.attr('data-client_provider_id'));
+                
+                
+                
+                $modal.modal('show');
+            }
+            function setDeleteTreatmentNoteID(){
+                var id = document.getElementById('treatment_date_id12').value;
+                document.getElementById('deleteTreatmentNote1').value = id;
+                console.log(id);
+            }
+    </script>
+    <script>
+        /* When the user clicks on the button, 
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+    
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    
+        function toggleDateTable()
+            {
+                console.log('toggleDateTable');
+                var hasC = $('.table-notes').hasClass('hide-tbody');
+                $('.table-notes').removeClass('hide-tbody');
+                if(!hasC) $('.table-notes').addClass('hide-tbody');
+            }
+    </script>
+    <script>
+        function myFunction6(x) {
+            var temp = 'myDropdown' + x;
+    
+            document.getElementById(temp).classList.toggle("show");
+        }
+    
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns6 = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns6.length; i++) {
+                    var openDropdown = dropdowns6[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
+<!-- end document-->

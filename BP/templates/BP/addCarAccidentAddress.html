@@ -1,0 +1,334 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+       
+    
+        <!-- Title Page-->
+        <title>Add Car Accident</title>
+    
+        <!-- Fontfaces CSS-->
+        <link href="{% static 'BP_resources/css/font-face.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Bootstrap CSS-->
+        <link href="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Vendor CSS-->
+        <link href="{% static 'BP_resources/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Main CSS-->
+        <link href="{% static 'BP_resources/css/theme.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/sidebar.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/header.css' %}" rel="stylesheet" media="all">
+    
+    </head>
+
+<body >
+    <div >
+
+
+        <!-- PAGE CONTAINER-->
+        <div >
+            <!-- HEADER DESKTOP-->
+       
+            <!-- HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="container">
+                    <div>
+                        
+                        <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Edit Address</h5>
+                              {% if form.errors %}
+                              {% for field in form %}
+                                  {% for error in field.errors %}
+                                      <div class="alert alert-warning">
+                                          <strong style="color: black;">{{ error|escape }}</strong>
+                                      </div>
+                                  {% endfor %}
+                              {% endfor %}
+                              {% for error in form.non_field_errors %}
+                                  <div class="alert alert-danger">
+                                      <strong>{{ error|escape }}</strong>
+                                  </div>
+                              {% endfor %}
+                          {% endif %}
+                          {% if car_accident %}
+                          <form method="POST" action="{% url 'bp-addCarAccidentAddress' client.id case.id car_accident.id %}">
+                            {% csrf_token %}
+                        
+                            <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Address:</label>
+                                <div class="col-sm-10">
+                                <input type="text" required class="form-control" value="{{car_accident.address}}" name="address" id="address"></input>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">City</label>
+                                <div class="col-sm-10">
+                                <input type="text" class="form-control" required value="{{car_accident.city}}" name="city" id="city"></input>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">State:</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select" required name="state" aria-label="Default select example">
+                                        
+                                        <option selected value="AL">Alabama</option>
+                                        <option value="AK">Alaska</option>
+                                        <option value="AZ">Arizona</option>
+                                        <option value="AR">Arkansas</option>
+                                        <option value="CA">California</option>
+                                        <option value="CO">Colorado</option>
+                                        <option value="CT">Connecticut</option>
+                                        <option value="DE">Delaware</option>
+                                        <option value="DC">District Of Columbia</option>
+                                        <option value="FL">Florida</option>
+                                        <option value="GA">Georgia</option>
+                                        <option value="HI">Hawaii</option>
+                                        <option value="ID">Idaho</option>
+                                        <option value="IL">Illinois</option>
+                                        <option value="IN">Indiana</option>
+                                        <option value="IA">Iowa</option>
+                                        <option value="KS">Kansas</option>
+                                        <option value="KY">Kentucky</option>
+                                        <option value="LA">Louisiana</option>
+                                        <option value="ME">Maine</option>
+                                        <option value="MD">Maryland</option>
+                                        <option value="MA">Massachusetts</option>
+                                        <option value="MI">Michigan</option>
+                                        <option value="MN">Minnesota</option>
+                                        <option value="MS">Mississippi</option>
+                                        <option value="MO">Missouri</option>
+                                        <option value="MT">Montana</option>
+                                        <option value="NE">Nebraska</option>
+                                        <option value="NV">Nevada</option>
+                                        <option value="NH">New Hampshire</option>
+                                        <option value="NJ">New Jersey</option>
+                                        <option value="NM">New Mexico</option>
+                                        <option value="NY">New York</option>
+                                        <option value="NC">North Carolina</option>
+                                        <option value="ND">North Dakota</option>
+                                        <option value="OH">Ohio</option>
+                                        <option value="OK">Oklahoma</option>
+                                        <option value="OR">Oregon</option>
+                                        <option value="PA">Pennsylvania</option>
+                                        <option value="RI">Rhode Island</option>
+                                        <option value="SC">South Carolina</option>
+                                        <option value="SD">South Dakota</option>
+                                        <option value="TN">Tennessee</option>
+                                        <option value="TX">Texas</option>
+                                        <option value="UT">Utah</option>
+                                        <option value="VT">Vermont</option>
+                                        <option value="VA">Virginia</option>
+                                        <option value="WA">Washington</option>
+                                        <option value="WV">West Virginia</option>
+                                        <option value="WI">Wisconsin</option>
+                                        <option value="WY">Wyoming</option>
+                                    </select>
+                                </div>
+                                </div>
+
+                            <div class="mb-3 row">
+                              <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Date</label>
+                              <div class="col-sm-10">
+                              <input type="date"  class="form-control" value="{{car_accident.date}}" name="date" id="date"></input>
+                              </div>
+                          </div>
+
+                          <div class="mb-3 row">
+                              <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Time</label>
+                              <div class="col-sm-10">
+                              <input type="text" class="form-control" value="{{car_accident.time}}" name="time" id="time"></input>
+                              </div>
+                          </div>
+
+                          <div class="mb-3 row">
+                              <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Weather</label>
+                              <div class="col-sm-10">
+                              <input type="text" class="form-control" value="{{car_accident.weather}}" name="weather" id="weather"></input>
+                              </div>
+                          </div>
+
+                          <div class="mb-3 row">
+                              <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Description</label>
+                              <div class="col-sm-10">
+                              <textarea type="text" class="form-control" value="{{car_accident.description}}" name="description" id="description"></textarea>
+                              </div>
+                          </div>
+        
+        
+                          
+                            <button  class="btn btn-primary" type="submit">Add Address</button>
+                          </form>
+                          {% else %}
+                          <form method="POST" action="{% url 'bp-addCarAccidentAddress' client.id case.id -1 %}">
+                            {% csrf_token %}
+                        
+                            <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Address:</label>
+                                <div class="col-sm-10">
+                                <input type="text" class="form-control" value="{{car_accident.address}}" name="address" id="address"></input>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">City</label>
+                                <div class="col-sm-10">
+                                <input type="text" class="form-control" value="{{car_accident.city}}" name="city" id="city"></input>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">State:</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select" required name="state" aria-label="Default select example">
+                                        
+                                        <option selected value="AL">Alabama</option>
+                                        <option value="AK">Alaska</option>
+                                        <option value="AZ">Arizona</option>
+                                        <option value="AR">Arkansas</option>
+                                        <option value="CA">California</option>
+                                        <option value="CO">Colorado</option>
+                                        <option value="CT">Connecticut</option>
+                                        <option value="DE">Delaware</option>
+                                        <option value="DC">District Of Columbia</option>
+                                        <option value="FL">Florida</option>
+                                        <option value="GA">Georgia</option>
+                                        <option value="HI">Hawaii</option>
+                                        <option value="ID">Idaho</option>
+                                        <option value="IL">Illinois</option>
+                                        <option value="IN">Indiana</option>
+                                        <option value="IA">Iowa</option>
+                                        <option value="KS">Kansas</option>
+                                        <option value="KY">Kentucky</option>
+                                        <option value="LA">Louisiana</option>
+                                        <option value="ME">Maine</option>
+                                        <option value="MD">Maryland</option>
+                                        <option value="MA">Massachusetts</option>
+                                        <option value="MI">Michigan</option>
+                                        <option value="MN">Minnesota</option>
+                                        <option value="MS">Mississippi</option>
+                                        <option value="MO">Missouri</option>
+                                        <option value="MT">Montana</option>
+                                        <option value="NE">Nebraska</option>
+                                        <option value="NV">Nevada</option>
+                                        <option value="NH">New Hampshire</option>
+                                        <option value="NJ">New Jersey</option>
+                                        <option value="NM">New Mexico</option>
+                                        <option value="NY">New York</option>
+                                        <option value="NC">North Carolina</option>
+                                        <option value="ND">North Dakota</option>
+                                        <option value="OH">Ohio</option>
+                                        <option value="OK">Oklahoma</option>
+                                        <option value="OR">Oregon</option>
+                                        <option value="PA">Pennsylvania</option>
+                                        <option value="RI">Rhode Island</option>
+                                        <option value="SC">South Carolina</option>
+                                        <option value="SD">South Dakota</option>
+                                        <option value="TN">Tennessee</option>
+                                        <option value="TX">Texas</option>
+                                        <option value="UT">Utah</option>
+                                        <option value="VT">Vermont</option>
+                                        <option value="VA">Virginia</option>
+                                        <option value="WA">Washington</option>
+                                        <option value="WV">West Virginia</option>
+                                        <option value="WI">Wisconsin</option>
+                                        <option value="WY">Wyoming</option>
+                                    </select>
+                                </div>
+                                </div>
+
+                            <div class="mb-3 row">
+                              <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Date</label>
+                              <div class="col-sm-10">
+                              <input type="date" required  class="form-control" required value="{{car_accident.date}}" name="date" id="date"></input>
+                              </div>
+                          </div>
+
+                          <div class="mb-3 row">
+                              <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Time</label>
+                              <div class="col-sm-10">
+                              <input type="text" class="form-control" value="{{car_accident.time}}" name="time" id="time"></input>
+                              </div>
+                          </div>
+
+                          <div class="mb-3 row">
+                              <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Weather</label>
+                              <div class="col-sm-10">
+                              <input type="text" class="form-control" value="{{car_accident.weather}}" name="weather" id="weather"></input>
+                              </div>
+                          </div>
+
+                          <div class="mb-3 row">
+                              <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Description</label>
+                              <div class="col-sm-10">
+                              <textarea type="text" class="form-control" value="{{car_accident.description}}" name="description" id="description"></textarea>
+                              </div>
+                          </div>
+        
+        
+                          
+                            <button  class="btn btn-primary" type="submit">Add Address</button>
+                          </form>
+                          {% endif %}
+                          
+                            
+                            </div>
+                          </div>
+                            
+                    </div>  
+                       
+        
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'BP_resources/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'BP_resources/vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/select2/select2.min.js' %}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static 'BP_resources/js/main.js' %}"></script>
+
+
+</body>
+
+</html>
+<!-- end document-->

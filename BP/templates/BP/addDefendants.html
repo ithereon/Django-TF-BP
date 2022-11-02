@@ -1,0 +1,307 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+       
+    
+        <!-- Title Page-->
+        <title>Add Defendants</title>
+    
+        <!-- Fontfaces CSS-->
+        <link href="{% static 'BP_resources/css/font-face.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Bootstrap CSS-->
+        <link href="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Vendor CSS-->
+        <link href="{% static 'BP_resources/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Main CSS-->
+        <link href="{% static 'BP_resources/css/theme.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/sidebar.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/header.css' %}" rel="stylesheet" media="all">
+    
+    </head>
+
+<body >
+    <div >
+
+
+        <!-- PAGE CONTAINER-->
+        <div >
+            <!-- HEADER DESKTOP-->
+       
+            <!-- HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="container">
+                    <div>
+                        
+                        <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Add Defendants</h5>
+                              {% if form.errors %}
+                              {% for field in form %}
+                                  {% for error in field.errors %}
+                                      <div class="alert alert-warning">
+                                          <strong style="color: black;">{{ error|escape }}</strong>
+                                      </div>
+                                  {% endfor %}
+                              {% endfor %}
+                              {% for error in form.non_field_errors %}
+                                  <div class="alert alert-danger">
+                                      <strong>{{ error|escape }}</strong>
+                                  </div>
+                              {% endfor %}
+                          {% endif %}
+                          <form method="POST" action="{% url 'bp-addDefendants' client.id case.id %}">
+                              {% csrf_token %}
+                          
+                              <div class="mb-3 row">
+                                  <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">First Name</label>
+                                  <div class="col-sm-10">
+                                  <input type="text" required class="form-control" name="first_name" id="first_name"></input>
+                                  </div>
+                              </div>
+                              <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Last Name</label>
+                                <div class="col-sm-10">
+                                <input type="text" required class="form-control" name="last_name" id="last_name"></input>
+                                </div>
+                            </div>
+                              <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Name</label>
+                                <div class="col-sm-10">
+                                <input type="text" required class="form-control" name="name" id="name"></input>
+                                </div>
+                            </div>
+                              
+                              <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Address1</label>
+                                <div class="col-sm-10">
+                                <textarea type="text"  class="form-control" name="address1" id="address1"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Address2</label>
+                                <div class="col-sm-10">
+                                <textarea type="text"  class="form-control" name="address2" id="address2"></textarea>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">City</label>
+                                <div class="col-sm-10">
+                                <input type="text"  class="form-control" name="city" id="city"></input>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">State</label>
+                                <div class="col-sm-10">
+                                <input type="text"  class="form-control" name="state" id="state"></input>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Zip</label>
+                                <div class="col-sm-10">
+                                <input type="text"  class="form-control" name="zip" id="zip"></input>
+                                </div>
+                            </div>
+                            
+
+                            <div class="mb-3 row">
+                                <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Type:</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select" required name="defendant_type" id="defendant_type" aria-label="Default select example">
+                                        
+                                        
+                                        <option selected value="Private Individual">Private Individual</option>
+                                        <option value="Private Company">Private Company</option>
+                                        <option value="Public Entity">Public Entity</option>
+                                        
+                                        
+                                      </select>
+                                </div>
+                                </div>
+
+                            <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Phone</label>
+                                <div class="col-sm-10">
+                                <input type="text"  class="form-control" name="phone" id="phone"></input>
+                                </div>
+                            </div>
+                              
+                            <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Email</label>
+                                <div class="col-sm-10">
+                                <input type="text"  class="form-control" name="email" id="email"></input>
+                                </div>
+                            </div>
+          
+                            <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Birthday</label>
+                                <div class="col-sm-10">
+                                <input type="date"  class="form-control" name="birthday" id="birthday"></input>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">SSN</label>
+                                <div class="col-sm-10">
+                                <input type="text"  class="form-control" name="ssn" id="ssn"></input>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Driver License</label>
+                                <div class="col-sm-10">
+                                <input type="text"  class="form-control" name="driver_license" id="driver_license"></input>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                
+                                <div class="col-sm-10">
+                                <input type="text" hidden  class="form-control" value="0" name="age" id="age"></input>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Note</label>
+                                <div class="col-sm-10">
+                                <textarea type="text"  class="form-control" name="note" id="note"></textarea>
+                                </div>
+                            </div>
+                            <hr>
+                            
+                            <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Company</label>
+                                <div class="col-sm-10">
+                                <input type="text"   class="form-control" name="company" id="company"></input>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Policy No</label>
+                                <div class="col-sm-10">
+                                <input type="text"   class="form-control" name="policy_no" id="policy_no"></input>
+                                </div>
+                            </div>
+          
+                            <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Claim No</label>
+                                <div class="col-sm-10">
+                                <input type="text"   class="form-control" name="claim_no" id="claim_no"></input>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Adjuster Name</label>
+                                <div class="col-sm-10">
+                                <input type="text"   class="form-control" name="adjuster_name" id="adjuster_name"></input>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Adjuster Address</label>
+                                <div class="col-sm-10">
+                                <input type="text"   class="form-control" name="adjuster_address" id="adjuster_address"></input>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Adjuster Phone</label>
+                                <div class="col-sm-10">
+                                <input type="text"   class="form-control" name="adjuster_phone" id="adjuster_phone"></input>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Adjuster Fax</label>
+                                <div class="col-sm-10">
+                                <input type="text"   class="form-control" name="adjuster_fax" id="adjuster_fax"></input>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Adjuster Email</label>
+                                <div class="col-sm-10">
+                                <input type="text"   class="form-control" name="adjuster_email" id="adjuster_email"></input>
+                                </div>
+                            </div>
+                            
+                            <button  class="btn btn-primary" onclick="_age();" type="submit">Add Defendant</button>
+                            </form>
+                            
+                            </div>
+                          </div>
+                            
+                    </div>  
+                       
+        
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+        function _calcAge() {
+            var date = new Date(document.getElementById("birthday").value);
+            var today = new Date();
+
+            var timeDiff = Math.abs(today.getTime() - date.getTime());
+            var age1 = Math.ceil(timeDiff / (1000 * 3600 * 24)) / 365;
+            return age1;
+        }
+        function _age(){
+            
+            var temp_age = _calcAge();
+            console.log(temp_age);
+            document.getElementById('age').value = temp_age.toFixed(2);
+        }
+        
+    </script>
+    <!-- Jquery JS-->
+    <script src="{% static 'BP_resources/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'BP_resources/vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/select2/select2.min.js' %}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static 'BP_resources/js/main.js' %}"></script>
+
+
+</body>
+
+</html>
+<!-- end document-->

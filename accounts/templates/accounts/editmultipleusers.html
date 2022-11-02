@@ -1,0 +1,102 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% block pagetitle %}
+    Treatment First - Edit Multiple Users
+{% endblock pagetitle %}
+{% block content %}
+
+    <div class="row py-5 px-3">
+        <div class="col-lg-4 col-md-4 col-xs-4">
+            {% if userprofile.providerprofile.account_type == 'Provider' or request.user.providerstaff_userprofile.account_type == 'ProviderStaff' %}
+                <a href="{% url 'accountdetails' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Account Details</a> <br><br>
+                <a href="{% url 'profile' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Locations</a> <br><br>
+                <a href="{% url 'providerdetails' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Provider Details</a><br><br>
+                <a href="{% url 'provider_firm_users' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Firm Users</a> <br><br>
+            {% elif userprofile.attorneyprofile.account_type == 'Attorney' or request.user.attorneystaff_userprofile.account_type == 'AttorneyStaff' %}
+                <a href="{% url 'accountdetails_attorney' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Account Details</a> <br><br>
+                <a href="{% url 'firm_users' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Firm Users</a> <br><br>
+                <a href="{% url 'attorney_profile' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Favorites</a><br><br>
+                <a href="{% url 'blacklist' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Blacklist</a><br><br>
+                <a href="{% url 'flagged_users' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Flagged Providers</a><br><br>
+                <a href="{% url 'provider_reviews' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Provider Reviews</a><br><br>
+            {% elif userprofile.marketerprofile.account_type == 'Marketer' or request.user.marketerstaff_userprofile.account_type == 'MarketerStaff' %}
+                <a href="{% url 'accountdetails_marketer' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Account Details</a> <br><br>
+                <a href="{% url 'marketer_firm_users' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Firm Users</a> <br><br>
+                <a href="{% url 'marketer_profile' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Favorites</a><br><br>
+                <a href="{% url 'marketer_blacklist' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Blacklist</a><br><br>
+                <a href="{% url 'marketer' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Marketer</a><br><br>
+                <a href="{% url 'marketer_provider_reviews' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Provider Reviews</a><br><br>
+            {% endif %}
+            {% if not request.user.marketerstaff_userprofile.account_type == 'MarketerStaff' and not request.user.providerstaff_userprofile.account_type == 'ProviderStaff' and not request.user.attorneystaff_userprofile.account_type == 'AttorneyStaff' %}
+                <a href="{% url 'multipleusers' %}" style="text-decoration: none; padding:10px 5px 10px 5px;">Add Users</a> <br><br>
+            {% endif %}
+        </div>
+        <div class="col-lg-8 col-md-8 col-xs-8">
+            
+            
+            
+            <h4>Edit User Details:</h4>
+            <br>
+            <form method="POST">
+                {% csrf_token %}
+                    
+                    <div class="mb-3 row">
+                        <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Username</label>
+                        <div class="col-sm-10">
+                        <input type="text" disabled class="form-control" value="{{user.username}}" name="username" id="username">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Email Address</label>
+                        <div class="col-sm-10">
+                        <input type="email" class="form-control" value="{{user.email}}" name="email" id="email">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">First Name</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" value="{{user.first_name}}" name="first_name" id="first_name">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Last Name</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" value="{{user.last_name}}" name="last_name" id="last_name">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3 row">
+                        <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Account Type</label>
+                        <div class="col-sm-10">
+                        {% if user.providerstaff_userprofile.account_type == 'ProviderStaff' %}
+                            <input type="text" disabled class="form-control" value="{{user.providerstaff_userprofile.account_type}}" name="account_type" id="account_type">
+                            
+                        {% elif user.attorneystaff_userprofile.account_type == 'AttorneyStaff' %}
+                            <input type="text" disabled class="form-control" value="{{user.attorneystaff_userprofile.account_type}}" name="account_type" id="account_type">
+                        {% elif user.marketerstaff_userprofile.account_type == 'MarketerStaff' %}
+                            <input type="text" disabled class="form-control" value="{{user.marketerstaff_userprofile.account_type}}" name="account_type" id="account_type">
+                        {% endif %}
+                        </div>
+                    </div>
+                    {% if user.providerstaff_userprofile.account_type == 'ProviderStaff' %}
+                        <div class="mb-3 row">
+                            <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Accounting Permission</label>
+                                <div class="col-sm-10">
+                                <select name="permission" id="permission">
+                                    <option value="Yes">Grant Permission</option>
+                                    <option value="No">Restrict</option>
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+        </div>
+        
+    </div>
+
+{% endblock content %}

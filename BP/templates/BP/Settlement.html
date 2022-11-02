@@ -1,0 +1,2379 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+       
+        <!-- Title Page-->
+        <title>Dashboard</title>
+    
+        <!-- Fontfaces CSS-->
+        <link href="{% static 'BP_resources/css/font-face.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Bootstrap CSS-->
+        <link href="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Vendor CSS-->
+        <link href="{% static 'BP_resources/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Main CSS-->
+        <link href="{% static 'BP_resources/css/theme.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'css/style.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/sidebar.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/header.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/case.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/client.css' %}" rel="stylesheet" media="all">
+    
+    </head>
+
+<body class="animsition client-page photos-page Settlement-pg">
+    <div class="modal fade zoom-in" id="phone-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+                <form action="{% url 'bp-editClientInfo1' client.id case.id %}" method="post" id="editClientForm1">
+                    {% csrf_token %}
+                    <div class="modal-content-row">
+                        <p>{{client.phone}}</p>
+                        <p>Phone Number</p>
+                        
+                        <input type="text" name="client_phone" class="form-control" placeholder="Enter Phone....">
+                        
+                    </div>
+                    <div class="modal-content-row mt-2">
+                        <p>{{client.email}}</p>
+                        <p>Email address</p>
+                        
+                        <input type="email" name="client_email" class="form-control" placeholder="Enter Email....">
+                        
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button form="editClientForm1" type="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade zoom-in" id="dob-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+                <form id="editClientForm2" action="{% url 'bp-editClientInfo2' client.id case.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="modal-content-row">
+                        <p>{{client.birthday}}</p>
+                        <p>DOB</p>
+                        
+                        <input type="date" name="client_dob" class="form-control" placeholder="Enter DOB....">
+                        
+                    </div>
+                    <div class="modal-content-row mt-2">
+                        <p>{{client.ssn}}</p>
+                        <p>ssn</p>
+                        
+                        <input type="number" name="client_ssn" class="form-control" placeholder="Enter SSN....">
+                        
+                    </div>
+                    <div class="modal-content-row mt-2">
+                        <p>{{client.driver_license_number}}, {{client.driver_license_state}}</p>
+                        <p>dl#</p>
+                        
+                        <input type="text" name="client_driver_license" class="form-control" placeholder="Enter DL#....">
+                        
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button form="editClientForm2" type="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addwitness" tabindex="-1" aria-labelledby="addwitness" aria-hidden="true">
+        <div class="modal-dialog">
+           <div class="modal-content">
+              <div class="modal-header">
+                 <h5 class="modal-title" id="exampleModalLabel">Add Witness</h5>
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet velit ab consectetur eius dignissimos nostrum</p>
+              </div> 
+              <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" style="float:left; margin-right:auto;" data-dismiss="modal">Cancel</button>
+                 <button type="submit" form="form12" class="btn btn-success">Save</button>
+              </div>
+           </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add Offer</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3 ">
+                    <form id="form-2" action="{% url 'bp-addOffer' client.id case.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="text" value="False" id="offer_check" name="check" hidden />
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Date</label>
+                            <div class="col-sm-10">
+                            <input type="date" required  class="form-control" name="date" id="date">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Note</label>
+                            <div class="col-sm-10">
+                            <input type="text"   class="form-control" name="note" id="note">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Check Number</label>
+                            <div class="col-sm-10">
+                            <input type="number"   class="form-control" name="check_number" id="check_number">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Amount</label>
+                            <div class="col-sm-10">
+                            <input type="number" required  class="form-control" name="amount" id="amount">
+                            </div>
+                        </div> 
+                        <!-- <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Final Amount</label>
+                            <div class="col-sm-10">
+                            <input type="number" required  class="form-control" name="final_amount" id="final_amount">
+                            </div>
+                        </div>  -->
+                      
+                    </form>
+                    
+                    
+                    </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" form="form-2" class="btn btn-primary" onclick="submitEditForm(event)">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="editOffer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Offer</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3 ">
+                    <form action="{% url 'bp-removeSettlementRecord' 'Offer' %}" method="post" class="deleteForm">
+                        {% csrf_token %}
+                        <input type="hidden" name="record_id" />
+                    </form>
+                    <form id="form-2" action="{% url 'bp-addOffer' client.id case.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="text" value="False" id="offer_check" name="check" hidden data-field="id" />
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Date</label>
+                            <div class="col-sm-10">
+                            <input type="date" required  class="form-control" name="date" id="date">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Note</label>
+                            <div class="col-sm-10">
+                            <input type="text"   class="form-control" name="note" id="note">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Check Number</label>
+                            <div class="col-sm-10">
+                            <input type="number"   class="form-control" name="check_number" id="check_number">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Amount</label>
+                            <div class="col-sm-10">
+                            <input type="number" required  class="form-control" name="amount" id="amount">
+                            </div>
+                        </div> 
+                        <!-- <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Final Amount</label>
+                            <div class="col-sm-10">
+                            <input type="number" required  class="form-control" name="final_amount" id="final_amount">
+                            </div>
+                        </div>  -->
+                      
+                    </form>
+                    
+                    
+                    </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger mr-auto" onclick="deleteRecord(event)">Delete</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" form="form-2" class="btn btn-primary" onclick="submitEditForm(event)">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="fees" tabindex="-1" role="dialog" aria-labelledby="feesLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="feesLabel">Add Fees</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3 ">
+                    <form id="form-3" action="{% url 'bp-addFees' client.id case.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="text" value="False" id="fees_check" name="check" hidden>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Note</label>
+                            <div class="col-sm-10">
+                            <input type="text" required  class="form-control" name="note" id="note">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Check Number</label>
+                            <div class="col-sm-10">
+                            <input type="number" required  class="form-control" name="check_number" id="check_number">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Amount</label>
+                            <div class="col-sm-10">
+                            <input type="number" required  class="form-control" name="amount" id="amount">
+                            </div>
+                        </div> 
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Final Amount</label>
+                            <div class="col-sm-10">
+                            <input type="number" required  class="form-control" name="final_amount" id="final_amount">
+                            </div>
+                        </div> 
+                      
+                    </form>
+                    
+                    
+                    </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" form="form-3" class="btn btn-primary" onclick="submitEditForm(event)">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="editFees" tabindex="-1" role="dialog" aria-labelledby="feesLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="feesLabel">Edit Fees</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3 ">
+                    <form action="{% url 'bp-removeSettlementRecord' 'Fees' %}" method="post" class="deleteForm">
+                        {% csrf_token %}
+                        <input type="hidden" name="record_id" />
+                    </form>
+                    <form id="form-3" action="{% url 'bp-addFees' client.id case.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="text" value="False" id="fees_check" name="check" hidden>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Note</label>
+                            <div class="col-sm-10">
+                            <input type="text" required  class="form-control" name="note" id="note">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Check Number</label>
+                            <div class="col-sm-10">
+                            <input type="number" required  class="form-control" name="check_number" id="check_number">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Amount</label>
+                            <div class="col-sm-10">
+                            <input type="number" required  class="form-control" name="amount" id="amount">
+                            </div>
+                        </div> 
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Final Amount</label>
+                            <div class="col-sm-10">
+                            <input type="number" required  class="form-control" name="final_amount" id="final_amount">
+                            </div>
+                        </div> 
+                      
+                    </form>
+                    
+                    
+                    </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger mr-auto" onclick="deleteRecord(event)">Delete</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" form="form-3" class="btn btn-primary" onclick="submitEditForm(event)">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="costs" tabindex="-1" role="dialog" aria-labelledby="costsLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="costsLabel">Edit Costs</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3 ">
+                    <form action="{% url 'bp-removeSettlementRecord' 'Costs' %}" method="post" class="deleteForm">
+                        {% csrf_token %}
+                        <input type="hidden" name="record_id" />
+                    </form>
+                    <form id="form-4" action="{% url 'bp-addSettlementCosts' client.id case.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="text" value="False" id="costs_check" name="check" hidden>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Date</label>
+                            <div class="col-sm-10">
+                            <input type="date" required  class="form-control" name="date" id="date">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Payee</label>
+                            <div class="col-sm-10">
+                            <input type="text" required  class="form-control" name="payee" id="payee">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Check Number</label>
+                            <div class="col-sm-10">
+                            <input type="number" required  class="form-control" name="check_number" id="check_number">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Check Date</label>
+                            <div class="col-sm-10">
+                            <input type="date" required  class="form-control" name="check_date" id="check_date">
+                            </div>
+                        </div> 
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Final Amount</label>
+                            <div class="col-sm-10">
+                            <input type="number" required  class="form-control" name="final_amount" id="final_amount">
+                            </div>
+                        </div> 
+                      
+                    </form>
+                    
+                    
+                    </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger mr-auto" onclick="deleteRecord(event)">Delete</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" form="form-4" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="medical-bill" tabindex="-1" role="dialog" aria-labelledby="costsLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="costsLabel">Medical Bill</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3 ">
+                    <form action="{% url 'bp-removeSettlementRecord' 'Providers' %}" method="post" class="deleteForm">
+                        {% csrf_token %}
+                        <input type="hidden" name="record_id" />
+                    </form>
+                    <form id="form-4" action="{% url 'bp-editSettlementProviders' client.id case.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="text" value="False" name="check" hidden>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Amount</label>
+                            <div class="col-sm-10">
+                            <input type="number" required  class="form-control" name="amount">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">INS PAID</label>
+                            <div class="col-sm-10">
+                            <input type="number" required  class="form-control" name="ins_paid">
+                            </div>
+                        </div> 
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Write-off</label>
+                            <div class="col-sm-10">
+                            <input type="number" required  class="form-control" name="write_off">
+                            </div>
+                        </div> 
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Reduction</label>
+                            <div class="col-sm-10">
+                            <input type="number" required  class="form-control" name="reduction">
+                            </div>
+                        </div> 
+                        <!-- <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Final Amount</label>
+                            <div class="col-sm-10">
+                            <input type="number" required  class="form-control" name="final_amount">
+                            </div>
+                        </div>  -->
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Check Number</label>
+                            <div class="col-sm-10">
+                            <input type="number" required  class="form-control" name="check_number">
+                            </div>
+                        </div> 
+                      
+                    </form>
+                    
+                    
+                    </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger mr-auto" onclick="deleteRecord(event)">Delete</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" form="form-3" class="btn btn-primary" onclick="submitEditForm(event)">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="loans" tabindex="-1" role="dialog" aria-labelledby="costsLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="costsLabel">Edit Loan</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3 ">
+                    <form action="{% url 'bp-removeSettlementRecord' 'Loans' %}" method="post" class="deleteForm">
+                        {% csrf_token %}
+                        <input type="hidden" name="record_id" />
+                    </form>
+                    <form id="form-4" action="{% url 'bp-addCaseLoans' client.id case.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="text" value="False" name="check" hidden>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Application Date</label>
+                            <div class="col-sm-10">
+                            <input type="date" required  class="form-control" name="application_date">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Current Amount</label>
+                            <div class="col-sm-10">
+                            <input type="number" required  class="form-control" name="current_amount_verified">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Date Verified</label>
+                            <div class="col-sm-10">
+                            <input type="date" required  class="form-control" name="date_verified">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Final Amount</label>
+                            <div class="col-sm-10">
+                            <input type="text" required  class="form-control" name="final_amount">
+                            </div>
+                        </div> 
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Check Number</label>
+                            <div class="col-sm-10">
+                            <input type="text" required  class="form-control" name="check_number">
+                            </div>
+                        </div> 
+                      
+                    </form>
+                    
+                    
+                    </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger mr-auto" onclick="deleteRecord(event)">Delete</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" form="form-4" class="btn btn-primary" onclick="submitEditForm(event)">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="client_proceeds" tabindex="-1" role="dialog" aria-labelledby="client_proceedsLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="client_proceedsLabel">Add Client Proceeds</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3 ">
+                    <form id="form-5" action="{% url 'bp-addClientProceeds' client.id case.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="text" value="False" id="costs_check" name="check" hidden>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Name on Check</label>
+                            <div class="col-sm-10">
+                            <input type="text" required  class="form-control" name="name_on_check" id="name_on_check">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Check Number</label>
+                            <div class="col-sm-10">
+                            <input type="number" required  class="form-control" name="check_number" id="check_number">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Check Date</label>
+                            <div class="col-sm-10">
+                            <input type="date" required  class="form-control" name="check_date" id="check_date">
+                            </div>
+                        </div> 
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Amount</label>
+                            <div class="col-sm-10">
+                            <input type="number" required  class="form-control" name="amount" id="amount">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Cleared</label>
+                            <div class="col-sm-10">
+                            <input type="date" required  class="form-control" name="cleared" id="cleared">
+                            </div>
+                        </div> 
+                      
+                    </form>
+                    </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" form="form-5" class="btn btn-primary" onclick="submitEditForm(event)">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="edit_client_proceeds" tabindex="-1" role="dialog" aria-labelledby="client_proceedsLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="client_proceedsLabel">Edit Client Proceeds</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3 ">
+                    <form action="{% url 'bp-removeSettlementRecord' 'Client Proceeds' %}" method="post" class="deleteForm">
+                        {% csrf_token %}
+                        <input type="hidden" name="record_id" />
+                    </form>
+                    <form id="form-5" action="{% url 'bp-addClientProceeds' client.id case.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="text" value="False" id="costs_check" name="check" hidden>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Name on Check</label>
+                            <div class="col-sm-10">
+                            <input type="text" required  class="form-control" name="name_on_check" id="name_on_check">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Check Number</label>
+                            <div class="col-sm-10">
+                            <input type="number" required  class="form-control" name="check_number" id="check_number">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Check Date</label>
+                            <div class="col-sm-10">
+                            <input type="date" required  class="form-control" name="check_date" id="check_date">
+                            </div>
+                        </div> 
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Amount</label>
+                            <div class="col-sm-10">
+                            <input type="number" required  class="form-control" name="amount" id="amount">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Cleared</label>
+                            <div class="col-sm-10">
+                            <input type="date" required  class="form-control" name="cleared" id="cleared">
+                            </div>
+                        </div> 
+                      
+                    </form>
+                    </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger mr-auto" onclick="deleteRecord(event)">Delete</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" form="form-5" class="btn btn-primary" onclick="submitEditForm(event)">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="page-wrapper">
+
+        <!-- MENU SIDEBAR-->
+        {% include 'BP/SideBar.html' %}
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP NEW-->
+            {% include 'BP/header.html' %}
+            <!-- HEADER DESKTOP NEW-->
+            <div class="top-panel-wrapper">
+                <div class="panel-page-title">
+                    <p>Settlement</p>
+                </div>
+                <div class="add-button">
+                    <input type="submit" class="btn" value="Add New Demand" data-toggle="modal" data-target="#addwitness">
+                </div>
+                <div class="add-button add-button-second">
+                    <input type="submit" class="btn" value=" Add New Mediation" data-toggle="modal" data-target="#addwitness">
+                </div>
+                <div class="add-button add-button-third">
+                    <input type="submit" class="btn" value="Add New Settlement Conference" data-toggle="modal" data-target="#addwitness">
+                </div>
+            </div>
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content" style="padding-top: 0px !important;">
+                <div class="section__content section__content--p30">
+                    <!--{% if flagPage %}
+                            <div class="top-pane" style="top: -75px !important; right: 363px !important" onclick="location.href='{% url 'bp-removeFlagPage' client.id case.id flagPage.id %}';">
+                                <img src="{% static 'BP_resources/images/icon/flag-icon-red-bg-gray.svg' %}" width="46px">
+                            </div>
+                    {% else %}
+                        <div class="top-pane" style="top: -75px !important; right: 363px !important" onclick="location.href='{% url 'bp-flagPage' client.id case.id 'Settlement' 'bp-settlement' %}';">
+                            <img src="{% static 'BP_resources/images/icon/flag-icon-bg-gray.svg' %}" width="46px">
+                        </div>
+                    {% endif %}-->
+                    {% comment %} <div class="check-circle">
+                        <p>{{total_marked}}/{{total_checklists}}</p>
+                        <div class="nt-box">
+                            <div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:{{checklist_percentage}}"></div>
+                        </div>
+                        <div class="dropdown">
+                            <button onclick="myFunction()" class="dropbtn"><i class="fa fa-check" aria-hidden="true"></i> Checklist <i class="fa fa-chevron-down" aria-hidden="true"></i></button>
+                            <div id="myDropdown" class="dropdown-content">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="checklist-cont">
+                                            {% for checklist in final_checklist %}
+                                                {% if not checklist.status  %}
+                                                    <div><input type="checkbox" onclick="location.href='{% url 'bp-markChecklist' checklist.id client.id case.id  %}';" id="vehicle1" name="vehicle1" value="Bike">
+                                                        <label for="vehicle1">{{checklist.name}}</label><br>
+                                                    </div>
+                                                {% else %}
+                                                    <div><input type="checkbox" onclick="location.href='{% url 'bp-uncheckChecklist' checklist.case_checklist_id %}';" checked id="vehicle1" name="vehicle1" value="Bike">
+                                                        <label for="vehicle1">{{checklist.name}}</label><br>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                            
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-lg-6">
+                                        <div class="checklist-cont">
+                                            <div><input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                                                <label for="vehicle1">example checkbox 1</label><br>
+                                            </div>
+                                            <div><input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                                                <label for="vehicle2">example checkbox 2</label><br>
+                                            </div>
+                                            <div><input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                                                <label for="vehicle3">example checkbox 3</label><br>
+                                            </div>
+                                            <div><input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                                                <label for="vehicle3">example checkbox 4</label><br>
+                                            </div>
+                                            <div><input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                                                <label for="vehicle3">example checkbox 5</label><br>
+                                            </div>
+                                            <div> <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                                                <label for="vehicle3">example checkbox 6</label><br>
+                                            </div>
+                                            <div><input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                                                <label for="vehicle3">example checkbox 7</label><br>
+                                            </div>
+                                            <div><input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                                                <label for="vehicle3">example checkbox 8</label><br>
+                                            </div>
+                                            <div><input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                                                <label for="vehicle3">example checkbox 9</label><br>
+                                            </div>
+                                            <div><input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                                                <label for="vehicle3">example checkbox 10</label><br>
+                                            </div>
+
+                                        </div>
+                                    </div> -->
+                                    <div class="checkbottom">
+                                        <div class="col-lg-2">
+                                            <p>{{total_marked}}/{{total_checklists}}</p>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:{{checklist_percentage}};"></div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <button onclick="myFunction()" class="dropbtn"><i class="fa fa-check" aria-hidden="true"></i> Checklist <i class="fa fa-angle-up" aria-hidden="true"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> {% endcomment %}
+                    <div class="container-fluid clienthead  top-head">
+
+                        <h2 style="margin-left: 15px !important"><img src="{% static 'BP_resources/images/icon/law.png' %}">Settlement</h2>
+                        <div class="row" id="other-parties-page">
+                            <div class="col-lg-12">
+								<div class="card">
+									<div class="">
+										<div class="custom-tab">
+
+											<nav>
+												<div class="nav nav-tabs" id="nav-tab" role="tablist">
+													<a class="nav-item nav-link active" id="custom-nav-home-tab" data-toggle="tab" href="#custom-nav-home" role="tab" aria-controls="custom-nav-home"
+													 aria-selected="true">Settlement</a>
+													<a class="nav-item nav-link" id="custom-nav-profile-tab" data-toggle="tab" href="#custom-nav-profile" role="tab" aria-controls="custom-nav-profile"
+													 aria-selected="false">Offer</a>
+													<a class="nav-item nav-link" id="custom-nav-fees-tab" data-toggle="tab" href="#custom-nav-fees" role="tab" aria-controls="custom-nav-fees"
+													 aria-selected="false">Fees</a>
+                                                     <a class="nav-item nav-link" id="custom-nav-costs-tab" data-toggle="tab" href="#custom-nav-costs" role="tab" aria-controls="custom-nav-costs"
+													 aria-selected="false">Costs</a>
+                                                     <a class="nav-item nav-link" id="custom-nav-providers-tab" data-toggle="tab" href="#custom-nav-providers" role="tab" aria-controls="custom-nav-providers"
+													 aria-selected="false">Medical Bills</a>
+                                                     <a class="nav-item nav-link" id="custom-nav-loans-tab" data-toggle="tab" href="#custom-nav-loans" role="tab" aria-controls="custom-nav-loans"
+													 aria-selected="false">Loans</a>
+                                                     <a class="nav-item nav-link" id="custom-nav-contact-tab" data-toggle="tab" href="#custom-nav-contact" role="tab" aria-controls="custom-nav-contact"
+													 aria-selected="false">Health Insurance Liens</a>
+                                                     <a class="nav-item nav-link" id="custom-nav-contact-tab" data-toggle="tab" href="#custom-nav-contact" role="tab" aria-controls="custom-nav-contact"
+													 aria-selected="false">Other Liens</a>
+                                                     <a class="nav-item nav-link" id="custom-nav-client_proceeds-tab" data-toggle="tab" href="#custom-nav-client_proceeds" role="tab" aria-controls="custom-nav-client_proceeds"
+													 aria-selected="false">Client Proceeds</a>
+                                                     
+
+												</div>
+											</nav>
+											<div class="tab-content" id="nav-tabContent">
+												<div class="tab-pane fade show active" id="custom-nav-home" role="tabpanel" aria-labelledby="custom-nav-home-tab">
+                                                 
+                                             <div class="col-lg-12">
+                                                <div class="row">
+                                                    <div class="table-responsive table--no-card m-b-40">
+                                                        <h4>OFFER</h4>
+                                                        <div class="pancil">
+                                                            <button type="button" data-toggle="modal" data-target="#exampleModal" style="float: right !important; margin: auto;background-color: #0a3761; margin-right: 0px !important;" class="btn btn-primary">+</button>     
+                                                        </div>
+                                                        
+                                                        <!-- <div  class="pancil"><img src="{% static 'BP_resources/images/icon/pencil-tool.png' %}"></div> -->
+                                                        <table class="table table-borderless table-striped table-earning table-hover">
+                                                            
+                                                        
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Date</th>
+                                                                    <th>Note</th>
+                                                                    <th>check number</th>
+                                                                    <th class="text-right">amount</th>
+                                                                    <th class="text-right">final amount</th>
+                                                                    
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% if not offers %}
+                                                                    <div class="alert alert-danger" role="alert">
+                                                                        No Offers!
+                                                                    </div>
+                                                                {% else %}
+                                                                    {% for offer in offers %}
+                                                                        <tr data-id="{{offer.id}}"
+                                                                            data-date="{{offer.date}}"
+                                                                            data-note="{{offer.note}}"
+                                                                            data-check_number="{{offer.check_number}}"
+                                                                            data-amount="{{offer.amount}}"
+                                                                            data-final_amount="{{offer.final_amount}}"
+                                                                            onclick="editOffer(event)">
+                                                                            <td>{{offer.date}}</td>
+                                                                            <td class="text-right">{{offer.note}}</td>
+                                                                            <td class="text-right">{{offer.check_number}}</td>
+                                                                            <td class="text-right">${{offer.amount}}</td>
+                                                                            <td>${{offer.final_amount}}</td>
+                                                                        </tr>
+                                                                    {% endfor %}
+                                                                {% endif %}
+
+                                                            </tbody>
+                                                        </table>
+                                                        
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="row">
+                                                    <div class="table-responsive table--no-card m-b-40">
+                                                        <h4>FEES</h4>
+                                                        <div class="pancil">
+                                                            <button type="button" data-toggle="modal" data-target="#fees" style="float: right !important; margin: auto;background-color: #0a3761; margin-right: 0px !important;" class="btn btn-primary">+</button>     
+                                                        </div>
+                                                        
+                                                        <!-- <div  class="pancil"><img src="{% static 'BP_resources/images/icon/pencil-tool.png' %}"></div> -->
+                                                        <table class="table table-borderless table-striped table-earning table-hover">
+                                                            
+                                                        
+                                                            <thead>
+                                                                <tr>
+                                                                    
+                                                                    <th>Note</th>
+                                                                    <th>check number</th>
+                                                                    <th>percentage</th>
+                                                                    <th class="text-right">amount</th>
+                                                                    <th class="text-right">final amount</th>
+                                                                    
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% if not fees %}
+                                                                    <div class="alert alert-danger" role="alert">
+                                                                        No Fees!
+                                                                    </div>
+                                                                {% else %}
+                                                                    {% for fee in fees %}
+                                                                        <tr data-id="{{fee.id}}"
+                                                                        data-date="{{fee.date}}"
+                                                                        data-note="{{fee.note}}"
+                                                                        data-check_number="{{fee.check_number}}"
+                                                                        data-amount="{{fee.amount}}"
+                                                                        data-final_amount="{{fee.final_amount}}"
+                                                                        onclick="editFees(event)">
+                                                                            <td class="text-right">{{fee.note}}</td>
+                                                                            <td class="text-right">{{fee.check_number}}</td>
+                                                                            <td class="text-right">{{fee.percentage}}</td>
+                                                                            <td class="text-right">${{fee.amount}}</td>
+                                                                            <td>${{fee.final_amount}}</td>
+                                                                        </tr>
+                                                                    {% endfor %}
+                                                                {% endif %}
+
+                                                            </tbody>
+                                                        </table>
+                                                        
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="row">
+                                                    <div class="table-responsive table--no-card m-b-40">
+                                                        <h4>COSTS</h4>
+                                                        <!-- <div class="pancil">
+                                                            <button type="button" data-toggle="modal" data-target="#costs" style="float: right !important; margin: auto;background-color: #0a3761; margin-right: 0px !important;" class="btn btn-primary">+</button>     
+                                                        </div> -->
+                                                        
+                                                        <!-- <div  class="pancil"><img src="{% static 'BP_resources/images/icon/pencil-tool.png' %}"></div> -->
+                                                        <table class="table table-borderless table-striped table-earning table-hover">
+                                                            
+                                                        
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Date</th>
+                                                                    <th>Payee</th>
+                                                                    <th>Check Number</th>
+                                                                    <th class="text-right">Check Date</th>
+                                                                    <th class="text-right">final amount</th>
+                                                                    <th class="text-right"></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% if not costs %}
+                                                                    <div class="alert alert-danger" role="alert">
+                                                                        No Costs!
+                                                                    </div>
+                                                                {% else %}
+                                                                    {% for cost in costs %}
+                                                                        <tr data-id="{{cost.id}}"
+                                                                        data-date="{{cost.date}}"
+                                                                        data-payee="{{cost.payee}}"
+                                                                        data-check_number="{{cost.check_number}}"
+                                                                        data-check_date="{{cost.check_date}}"
+                                                                        data-final_amount="{{cost.final_amount}}"
+                                                                        onclick="editCost(event)">
+                                                                            <td>{{cost.date}}</td>
+                                                                            <td class="text-right">{{cost.payee}}</td>
+                                                                            <td class="text-right">{{cost.check_number}}</td>
+                                                                            <td class="text-right">{{cost.check_date}}</td>
+                                                                            <td>${{cost.final_amount}}</td>
+                                                                            <td><input type="checkbox"></td>
+                                                                        </tr>
+                                                                    {% endfor %}
+                                                                {% endif %}
+
+                                                            </tbody>
+                                                        </table>
+                                                        
+                                                    </div>
+                                                </div>
+                                                
+
+                                                <div class="row">
+                                                    <div class="table-responsive table--no-card m-b-40">
+                                                        <h4>MEDICAL BILLS</h4>
+                                                        <!-- <div class="pancil">
+                                                            <button type="button" data-toggle="modal" data-target="#costs" style="float: right !important; margin: auto;background-color: #0a3761; margin-right: 0px !important;" class="btn btn-primary">+</button>     
+                                                        </div> -->
+                                                        
+                                                        <!-- <div  class="pancil"><img src="{% static 'BP_resources/images/icon/pencil-tool.png' %}"></div> -->
+                                                        <table class="table table-borderless table-striped table-earning table-hover">
+                                                            
+                                                        
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Specialty</th>
+                                                                    <th>Provider</th>
+                                                                    <th>Amount</th>
+                                                                    <th>INS Paid</th>
+                                                                    <th class="text-right">Write-off</th>
+                                                                    <th class="text-right">Reduction</th>
+                                                                    <th class="text-right">Final Amount</th>
+                                                                    <th class="text-right">Check Number</th>
+                                                                    
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% if not providers %}
+                                                                    <div class="alert alert-danger" role="alert">
+                                                                        No Providers!
+                                                                    </div>
+                                                                {% else %}
+                                                                    {% for provider in providers %}
+                                                                        <tr data-specialty="{{provider.specialty.name}}"
+                                                                        data-id="{{provider.id}}"
+                                                                        data-provider="{{provider.location.added_by.providerprofile.office_name}}"
+                                                                        data-amount="{{provider.amount}}"
+                                                                        data-ins_paid="{{provider.ins_paid}}"
+                                                                        data-write_off="{{provider.write_off}}"
+                                                                        data-reduction="{{provider.reduction}}"
+                                                                        data-final_amount="{{provider.final_amount}}"
+                                                                        data-check_number="{{provider.check_number}}"
+                                                                        onclick="editMedicalBill(event)">
+                                                                            
+                                                                            <td class="text-right">
+                                                                                <span class="badge badge-light" style="font-size: 17px;color: {{provider.specialty.color}};border: 1px solid;">{{provider.specialty.name.0}}</span>
+                                                                            </td>
+                                                                            <td>{{provider.location.added_by.providerprofile.office_name}}</td>
+                                                                            <td class="text-right">${{provider.amount}}</td>
+                                                                            <td class="text-right">{{provider.ins_paid}}</td>
+                                                                            <td class="text-right">${{provider.write_off}}</td>
+                                                                            <td class="text-right">${{provider.reduction}}</td>
+                                                                            <td class="text-right">${{provider.final_amount}}</td>
+                                                                            <td>{{provider.check_number}}</td>
+                                                                            
+                                                                        </tr>
+                                                                    {% endfor %}
+                                                                {% endif %}
+
+                                                            </tbody>
+                                                        </table>
+                                                        
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="row">
+                                                    <div class="table-responsive table--no-card m-b-40">
+                                                        <h4>LOANS</h4>
+                                                        <!-- <div class="pancil">
+                                                            <button type="button" data-toggle="modal" data-target="#costs" style="float: right !important; margin: auto;background-color: #0a3761; margin-right: 0px !important;" class="btn btn-primary">+</button>     
+                                                        </div> -->
+                                                        
+                                                        <!-- <div  class="pancil"><img src="{% static 'BP_resources/images/icon/pencil-tool.png' %}"></div> -->
+                                                        <table class="table table-borderless table-striped table-earning table-hover">
+                                                            
+                                                        
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Application Date</th>
+                                                                    <th>Current Amount</th>
+                                                                    <th>Date Verified</th>
+                                                                    <th class="text-right">Final Amount</th>
+                                                                    <th class="text-right">Check Number</th>
+                                                                    
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% if not loans %}
+                                                                    <div class="alert alert-danger" role="alert">
+                                                                        No Loans!
+                                                                    </div>
+                                                                {% else %}
+                                                                    {% for loan in loans %}
+                                                                        <tr data-id="{{loan.id}}"
+                                                                        data-application_date="{{loan.application_date}}"
+                                                                        data-current_amount_verified="{{loan.current_amount_verified}}"
+                                                                        data-date_verified="{{loan.date_verified}}"
+                                                                        data-final_amount="{{loan.final_amount}}"
+                                                                        data-check_number="{{loan.check_number}}"
+                                                                        onclick="editLoan(event)">
+                                                                        
+                                                                            <td>{{loan.application_date}}</td>
+                                                                            <td class="text-right">${{loan.current_amount_verified}}</td>
+                                                                            <td class="text-right">{{loan.date_verified}}</td>
+                                                                            <td class="text-right">${{loan.final_amount}}</td>
+                                                                            <td>{{loan.check_number}}</td>
+                                                                            
+                                                                        </tr>
+                                                                    {% endfor %}
+                                                                {% endif %}
+
+                                                            </tbody>
+                                                        </table>
+                                                        
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="table-responsive table--no-card m-b-40">
+                                                        <h4>CLIENT PROCEEDS</h4>
+                                                        <div class="pancil">
+                                                            <button type="button" data-toggle="modal" data-target="#client_proceeds" style="float: right !important; margin: auto;background-color: #0a3761; margin-right: 0px !important;" class="btn btn-primary">+</button>     
+                                                        </div>
+                                                        
+                                                        <!-- <div  class="pancil"><img src="{% static 'BP_resources/images/icon/pencil-tool.png' %}"></div> -->
+                                                        <table class="table table-borderless table-striped table-earning table-hover">
+                                                            
+                                                        
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Name on check</th>
+                                                                    <th>Check number</th>
+                                                                    <th>amount</th>
+                                                                    <th class="text-right">Check date</th>
+                                                                    <th class="text-right">Cleared</th>
+                                                                    
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% if not client_proceeds %}
+                                                                    <div class="alert alert-danger" role="alert">
+                                                                        No Client Proceeds!
+                                                                    </div>
+                                                                {% else %}
+                                                                    {% for client_proceed in client_proceeds %}
+                                                                        <tr data-id="{{client_proceed.id}}"
+                                                                        data-name_on_check="{{client_proceed.name_on_check}}"
+                                                                        data-check_number="{{client_proceed.check_number}}"
+                                                                        data-amount="{{client_proceed.amount}}"
+                                                                        data-check_date="{{client_proceed.check_date}}"
+                                                                        data-cleared="{{client_proceed.cleared}}"
+                                                                        onclick="editClientProcedure(event)">
+                                                                        
+                                                                            <td>{{client_proceed.name_on_check}}</td>
+                                                                            <td class="text-right">{{client_proceed.check_number}}</td>
+                                                                            <td class="text-right">${{client_proceed.amount}}</td>
+                                                                            <td class="text-right">{{client_proceed.check_date}}</td>
+                                                                            <td>{{client_proceed.cleared}}</td>
+                                                                            
+                                                                        </tr>
+                                                                    {% endfor %}
+                                                                {% endif %}
+
+                                                            </tbody>
+                                                        </table>
+                                                        
+                                                    </div>
+                                                </div>
+
+                                                
+
+                                                </div>
+
+											</div>
+                                       
+                                            <div class="tab-pane fade" id="custom-nav-profile" role="tabpanel" aria-labelledby="custom-nav-profile-tab">
+                                                <div class="col-lg-12">
+                                                    <div class="row">
+                                                        <div class="table-responsive table--no-card m-b-40">
+                                                            <h4>OFFER</h4>
+                                                            <div class="pancil">
+                                                                <button type="button" data-toggle="modal" data-target="#exampleModal" style="float: right !important; margin: auto;background-color: #0a3761; margin-right: 0px !important;" class="btn btn-primary">+</button>     
+                                                            </div>
+                                                            
+                                                            <!-- <div  class="pancil"><img src="{% static 'BP_resources/images/icon/pencil-tool.png' %}"></div> -->
+                                                            <table class="table table-borderless table-striped table-earning table-hover">
+                                                                
+                                                            
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Date</th>
+                                                                        <th>Note</th>
+                                                                        <th>check number</th>
+                                                                        <th class="text-right">amount</th>
+                                                                        <th class="text-right"></th>
+                                                                        
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    {% if not offers %}
+                                                                        <div class="alert alert-danger" role="alert">
+                                                                            No Offers!
+                                                                        </div>
+                                                                    {% else %}
+                                                                        {% for offer in offers %}
+                                                                            <tr data-id="{{offer.id}}"
+                                                                                data-date="{{offer.date}}"
+                                                                                data-note="{{offer.note}}"
+                                                                                data-check_number="{{offer.check_number}}"
+                                                                                data-amount="{{offer.amount}}"
+                                                                                data-final_amount="{{offer.final_amount}}"
+                                                                                onclick="editOffer(event)">
+                                                                                <td>{{offer.date}}</td>
+                                                                                <td class="text-right">{{offer.note}}</td>
+                                                                                <td class="text-right">{{offer.check_number}}</td>
+                                                                                <td class="text-right">${{offer.amount}}</td>
+                                                                                {% if offer.final_amount == 'True' %}
+                                                                                    <td>
+                                                                                        <span style="color: green;">Accepted</span>
+                                                                                    </td>
+                                                                                {% else %}
+                                                                                    <td>
+                                                                                        <form action="{% url 'bp-checkSettlementOffer' offer.id %}" method="post">
+                                                                                            {% csrf_token %}
+                                                                                            <input name="check_final_amount" type="checkbox" onChange="this.form.submit()">
+                                                                                        </form>
+                                                                                    </td>
+                                                                                {% endif %}
+                                                                                
+                                                                            </tr>
+                                                                        {% endfor %}
+                                                                    {% endif %}
+
+                                                                </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                        </div>
+                                            </div>
+												
+                                            <div class="tab-pane fade" id="custom-nav-fees" role="tabpanel" aria-labelledby="custom-nav-fees-tab">
+                                                <div class="col-lg-12">
+                                                    <div class="row">
+                                                        <div class="table-responsive table--no-card m-b-40">
+                                                            <h4>FEES</h4>
+                                                            <div class="pancil">
+                                                                <button type="button" data-toggle="modal" data-target="#fees" style="float: right !important; margin: auto;background-color: #0a3761; margin-right: 0px !important;" class="btn btn-primary">+</button>     
+                                                            </div>
+                                                            
+                                                            <!-- <div  class="pancil"><img src="{% static 'BP_resources/images/icon/pencil-tool.png' %}"></div> -->
+                                                            <table class="table table-borderless table-striped table-earning table-hover">
+                                                                
+                                                            
+                                                                <thead>
+                                                                    <tr>
+                                                                        
+                                                                        <th>Note</th>
+                                                                        <th>check number</th>
+                                                                        <th>percentage</th>
+                                                                        <th class="text-right">amount</th>
+                                                                        <th class="text-right">final amount</th>
+                                                                        
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    {% if not fees %}
+                                                                        <div class="alert alert-danger" role="alert">
+                                                                            No Fees!
+                                                                        </div>
+                                                                    {% else %}
+                                                                        {% for fee in fees %}
+                                                                            <tr data-id="{{fee.id}}"
+                                                                            data-date="{{fee.date}}"
+                                                                            data-note="{{fee.note}}"
+                                                                            data-check_number="{{fee.check_number}}"
+                                                                            data-amount="{{fee.amount}}"
+                                                                            data-final_amount="{{fee.final_amount}}"
+                                                                            onclick="editFees(event)">
+                                                                                <td class="text-right">{{fee.note}}</td>
+                                                                                <td class="text-right">{{fee.check_number}}</td>
+                                                                                <td class="text-right">{{fee.percentage}}</td>
+                                                                                <td class="text-right">${{fee.amount}}</td>
+                                                                                <td>${{fee.final_amount}}</td>
+                                                                            </tr>
+                                                                        {% endfor %}
+                                                                    {% endif %}
+
+                                                                </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                        </div>
+                                            </div>
+
+                                            <div class="tab-pane fade" id="custom-nav-costs" role="tabpanel" aria-labelledby="custom-nav-costs-tab">
+                                                <div class="col-lg-12">
+                                                    <div class="row">
+                                                        <div class="table-responsive table--no-card m-b-40">
+                                                            <h4>COSTS</h4>
+                                                            <!-- <div class="pancil">
+                                                                <button type="button" data-toggle="modal" data-target="#costs" style="float: right !important; margin: auto;background-color: #0a3761; margin-right: 0px !important;" class="btn btn-primary">+</button>     
+                                                            </div> -->
+                                                            
+                                                            <!-- <div  class="pancil"><img src="{% static 'BP_resources/images/icon/pencil-tool.png' %}"></div> -->
+                                                            <table class="table table-borderless table-striped table-earning table-hover">
+                                                                
+                                                            
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Date</th>
+                                                                        <th>Payee</th>
+                                                                        <th>Check Number</th>
+                                                                        <th class="text-right">Check Date</th>
+                                                                        <th class="text-right">final amount</th>
+                                                                        <th class="text-right"></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    {% if not costs %}
+                                                                        <div class="alert alert-danger" role="alert">
+                                                                            No Costs!
+                                                                        </div>
+                                                                    {% else %}
+                                                                        {% for cost in costs %}
+                                                                            <tr data-id="{{cost.id}}"
+                                                                            data-date="{{cost.date}}"
+                                                                            data-payee="{{cost.payee}}"
+                                                                            data-check_number="{{cost.check_number}}"
+                                                                            data-check_date="{{cost.check_date}}"
+                                                                            data-final_amount="{{cost.final_amount}}"
+                                                                            onclick="editCost(event)">
+                                                                                <td>{{cost.date}}</td>
+                                                                                <td class="text-right">{{cost.payee}}</td>
+                                                                                <td class="text-right">{{cost.check_number}}</td>
+                                                                                <td class="text-right">{{cost.check_date}}</td>
+                                                                                <td>${{cost.final_amount}}</td>
+                                                                                <td><input type="checkbox"></td>
+                                                                            </tr>
+                                                                        {% endfor %}
+                                                                    {% endif %}
+
+                                                                </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                        </div>
+                                            </div>
+
+                                            <div class="tab-pane fade" id="custom-nav-loans" role="tabpanel" aria-labelledby="custom-nav-loans-tab">
+                                                <div class="col-lg-12">
+                                                    <div class="row">
+                                                        <div class="table-responsive table--no-card m-b-40">
+                                                            <h4>LOANS</h4>
+                                                            <!-- <div class="pancil">
+                                                                <button type="button" data-toggle="modal" data-target="#costs" style="float: right !important; margin: auto;background-color: #0a3761; margin-right: 0px !important;" class="btn btn-primary">+</button>     
+                                                            </div> -->
+                                                            
+                                                            <!-- <div  class="pancil"><img src="{% static 'BP_resources/images/icon/pencil-tool.png' %}"></div> -->
+                                                            <table class="table table-borderless table-striped table-earning table-hover">
+                                                                
+                                                            
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Application Date</th>
+                                                                        <th>Current Amount</th>
+                                                                        <th>Date Verified</th>
+                                                                        <th class="text-right">Final Amount</th>
+                                                                        <th class="text-right">Check Number</th>
+                                                                        
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    {% if not loans %}
+                                                                        <div class="alert alert-danger" role="alert">
+                                                                            No Loans!
+                                                                        </div>
+                                                                    {% else %}
+                                                                        {% for loan in loans %}
+                                                                            <tr data-id="{{loan.id}}"
+                                                                            data-application_date="{{loan.application_date}}"
+                                                                            data-current_amount_verified="{{loan.current_amount_verified}}"
+                                                                            data-date_verified="{{loan.date_verified}}"
+                                                                            data-final_amount="{{loan.final_amount}}"
+                                                                            data-check_number="{{loan.check_number}}"
+                                                                            onclick="editLoan(event)">
+                                                                            
+                                                                                <td>{{loan.application_date}}</td>
+                                                                                <td class="text-right">${{loan.current_amount_verified}}</td>
+                                                                                <td class="text-right">{{loan.date_verified}}</td>
+                                                                                <td class="text-right">${{loan.final_amount}}</td>
+                                                                                <td>{{loan.check_number}}</td>
+                                                                                
+                                                                            </tr>
+                                                                        {% endfor %}
+                                                                    {% endif %}
+
+                                                                </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                        </div>
+                                            </div>
+
+                                            <div class="tab-pane fade" id="custom-nav-providers" role="tabpanel" aria-labelledby="custom-nav-providers-tab">
+                                                <div class="col-lg-12">
+                                                    <div class="row">
+                                                        <div class="table-responsive table--no-card m-b-40">
+                                                            <h4>MEDICAL BILLS</h4>
+                                                            <!-- <div class="pancil">
+                                                                <button type="button" data-toggle="modal" data-target="#costs" style="float: right !important; margin: auto;background-color: #0a3761; margin-right: 0px !important;" class="btn btn-primary">+</button>     
+                                                            </div> -->
+                                                            
+                                                            <!-- <div  class="pancil"><img src="{% static 'BP_resources/images/icon/pencil-tool.png' %}"></div> -->
+                                                            <table class="table table-borderless table-striped table-earning table-hover">
+                                                                
+                                                            
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Specialty</th>
+                                                                        <th>Provider</th>
+                                                                        <th>Amount</th>
+                                                                        <th>INS Paid</th>
+                                                                        <th class="text-right">Write-off</th>
+                                                                        <th class="text-right">Reduction</th>
+                                                                        <th class="text-right">Final Amount</th>
+                                                                        <th class="text-right">Check Number</th>
+                                                                        
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    {% if not providers %}
+                                                                        <div class="alert alert-danger" role="alert">
+                                                                            No Providers!
+                                                                        </div>
+                                                                    {% else %}
+                                                                        {% for provider in providers %}
+                                                                            <tr data-id="{{provider.id}}"
+                                                                            data-specialty="{{provider.specialty.name}}"
+                                                                            data-provider="{{provider.location.added_by.providerprofile.office_name}}"
+                                                                            data-amount="{{provider.amount}}"
+                                                                            data-ins_paid="{{provider.ins_paid}}"
+                                                                            data-write_off="{{provider.write_off}}"
+                                                                            data-reduction="{{provider.reduction}}"
+                                                                            data-final_amount="{{provider.final_amount}}"
+                                                                            data-check_number="{{provider.check_number}}"
+                                                                            onclick="editMedicalBill(event)">
+                                                                                
+                                                                                <td class="text-right">
+                                                                                    <span class="badge badge-light" style="font-size: 17px;color: {{provider.specialty.color}};border: 1px solid;">{{provider.specialty.name.0}}</span>
+                                                                                </td>
+                                                                                <td>{{provider.location.added_by.providerprofile.office_name}}</td>
+                                                                                <td class="text-right">${{provider.amount}}</td>
+                                                                                <td class="text-right">{{provider.ins_paid}}</td>
+                                                                                <td class="text-right">${{provider.write_off}}</td>
+                                                                                <td class="text-right">${{provider.reduction}}</td>
+                                                                                <td class="text-right">${{provider.final_amount}}</td>
+                                                                                <td>{{provider.check_number}}</td>
+                                                                                
+                                                                            </tr>
+                                                                        {% endfor %}
+                                                                    {% endif %}
+
+                                                                </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                        </div>
+                                            </div>
+
+                                            <div class="tab-pane fade" id="custom-nav-client_proceeds" role="tabpanel" aria-labelledby="custom-nav-client_proceeds-tab">
+                                                <div class="col-lg-12">
+                                                    <div class="row">
+                                                        <div class="table-responsive table--no-card m-b-40">
+                                                            <h4>CLIENT PROCEEDS</h4>
+                                                            <div class="pancil">
+                                                                <button type="button" data-toggle="modal" data-target="#client_proceeds" style="float: right !important; margin: auto;background-color: #0a3761; margin-right: 0px !important;" class="btn btn-primary">+</button>     
+                                                            </div>
+                                                            
+                                                            <!-- <div  class="pancil"><img src="{% static 'BP_resources/images/icon/pencil-tool.png' %}"></div> -->
+                                                            <table class="table table-borderless table-striped table-earning table-hover">
+                                                                
+                                                            
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Name on check</th>
+                                                                        <th>Check number</th>
+                                                                        <th>amount</th>
+                                                                        <th class="text-right">Check date</th>
+                                                                        <th class="text-right">Cleared</th>
+                                                                        
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    {% if not client_proceeds %}
+                                                                        <div class="alert alert-danger" role="alert">
+                                                                            No Client Proceeds!
+                                                                        </div>
+                                                                    {% else %}
+                                                                        {% for client_proceed in client_proceeds %}
+                                                                            <tr data-id="{{client_proceed.id}}"
+                                                                            data-name_on_check="{{client_proceed.name_on_check}}"
+                                                                            data-check_number="{{client_proceed.check_number}}"
+                                                                            data-amount="{{client_proceed.amount}}"
+                                                                            data-check_date="{{client_proceed.check_date}}"
+                                                                            data-cleared="{{client_proceed.cleared}}"
+                                                                            onclick="editClientProcedure(event)">
+                                                                            
+                                                                                <td>{{client_proceed.name_on_check}}</td>
+                                                                                <td class="text-right">{{client_proceed.check_number}}</td>
+                                                                                <td class="text-right">${{client_proceed.amount}}</td>
+                                                                                <td class="text-right">{{client_proceed.check_date}}</td>
+                                                                                <td>{{client_proceed.cleared}}</td>
+                                                                                
+                                                                            </tr>
+                                                                        {% endfor %}
+                                                                    {% endif %}
+
+                                                                </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                        </div>
+                                            </div>
+
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+
+
+
+                            </div>
+
+                     
+                            <div class="col-lg-12">
+                                {% include 'BP/notes-section.html' %}
+                                <form method="POST" action="{% url 'bp-addToDo' client.id case.id %}"> {% csrf_token %}
+                                    <textarea id="todo-note" hidden name="note"></textarea>
+                                    <div class="footer-line">
+                                        <div class="row">
+                                            <div class="col-lg-7"> To-Do for
+                                                <select name="user_type" id="cars"> {% for user_type in case_users %}
+                                                    <option value="{{user_type.id}}">{{user_type.user_type.name}} {{user_type.user.first_name}} {{user_type.user.last_name}}</option> {% endfor %} </select> due in
+                                                <select name="due_date" id="cars">
+                                                    <option value="Now">Now</option>
+                                                    <option value="1 day">1 day</option>
+                                                    <option selected value="2 days">2 days</option>
+                                                    <option value="3 days">3 days</option>
+                                                    <option value="4 days">4 days</option>
+                                                    <option value="5 days">5 days</option>
+                                                    <option value="6 days">6 days</option>
+                                                    <option value="1 week">1 week</option>
+                                                    <option value="2 weeks">2 weeks</option>
+                                                    <option value="1 month">1 month</option>
+                                                    <option value="2 months">2 months</option>
+                                                    <option value="6 months">6 months</option>
+                                                </select>
+                                                <button onclick="addTodoNote()" type="submit">New To-Do</button>
+                                </form>
+                                </div>
+                                <div class="col-lg-5">
+                                    <select id="note_category" class="right footer-select"> {% for page in pages %} {% if page.name == 'Settlement' %}
+                                        <option selected value="{{page.id}}">{{page.name}}</option> {% else %}
+                                        <option value="{{page.id}}">{{page.name}}</option> {% endif %} {% endfor %} </select>
+                                    <button form="notes-form" onclick="newNoteFunction()" type="submit">Add Note</button>
+                                </div>
+                                </div>
+                                <div class="col-lg-12 table-section">
+                                    <div class="row" id="other-parties-page">
+                                        <div class="col-lg-12 notetable">
+                                            <div class="card">
+                                                <div class="">
+                                                    <div class="custom-tab">
+                                                        <nav>
+                                                            <div class="nav nav-tabs" id="nav-tab" role="tablist"> <a class="nav-item nav-link active" id="custom-nav-home-tab" data-toggle="tab" href="#custom-nav-all" role="tab" aria-controls="custom-nav-all" aria-selected="true">All</a> {% if 'Case' in categories %} <a class="nav-item nav-link" id="custom-nav-profile-tab" data-toggle="tab" href="#custom-nav-case" role="tab" aria-controls="custom-nav-case" aria-selected="false">case</a> {% endif %} {% if 'Client' in categories %} <a class="nav-item nav-link" id="custom-nav-contact-tab" data-toggle="tab" href="#custom-nav-client" role="tab" aria-controls="custom-nav-client" aria-selected="false">client</a> {% endif %} {% if 'Defendants' in categories %} <a class="nav-item nav-link" id="custom-nav-injurie-tab" data-toggle="tab" href="#custom-nav-injurie" role="tab" aria-controls="custom-nav-client" aria-selected="false">Defendants</a> {% endif %} {% if 'Car Accident' in categories %} <a class="nav-item nav-link" id="custom-nav-car_accident-tab" data-toggle="tab" href="#custom-nav-car_accident" role="tab" aria-controls="custom-nav-car_accident" aria-selected="false">Car Accident</a> {% endif %} {% if 'Photo' in categories %} <a class="nav-item nav-link" id="custom-nav-photo-tab" data-toggle="tab" href="#custom-nav-photo" role="tab" aria-controls="custom-nav-photo" aria-selected="false">Photo</a> {% endif %} {% if 'Injury' in categories %} <a class="nav-item nav-link" id="custom-nav-injury-tab" data-toggle="tab" href="#custom-nav-injury" role="tab" aria-controls="custom-nav-injury" aria-selected="false">injuries</a> {% endif %} {% if 'Other Party' in categories %} <a class="nav-item nav-link" id="custom-nav-other_party-tab" data-toggle="tab" href="#custom-nav-other_party" role="tab" aria-controls="custom-nav-other_party" aria-selected="false">Other Party</a> {% endif %} {% if 'Witnesses' in categories %} <a class="nav-item nav-link" id="custom-nav-witnesses-tab" data-toggle="tab" href="#custom-nav-witnesses" role="tab" aria-controls="custom-nav-witnesses" aria-selected="false">witnesses</a> {% endif %} {% if 'Insurance' in categories %} <a class="nav-item nav-link" id="custom-nav-insurance-tab" data-toggle="tab" href="#custom-nav-insurance" role="tab" aria-controls="custom-nav-insurance" aria-selected="false">Insurance</a> {% endif %} {% if 'Employment' in categories %} <a class="nav-item nav-link" id="custom-nav-employment-tab" data-toggle="tab" href="#custom-nav-employment" role="tab" aria-controls="custom-nav-employment" aria-selected="false">Employment</a> {% endif %} {% if 'Recordings' in categories %} <a class="nav-item nav-link" id="custom-nav-recording-tab" data-toggle="tab" href="#custom-nav-recording" role="tab" aria-controls="custom-nav-recording" aria-selected="false">recording</a> {% endif %} {% if 'Documents' in categories %} <a class="nav-item nav-link" id="custom-nav-documents-tab" data-toggle="tab" href="#custom-nav-documents" role="tab" aria-controls="custom-nav-documents" aria-selected="false">documents</a> {% endif %} {% if 'Costs' in categories %} <a class="nav-item nav-link" id="custom-nav-costs-tab" data-toggle="tab" href="#custom-nav-costs" role="tab" aria-controls="custom-nav-costs" aria-selected="false">costs</a> {% endif %} {% if 'Case Loans' in categories %} <a class="nav-item nav-link" id="custom-nav-case_loans-tab" data-toggle="tab" href="#custom-nav-case_loans" role="tab" aria-controls="custom-nav-case_loans" aria-selected="false">case Loan</a> {% endif %} {% if 'Settlement' in categories %} <a class="nav-item nav-link" id="custom-nav-settlement-tab" data-toggle="tab" href="#custom-nav-settlement" role="tab" aria-controls="custom-nav-settlement" aria-selected="false">Settlement</a> {% endif %} {% if 'Litigation' in categories %} <a class="nav-item nav-link" id="custom-nav-litigation-tab" data-toggle="tab" href="#custom-nav-litigation" role="tab" aria-controls="custom-nav-litigation" aria-selected="false">litigation</a> {% endif %} {% if 'Discovery' in categories %} <a class="nav-item nav-link" id="custom-nav-discovery-tab" data-toggle="tab" href="#custom-nav-discovery" role="tab" aria-controls="custom-nav-discovery" aria-selected="false">discovery</a> {% endif %} {% if 'Depositions' in categories %} <a class="nav-item nav-link" id="custom-nav-depositions-tab" data-toggle="tab" href="#custom-nav-depositions" role="tab" aria-controls="custom-nav-depositions" aria-selected="false">depositions</a> {% endif %} {% if 'Medical Treatment' in categories %} <a class="nav-item nav-link" id="custom-nav-medical-tab" data-toggle="tab" href="#custom-nav-medical" role="tab" aria-controls="custom-nav-medical" aria-selected="false">Medical Treatment</a> {% endif %} {% if 'To-Do' in categories %} <a class="nav-item nav-link" id="custom-nav-todo-tab" data-toggle="tab" href="#custom-nav-todo" role="tab" aria-controls="custom-nav-medical" aria-selected="false">To-Do</a> {% endif %} </div>
+                                                        </nav>
+                                                        <div class="tab-content" id="nav-tabContent">
+                                                            <div class="tab-pane fade show active" id="custom-nav-all" role="tabpanel" aria-labelledby="custom-nav-all-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if empty %}
+                                                                                    <div class="alert alert-danger" role="alert"> A simple danger alert—check it out! </div> {% endif %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-case" role="tabpanel" aria-labelledby="custom-nav-case-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Case' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-todo" role="tabpanel" aria-labelledby="custom-nav-todo-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'To-Do' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-client" role="tabpanel" aria-labelledby="custom-nav-client-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Client' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-injurie" role="tabpanel" aria-labelledby="custom-nav-injurie-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Defendants' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-car_accident" role="tabpanel" aria-labelledby="custom-nav-car_accident-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Car Accident' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-photo" role="tabpanel" aria-labelledby="custom-nav-photo-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Photo' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-injury" role="tabpanel" aria-labelledby="custom-nav-injury-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Injury' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-medical" role="tabpanel" aria-labelledby="custom-nav-medical-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Medical Treatment' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-other_party" role="tabpanel" aria-labelledby="custom-nav-other_party-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Other Party' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-witnesses" role="tabpanel" aria-labelledby="custom-nav-witnesses-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Witnesses' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-insurance" role="tabpanel" aria-labelledby="custom-nav-insurance-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Insurance' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-employment" role="tabpanel" aria-labelledby="custom-nav-employment-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Employment' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-recordings" role="tabpanel" aria-labelledby="custom-nav-recordings-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Recordings' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-documents" role="tabpanel" aria-labelledby="custom-nav-documents-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Documents' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-costs" role="tabpanel" aria-labelledby="custom-nav-costs-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Costs' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-case_loans" role="tabpanel" aria-labelledby="custom-nav-case_loans-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Case Loan' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-settlement" role="tabpanel" aria-labelledby="custom-nav-settlement-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Settlement' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-litigation" role="tabpanel" aria-labelledby="custom-nav-litigation-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Litigation' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-discovery" role="tabpanel" aria-labelledby="custom-nav-discovery-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Discovery' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-depositions" role="tabpanel" aria-labelledby="custom-nav-depositions-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Depositions' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                            </div>
+                      
+                       </div>
+                    <div class="col-lg-6"> 
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2022 Ian Silverthorne</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'BP_resources/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'BP_resources/vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/select2/select2.min.js' %}">
+    </script>
+    <script>
+        /* When the user clicks on the button, 
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+
+        function editOffer(ev) {
+            var $modal = $('#editOffer');
+            var $tr = $(ev.target).closest('tr');
+
+            $modal.find('[name="check"]').val($tr.attr('data-id'));
+            $modal.find('[name="date"]').val($tr.attr('data-date'));
+            $modal.find('[name="note"]').val($tr.attr('data-note'));
+            $modal.find('[name="check_number"]').val($tr.attr('data-check_number'));
+            $modal.find('[name="amount"]').val($tr.attr('data-amount'));
+            $modal.find('[name="final_amount"]').val($tr.attr('data-final_amount'));
+
+            $modal.modal('show');
+        }
+
+        function editFees(ev) {
+            var $modal = $('#editFees');
+            var $tr = $(ev.target).closest('tr');
+
+            $modal.find('[name="check"]').val($tr.attr('data-id'));
+            $modal.find('[name="note"]').val($tr.attr('data-note'));
+            $modal.find('[name="check_number"]').val($tr.attr('data-check_number'));
+            $modal.find('[name="amount"]').val($tr.attr('data-amount'));
+            $modal.find('[name="final_amount"]').val($tr.attr('data-final_amount'));
+
+            $modal.modal('show');
+        }
+
+        function editCost(ev) {
+            var $modal = $('#costs');
+            var $tr = $(ev.target).closest('tr');
+
+            $modal.find('[name="check"]').val($tr.attr('data-id'));
+            $modal.find('[name="date"]').val($tr.attr('data-date'));
+            $modal.find('[name="payee"]').val($tr.attr('data-payee'));
+            $modal.find('[name="check_number"]').val($tr.attr('data-check_number'));
+            $modal.find('[name="check_date"]').val($tr.attr('data-check_date'));
+            $modal.find('[name="final_amount"]').val($tr.attr('data-final_amount'));
+
+            $modal.modal('show');
+        }
+        
+        function editMedicalBill(ev) {
+            var $modal = $('#medical-bill');
+            var $tr = $(ev.target).closest('tr');
+
+            $modal.find('[name="check"]').val($tr.attr('data-id'));
+            $modal.find('[name="specialty"]').val($tr.attr('data-specialty'));
+            $modal.find('[name="provider"]').val($tr.attr('data-provider'));
+            $modal.find('[name="amount"]').val($tr.attr('data-amount'));
+            $modal.find('[name="ins_paid"]').val($tr.attr('data-ins_paid'));
+            $modal.find('[name="write_off"]').val($tr.attr('data-write_off'));
+            $modal.find('[name="reduction"]').val($tr.attr('data-reduction'));
+            // $modal.find('[name="final_amount"]').val($tr.attr('data-final_amount'));
+            $modal.find('[name="check_number"]').val($tr.attr('data-check_number'));
+
+            $modal.modal('show');
+        }
+        
+        function editLoan(ev) {
+            var $modal = $('#loans');
+            var $tr = $(ev.target).closest('tr');
+
+            $modal.find('[name="check"]').val($tr.attr('data-id'));
+            $modal.find('[name="application_date"]').val($tr.attr('data-application_date'));
+            $modal.find('[name="current_amount_verified"]').val($tr.attr('data-current_amount_verified'));
+            $modal.find('[name="date_verified"]').val($tr.attr('data-date_verified'));
+            $modal.find('[name="final_amount"]').val($tr.attr('data-final_amount'));
+            $modal.find('[name="check_number"]').val($tr.attr('data-check_number'));
+
+            $modal.modal('show');
+        }
+        
+        function editClientProcedure(ev) {
+            var $modal = $('#edit_client_proceeds');
+            var $tr = $(ev.target).closest('tr');
+
+            $modal.find('[name="check"]').val($tr.attr('data-id'));
+            $modal.find('[name="name_on_check"]').val($tr.attr('data-name_on_check'));
+            $modal.find('[name="check_number"]').val($tr.attr('data-check_number'));
+            $modal.find('[name="amount"]').val($tr.attr('data-amount'));
+            $modal.find('[name="check_date"]').val($tr.attr('data-check_date'));
+            $modal.find('[name="cleared"]').val($tr.attr('data-cleared'));
+
+            $modal.modal('show');
+        }
+
+        function deleteRecord(ev) {
+            var id = $(ev.target).closest('.modal').find('[name="check"]').val();
+            var $form = $(ev.target).closest('.modal').find('.deleteForm');
+            $form.find('[name="record_id"]').val(id);
+            $form.submit();
+        }
+
+        function submitEditForm(ev) {
+            var id = $(ev.target).closest('.modal').find('[name="check"]').val();
+            var $form = $(ev.target).closest('.modal').find('form:not(.deleteForm)');
+            $form.submit();
+        }
+    </script>
+    <!-- Main JS-->
+    <script src="{% static 'BP_resources/js/main.js' %}"></script>
+    <script>
+        function addTodoNote() {
+            var note = document.getElementById('w3review').value;
+            var temp = document.getElementById('todo-note');
+            temp.value = note;
+            console.log(note);
+        }
+
+        function newNoteFunction() {
+            var temp_category = document.getElementById('note_category').value;
+            var category = document.getElementById('category');
+            category.value = temp_category;
+        }
+        </script>
+        <script>
+            $(document).ready(function(){
+            // $('a').on('click', function () {
+                console.log('hello');
+              
+                $.ajax({
+                    url: '/BP/clickRecord/',
+                    type: "GET",
+                    data: {
+                        "case_id": "{{case.id}}",
+                        "page_id": "{{page.id}}",
+                        "click_id": "18",
+                        "clickIDDescription": "Settlement Page Entry"
+                    },
+                   
+                    success: function (data) {
+                        var x = JSON.stringify(data);
+                        console.log(x);
+                    },
+                    // Error handling 
+                    error: function (error) {
+                        console.log(`Error ${error}`);
+                    }
+                });
+            // });
+        });
+        </script>
+        <script>
+            function calcWidth() {
+                var navwidth = 0;
+                var morewidth = $('#main-2 .more-2').outerWidth(true);
+                $('#main-2 > li:not(.more-2)').each(function() {
+                    navwidth += $(this).outerWidth( true );
+                });
+                var availablespace = $('.wrap').outerWidth(true) - morewidth;
+                
+                if (navwidth > availablespace) {
+                  var lastItem = $('#main-2 > li:not(.more-2)').last();
+                  lastItem.attr('data-width', lastItem.outerWidth(true));
+                  lastItem.prependTo($('#main-2 .more-2 ul'));
+                  calcWidth();
+                } else {
+                  var firstMoreElement = $('#main-2 li.more-2 li').first();
+                  if (navwidth + firstMoreElement.data('width') < availablespace) {
+                    firstMoreElement.insertBefore($('#main-2 .more-2'));
+                  }
+                }
+                
+                if ($('.more-2 li').length > 0) {
+                  $('.more-2').css('display','block');
+                } else {
+                  $('.more-2').css('display','none');
+                }
+              }
+              $(window).on('resize load',function(){
+                calcWidth();
+              });
+              $(".more-button").click(function(){
+                $(".collapsible-ul").toggle();
+              });
+        </script>
+</body>
+
+</html>
+<!-- end document-->

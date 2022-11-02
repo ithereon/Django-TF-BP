@@ -1,0 +1,89 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% block pagetitle %}
+    Treatment First - Favorite
+{% endblock pagetitle %}
+{% block content %}
+    <div class="mt-4">
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="search" value="basic" />
+            <input type="hidden" name="page" value="0" />
+            <div class="mb-3">
+                <div class="row">
+                    <h5 class="col-md-2 text-primary mt-2 mb-2">Quick Search</h5>
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="col mb-2">
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Enter the Provider Office name">
+                            </div>
+                            <div class="col-md-1">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="mt-4 py-4 px-md-5 bg-white">
+        <h4 class="text-primary text-center">Choose Favorite Provider</h4>
+
+        <div class="mt-3">
+            <div>
+                {% for x in temp %}
+            
+                    <a href="{% url 'provider' x.provider.providerprofile.office_name %}" class="px-3 py-2 card-hover" style="border-color: {{x.specialty.color}};">
+                        <div class="row align-items-center py-2">
+                            
+                            <div class="col-md">
+                                <div>
+                                    {{x.provider.providerprofile.office_name}}
+                                </div>
+                            </div>
+                            <div class="col-md" style="color: {{x.specialty.color}};">
+                                <div class="fw-bold">{{x.specialty.name}}</div>
+                            </div>
+                            <div class="col-md text-md-center">
+                                <div class="star-container">
+                                    <div class="star-back">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="star-front text-warning" style="width: {{x.provider.review_percentage}}%;">
+                                        <div class="cover">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>{{x.provider.review_userprofile.count}} review</div>
+                            </div>
+                            
+                            
+                            <div class="col-md">
+                                <div>{{x.location.address}}, {{x.location.city}}, {{x.location.state}}</div>
+                            </div>
+                            <div class="col-md  text-md-end">
+                            
+                            <form action="{% url 'addFavorite' x.provider.id x.location.id x.specialty.id %}">
+                                <input class="btn btn-primary" type="submit"  value="Add to favorites" />
+                            </form>
+                                        
+                            </div>
+                        </div>
+                    </a>
+                
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

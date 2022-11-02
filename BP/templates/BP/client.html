@@ -1,0 +1,1918 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+        <!-- Title Page-->
+        <title>Dashboard</title>
+        <!-- Fontfaces CSS-->
+        <link href="{% static 'BP_resources/css/font-face.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+        <!-- Bootstrap CSS-->
+        <link href="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+        <!-- Vendor CSS-->
+        <link href="{% static 'BP_resources/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+        <!-- Main CSS-->
+        <link href="{% static 'BP_resources/css/theme.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'css/style.css' %}" rel="stylesheet" media="all"> 
+        <link href="{% static 'BP_resources/css/sidebar.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/header.css' %}" rel="stylesheet" media="all">
+        <!-- <link href="{% static 'BP_resources/css/medicalTreatment.css' %}" rel="stylesheet" media="all"> -->
+        <link href="{% static 'BP_resources/css/client-main.css' %}" rel="stylesheet" media="all">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    </head>
+
+<body class="animsition client-page">
+    <!-- Panels popup starts here -->
+    <div class="modal generic-popup fade bd-example-modal-lg zoom-in" id="client-phone-numbers-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 1000px" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title mx-auto">Client Phone Numbers</h5>
+            </div>
+            <div class="modal-body">
+                <form id="editClientForm3" action="{% url 'bp-editClientInfo2' client.id case.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-2">
+                            <p style="color: #000">{{client.contact_1.phone_number}}</p>
+                        </div>
+                        <div class="col-md-1 px-0">
+                            <p class="text-secondary">Phone 1 :</p>
+                        </div>
+                        <div class="col-md-3 pl-0">
+                           <input type="tel" id="mask_phone_number" placeholder="(555) 555-5555" class="form-control" name="client_phone_1"  onchange="change_value_input(this ,'primaryCheck1_phone' )">
+                        </div>
+                        <div class="col-md-1 px-0">
+                            <p class="text-secondary">Primary :</p>
+                        </div>
+                        <div class="col-md-5 pl-0">
+                            <div class="custom-control custom-checkbox">
+                                <input type="radio" class="custom-control-input" id="primaryCheck1_phone" {% if client.contact_1.phone_number == client.primary_phone.phone_number %} checked {% endif %} name="primary_phone">
+                                <label class="custom-control-label" for="primaryCheck1_phone">Check this checkbox to mark it primary</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-2">
+                            <p style="color: #000">{{client.contact_2.phone_number}}</p>
+                        </div>
+                        <div class="col-md-1 px-0">
+                            <p class="text-secondary">Phone 2 :</p>
+                        </div>
+                        <div class="col-md-3 pl-0">
+                           <input type="tel" id="mask_phone_number" placeholder="(555) 555-5555" class="form-control" name="client_phone_2"  onchange="change_value_input(this ,'primaryCheck2_phone' )">
+                        </div>
+                        <div class="col-md-1 px-0">
+                            <p class="text-secondary">Primary :</p>
+                        </div>
+                        <div class="col-md-5 pl-0">
+                            <div class="custom-control custom-checkbox">
+                                <input type="radio" class="custom-control-input" id="primaryCheck2_phone" {% if client.contact_2.phone_number == client.primary_phone.phone_number %} checked {% endif %} name="primary_phone" >
+                                <label class="custom-control-label" for="primaryCheck2_phone">Check this checkbox to mark it primary</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-2">
+                            <p style="color: #000">{{client.contact_3.phone_number}}</p>
+                        </div>
+                        <div class="col-md-1 px-0">
+                            <p class="text-secondary">Phone 3 :</p>
+                        </div>
+                        <div class="col-md-3 pl-0">
+                           <input type="tel" id="mask_phone_number" placeholder="(555) 555-5555" class="form-control" name="client_phone_3"  onchange="change_value_input(this ,'primaryCheck3_phone' )">
+                        </div>
+                        <div class="col-md-1 px-0">
+                            <p class="text-secondary">Primary :</p>
+                        </div>
+                        <div class="col-md-5 pl-0">
+                            <div class="custom-control custom-checkbox">
+                                <input type="radio" class="custom-control-input" id="primaryCheck3_phone" {% if client.contact_3.phone_number == client.primary_phone.phone_number %} checked {% endif %} name="primary_phone">
+                                <label class="custom-control-label" for="primaryCheck3_phone">Check this checkbox to mark it primary</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0 justify-content-between pt-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button form="editClientForm3" type="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal generic-popup fade bd-example-modal-lg zoom-in" id="client-emails-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 1000px" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title mx-auto">Client Emails</h5>
+            </div>
+            <div class="modal-body">
+                <form id="editClientForm4" action="{% url 'bp-editClientInfo2' client.id case.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-3">
+                            <p id="client_email1_backend" style="color: #000">{{client.contact_1.email}}</p>
+                        </div>
+                        <div class="col-md-1 px-0">
+                            <p class="text-secondary">Email 1 :</p>
+                        </div>
+                        <div class="col-md-2 pl-0">
+                           <input type="email" placeholder="Enter Email" class="form-control" name="client_email1" onchange="change_value_input(this ,'primary_email1' )">
+                        </div>
+                        <div class="col-md-1 px-0">
+                            <p class="text-secondary">Primary :</p>
+                        </div>
+                        <div class="col-md-5 pl-0">
+                            <div class="custom-control custom-checkbox">
+                                <input type="radio" class="custom-control-input"  {% if client.contact_1.email == client.primary_email.email %} checked {% endif %} id="primary_email1" name="primary_email">
+                                <label class="custom-control-label" for="primary_email1">Check this checkbox to mark it primary</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-3">
+                            <p id="client_email2_backend" style="color: #000">{{client.contact_2.email}}</p>
+                        </div>
+                        <div class="col-md-1 px-0">
+                            <p class="text-secondary">Email 2 :</p>
+                        </div>
+                        <div class="col-md-2 pl-0">
+                           <input type="email" placeholder="Enter Email" class="form-control" name="client_email2" onchange="change_value_input(this ,'primary_email2' )">
+                        </div>
+                        <div class="col-md-1 px-0">
+                            <p class="text-secondary">Primary :</p>
+                        </div>
+                        <div class="col-md-5 pl-0">
+                            <div class="custom-control custom-checkbox">
+                                <input type="radio" class="custom-control-input" id="primary_email2" {% if client.contact_2.email == client.primary_email.email %} checked {% endif %} name="primary_email">
+                                <label class="custom-control-label" for="primary_email2">Check this checkbox to mark it primary</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-3">
+                            <p id="client_email3_backend" style="color: #000">{{client.contact_3.email}}</p>
+                        </div>
+                        <div class="col-md-1 px-0">
+                            <p class="text-secondary">Email 3 :</p>
+                        </div>
+                        <div class="col-md-2 pl-0">
+                           <input type="email" placeholder="Enter Email" class="form-control" name="client_email3" onchange="change_value_input(this ,'primary_email3' )">
+                        </div>
+                        <div class="col-md-1 px-0">
+                            <p class="text-secondary">Primary :</p>
+                        </div>
+                        <div class="col-md-5 pl-0">
+                            <div class="custom-control custom-checkbox">
+                                <input type="radio" class="custom-control-input" id="primary_email3" {% if client.contact_3.email == client.primary_email.email %} checked {% endif %}  name="primary_email">
+                                <label class="custom-control-label" for="primary_email3">Check this checkbox to mark it primary</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0 justify-content-between pt-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button form="editClientForm4" type="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal generic-popup fade bd-example-modal-lg zoom-in" id="home-adress-one-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 1000px" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title mx-auto">Home Address</h5>
+            </div>
+            <div class="modal-body">
+                <form id="editClientForm5" action="{% url 'bp-editClientInfo2' client.id case.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Mail?</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Mail :</p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="is_email_1" value="True" name= 'is_email'>
+                                <label class="custom-control-label" for="is_email_1">Check this checkbox to mark it mail</label>
+                            </div>                        
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">{{client.contact_1.address1}}</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Address 1 :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" name="home_modal_one_address1" placeholder="Enter Address 1" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">{{client.contact_1.address2}}</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Address 2 :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" name="home_modal_one_address2" placeholder="Enter Address 2" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">{{client.contact_1.city}}</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">City :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" name="home_modal_one_city" placeholder="Enter City" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">{{client.contact_1.state}}</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">State :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" name="home_modal_one_state" placeholder="Enter State" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">{{client.contact_1.zip}}</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">ZIP :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" name="home_modal_one_zip" placeholder="Enter Zip" class="form-control">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0 justify-content-between pt-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button form="editClientForm5" type="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal generic-popup fade bd-example-modal-lg zoom-in" id="home-adress-two-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 1000px" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title mx-auto">Home Address</h5>
+            </div>
+            <div class="modal-body">
+                <form id="editClientForm5_2" action="{% url 'bp-editClientInfo2' client.id case.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Mail?</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Mail :</p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="is_email_2" value="True" name= 'is_email'>
+                                <label class="custom-control-label" for="is_email_2">Check this checkbox to mark it mail</label>
+                            </div>                        
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">{{client.contact_2.address1}}</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Address 1 :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" name="home_modal_two_address1" placeholder="Enter Address 1" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">{{client.contact_2.address2}}</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Address 2 :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" name="home_modal_two_address2" placeholder="Enter Address 2" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">{{client.contact_2.city}}</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">City :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" name="home_modal_two_city" placeholder="Enter City" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">{{client.contact_2.state}}</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">State :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" name="home_modal_two_state" placeholder="Enter State" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">{{client.contact_2.zip}}</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">ZIP :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" name="home_modal_two_zip" placeholder="Enter Zip" class="form-control">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0 justify-content-between pt-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button form="editClientForm5_2" type="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal generic-popup fade bd-example-modal-lg zoom-in" id="emergency-contact-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 1000px" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title mx-auto">Emergency Contact</h5>
+            </div>
+            <div class="modal-body">
+                <form id="editClientForm6_emergency" action="{% url 'bp-editClientInfo2' client.id case.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">{{client.emergency_contact.first_name}}</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Name :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" name = 'emergency_name' placeholder="Enter name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">{{client.emergency_contact.relationship}}</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Relationship :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" name = 'emergency_relationship' placeholder="Enter Relationship" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Alright to discuss case?</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Discuss Case :</p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="discuss_case" name="discuss_case" value="True">
+                                <label class="custom-control-label" for="discuss_case">Check this checkbox to discuss</label>
+                            </div>                        
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">{{client.emergency_contact.contact.phone_number}}</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Phone 1 :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" id="mask_phone_number" name="emergency_phone" placeholder="(555) 555-5555" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">{{client.emergency_contact.contact.email}} </p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Email :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" name="emergency_email" placeholder="Enter email" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">{{client.emergency_contact.contact.address1}}</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Address 1 :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" name="emergency_address1" placeholder="Enter Address 1" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">{{client.emergency_contact.contact.address2}}</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Address 2 :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" name="emergency_address2" placeholder="Enter Address 2" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">{{client.emergency_contact.contact.city}}</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">City :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" name="emergency_city" placeholder="Enter City" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">{{client.emergency_contact.contact.state}}</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">State :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" name="emergency_state" placeholder="Enter State" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">{{client.emergency_contact.contact.zip}}</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">ZIP :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" name="emergency_zip" placeholder="Enter Zip" class="form-control">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0 justify-content-between pt-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button form="editClientForm6_emergency" type="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- Panels popup ends here -->
+    <div class="modal fade zoom-in" id="phone-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+                <form action="{% url 'bp-editClientInfo1' client.id case.id %}" method="post" id="editClientForm1">
+                    {% csrf_token %}
+                    <div class="modal-content-row">
+                        <p>{{client.phone}}</p>
+                        <p>Phone Number</p>
+                        
+                        <input type="text" id="mask_phone_number" name="client_phone" class="form-control" placeholder="(555) 555-5555">
+                        
+                    </div>
+                    <div class="modal-content-row mt-2">
+                        <p>{{client.email}}</p>
+                        <p>Email address</p>
+                        
+                        <input type="email" name="client_email" class="form-control" placeholder="Enter Email....">
+                        
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button form="editClientForm1" type="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="addparty" tabindex="-1" aria-labelledby="addparty" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 1000px">
+           <div class="modal-content">
+              <div class="modal-header text-center">
+                 <h5 class="modal-title mx-auto" id="exampleModalLabel">Add Client Insurance</h5>
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body panel-popups-body">
+                
+                <form id="editClientForm3" action="{% url 'bp-editClientInfo2' client.id case.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="row align-items-center mb-1">
+                        <div class="" style="margin: 0 15px">
+                            <p class="text-secondary" style="color: #000">Type:</p>
+                        </div>
+                        <div class="" style="width: 236.5px">
+                            <select name="insurance type" id="" class="form-control">
+                                <option value="">Insurance Type 1</option>
+                                <option value="">Insurance Type 2</option>
+                                <option value="">Insurance Type 3</option>
+                            </select>
+                        </div>
+                        <div class="" style="margin: 0 15px">
+                            <p class="text-secondary" style="color: #000">Policy # :</p>
+                        </div>
+                        <div class="" style="width: 236.5px">
+                           <input type="text" placeholder="Enter Policy #" class="form-control">
+                        </div>
+                        <div class="" style="margin: 0 15px">
+                            <p class="text-secondary" style="color: #000">Claim # :</p>
+                        </div>
+                        <div class="" style="width: 236.5px">
+                           <input type="text" placeholder="Enter Claim #" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                           <input type="text" placeholder="Type insurance company name to search directory then click an entry" class="form-control mb-1">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-2">
+                            <p class="text-secondary" style="color: #000">Insurance Name:</p>
+                        </div>
+                        <div class="col-md-4">
+                           <input type="text" placeholder="Enter Insurance Name" class="form-control">
+                        </div>
+                        <div class="col-md-2">
+                            <p class="text-secondary" style="color: #000">Address 1 :</p>
+                        </div>
+                        <div class="col-md-4">
+                           <input type="text" placeholder="Enter Address 1" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-2">
+                            <p class="text-secondary" style="color: #000">Phone :</p>
+                        </div>
+                        <div class="col-md-4">
+                           <input type="text" id="mask_phone_number" placeholder="(555) 555-5555" class="form-control">
+                        </div>
+                        <div class="col-md-2">
+                            <p class="text-secondary" style="color: #000">Address 2 :</p>
+                        </div>
+                        <div class="col-md-4">
+                           <input type="text" placeholder="Enter Address 2" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-2">
+                            <p class="text-secondary" style="color: #000">Fax :</p>
+                        </div>
+                        <div class="col-md-4">
+                           <input type="text" placeholder="Enter Fax" class="form-control">
+                        </div>
+                        <div class="col-md-2">
+                            <p class="text-secondary" style="color: #000">City :</p>
+                        </div>
+                        <div class="col-md-4">
+                           <input type="text" placeholder="Enter City" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-2">
+                            <p class="text-secondary" style="color: #000">Email :</p>
+                        </div>
+                        <div class="col-md-4">
+                           <input type="text" placeholder="Enter Email" class="form-control">
+                        </div>
+                        <div class="col-md-2">
+                            <p class="text-secondary" style="color: #000">State :</p>
+                        </div>
+                        <div class="col-md-4">
+                           <input type="text" placeholder="Enter State" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-2">
+                            <p class="text-secondary">ZIP :</p>
+                        </div>
+                        <div class="col-md-4">
+                           <input type="text" placeholder="Enter ZIP" class="form-control">
+                        </div>
+                    </div>
+                </form>
+              </div> 
+              <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" style="float:left; margin-right:auto;" data-dismiss="modal">Cancel</button>
+                 <button type="submit" form="form12" class="btn btn-success">Save</button>
+              </div>
+           </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addcase" tabindex="-1" aria-labelledby="addcase" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+           <div class="modal-content">
+              <div class="modal-header">
+                 <h5 class="modal-title" id="exampleModalLabel">Add New Case</h5>
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet velit ab consectetur eius dignissimos nostrum</p>
+              </div> 
+              <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" style="float:left; margin-right:auto;" data-dismiss="modal">Cancel</button>
+                 <button type="submit" form="form12" class="btn btn-success">Save</button>
+              </div>
+           </div>
+        </div>
+    </div>
+	<div class="page-wrapper">
+		<!-- MENU SIDEBAR-->
+        {% include 'BP/SideBar.html' %}
+		<!-- END MENU SIDEBAR-->
+		<!-- PAGE CONTAINER-->
+		    <div class="page-container">
+                <!-- HEADER DESKTOP NEW-->
+            {% include 'BP/header.html' %}
+                <!-- HEADER DESKTOP NEW-->
+            <div class="top-panel-wrapper">
+                <div class="panel-page-title">
+                    <p>Client</p>
+                </div>
+                <div class="add-button">
+                    <input type="submit" class="btn" value="Add New Case" data-toggle="modal" data-target="#addcase">
+                </div>
+                <div class="add-button add-button-second">
+                    <input type="submit" class="btn" value="Add Insurance" data-toggle="modal" data-target="#addparty">
+                </div>
+            </div>
+			<!-- MAIN CONTENT-->
+			<div class="main-content" style="margin-top: -1px;">
+                <!--<div class="top-panel-row">
+                    <p>Client</p>
+                    <div class="add-button add-button-panels">
+                        <input type="submit" class="btn" value="Add New Case">
+                    </div>
+                </div>-->
+				<div class="row m-0" style="padding-left: 5px !important">
+                    <div class="p-0"  style="border: solid 5px #093761; padding: 5px !important;border-radius: 8px;padding-left: 5px; flex: 1;">
+                        <div class="row" style="margin-left: 0;">
+                            <div class="col-md-10" style="flex: 0 0 80%;padding-right: 5px">
+                                <form method="POST" id="mail-form" action="{% url 'bp-send_email_firm' client.id case.id %}"> 
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div style="width: 200px; padding-right: 5px !important">
+                                            <input type="hidden" name="" value="">
+                                                <textarea id="w3review" value="" required="" name="greeting" placeholder="Greeting..."></textarea>
+                                        </div>
+                                        <div class="px-0" style="flex: 1; padding-right: 5px !important">
+                                            <textarea id="w3review" cols="10" required="" name="mail_body" placeholder="Message to client…" style="height: 100%"></textarea>
+                                        </div>
+                                        <div class="px-0" style="width: 200px;">
+                                            <textarea id="w3review" value="" required="" name="ending" placeholder="Signature..."></textarea>
+                                        </div>
+                                    </div> 
+                                </form>
+                                <form hidden action="{% url 'bp-send_chat_message' client.id case.id %}" method="post" id="chat-form">
+                                    {% csrf_token %}
+                                    <input type="text" name="chat_message" id="chat-message" hidden>
+                                </form>
+                            </div>
+                            <div class="col-md-2" style="flex: 0 0 20%;max-width: 20%">
+                                <h6 class="mb-2">Send to Client by:</h6>
+                                <a href="javascript:Void(0)" class="social-span-wrap" style="font-size: 12px;overflow: hidden">
+                                    <img style="" src="{% static 'BP_resources/images/icon/email-logo-icon.svg' %}" alt="Chat Icon"  class="float-left mr-2" width="21px"/>
+                                    <span onclick="document.forms['mail-form'].submit();" class="d-inline-block overflow-hidden text-darker">Email to : {{client.email}}</span>
+                                </a>
+                                <a href="javascript:Void(0)" class="social-span-wrap" style="font-size: 12px;overflow: hidden">
+                                    <img style="" src="{% static 'BP_resources/images/icon/text-logo-icon.svg' %}" alt="Chat Icon"  class="float-left mr-2" width="21px"/>
+                                    <span onclick="submitChatForm()" class="d-inline-block overflow-hidden text-darker">Text to : (949) 555-1212</span>
+                                </a>
+                                <a href="javascript:Void(0)" class="social-span-wrap" style="font-size: 12px;overflow: hidden">
+                                    <img style="" src="{% static 'BP_resources/images/icon/chat-logo-icon-client.svg' %}" alt="Chat Icon"  class="float-left mr-2" width="21px"/>
+                                    <span class="d-inline-block overflow-hidden text-darker">Chat through the : Client Portal</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="table-responsive table--no-card m-b-40">
+                            <table class="table table-earning">
+                                <thead>
+                                    <tr>
+                                        <th style="width:2%"></th>
+                                        <th style="width:6%">RECEIVED</th>
+                                        <th style="width:6%">SENT BY</th>
+                                        <th style="width:2%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                        <th style="width:78%">MESSAGE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>  
+                                    {% for email in emails %}
+                                    <tr>
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{email.created_at|date}}&nbsp;&nbsp;<b style="text-transform: lowercase; font-weight: normal">{{email.created_at|time}}</b></td>
+                                        <td style="color: #666;">{{email.created_by.first_name}} {{email.created_by.last_name}}</td>
+                                        <td><img style="" src="{% static 'BP_resources/images/chat-icon.png' %}" alt="Chat Icon" /></td>
+                                        <td class="text-right" style="white-space: normal;
+                                        min-width: 350px;">{{email.body|slice:":300"}}</td>
+                                    </tr>  
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <a href="{% url 'bp-addCase' client.id case.id %}" class="btn btn-primary mt-2" style="float:right;">New Case</a>
+                    </div>
+                    
+                    <div class="p-0" style="width: 635px;">
+                        <div class="section__content section__content--p30" style="margin-top: 0px">
+                            <div class="container-fluid clienthead"> {% if flagPage %}
+                                <div class="top-pane" style="top: -75px !important;right: 364px !important" onclick="location.href='{% url 'bp-removeFlagPage' client.id case.id flagPage.id %}';"> <img src="{% static 'BP_resources/images/icon/flag-icon-red-bg-gray.svg' %}" width="46px"> </div> {% else %}
+                                <div class="top-pane" style="top: -75px !important;right: 364px !important" onclick="location.href='{% url 'bp-flagPage' client.id case.id 'Client' 'bp-client' %}';"> <img src="{% static 'BP_resources/images/icon/flag-icon-bg-gray.svg' %}" width="46px"> </div> {% endif %}
+                                <div class="flexStart wf" style="width:100%;border-radius: 8px; border:solid 5px #093761;overflow: hidden">
+                                    <div class="innerContentContainer position-relative" style="margin-left: 0px;width:100%;padding: 50px 5px 0 5px;">
+                                    <!-- <div class="panelHeaderContainer row pb-0 wf" style="position: relative; height:49px;width:100%;margin-left:0px;margin-top:3px;margin-bottom: 8px">
+                                        <div class="col" style="height:39px">
+                                            &nbsp;
+                                        </div>
+                                        <div style="position:relative;top:-5.5px;width:250px; height:53px;margin-left:5px;border:none;display: flex;justify-content: flex-end;align-items: flex-end;">
+                                            <div class="checklistAngle textcol">
+                                                <div class="nt-box">
+                                                        <div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:0"></div>
+                                                </div>
+                                                <div class="dropdown6">
+                                                    <button onclick="myFunction6(31)" class="dropbtn"><i class="fa fa-check" aria-hidden="true"></i> Checklist <i class="fa fa-chevron-down" aria-hidden="true"></i></button>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="checklist-section checklist-pink">
+                                            <p class="text-darker">0/2</p>
+                                            <div class="circle-wrap">
+                                                <div class="circle">
+                                                <div class="mask full">
+                                                    <div class="fill"></div>
+                                                </div>
+                                                <div class="mask half">
+                                                    <div class="fill"></div>
+                                                </div>
+                                                <div class="inside-circle"> 100% </div>
+                                                </div>
+                                            </div>
+                                            <div class="dropdown6">
+                                                <button onclick="myFunction6(31)" class="dropbtn text-darker" style="background-color: #F5E8E9;"> 
+                                                    <img src="/static/BP_resources/images/icon/check-green.svg" alt="Double arrow down" class="green-check"> Checklist <img src="/static/BP_resources/images/icon/angles-down-blue.svg" alt="Double arrow down" class="double-arrow-down"></button>
+                                                    
+                                                    <div id="myDropdown31" class="dropdown-content">
+                                                        <div class="checklist-multi-dropdowns pink-checklist-multi-dropdowns">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                                <label class="form-check-label" for="gridCheck1">
+                                                                  Check Item example
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                                <label class="form-check-label" for="gridCheck1">
+                                                                  Check Item example
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                                <label class="form-check-label" for="gridCheck1">
+                                                                  Check Item example
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                                <label class="form-check-label" for="gridCheck1">
+                                                                  Check Item example
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <div class="chiroLineWrap" style="width:100%">
+                                            <div class="chiroLine"> </div>
+                                        </div>
+                                    </div> -->
+                                    <!-- <div class="checklist-section checklist-pink">
+                                        <p class="text-darker">0/2</p>
+                                        <div class="circle-wrap">
+                                            <div class="circle">
+                                            <div class="mask full">
+                                                <div class="fill"></div>
+                                            </div>
+                                            <div class="mask half">
+                                                <div class="fill"></div>
+                                            </div>
+                                            <div class="inside-circle"> 100% </div>
+                                            </div>
+                                        </div>
+                                        <div class="dropdown6">
+                                            <button onclick="myFunction6(90)" class="dropbtn text-darker" style="background-color: #F5E8E9;"> 
+                                                <img src="/static/BP_resources/images/icon/check-green.svg" alt="Double arrow down" class="green-check"> Checklist <img src="/static/BP_resources/images/icon/angles-down-blue.svg" alt="Double arrow down" class="double-arrow-down double-arrow-down-pink"></button>
+                                        </div>
+                                    </div> -->
+                                    <div class="checklist-section checklist-pink client-checklist">
+                                        <p class="text-darker">0/2</p>
+                                        <div class="nt-box">
+                                            <div class="circlechart" data-percentage="0"></div>
+                                        </div>
+                                        <div class="dropdown6">
+                                            <button onclick="showClientCheckList()" class="dropbtn text-darker"
+                                                style="background-color: #F5E8E9;">
+                                                <img src="/static/BP_resources/images/icon/check-green.svg"
+                                                    alt="Double arrow down" class="green-check"> Checklist
+                                                <img src="/static/BP_resources/images/icon/angles-down-blue.svg"
+                                                    alt="Double arrow down" class="double-arrow-down">
+                                            </button>
+
+                                            <div id="myDropdown{{client_provider.id}}" class="dropdown-content">
+                                                <div class="checkbox-line">
+                                                    <input type="checkbox" id="medicalcheck11" name="medicalcheck11">
+                                                    <label for="medicalcheck11">Work Unit Name 1</label>
+                                                </div>
+                                                <div class="checkbox-line">
+                                                    <input type="checkbox" id="medicalcheck12" name="medicalcheck12">
+                                                    <label for="medicalcheck12">Work Unit Name longer 2</label>
+                                                </div>
+                                                <div class="checkbox-line">
+                                                    <input type="checkbox" id="medicalcheck13" name="medicalcheck13">
+                                                    <label for="medicalcheck13">Work Unit Name variety 3</label>
+                                                </div>
+                                                <div class="checkbox-line">
+                                                    <input type="checkbox" id="medicalcheck14" name="medicalcheck14">
+                                                    <label for="medicalcheck14">Work Unit 4</label>
+                                                </div>
+                                                <div class="checkbox-line">
+                                                    <input type="checkbox" id="medicalcheck15" name="medicalcheck15">
+                                                    <label for="medicalcheck15">Work 5</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <h4 class="client-contact-title" style="position: absolute; top: 0; left: 5px;">Client Identification</h4>
+                                        <div class="client-identification-section">
+                                            <div class="client-identification-row">
+                                                <span class="row-label">Birthday:&nbsp;</span>2022-03-26
+                                            </div>
+                                            <div class="client-identification-row">
+                                                <span class="row-label">SSN:&nbsp;</span>421394919
+                                            </div>
+                                            <div class="client-identification-row">
+                                                <span class="row-label">Drivers License#:&nbsp;</span>3791860
+                                            </div>
+                                        </div>
+                                        <h4 class="client-contact-title" style="margin: 20px 0;">Client Contact</h4>
+                                        <div class="columnsContainer2"> 
+                                            <div class="flexStart" style="height:336px; text-align: left; display:block; margin-right: 0;">
+        
+                                                <div data-toggle="modal" data-target="#client-phone-numbers-modal" onMouseOver="this.style.backgroundColor='#eee'"
+                                                onMouseOut="this.style.backgroundColor='#fff'" class="mb-3">
+                                                    {% if client_contact_info %}
+                                                    {% for info in client_contact_info %}
+                                                    {% if info.phone_number == client.primary_phone.phone_number  %}
+                                                    <div class="colFonts colFont" style="margin-bottom: 0px;font:14px poppins;color:black">({{info.phone_number|slice:":3"}}) {{info.phone_number|slice:"3:6"}}-{{info.phone_number|slice:"6:"}} <small  class="colFonts colFont float-right font-weight-bold" style="margin-bottom: 0px;font:14px poppins;color:#666">Primary</small></div>
+                                                    {% else %}
+                                                    <div class="colFonts colFont" style="margin-top: 0px;margin-bottom: 0px;font:14px poppins">({{info.phone_number|slice:":3"}}) {{info.phone_number|slice:"3:6"}}-{{info.phone_number|slice:"6:"}}</div>
+                                                    {% endif %}
+                                                    {% endfor %}
+                                                    {% else %}
+                                                    <div class="colFonts colFont" style="margin-top: 0px;margin-bottom: 0px;font:14px poppins">Add Contact Information</div>
+                                                    
+                                                    {% endif%}
+                                                </div>  
+                                                
+                                                <div data-toggle="modal" data-target="#home-adress-one-modal" onMouseOver="this.style.backgroundColor='#eee'"
+                                                onMouseOut="this.style.backgroundColor='#fff'">
+                                                {% if client_contact_info.0 %}
+                                                {% if client.mailing_contact.email == client_contact_info.0.email  %}
+                                                <div class="colFonts colFont" style="margin-bottom: 0px;font:14px poppins;color:#666; border-bottom: 1px solid #000">Home Address<small  class="colFonts colFont float-right font-weight-bold" style="margin-bottom: 0px;font:14px poppins;color:lightgreen">Mail?</small></div>
+                                                
+                                                {% else %}
+                                                <div class="colFonts colFont" style="margin-bottom: 0px;font:14px poppins;color:#666; border-bottom: 1px solid #000">Home Address<small  class="colFonts colFont float-right font-weight-bold" style="margin-bottom: 0px;font:14px poppins;color:#666">Mail?</small></div>
+                                                {% endif %}<div class="colFonts colFont" style="margin-bottom: 0px;font:14px poppins;color:black;text-align: left;">{{client_contact_info.0.address1}}</div>
+                                                    <div class="colFonts colFont" style="margin-bottom: 0px;font:14px poppins;color:black"> {{client_contact_info.0.address2}}</div>
+                                                    <div class="colFonts colFont" style="margin-bottom: 0px;font:14px poppins;color:black"> {{client_contact_info.0.city}},{{client_contact_info.0.state}}, {{client_contact_info.0.zip}} </div>
+                                                    <form method="POST" action="/BP/fillTemplate/" class="mt-2 mb-3">
+                                                        <input type="hidden" name="csrfmiddlewaretoken" value="FCLPzuOeT9mXXEM54SiQiALCATmhL1ZB7usTBoKxApEo1g0TF9P6LqePe0vsDju7">
+                                                        <div>
+                                                            <input type="text" name="provider_id" value="31" hidden="">
+                                                            <div>
+                                                                <select onchange="this.form.submit()" style="color:grey; font:14px poppins;width: 100%;text-align: center;" class="form-select" name="template_id" id="template_id" aria-label="Default select example">
+                                                                    <option selected="" style="color:grey; font-size:14px;" value="no_option">Select Letter Template</option>
+                                                                    
+                                                                </select>
+                                                            </div>
+                                                        </div> 
+                                                    </form> 
+                                                    {% else %}
+                                                    <div class="colFonts colFont" style="margin-bottom: 0px;font:14px poppins;color:#666; border-bottom: 1px solid #000">Home Address<small  class="colFonts colFont float-right font-weight-bold" style="margin-bottom: 0px;font:14px poppins;color:lightgreen">Mail?</small></div>
+                                                    <div class="colFonts colFont" style="margin-bottom: 0px;font:14px poppins;color:black;text-align: left;">None</div>
+                                                    <div class="colFonts colFont" style="margin-bottom: 0px;font:14px poppins;color:black"> None</div>
+                                                    <div class="colFonts colFont" style="margin-bottom: 0px;font:14px poppins;color:black"> None</div>
+                                                   
+                                                    {% endif%} 
+                                                </div>
+                                                
+                                                
+                                                <div data-toggle="modal" data-target="#home-adress-two-modal" onMouseOver="this.style.backgroundColor='#eee'"
+                                                onMouseOut="this.style.backgroundColor='#fff'">
+                                                {% if client_contact_info.1 %}
+                                                    
+                                                {% if client.mailing_contact.email == client_contact_info.1.email  %}
+                                                <div class="colFonts colFont" style="margin-bottom: 0px;font:14px poppins;color:#666; border-bottom: 1px solid #000">Home Address<small  class="colFonts colFont float-right font-weight-bold" style="margin-bottom: 0px;font:14px poppins;color:lightgreen">Mail?</small></div>
+                                                
+                                                {% else %} 
+                                                
+                                                <div class="colFonts colFont" style="margin-bottom: 0px;font:14px poppins;color:#666; border-bottom: 1px solid #000">Home Address<small  class="colFonts colFont float-right font-weight-bold" style="margin-bottom: 0px;font:14px poppins;color:#666">Mail?</small></div>
+                                                {% endif %}
+                                                <div class="colFonts colFont" style="margin-bottom: 0px;font:14px poppins;color:black;text-align: left;">{{client_contact_info.1.address1}}</div>
+                                                <div class="colFonts colFont" style="margin-bottom: 0px;font:14px poppins;color:black"> {{client_contact_info.1.address2}}</div>
+                                                <div class="colFonts colFont" style="margin-bottom: 0px;font:14px poppins;color:black">  {{client_contact_info.1.city}},{{client_contact_info.1.state}}, {{client_contact_info.1.zip}}  </div>
+                                                <form method="POST" action="/BP/fillTemplate/" class="mt-2 mb-3">
+                                                    <input type="hidden" name="csrfmiddlewaretoken" value="FCLPzuOeT9mXXEM54SiQiALCATmhL1ZB7usTBoKxApEo1g0TF9P6LqePe0vsDju7">
+                                                    <div>
+                                                        <input type="text" name="provider_id" value="31" hidden="">
+                                                        <div>
+                                                            <select onchange="this.form.submit()" style="color:grey; font:14px poppins;width: 100%;text-align: center;" class="form-select" name="template_id" id="template_id" aria-label="Default select example">
+                                                                <option selected="" style="color:grey; font-size:14px;" value="no_option">Select Letter Template</option>
+                                                                
+                                                              </select>
+                                                        </div>
+                                                    </div>
+                                                </form> 
+                                                {% else %}
+                                                <div class="colFonts colFont" style="margin-bottom: 0px;font:14px poppins;color:#666; border-bottom: 1px solid #000">Home Address<small  class="colFonts colFont float-right font-weight-bold" style="margin-bottom: 0px;font:14px poppins;color:#666">Mail?</small></div>
+                                                <div class="colFonts colFont" style="margin-bottom: 0px;font:14px poppins;color:black;text-align: left;">None</div>
+                                                <div class="colFonts colFont" style="margin-bottom: 0px;font:14px poppins;color:black"> None</div>
+                                                <div class="colFonts colFont" style="margin-bottom: 0px;font:14px poppins;color:black">  None  </div>
+                                                    
+                                                {% endif %}
+                                                </div> 
+                                               
+                                            
+                                            </div>
+                                            <div class="flexStart" style="height:336px; margin-right: 0;"> 
+                                                <div data-toggle="modal" data-target="#client-emails-modal" onMouseOver="this.style.backgroundColor='#eee'"
+                                                onMouseOut="this.style.backgroundColor='#fff'" class="text-left w-100 mb-3">
+                                                    {% if client_contact_info %}
+                                                    {% for info in client_contact_info %}
+                                                    {% if info.email == client.primary_email.email  %}
+                                                    <div class="colFonts colFont" style="margin-bottom: 0px;font:14px poppins;color:black"><a href="mailto:ksrherhiog@wkejrhfsadf.com" class=" email colFonts colFont mb-0">{{info.email}}</a> <small  class="colFonts colFont float-right font-weight-bold" style="margin-bottom: 0px;font:14px poppins;color:#666">&nbsp;&nbsp;Primary</small></div>
+                                                    {% else %}
+                                                    <p class="colFonts colText mb-0" style="margin-bottom: 0px !important;font:14px poppins;color:black"><small style="font: 14px poppins">{{info.email}}</small> </p>
+                                                    {% endif %}
+                                                    {% endfor %}
+                                                    {% else %}
+                                                    <p class="colFonts colText mb-0" style="margin-bottom: 0px !important;font:14px poppins;color:black"><small style="font: 14px poppins">Add Emails</small> </p>
+                                                    {% endif %}
+                                                </div>
+                                               <div data-toggle="modal" data-target="#emergency-contact-modal" onMouseOver="this.style.backgroundColor='#eee'"
+                                               onMouseOut="this.style.backgroundColor='#fff'">
+                                                <div class="colFonts colFont" style="margin-bottom: 0px;font:14px poppins;color:#666; border-bottom: 1px solid #000">Emergency Contact: <i style="color: #666; font-style: normal">{{client.emergency_contact.relationship}}</i> <small  class="colFonts colFont float-right font-weight-bold" {% if client.emergency_contact.discussCase %} style="margin-bottom: 0px;font:14px poppins;color:rgb(118, 209, 118)" {% else %}style="margin-bottom: 0px;font:14px poppins;color:#666"  {% endif %}>&nbsp;&nbsp;Discuss?</small></div>
+                                                <div class="colFonts colFont" style="margin-bottom: 0px;font:14px poppins;color:black;text-align: left;">{% firstof client.emergency_contact.first_name "None" %}</div>
+                                                <div class="colFonts colFont" style="margin-bottom: 0px;font:14px poppins;color:black;text-align: left;"> {% firstof client.emergency_contact.contact.address1 "None" %}</div>
+                                                <div class="colFonts colFont" style="margin-bottom: 0px;font:14px poppins;color:black;text-align: left;">  {% firstof client.emergency_contact.contact.city "None" %}, {% firstof client.emergency_contact.contact.state "None" %},  {% firstof client.emergency_contact.contact.zip "None" %} </div>
+                                                <div class="colFonts colFont text-left" style="margin-bottom: 0px;font:14px poppins;color:black"> {% firstof client.emergency_contact.contact.phone_number "None" %}</div>
+                                                
+                                                <p class="colText colFont text-left" style="color:black;margin-bottom: 0px !important">{% firstof client.emergency_contact.contact.email "None" %}</p>  
+                                                <form method="POST" action="/BP/fillTemplate/" class="mt-4 mb-3">
+                                                    <input type="hidden" name="csrfmiddlewaretoken" value="FCLPzuOeT9mXXEM54SiQiALCATmhL1ZB7usTBoKxApEo1g0TF9P6LqePe0vsDju7">
+                                                        <div>
+                                                            <input type="text" name="provider_id" value="31" hidden="">
+                                    
+                                                            <div>
+                                                                <select style="color:grey;font:14px poppins;width: 100%;text-align: center" onchange="this.form.submit()" class="form-select" name="template_id" id="template_id" aria-label="Default select example">
+                                                                    <option selected="" value="no_option">Select Letter Template</option>
+                                                                    
+                                                                  </select>
+                                                            </div>
+                                                        </div>
+                                                </form>
+                                               </div>
+                                            </div>  
+                                    </div>
+                                    <div class="row dtn-re">
+                                        <div style="width:100%;display: flex;justify-content:center">
+                                            
+                                            <div class="d-flex flex-wrap" style="margin-left: 0px;width:100%;display: flex;justify-content: space-evenly;margin-top: 5px">
+                                                        <div class="documentIcon">
+                                                            <form action="/BP/upload/19/19/357/" method="POST" class="docIconForm" data-aaa="">
+                                                                <input type="hidden" name="csrfmiddlewaretoken" value="FCLPzuOeT9mXXEM54SiQiALCATmhL1ZB7usTBoKxApEo1g0TF9P6LqePe0vsDju7">
+                                                              <i class="icon-file-text" style="font-size: 20px;margin-bottom:1px"></i>
+                                                              <div class="iconTextWrap">
+                                                                
+                                                                    <div> Bill </div>
+                                                                
+                                                              </div>
+                                                            </form>
+                                                        </div>
+                                                        <div class="documentIcon">
+                                                            <form action="/BP/upload/19/19/358/" method="POST" class="docIconForm" data-aaa="">
+                                                                <input type="hidden" name="csrfmiddlewaretoken" value="FCLPzuOeT9mXXEM54SiQiALCATmhL1ZB7usTBoKxApEo1g0TF9P6LqePe0vsDju7">
+                                                              <i class="icon-file-text" style="font-size: 20px;margin-bottom:1px"></i>
+                                                              <div class="iconTextWrap">
+                                                                
+                                                                    <div> Record </div>
+                                                                
+                                                              </div>
+                                                            </form>
+                                                        </div>
+                                                        <div class="documentIcon">
+                                                            <form action="/BP/upload/19/19/359/" method="POST" class="docIconForm" data-aaa="">
+                                                                <input type="hidden" name="csrfmiddlewaretoken" value="FCLPzuOeT9mXXEM54SiQiALCATmhL1ZB7usTBoKxApEo1g0TF9P6LqePe0vsDju7">
+                                                              <i class="icon-file-text" style="font-size: 20px;margin-bottom:1px"></i>
+                                                              <div class="iconTextWrap">
+                                                                
+                                                                    <div> Open 1 </div>
+                                                                
+                                                              </div>
+                                                            </form>
+                                                        </div>
+                                                        <div class="documentIcon">
+                                                            <form action="/BP/upload/19/19/359/" method="POST" class="docIconForm" data-aaa="">
+                                                                <input type="hidden" name="csrfmiddlewaretoken" value="FCLPzuOeT9mXXEM54SiQiALCATmhL1ZB7usTBoKxApEo1g0TF9P6LqePe0vsDju7">
+                                                              <i class="icon-file-text" style="font-size: 20px;margin-bottom:1px"></i>
+                                                              <div class="iconTextWrap">
+                                                                
+                                                                    <div> Open 1 </div>
+                                                                
+                                                              </div>
+                                                            </form>
+                                                        </div>
+                                            </div>
+                                            <br>
+        
+                                            <div class="pdfcontainer">
+                                                <div class="pdfViewer"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row dtn-re" style="margin-bottom: 5px">
+                                        <div class="d-flex flex-wrap super-heros" style="margin-left: 0px;width:100%;display: flex;justify-content: space-evenly;margin-top: 5px">
+                                            <img src="{% static 'BP_resources/images/superhero-img1.png' %}" alt="John Doe" />
+                                            <img src="{% static 'BP_resources/images/superhero-img2.png' %}" alt="John Doe" />
+                                            <img src="{% static 'BP_resources/images/superhero-img3.png' %}" alt="John Doe" />
+                                        </div>
+                                    </div>
+                                </div>    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row m-0" style="padding: 0 5px;">
+                    <div class="col-lg-12 table-section">
+                        {% include 'BP/notes-section.html' %}
+                        <form method="POST" action="{% url 'bp-addToDo' client.id case.id %}"> <input type="hidden" name="csrfmiddlewaretoken" value="sonsv67R17HcbsC2OTtyxzNJIYSLuAJoUg4wx03aInZDf4QQpa0O0pgWm51WmSeU">
+                            <textarea id="todo-note" name="note" hidden=""></textarea>
+                            <div class="footer-line">
+                                <div class="row">
+                                    <div class="col-lg-7">"Create New To-Do for"
+                                        <select name="user_type" id="cars"> 
+                                            <option value="4">None Ian Silverthorne</option> 
+                                            <option value="5">None Giselle Peralta</option> 
+                                            <option value="10">None Rustin Mangum</option> 
+                                            <option value="6">None Christian Rios</option> 
+                                            <option value="8">None Liz Silverthorne</option>  </select> due in
+                                        <select name="due_date" id="cars">
+                                            <option value="Now">Now</option>
+                                            <option value="1 day">1 day</option>
+                                            <option selected="" value="2 days">2 days</option>
+                                            <option value="3 days">3 days</option>
+                                            <option value="4 days">4 days</option>
+                                            <option value="5 days">5 days</option>
+                                            <option value="6 days">6 days</option>
+                                            <option value="1 week">1 week</option>
+                                            <option value="2 weeks">2 weeks</option>
+                                            <option value="1 month">1 month</option>
+                                            <option value="2 months">2 months</option>
+                                            <option value="6 months">6 months</option>
+                                        </select>
+                                        <button onclick="addTodoNote()" type="submit">New To-Do</button>
+                        
+                        </div>
+                        <div class="col-lg-5">
+                            <select id="note_category" class="right footer-select "> {% for page in pages %} {% if page.name == 'Case' %}
+                                <option selected value="{{page.id}}">{{page.name}}</option> {% else %}
+                                <option value="{{page.id}}">{{page.name}}</option> {% endif %} {% endfor %} </select>
+                            <button form="notes-form" onclick="newNoteFunction()" type="submit">Add Note</button>
+                        </div>
+                        </div>
+                        <div class="row" id="other-parties-page">
+                            <div class="col-lg-12 notetable">
+                                <div class="card">
+                                    <div class="">
+                                        <div class="custom-tab">
+                                            <nav>
+                                                <div class="nav nav-tabs" id="nav-tab" role="tablist"> <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab" href="#custom-nav-all" role="tab" aria-controls="custom-nav-all" aria-selected="true">All</a> {% if 'Case' in categories %} <a class="nav-item nav-link active" id="custom-nav-profile-tab" data-toggle="tab" href="#custom-nav-case" role="tab" aria-controls="custom-nav-case" aria-selected="false">case</a> {% endif %} {% if 'Client' in categories %} <a class="nav-item nav-link" id="custom-nav-contact-tab" data-toggle="tab" href="#custom-nav-contact" role="tab" aria-controls="custom-nav-contact" aria-selected="false">client</a> {% endif %} {% if 'Defendants' in categories %} <a class="nav-item nav-link" id="custom-nav-injurie-tab" data-toggle="tab" href="#custom-nav-injurie" role="tab" aria-controls="custom-nav-contact" aria-selected="false">Defendants</a> {% endif %} {% if 'Car Accident' in categories %} <a class="nav-item nav-link" id="custom-nav-car_accident-tab" data-toggle="tab" href="#custom-nav-car_accident" role="tab" aria-controls="custom-nav-car_accident" aria-selected="false">Car Accident</a> {% endif %} {% if 'Photo' in categories %} <a class="nav-item nav-link" id="custom-nav-photo-tab" data-toggle="tab" href="#custom-nav-photo" role="tab" aria-controls="custom-nav-photo" aria-selected="false">Photo</a> {% endif %} {% if 'Injury' in categories %} <a class="nav-item nav-link" id="custom-nav-injury-tab" data-toggle="tab" href="#custom-nav-injury" role="tab" aria-controls="custom-nav-injury" aria-selected="false">injuries</a> {% endif %} {% if 'Other Party' in categories %} <a class="nav-item nav-link" id="custom-nav-other_party-tab" data-toggle="tab" href="#custom-nav-other_party" role="tab" aria-controls="custom-nav-other_party" aria-selected="false">Other Party</a> {% endif %} {% if 'Witnesses' in categories %} <a class="nav-item nav-link" id="custom-nav-witnesses-tab" data-toggle="tab" href="#custom-nav-witnesses" role="tab" aria-controls="custom-nav-witnesses" aria-selected="false">witnesses</a> {% endif %} {% if 'Insurance' in categories %} <a class="nav-item nav-link" id="custom-nav-insurance-tab" data-toggle="tab" href="#custom-nav-insurance" role="tab" aria-controls="custom-nav-insurance" aria-selected="false">Insurance</a> {% endif %} {% if 'Employment' in categories %} <a class="nav-item nav-link" id="custom-nav-employment-tab" data-toggle="tab" href="#custom-nav-employment" role="tab" aria-controls="custom-nav-employment" aria-selected="false">Employment</a> {% endif %} {% if 'Recordings' in categories %} <a class="nav-item nav-link" id="custom-nav-recording-tab" data-toggle="tab" href="#custom-nav-recording" role="tab" aria-controls="custom-nav-recording" aria-selected="false">recording</a> {% endif %} {% if 'Documents' in categories %} <a class="nav-item nav-link" id="custom-nav-documents-tab" data-toggle="tab" href="#custom-nav-documents" role="tab" aria-controls="custom-nav-documents" aria-selected="false">documents</a> {% endif %} {% if 'Costs' in categories %} <a class="nav-item nav-link" id="custom-nav-costs-tab" data-toggle="tab" href="#custom-nav-costs" role="tab" aria-controls="custom-nav-costs" aria-selected="false">costs</a> {% endif %} {% if 'Case Loans' in categories %} <a class="nav-item nav-link" id="custom-nav-case_loans-tab" data-toggle="tab" href="#custom-nav-case_loans" role="tab" aria-controls="custom-nav-case_loans" aria-selected="false">case Loan</a> {% endif %} {% if 'Settlement' in categories %} <a class="nav-item nav-link" id="custom-nav-settlement-tab" data-toggle="tab" href="#custom-nav-settlement" role="tab" aria-controls="custom-nav-settlement" aria-selected="false">Settlement</a> {% endif %} {% if 'Litigation' in categories %} <a class="nav-item nav-link" id="custom-nav-litigation-tab" data-toggle="tab" href="#custom-nav-litigation" role="tab" aria-controls="custom-nav-litigation" aria-selected="false">litigation</a> {% endif %} {% if 'Discovery' in categories %} <a class="nav-item nav-link" id="custom-nav-discovery-tab" data-toggle="tab" href="#custom-nav-discovery" role="tab" aria-controls="custom-nav-discovery" aria-selected="false">discovery</a> {% endif %} {% if 'Depositions' in categories %} <a class="nav-item nav-link" id="custom-nav-depositions-tab" data-toggle="tab" href="#custom-nav-depositions" role="tab" aria-controls="custom-nav-depositions" aria-selected="false">depositions</a> {% endif %} {% if 'Medical Treatment' in categories %} <a class="nav-item nav-link" id="custom-nav-medical-tab" data-toggle="tab" href="#custom-nav-medical" role="tab" aria-controls="custom-nav-medical" aria-selected="false">Medical Treatment</a> {% endif %} {% if 'To-Do' in categories %} <a class="nav-item nav-link" id="custom-nav-todo-tab" data-toggle="tab" href="#custom-nav-todo" role="tab" aria-controls="custom-nav-medical" aria-selected="false">To-Do</a> {% endif %} </div>
+                                            </nav>
+                                            <div class="tab-content" id="nav-tabContent">
+                                                <div class="tab-pane fade " id="custom-nav-all" role="tabpanel" aria-labelledby="custom-nav-all-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                <table class="table table-borderless table-striped table-earning">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Date</td>
+                                                                            <td>Time</td>
+                                                                            <td>User</td>
+                                                                            <td>Note</td>
+                                                                            <td>Category</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody> {% for note in case.case_notes.all %} {% if empty %}
+                                                                        <div class="alert alert-danger" role="alert"> A simple danger alert—check it out! </div> {% endif %}
+                                                                        <tr class="hove">
+                                                                            <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                            <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                            <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                            <td style="color:black !important">{{note.description}}</td>
+                                                                            <td class="td-autosize">{{note.category}}</td>
+                                                                        </tr> {% endfor %} </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade show active" id="custom-nav-case" role="tabpanel" aria-labelledby="custom-nav-case-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                <table class="table table-borderless table-striped table-earning">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Date</td>
+                                                                            <td>Time</td>
+                                                                            <td>User</td>
+                                                                            <td>Note</td>
+                                                                            <td>Category</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Case' %}
+                                                                        <tr class="hove">
+                                                                            <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                            <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                            <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                            <td style="color:black !important">{{note.description}}</td>
+                                                                            <td class="td-autosize">{{note.category}}</td>
+                                                                        </tr> {% endif %} {% endfor %} </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="custom-nav-todo" role="tabpanel" aria-labelledby="custom-nav-todo-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                <table class="table table-borderless table-striped table-earning">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Date</td>
+                                                                            <td>Time</td>
+                                                                            <td>User</td>
+                                                                            <td>Note</td>
+                                                                            <td>Category</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'To-Do' %}
+                                                                        <tr class="hove">
+                                                                            <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                            <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                            <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                            <td style="color:black !important">{{note.description}}</td>
+                                                                            <td class="td-autosize">{{note.category}}</td>
+                                                                        </tr> {% endif %} {% endfor %} </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="custom-nav-contact" role="tabpanel" aria-labelledby="custom-nav-contact-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                <table class="table table-borderless table-striped table-earning">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Date</td>
+                                                                            <td>Time</td>
+                                                                            <td>User</td>
+                                                                            <td>Note</td>
+                                                                            <td>Category</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Client' %}
+                                                                        <tr class="hove">
+                                                                            <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                            <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                            <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                            <td style="color:black !important">{{note.description}}</td>
+                                                                            <td class="td-autosize">{{note.category}}</td>
+                                                                        </tr> {% endif %} {% endfor %} </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="custom-nav-injurie" role="tabpanel" aria-labelledby="custom-nav-injurie-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                <table class="table table-borderless table-striped table-earning">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Date</td>
+                                                                            <td>Time</td>
+                                                                            <td>User</td>
+                                                                            <td>Note</td>
+                                                                            <td>Category</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Defendants' %}
+                                                                        <tr class="hove">
+                                                                            <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                            <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                            <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                            <td style="color:black !important">{{note.description}}</td>
+                                                                            <td class="td-autosize">{{note.category}}</td>
+                                                                        </tr> {% endif %} {% endfor %} </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="custom-nav-car_accident" role="tabpanel" aria-labelledby="custom-nav-car_accident-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                <table class="table table-borderless table-striped table-earning">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Date</td>
+                                                                            <td>Time</td>
+                                                                            <td>User</td>
+                                                                            <td>Note</td>
+                                                                            <td>Category</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Car Accident' %}
+                                                                        <tr class="hove">
+                                                                            <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                            <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                            <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                            <td style="color:black !important">{{note.description}}</td>
+                                                                            <td class="td-autosize">{{note.category}}</td>
+                                                                        </tr> {% endif %} {% endfor %} </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="custom-nav-photo" role="tabpanel" aria-labelledby="custom-nav-photo-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                <table class="table table-borderless table-striped table-earning">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Date</td>
+                                                                            <td>Time</td>
+                                                                            <td>User</td>
+                                                                            <td>Note</td>
+                                                                            <td>Category</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Photo' %}
+                                                                        <tr class="hove">
+                                                                            <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                            <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                            <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                            <td style="color:black !important">{{note.description}}</td>
+                                                                            <td class="td-autosize">{{note.category}}</td>
+                                                                        </tr> {% endif %} {% endfor %} </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="custom-nav-injury" role="tabpanel" aria-labelledby="custom-nav-injury-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                <table class="table table-borderless table-striped table-earning">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Date</td>
+                                                                            <td>Time</td>
+                                                                            <td>User</td>
+                                                                            <td>Note</td>
+                                                                            <td>Category</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Injury' %}
+                                                                        <tr class="hove">
+                                                                            <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                            <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                            <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                            <td style="color:black !important">{{note.description}}</td>
+                                                                            <td class="td-autosize">{{note.category}}</td>
+                                                                        </tr> {% endif %} {% endfor %} </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="custom-nav-medical" role="tabpanel" aria-labelledby="custom-nav-medical-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                <table class="table table-borderless table-striped table-earning">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Date</td>
+                                                                            <td>Time</td>
+                                                                            <td>User</td>
+                                                                            <td>Note</td>
+                                                                            <td>Category</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Medical Treatment' %}
+                                                                        <tr class="hove">
+                                                                            <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                            <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                            <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                            <td style="color:black !important">{{note.description}}</td>
+                                                                            <td class="td-autosize">{{note.category}}</td>
+                                                                        </tr> {% endif %} {% endfor %} </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="custom-nav-other_party" role="tabpanel" aria-labelledby="custom-nav-other_party-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                <table class="table table-borderless table-striped table-earning">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Date</td>
+                                                                            <td>Time</td>
+                                                                            <td>User</td>
+                                                                            <td>Note</td>
+                                                                            <td>Category</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Other Party' %}
+                                                                        <tr class="hove">
+                                                                            <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                            <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                            <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                            <td style="color:black !important">{{note.description}}</td>
+                                                                            <td class="td-autosize">{{note.category}}</td>
+                                                                        </tr> {% endif %} {% endfor %} </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="custom-nav-witnesses" role="tabpanel" aria-labelledby="custom-nav-witnesses-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                <table class="table table-borderless table-striped table-earning">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Date</td>
+                                                                            <td>Time</td>
+                                                                            <td>User</td>
+                                                                            <td>Note</td>
+                                                                            <td>Category</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Witnesses' %}
+                                                                        <tr class="hove">
+                                                                            <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                            <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                            <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                            <td style="color:black !important">{{note.description}}</td>
+                                                                            <td class="td-autosize">{{note.category}}</td>
+                                                                        </tr> {% endif %} {% endfor %} </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="custom-nav-insurance" role="tabpanel" aria-labelledby="custom-nav-insurance-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                <table class="table table-borderless table-striped table-earning">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Date</td>
+                                                                            <td>Time</td>
+                                                                            <td>User</td>
+                                                                            <td>Note</td>
+                                                                            <td>Category</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Insurance' %}
+                                                                        <tr class="hove">
+                                                                            <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                            <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                            <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                            <td style="color:black !important">{{note.description}}</td>
+                                                                            <td class="td-autosize">{{note.category}}</td>
+                                                                        </tr> {% endif %} {% endfor %} </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="custom-nav-employment" role="tabpanel" aria-labelledby="custom-nav-employment-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                <table class="table table-borderless table-striped table-earning">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Date</td>
+                                                                            <td>Time</td>
+                                                                            <td>User</td>
+                                                                            <td>Note</td>
+                                                                            <td>Category</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Employment' %}
+                                                                        <tr class="hove">
+                                                                            <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                            <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                            <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                            <td style="color:black !important">{{note.description}}</td>
+                                                                            <td class="td-autosize">{{note.category}}</td>
+                                                                        </tr> {% endif %} {% endfor %} </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="custom-nav-recordings" role="tabpanel" aria-labelledby="custom-nav-recordings-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                <table class="table table-borderless table-striped table-earning">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Date</td>
+                                                                            <td>Time</td>
+                                                                            <td>User</td>
+                                                                            <td>Note</td>
+                                                                            <td>Category</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Recordings' %}
+                                                                        <tr class="hove">
+                                                                            <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                            <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                            <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                            <td style="color:black !important">{{note.description}}</td>
+                                                                            <td class="td-autosize">{{note.category}}</td>
+                                                                        </tr> {% endif %} {% endfor %} </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="custom-nav-documents" role="tabpanel" aria-labelledby="custom-nav-documents-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                <table class="table table-borderless table-striped table-earning">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Date</td>
+                                                                            <td>Time</td>
+                                                                            <td>User</td>
+                                                                            <td>Note</td>
+                                                                            <td>Category</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Documents' %}
+                                                                        <tr class="hove">
+                                                                            <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                            <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                            <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                            <td style="color:black !important">{{note.description}}</td>
+                                                                            <td class="td-autosize">{{note.category}}</td>
+                                                                        </tr> {% endif %} {% endfor %} </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="custom-nav-costs" role="tabpanel" aria-labelledby="custom-nav-costs-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                <table class="table table-borderless table-striped table-earning">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Date</td>
+                                                                            <td>Time</td>
+                                                                            <td>User</td>
+                                                                            <td>Note</td>
+                                                                            <td>Category</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Costs' %}
+                                                                        <tr class="hove">
+                                                                            <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                            <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                            <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                            <td style="color:black !important">{{note.description}}</td>
+                                                                            <td class="td-autosize">{{note.category}}</td>
+                                                                        </tr> {% endif %} {% endfor %} </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="custom-nav-case_loans" role="tabpanel" aria-labelledby="custom-nav-case_loans-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                <table class="table table-borderless table-striped table-earning">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Date</td>
+                                                                            <td>Time</td>
+                                                                            <td>User</td>
+                                                                            <td>Note</td>
+                                                                            <td>Category</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Case Loan' %}
+                                                                        <tr class="hove">
+                                                                            <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                            <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                            <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                            <td style="color:black !important">{{note.description}}</td>
+                                                                            <td class="td-autosize">{{note.category}}</td>
+                                                                        </tr> {% endif %} {% endfor %} </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="custom-nav-settlement" role="tabpanel" aria-labelledby="custom-nav-settlement-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                <table class="table table-borderless table-striped table-earning">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Date</td>
+                                                                            <td>Time</td>
+                                                                            <td>User</td>
+                                                                            <td>Note</td>
+                                                                            <td>Category</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Settlement' %}
+                                                                        <tr class="hove">
+                                                                            <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                            <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                            <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                            <td style="color:black !important">{{note.description}}</td>
+                                                                            <td class="td-autosize">{{note.category}}</td>
+                                                                        </tr> {% endif %} {% endfor %} </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="custom-nav-litigation" role="tabpanel" aria-labelledby="custom-nav-litigation-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                <table class="table table-borderless table-striped table-earning">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Date</td>
+                                                                            <td>Time</td>
+                                                                            <td>User</td>
+                                                                            <td>Note</td>
+                                                                            <td>Category</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Litigation' %}
+                                                                        <tr class="hove">
+                                                                            <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                            <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                            <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                            <td style="color:black !important">{{note.description}}</td>
+                                                                            <td class="td-autosize">{{note.category}}</td>
+                                                                        </tr> {% endif %} {% endfor %} </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="custom-nav-discovery" role="tabpanel" aria-labelledby="custom-nav-discovery-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                <table class="table table-borderless table-striped table-earning">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Date</td>
+                                                                            <td>Time</td>
+                                                                            <td>User</td>
+                                                                            <td>Note</td>
+                                                                            <td>Category</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Discovery' %}
+                                                                        <tr class="hove">
+                                                                            <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                            <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                            <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                            <td style="color:black !important">{{note.description}}</td>
+                                                                            <td class="td-autosize">{{note.category}}</td>
+                                                                        </tr> {% endif %} {% endfor %} </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="custom-nav-depositions" role="tabpanel" aria-labelledby="custom-nav-depositions-tab">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                <table class="table table-borderless table-striped table-earning">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Date</td>
+                                                                            <td>Time</td>
+                                                                            <td>User</td>
+                                                                            <td>Note</td>
+                                                                            <td>Category</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Depositions' %}
+                                                                        <tr class="hove">
+                                                                            <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                            <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                            <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                            <td style="color:black !important">{{note.description}}</td>
+                                                                            <td class="td-autosize">{{note.category}}</td>
+                                                                        </tr> {% endif %} {% endfor %} </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div></form>
+                    </div>
+				</div>
+				<div class="col-lg-6">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="copyright">
+								<p>Copyright © 2022 Ian Silverthorne</a>.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+			<!-- END MAIN CONTENT-->
+			<!-- END PAGE CONTAINER-->
+		</div>
+	</div> 
+	<!-- Jquery JS-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="{% static 'BP_resources/js/progresscircle.js' %}"></script>
+<script>
+    $('.circlechart').circlechart(); // Initialization
+</script>
+
+	<script src="{% static 'BP_resources/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/      popper.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'BP_resources/vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/select2/select2.min.js' %}">
+    </script>
+    <script>
+	</script>
+	<!-- Main JS-->
+	<script src="{% static 'BP_resources/js/main.js' %}"></script>
+    {% comment %} <script>
+        var elem = document.querySelector('[name="ending"]');
+        var elem1 = document.querySelector('[name="greeting"]');
+        elem.value = 'Best Regards' + '\n' +  "{{userprofile.attorneyprofile.office_name}}";
+        elem1.value = 'Dear ' + "{{client.first_name}} " + "{{client.last_name}},"; 
+    </script> {% endcomment %}
+    <script>
+        function change_value_input(ele1, ele2) {
+            console.log('On change func',$(ele1).val(), ele2)
+            $('#'+ele2).val($(ele1).val());
+            console.log('Value 2', $('#'+ele2).val())
+        }
+        $("#checklist-pink1").click(function(){
+            $("#checklist-cont1").toggle();
+            $(".double-arrow-down-pink").toggleClass("inverted");
+          });
+    </script>
+    <script>
+        function myFunction6(x) {
+            var temp = 'myDropdown' + x;
+
+            document.getElementById(temp).classList.toggle("show");
+        }
+        function submitChatForm(){
+            var elem = document.querySelector('[name="mail_body"]');
+            console.log(elem.value);
+            var temp = document.getElementById('chat-message');
+            temp.value = elem.value;
+            console.log(temp.value);
+            document.getElementById('chat-form').submit();
+        }
+    </script>
+	<script>
+	/* When the user clicks on the button, 
+	        toggle between hiding and showing the dropdown content */
+	function myFunction() {
+		document.getElementById("myDropdown").classList.toggle("show");
+	}
+
+    function showClientCheckList() {
+        $(".client-checklist .dropdown-content").toggle();
+        $(".client-checklist .double-arrow-down").toggleClass("inverted");
+    }
+
+    //phone number mask
+    document.querySelectorAll('#mask_phone_number').forEach(element => {
+        element.addEventListener('input', function (e) {
+            var x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+            e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+        });
+    });
+    
+    
+
+	// Close the dropdown if the user clicks outside of it
+	window.onclick = function(event) {
+		if(!event.target.matches('.dropbtn')) {
+			var dropdowns = document.getElementsByClassName("dropdown-content");
+			var i;
+			for(i = 0; i < dropdowns.length; i++) {
+				var openDropdown = dropdowns[i];
+				if(openDropdown.classList.contains('show')) {
+					openDropdown.classList.remove('show');
+				}
+			}
+		}
+	}
+	</script>
+    <script>
+        function addTodoNote() {
+            var note = document.getElementById('w3review').value;
+            var temp = document.getElementById('todo-note');
+            temp.value = note;
+            console.log(note);
+        }
+
+        function newNoteFunction() {
+            var temp_category = document.getElementById('note_category').value;
+            var category = document.getElementById('category');
+            category.value = temp_category;
+        }
+        </script>
+        <!-- <script>
+            $(document).ready(function(){
+            // $('a').on('click', function () {
+                console.log('hello');
+              
+                $.ajax({
+                    url: '/BP/clickRecord/',
+                    type: "GET",
+                    data: {
+                        "case_id": "{{case.id}}",
+                        "page_id": "{{page.id}}",
+                        "click_id": "3",
+                        "clickIDDescription": "Client Page Entry"
+                    },
+                   
+                    success: function (data) {
+                        var x = JSON.stringify(data);
+                        console.log(x);
+                    },
+                    // Error handling 
+                    error: function (error) {
+                        console.log(`Error ${error}`);
+                    }
+                });
+            // });
+        });
+        </script> -->
+        <script>
+            function calcWidth() {
+                var navwidth = 0;
+                var morewidth = $('#main-2 .more-2').outerWidth(true);
+                $('#main-2 > li:not(.more-2)').each(function() {
+                    navwidth += $(this).outerWidth( true );
+                });
+                var availablespace = $('.wrap').outerWidth(true) - morewidth;
+                
+                if (navwidth > availablespace) {
+                  var lastItem = $('#main-2 > li:not(.more-2)').last();
+                  lastItem.attr('data-width', lastItem.outerWidth(true));
+                  lastItem.prependTo($('#main-2 .more-2 ul'));
+                  calcWidth();
+                } else {
+                  var firstMoreElement = $('#main-2 li.more-2 li').first();
+                  if (navwidth + firstMoreElement.data('width') < availablespace) {
+                    firstMoreElement.insertBefore($('#main-2 .more-2'));
+                  }
+                }
+                
+                if ($('.more-2 li').length > 0) {
+                  $('.more-2').css('display','block');
+                } else {
+                  $('.more-2').css('display','none');
+                }
+              }
+              $(window).on('resize load',function(){
+                calcWidth();
+              });
+              $(".more-button").click(function(){
+                $(".collapsible-ul").toggle();
+              });
+        </script>
+</body>
+
+</html>
+<!-- end document-->

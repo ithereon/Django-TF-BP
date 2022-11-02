@@ -1,0 +1,18 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="4" y="21" width="16" height="1" fill="#DCE1E6"/>
+<rect x="6" y="18" width="12" height="1" fill="#DCE1E6"/>
+<path d="M1 23H23" stroke="#19375F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M3 23V20H21V23" stroke="#19375F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5 20V17H19V20" stroke="#19375F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M14 10.5L12 8.5L3 17.5L2 18.5C1.44771 19.0523 1.44772 19.9477 2 20.5C2.55228 21.0523 3.44771 21.0523 4 20.5L5 19.5L14 10.5Z" fill="#7D5A1E"/>
+<path d="M13 3.5L10 6.5L12 8.5L14 10.5L16 12.5L19 9.5L13 3.5Z" fill="#FFFF41"/>
+<path d="M14.5 6L13 4.5L11 6.5L12.5 8L14.5 6Z" fill="#C39637"/>
+<path d="M18 9.5L16.5 8L14.5 10L16 11.5L18 9.5Z" fill="#C39637"/>
+<path d="M21 11.5L18 14.5C17.4477 15.0523 16.5523 15.0523 16 14.5C15.4477 13.9477 15.4477 13.0523 16 12.5L19 9.5L13 3.5L10 6.5C9.44772 7.05228 8.55228 7.05228 8 6.5C7.44772 5.94772 7.44772 5.05228 8 4.5L9.5 3L11 1.5C11.5523 0.947714 12.4477 0.947715 13 1.5C13.5523 2.05228 13.5523 2.94772 13 3.5L19 9.5C19.5523 8.94771 20.4477 8.94771 21 9.5C21.5523 10.0523 21.5523 10.9477 21 11.5Z" fill="#7D5A1E"/>
+<path d="M3 17.5L4 18.5L5 19.5M9 11.5L10 12.5L11 13.5" stroke="#C39637" stroke-miterlimit="2.61313" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M21 12.5L20 13.5L19 14.5" stroke="#7D5A1E" stroke-width="2" stroke-miterlimit="2.61313" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M17 7.5L15 9.5L13 11.5" stroke="#FFFF96" stroke-miterlimit="2.61313" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M15 5.5L13 7.5L11 9.5" stroke="#FFFF96" stroke-miterlimit="2.61313" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M10 1.5L9 2.5L8 3.5" stroke="#7D5A1E" stroke-width="2" stroke-miterlimit="2.61313" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M13 3.5V3.5C13.5523 2.94772 13.5523 2.05228 13 1.5V1.5C12.4477 0.947715 11.5523 0.947714 11 1.5L9.5 3L8 4.5C7.44772 5.05228 7.44772 5.94772 8 6.5V6.5C8.55228 7.05228 9.44772 7.05228 10 6.5V6.5M13 3.5L10 6.5M13 3.5L19 9.5M10 6.5L12 8.5M16 12.5V12.5C15.4477 13.0523 15.4477 13.9477 16 14.5V14.5C16.5523 15.0523 17.4477 15.0523 18 14.5L21 11.5C21.5523 10.9477 21.5523 10.0523 21 9.5V9.5C20.4477 8.94772 19.5523 8.94772 19 9.5V9.5M16 12.5L19 9.5M16 12.5L14 10.5M12 8.5L14 10.5M12 8.5L3 17.5L2 18.5C1.44771 19.0523 1.44772 19.9477 2 20.5V20.5C2.55228 21.0523 3.44771 21.0523 4 20.5L5 19.5L14 10.5" stroke="#371E00" stroke-width="2" stroke-miterlimit="2.61313" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

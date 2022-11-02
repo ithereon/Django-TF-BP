@@ -1,0 +1,335 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% block pagetitle %}
+    Treatment First - Add Law Office
+{% endblock pagetitle %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'BP/kendo/styles/kendo.common.min.css' %}" />
+<link rel="stylesheet" href="{% static 'BP/kendo/styles/kendo.default.min.css' %}" />
+<link rel="stylesheet" href="{% static 'BP/kendo/styles/kendo.default.mobile.min.css' %}" />
+<style>
+   
+/* #select_firm-list:hover {
+    
+    color: black;
+}
+
+#select_firm-list .k-focused {
+    color: white;
+    background-color: #1266f1 !important;
+}
+
+#select_firm-list .k-state-hover {
+    color: #1266f1;
+    
+} */
+.k-list-item.k-selected{
+    background-color: #1C6FB2;
+    color: white;
+}
+
+.k-list-item.k-selected.k-hover {
+    background-color: #1C6FB2;
+    color: white;
+}
+
+</style>
+        
+        <div class="mt-1">
+            <h4>Reports:</h4>
+            <form action="{% url 'reports' %}" method="post">
+                {% csrf_token %}
+                <div class="mt-4 row" style="background-color:rgb(233, 233, 233);padding: 0px 10px 12px 10px;">
+                    <nav style="--bs-breadcrumb-divider: '';padding:0px;" aria-label="breadcrumb">
+                        <ol class="breadcrumb d-flex mb-1" style="justify-content:space-between;flex-wrap: nowrap;">
+                        <li class="breadcrumb-item" >
+                            <div class="row mt-3">
+                                <label style="color:#a9a9a9;font-weight:400;padding-right:0;" for="inputEmail" class="col-auto col-form-label">Date:</label>
+                            <div class="col-sm-auto pl-0" >
+                                
+                                <select class="form-select" style="max-width:120px;" name="date" id="date" aria-label="Default select example">
+                                    
+                                    <option selected value="first_visit">First Visit</option>
+                                    <option  value="last_visit">Last Visit</option>
+                                    <option  value="injury_date">Injury Date</option>
+                                
+                                </select>
+                            </div>
+                            </div>
+                            
+                        </li>
+                        <li class="breadcrumb-item" >
+                            <div class="row mt-3">
+                                <label style="color:#a9a9a9;font-weight:400;padding-right:0;" for="inputEmail" class="col-auto col-form-label">Range:</label>
+                            <div class="col">
+                                
+                                <select class="form-select" style="padding: auto 0px;" name="date_selection" id="date_selection" aria-label="Default select example">
+                                    
+                                    <option  value="current_month">Current Month</option>
+                                    <option  value="last_month">Last Month</option>
+                                    <option  value="current_quarter">Current Quarter</option>
+                                    <option  value="last_quarter">Last Quarter</option>
+                                    <option  value="current_year">Current Year</option>
+                                    <option  value="last_year">Last Year</option>
+                                    <option selected  value="all_time">All-Time</option>
+                                
+                                </select>
+                            </div>
+                            </div>
+                            
+                        </li>
+                        <li class="breadcrumb-item">
+                            <div class="row mt-3">
+                                <label style="color:#a9a9a9;font-weight:400;padding-right:0;" for="inputEmail" class="col-auto col-form-label">First:</label>
+                            <div class="col">
+                                <input type="date" class="form-control" name="first_date">
+                                
+                            </div>
+                            </div>
+                            
+                        </li>
+                        <li class="breadcrumb-item">
+                            <div class="row mt-3">
+                                <label style="color:#a9a9a9;font-weight:400;padding-right:0;" for="inputEmail" class="col-auto col-form-label">Last:</label>
+                            <div class="col">
+                                <input type="date" class="form-control" name="end_date">
+                                
+                            </div>
+                            </div>
+                            
+                        </li>
+        
+                        
+        
+                        <!-- <li class="breadcrumb-item">
+                            <label style="color:#a9a9a9;font-weight:400;"  for="inputEmail" class="col-sm-auto col-form-label fw-bold">Case Status:</label>
+                            <div class="col-sm-auto">
+                                
+                                <select id="required" multiple="multiple" name="case_statuses"  style="padding-bottom:4px;"  data-placeholder="Select Case Status ...">
+                                    {% for tf_case_status in tf_case_statutes %}
+                                    <option value="{{tf_case_status.id}}">{{tf_case_status.name}}</option>
+                                    {% endfor %}
+                                    
+        
+                                    
+                                </select>
+                            </div>
+                        </li> -->
+        
+                        <!-- <li class="breadcrumb-item">
+                            
+                            <div class="col-sm-auto mt-3">
+                                
+                                <input id="select_firm" style="padding-top: 2px; padding-bottom:2px;" name="law_firm" class="form-control" placeholder="Select Law Firm..." />
+                            </div>
+                        </li> -->
+                        <!-- <li class="breadcrumb-item">
+                            
+                            <div class="col mt-3">
+        
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" checked>
+                                    <label class="form-check-label" for="flexCheckDisabled">
+                                    Open
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" >
+                                    <label class="form-check-label" for="flexCheckCheckedDisabled">
+                                    Closed
+                                    </label>
+                                </div>
+                                
+                            </div>
+                        </li> -->
+                        
+                        </ol>
+                    </nav>
+                    <div class="d-flex" style="padding:0px !important;justify-content: space-between;">
+                        
+                        <div class="col-sm-auto d-flex" style="padding-right:0px !important;justify-self: center; align-self: center;">
+                            <!-- <label style="color:#a9a9a9;font-weight:400;"  for="inputEmail" class="col-sm-auto col-form-label fw-bold">Case Status:</label> -->
+                            <div class="col-sm-12" style="padding-right:0px !important;">
+                                
+                                <select id="required"   multiple="multiple" name="case_statuses"  style="padding-bottom:4px; min-width: 210px;"  data-placeholder="Click to Select Case Status">
+                                    {% for tf_case_status in tf_case_statutes %}
+                                    <option value="{{tf_case_status.id}}">{{tf_case_status.name}}</option>
+                                    {% endfor %}
+                                    
+        
+                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div >
+                           
+                            
+                                <div class="col" >
+                                    <div class="form-check" style="margin:0;">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" checked>
+                                        <label class="form-check-label" for="flexCheckDisabled">
+                                        Open
+                                        </label>
+                                    </div>
+                                    <div class="form-check" style="margin:0;">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" >
+                                        <label class="form-check-label" for="flexCheckCheckedDisabled">
+                                        Closed
+                                        </label>
+                                    </div>
+                            
+                                </div>
+                            
+                        </div>
+                        <!-- <div class="col-sm-auto" style="display: flex; float: right; margin-left:auto">
+                            
+                            <div class="col-sm-auto " >
+                                <select class="form-select" onchange="this.form.submit()" name="report_type" id="report_type" aria-label="Default select example">
+                                    <option style="color:grey" selected value="">---<span style="color:black">Select Report Type</span>---</option>
+                                    <option  value="payment_received">Payment Received</option>
+                                    <option  value="accounts_receivable">Accounts Receivable</option>
+                                    
+                                
+                                </select>
+                            </div>
+                        
+                        </div> -->
+                        
+                    </div>
+                    <div class="d-flex" style="padding:0px !important;justify-content: space-between;">
+                        <div class="col-sm-auto mt-1">
+                                
+                            <input id="select_firm" style="padding-top: 2px; padding-bottom:2px;" name="law_firm" class="form-control changeColor" placeholder="Select Law Firm..." />
+                        </div>
+                        <div class="col-sm-auto mt-1" style="display: flex; float: right; margin-left:auto">
+                            
+                            <div class="col-sm-auto " >
+                                <select class="form-select" onchange="this.form.submit()" name="report_type" id="report_type" aria-label="Default select example">
+                                    <option style="color:grey" selected value="">---<span style="color:black">Select Report Type</span>---</option>
+                                    <option  value="payment_received">Payment Received</option>
+                                    <option  value="accounts_receivable">Accounts Receivable</option>
+                                    
+                                
+                                </select>
+                            </div>
+                        
+                        </div>
+
+                    </div>
+                </div>
+                
+            </form>
+            {% if check %}
+            <div class="mt-4 pb-2 row" >
+                <table class="table table-striped table-hover table-borderless align-middle mb-0">
+                    <thead>
+                       
+                          <tr>
+                            <th style="font-weight: 400 !important;color:grey;"></th>
+                            <th style="font-weight: 400 !important;color:grey;">Patient</th>
+                            <th style="font-weight: 400 !important;color:grey;">Specialty</th>
+                            <th style="font-weight: 400 !important;color:grey; text-align: right;">Total Visits</th>
+                            <th style="font-weight: 400 !important;color:grey; text-align: right;">Final Billing</th>
+                            <th style="font-weight: 400 !important;color:grey; text-align: right;">Paid / Visit</th>
+                            <th style="font-weight: 400 !important;color:grey; text-align: center;">Firm</th>
+                            <th style="font-weight: 400 !important;color:grey; text-align: right;">Payment Received</th>
+                             
+                          </tr>
+                       
+                    </thead>
+                    {% for x in records %}
+                    
+                       <tr>
+                        <td>{{x.index}}</td>
+                            <td>{{x.client.last_name}}, {{x.client.first_name}}</td>
+                          <td style="color: {{ x.provider.specialty.color }};">{{ x.provider.specialty.name }}</td>
+                          {% if x.treatmentDates.visits != '__' %}
+                          <td style="text-align:right;">{{x.treatmentDates.visits}}</td>
+                          {% else %}
+                          <td style="text-align:right;"></td>
+                          {% endif %}
+                          
+                          {% if x.tf_accounting %}
+                          <td style="text-align:right;">${{x.tf_accounting.final}}</td>
+                          {% else %}
+                          <td style="text-align:right;"></td>
+                          {% endif %}
+                          
+                          {% if x.paid_visits != -1 %}
+                          <td style="text-align:right;">${{x.paid_visits}}</td>
+                          {% else %}
+                          <td style="text-align:right;"></td>
+                          {% endif %}
+                          
+                          
+                          <td style="text-align: center;">{{x.attorney.attorneyprofile.office_name}}</td>
+                          {% if x.tf_accounting.payment_received_date != '_/_/_' %}
+                          <td style="text-align:right;">{{x.tf_accounting.payment_received_date}}</td>
+                          {% else %}
+                          <td style="text-align:right;"></td>
+                          {% endif %}
+                          
+                       </tr>
+                    
+                    
+                    {% endfor %}
+                 </table>
+            </div>
+            {% else %}
+            <div class="alert alert-danger mt-4" role="alert">
+                Please select the report type to generate the report.
+            </div>
+            {% endif %}
+        </div>
+   
+    
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script src="{% static 'BP/kendo/js/kendo.all.min.js' %}"></script>
+
+    <script>
+      
+        $(document).ready(function() {
+            // create MultiSelect from select HTML element
+            var required = $("#required").kendoMultiSelect().data("kendoMultiSelect");
+            var optional = $("#optional").kendoMultiSelect({
+                autoClose: false
+            }).data("kendoMultiSelect");
+
+            
+        });
+ 
+    </script>
+    <script>
+        $(document).ready(function() {
+            // create ComboBox from input HTML element
+            $("#select_firm").kendoComboBox({
+                dataTextField: "text",
+                dataValueField: "value",
+                dataTextColor: "blue",
+                dataSource: [
+                    {% for case_provider in case_providers %}
+                        {text: "{{case_provider.for_case.for_client.created_by.attorneyprofile.office_name}}", value: "{{case_provider.for_case.for_client.created_by.id}}"},
+                    {% endfor %}
+
+                    
+                    // { text: "Polyester", value: "2" },
+                    // { text: "Cotton/Polyester", value: "3" },
+                    // { text: "Rib Knit", value: "4" }
+                ],
+                filter: "contains",
+                suggest: true,
+                
+            });
+
+            // create ComboBox from select HTML element
+            
+
+            var select_firm = $("#select_firm").data("kendoComboBox");
+            
+
+        });
+    </script>
+{% endblock %}

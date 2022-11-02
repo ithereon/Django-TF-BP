@@ -1,0 +1,292 @@
+/* farrukh code */
+.checklist-section::after {
+  border-top: 53px solid #093761;
+  border-left: 12px solid white;
+}
+.text-darker{
+    color: #000 !important;
+}
+.checklist-pink{
+    top: -5px !important;
+    width: 302px !important;
+    margin-right: -20px;
+}
+.checklist-pink{
+    background-color: #F5E8E9 !important;
+}
+.checklist-pink::after {
+    border-top: 53px solid #F5E8E9 !important;
+    display: block !important;
+  }
+  .checklist-pink .double-arrow-down,   .checklist-pink .green-check{
+    filter: brightness(0) invert(0) !important;
+  }
+  #myDropdown86, #myDropdown87{
+    top: 54px !important;
+    position: absolute;
+  }
+  .photos-page .section__content--p30 {
+    padding: 0 5px !important;
+  }
+  .checklist-pink {
+    top: -5px !important;
+    width: 296px !important;
+    margin-right: 6px !important;
+  }
+  .main-content {
+    min-height: 100vh !important;
+  }
+  .pink-checklist-multi-dropdowns {
+    right: 16px !important;
+    width: 283px !important;
+  }
+  .top-pane {
+    position: absolute;
+    right: 350px;
+    top: -53px !important;
+  }
+  .top-head h2 {
+    margin-left: -15px;
+    position: relative;
+  }
+  .client-page .page-container {
+    padding-left: 190px;
+    background: #fff;
+  }
+  .section__content--p30 {
+    padding: 0 5px !important;
+    margin-top: -1px;
+  }
+  .client-details-wrap{
+    padding: 0 5px;
+    display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  }
+  .client-details-wrap a{
+    color: #000;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .client-details-wrap .email{
+    color: #0a3761 !important;
+  }
+  .client-details-wrap small{
+    font-size: 13px;
+    color: #000;
+    line-height: 18px;
+    margin-top: -2px;
+  }
+  
+  .client-details-wrap small i{
+    color: #999;
+    font-style: normal;
+    font-weight: 600;
+  }
+  .last-row-details small i{
+    float: left;
+    overflow: hidden;
+    text-align: right;
+    width: 80px;
+  }
+  .clienthead{
+    padding: 0 !important;
+  }
+  .columnsContainer2 p {
+    margin-bottom: 0px !important;
+  }
+  .columnsContainer2 > div form {
+    position: relative !important;
+  }
+  .client-page .table-earning tbody td {
+    padding: 5px 15px !important;
+  }
+  #w3review {
+    height: 55px;
+    padding-left: 5px !important;
+    padding-top: 0px !important;
+    font-size: 15px;
+    margin-bottom: 2px !important;
+  }
+  ::placeholder{
+    color: #666 !important;
+  }
+  .table-earning tbody tr td:nth-child(1) {
+    color: #808080;
+  }
+  
+  .photos-page .nav-link.active {
+    color: #0a3761;
+    text-decoration: underline;
+  }
+  .columnsContainer2{
+  }
+
+  /* Defendants and other pages css */
+  .top-input-field .form-control {
+    height: 45px;
+    width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding-left: 15px;
+    padding-top: 6px;
+    display: inline-block;
+  }
+  .top-input-field{
+    margin: 7px 5px;
+  }
+  .top-input-field button {
+    background: #0a3761;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 40px;
+    margin-left: 20px;
+  }
+  .super-hero-img{
+    width: 140px;
+    height: 110px;
+  }
+  .super-hero-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .checklist-pink::after {
+    border-top: 53px solid #F5E8E9 !important;
+  }
+  .checklist-pink {
+    margin-right: -1px !important;
+  }
+  .add-button {
+    position: absolute;
+    right: 47% !important;
+    top: 6px !important;
+    bottom: 7px;
+    transform: translateX(-50%) !important;
+  }
+  .add-button::before {
+    display: inline-block;
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: 19px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-right: 10px solid #093761;
+    position: absolute;
+    left: -9px;
+    top: -1px;
+    z-index: 1000;
+  }
+  .add-button::after {
+    display: inline-block;
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: 19px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 10px solid #093761;
+    position: absolute;
+    right: -9px;
+    top: 0px;
+    z-index: 1000;
+  }
+  .add-button .btn {
+    background-color: #093761;
+    color: #fff;
+    border-radius: 0px;
+  }
+  .single-document{
+    padding: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom:5px;
+    border: solid 5px #093761;
+    border-radius: 8px;
+  }
+  .table-earning tbody tr td:nth-child(1){
+    font-weight: normal;
+  }
+  .table-earning thead th{
+    font-weight: 600;
+  }
+  .table-responsive{
+    margin-bottom: 0px !important;
+    min-height: 186px;
+  }
+  .modal-lg{
+    max-width: 99%;
+  }
+  /* .modal-footer .btn-secondary{
+    background-color: #093761;
+    color: #fff;
+    border: none;
+  } */
+  .carousel-control-prev, .carousel-control-next{
+    opacity: 1;
+  }
+  .carousel-control-prev span, .carousel-control-next span{
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #093761;
+    border-radius: 50%;
+    color: #fff;
+  }
+  .carousel-control-next {
+    right: -10px;
+  }
+  .carousel-control-prev {
+    left: -10px;
+  }
+  .modal-body .table-earning thead th,.modal-body  .table-earning tbody td{
+    font-size: 17px;
+  }
+  .modal.fade .modal-dialog{
+    -webkit-transform: translate(0,0);
+    transform: translate(0,0);
+  }
+  
+  .zoom-in {
+    transform: scale(0)!important;
+    opacity: 0;
+    -webkit-transition: 0.4s all 0s;
+    -moz-transition: 0.4s all 0s;
+    -ms-transition: 0.4s all 0s;
+    -o-transition: 0.4s all 0s;
+    transition: 0.4s all 0s;
+    display: block !important;
+  }
+  .zoom-in.show {
+    opacity: 1;
+    transform: scale(1)!important;
+    transform:none;
+  }
+  .modal-body, .modal-footer{
+    padding: 5px !important;
+  }
+  .client-search{
+    margin-bottom: 5px;
+  }
+  .client-search .form-control{
+    border-radius: 5px !important;
+  }
+  .document-actions .btn{
+    padding: 5px 15px;
+    background-color: #0a3761;
+    color: #fff;
+    border-radius: 5px;
+    margin-top: -3px;
+  }
+  .document-actions .form-control{
+    border-radius: 5px !important;
+    width:350px;
+    display: inline-block;
+  }
+  .check-details-item-popup{
+    padding: 5px 20px;
+    border-right: 1px solid #ccc;
+  }
+  .check-details-item-popup:nth-child(5){
+    border: none !important;
+    padding-right: 0px !important;
+  }

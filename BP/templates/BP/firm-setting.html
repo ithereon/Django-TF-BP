@@ -1,0 +1,1332 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+       
+        <!-- Title Page-->
+        <title>Dashboard</title>
+    
+        <!-- Fontfaces CSS-->
+        <link href="{% static 'BP_resources/css/font-face.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Bootstrap CSS-->
+        <link href="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Vendor CSS-->
+        <link href="{% static 'BP_resources/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+        <!-- Main CSS-->
+        <link href="{% static 'BP_resources/css/theme.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/sidebar.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/header.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/firmsettings.css' %}" rel="stylesheet" media="all">
+    
+    </head>
+    <script>
+        $(document).ready(function(){
+            $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+                localStorage.setItem('activeTab', $(e.target).attr('href'));
+            });
+            var activeTab = localStorage.getItem('activeTab');
+            if(activeTab){
+                $('#myTab a[href="' + activeTab + '"]').tab('show');
+            }
+        });
+        </script>
+    <style>
+        td{
+            color:black;
+        }
+    </style>
+<body class="animsition homepage ">
+    <div class="modal fade" id="addBankAccount" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add Bank Account</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3 ">
+                    <form id="form-786" action="{% url 'bp-addBankAccount' %}" method="post">
+                        {% csrf_token %}
+                        
+                        
+                         <div class="mb-3 row">
+                             
+                            <div class="col-sm-12">
+                               <input type="text" class="form-control" placeholder="Bank Name" name="bank" id="bank1">
+                            </div>
+                            
+                         </div>
+                         <div class="mb-3 row">
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" placeholder="Account Name" name="account_name" id="account_name1">
+                             </div>
+                         </div>
+                         <div class="mb-3 row">
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" placeholder="Account Number" name="account_number" id="account_number1">
+                             </div>
+                        </div>
+                         
+                         
+
+                         <!-- <input type="text" name="record_id1" id="record_id1" hidden> -->
+                    </form>
+                    
+                    
+                    </div>
+            </div>
+            <!-- <form action="{% url 'bp-deleteIncidentReport' %}" method="post" id="deleteForm" hidden>
+                {% csrf_token %}
+                <input type="text" name="record_id2" id="record_id2" hidden>
+                
+            </form> -->
+            <div class="modal-footer">
+            <!-- <button type="submit" style="float:left !important; margin-right:auto" form="deleteForm" class="btn btn-danger">Delete</button> -->
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="submit" form="form-786" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="addTeam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog " role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Add Team</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+				</div>
+				<div class="modal-body">
+					<div class="mb-3 ">
+						<form id="form-9" action="{% url 'bp-addTeam' %}" method="post"> {% csrf_token %} 
+							
+
+							<div>
+								<div class="col-sm-12">
+									<div class="form-group">
+                                        <label for="users">Select Firm Users: </label>
+                                        <select multiple class="form-control" name="users" id="users">
+                                            {% for user in users %}
+                                            
+                                            <option value="{{user.id}}">{{user.user.first_name}} {{user.user.last_name}}</option>
+                                            {% endfor %}
+                                          
+                                        </select>
+                                      </div>
+								</div>
+							</div> 
+							<input type="text" hidden name="user_id" id="user_id">
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" form="form-9" class="btn btn-primary">Save</button>
+				</div>
+			</div>
+		</div>
+	</div>
+    <div class="page-wrapper">
+        <aside class="menu-sidebar d-none d-lg-block">
+            <div class="logo">
+                
+            </div>
+            
+            <div class="menu-sidebar__content">
+                <nav class="navbar-sidebar position-relative">
+                    <ul class="list-unstyled navbar__list">
+                        
+                        
+                        
+                        <li class="Row  active" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(1, '0')" href="/BP/client/50/43/">
+                                <img src="/static/BP_resources/images/icon/menu-icon3.png">Client
+                            </a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(2, '0')" style="font:14px poppins" href="/BP/medicaltreatment/50/43/">
+                               <img src="/static/BP_resources/images/icon/medical-treatment-icon-color.svg">Medical Treatment
+                            </a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li style="100%" class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(3, '0')" class="js-arrow" href="/BP/case/50/43/">
+                               <img src="/static/BP_resources/images/icon/case-icon-color.svg">Case</a>
+                               <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(4, '0')" href="/BP/todo/50/43/">
+                                <img src="/static/BP_resources/images/icon/to-do-icon-color.svg">To-Do</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(5, '0')" href="/BP/defendants/50/43/">
+                            <img src="/static/BP_resources/images/icon/defendants-icon-color.svg">Defendants</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="has-sub Row " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(6, '0')" href="/BP/caraccident/50/43/">
+                            <img src="/static/BP_resources/images/icon/menu-icon5.png">Car Accident</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(7, '0')" href="/BP/photo/50/43/">
+                              <img src="/static/BP_resources/images/icon/menu-icon6.png">Photo</a>
+                              <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(8, '0')" href="/BP/injuriessub/50/43/">
+                            <img src="/static/BP_resources/images/icon/injuries-icon-color.svg">Injuries</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(9, '0')" href="/BP/otherparties/50/43/">
+                            <img src="/static/BP_resources/images/icon/other-parties-icon-color.svg">Other Parties</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(10, '0')" href="/BP/witnesses/50/43/">
+                            <img src="/static/BP_resources/images/icon/witnesses-icon-color.svg">Witnesses</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(11, '0')" href="/BP/insurance/50/43/">
+                            <img src="/static/BP_resources/images/icon/insurance-icon-color.svg">Insurance</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(12, '0')" href="#">
+                            <img src="/static/BP_resources/images/icon/employment-icon-color.svg">Employment</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(13, '0')" href="/BP/recordings/50/43/">
+                             <img src="/static/BP_resources/images/icon/menu-icon13.png">Recordings</a>
+                             <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(14, '0')" href="/BP/incidentreport/50/43/">
+                             <img src="/static/BP_resources/images/icon/incident-folder-icon-color.svg">Incident Report</a>
+                             <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(15, '0')" href="/BP/documents/50/43/">
+                             <img src="/static/BP_resources/images/icon/menu-icon15.png">Documents</a>
+                             <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(16, '0')" href="/BP/costs/50/43/">
+                            <img src="/static/BP_resources/images/icon/costs-icon-color.svg">Costs</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(17, '0')" href="/BP/caseloan/50/43/">
+                            <img src="/static/BP_resources/images/icon/case-loans-icon-color.svg">Case Loans</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(18, '0')" href="/BP/settlement/50/43/">
+                            <img src="/static/BP_resources/images/icon/menu-icon18.png">Settlement</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(19, '0')" href="/BP/litigation/50/43/">
+                              <img src="/static/BP_resources/images/icon/menu-icon19.png">Litigation</a>
+                              <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(20, '0')" href="/BP/discovery/50/43/">
+                             <img src="/static/BP_resources/images/icon/discovery-icon-color.svg">Discovery</a>
+                             <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(21, '0')" href="/BP/depositions/50/43/">
+                               <img src="/static/BP_resources/images/icon/depositions-icon-color.svg">Depositions</a>
+                               <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(22, '0')" href="/BP/note/50/43/">
+                             <img src="/static/BP_resources/images/icon/notes-icon-color.svg">Notes</a>
+                             <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+        
+                    </ul>
+                </nav>
+                <div class="sidebar-bottom">
+                </div>
+                
+            </div>
+        </aside>
+        <!-- PAGE CONTAINER-->
+        <div class="page-container" style="padding-left: 190px">
+            <!-- HEADER DESKTOP-->
+            {% include 'BP/header-desktop.html' %}
+            <!-- HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content" style="padding-top: 76px !important;">
+                <div class="section__content section__content--p30 photos-page">
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-lg-12 top-head">
+                    <h2><img src="{% static 'BP_resources/images/icon/firm-setting.png' %}">Firm Setting</h2>
+                             
+
+
+                    <div class="custom-tab firm-setting">
+                        <div class="row">
+                            <div class="col-md-2 px-0" style="flex: 0 0 14.666667%">
+                                <nav id="myTab firmsettingsnav">
+                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                        <a class="nav-item nav-link active" id="custom-nav-home-tab" data-toggle="tab" href="#custom-nav-home" role="tab" aria-controls="custom-nav-home"
+                                         aria-selected="true">User Accounts</a>
+                                         {% if request.user.bp_userprofile.account_type == 'Attorney' %}
+                                         <a class="nav-item nav-link" id="custom-nav-mail-tab" data-toggle="tab" href="#custom-nav-mail" role="tab" aria-controls="custom-nav-mail"
+                                         aria-selected="true">Client Communication</a>
+                                         {% endif %}
+                                         <a class="nav-item nav-link" id="custom-nav-hipaa-tab" data-toggle="tab" href="#custom-nav-hipaa" role="tab" aria-controls="custom-nav-hipaa"
+                                         aria-selected="true">HIPAA Template</a>
+                                         <a class="nav-item nav-link" id="custom-nav-threshold-tab" data-toggle="tab" href="#custom-nav-threshold" role="tab" aria-controls="custom-nav-threshold"
+                                         aria-selected="true">Threshold Values</a>
+                                         <a class="nav-item nav-link" id="custom-nav-automatedTodos-tab" data-toggle="tab" href="#custom-nav-automatedTodos" role="tab" aria-controls="custom-nav-automatedTodos"
+                                         aria-selected="false">Add To-Dos</a>
+                                         <a class="nav-item nav-link" id="custom-nav-shakespeare-tab" data-toggle="tab" href="#custom-nav-shakespeare" role="tab" aria-controls="custom-nav-shakespeare"
+                                         aria-selected="true">Shakespeare</a>
+                                        <a class="nav-item nav-link" id="custom-nav-profile-tab" data-toggle="tab" href="#custom-nav-profile" role="tab" aria-controls="custom-nav-profile"
+                                         aria-selected="false">Firm Addresses</a>
+                                        {% if not request.user.bp_attorneystaff_userprofile.account_type == 'AttorneyStaff' %}
+                                        <a class="nav-item nav-link" id="custom-nav-profile-tab" data-toggle="tab" href="#custom-nav-addUsers" role="tab" aria-controls="custom-nav-profile"
+                                         aria-selected="false">Add Users</a>
+                                         <a class="nav-item nav-link" id="custom-nav-profile-tab" data-toggle="tab" href="#custom-nav-addTeams" role="tab" aria-controls="custom-nav-profile"
+                                         aria-selected="false">Add Teams</a>
+                                        {% endif %}
+                                        {% if request.user.bp_attorneystaff_userprofile.accounting_admin_permission == 'True' or request.user.bp_userprofile.account_type == 'Attorney' %}
+                                        <a class="nav-item nav-link" id="custom-nav-profile-tab" data-toggle="tab" href="#custom-nav-manageBankAccounts" role="tab" aria-controls="custom-nav-profile"
+                                         aria-selected="false">Manage Bank Accounts</a>
+                                        {% endif %}
+                                        <a class="nav-item nav-link" id="custom-nav-template-tab" data-toggle="tab" href="#custom-nav-template" role="tab" aria-controls="custom-nav-template"
+                                         aria-selected="false">Letter Templates</a>
+                                         <a class="nav-item nav-link" id="custom-firm-logo-branding-tab" data-toggle="tab" href="#custom-firm-logo-branding" role="tab" aria-controls="custom-firm-logo-branding"
+                                          aria-selected="false">Firm Logo and Branding</a>
+                                        
+                                    </div>
+                                </nav>
+                            </div>
+                            <div class="col-md-10 px-0" style="flex:0 0 85.333333%;max-width: 85.333%">
+                                <div class="tab-content" id="nav-tabContent">
+                                    <div class="tab-pane fade" id="custom-nav-template" role="tabpanel" aria-labelledby="custom-nav-template-tab">
+                                     
+                                        <div class="col-lg-12">
+                                            
+                                                
+                                                <h3 class="mt-2">Upload Letter Templates</h3>
+                                                
+                                                <form class="mt-3" method="POST" action="{% url 'bp-uploadTemplate' %}" enctype="multipart/form-data">
+                                                    {% csrf_token %}
+                                                    {% for message in messages %}
+                                                        <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                                                            {{ message | safe }}
+                                                            </button>
+                                                        </div>
+                                                    {% endfor %}
+                                                    <div class="form-group">
+                                                        <div >
+                                                            <div class="mb-3">
+                                                                <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Template Name</label>
+                                                                <div class="col-sm-3">
+                                                                <input type="text" required  class="form-control" name="name" id="name">
+                                                                </div>
+                                                                
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                
+                                                                <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Category</label>
+                                                                <div class="col-sm-3">
+                                                                    <select class="form-select" name="category" id="category" aria-label="Default select example">
+                                                                        <!-- <option selected value="Client">Client</option>
+                                                                        <option value="Defendants">Defendants</option>
+                                                                        <option value="Other Parties">Other Parties</option>
+                                                                        <option value="Witnesses">Witnesses</option>
+                                                                        <option value="Medical Provider">Medical Provider</option> -->
+        
+                                                                        {% for page in pages %}
+                                                                        <option value="{{page.name}}">{{page.name}}</option>
+                                                                        {% endfor %}
+        
+                                                                        
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                
+                                                                <div class="col-sm-3">
+                                                                    <input type="file" name="file">
+                                                                </div>
+                                                                
+                                                            </div>
+                                                            <div class="mb-3">
+                                                               
+                                                                <div class="col-sm-3">
+                                                                    <button type="submit" class="btn btn-primary">Upload Template</button>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                            
+                                                            
+                                                        </div>
+                                                        
+                                                    </div>
+                                                  </form>
+                                            
+        
+        
+        
+                                        </div>
+        
+                                    </div>
+                                    <div class="tab-pane fade" id="custom-nav-hipaa" role="tabpanel" aria-labelledby="custom-nav-hipaa-tab">
+                                     
+                                        <div class="col-lg-12">
+                                            
+                                                
+                                                <h3 class="mt-2">Upload HIPAA Templates</h3>
+                                                
+                                                <form class="mt-3" method="POST" action="{% url 'bp-uploadHIPAATemplate' %}" enctype="multipart/form-data">
+                                                    {% csrf_token %}
+                                                    {% for message in messages %}
+                                                        <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                                                            {{ message | safe }}
+                                                            </button>
+                                                        </div>
+                                                    {% endfor %}
+                                                    <div class="form-group">
+                                                        <div >
+                                                            <div class="mb-3 d-flex">
+                                                               
+                                                                <div class="col-sm-3">
+                                                                <input type="text" required placeholder="Enter x value" class="form-control" name="x_value" id="x_value">
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <input type="text" required placeholder="Enter y value" class="form-control" name="y_value" id="y_value">
+                                                                </div>
+                                                                
+                                                            </div>
+                                                            
+                                                            <div class="mb-3">
+                                                                
+                                                                <div class="col-sm-3">
+                                                                    <input type="file" name="file">
+                                                                </div>
+                                                                
+                                                            </div>
+                                                            <div class="mb-3">
+                                                               
+                                                                <div class="col-sm-3 d-flex">
+                                                                    <button type="submit" class="btn btn-primary mr-3">Test Values</button>
+                                                                    <button type="button" class="btn btn-success">Upload Template</button>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                            
+                                                            
+                                                        </div>
+                                                        
+                                                    </div>
+                                                  </form>
+                                            
+        
+        
+        
+                                        </div>
+        
+                                    </div>
+                                    <div class="tab-pane fade" id="custom-nav-mail" role="tabpanel" aria-labelledby="custom-nav-mail-tab">
+                                     
+                                        <div class="col-lg-12">
+                                            
+                                                
+                                                <h3 class="mt-2">Client Communication</h3>
+                                                
+                                                <form class="mt-3" method="POST" action="{% url 'bp-email_credentials' %}">
+                                                    {% csrf_token %}
+                                                    {% for message in messages %}
+                                                        <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                                                            {{ message | safe }}
+                                                            </button>
+                                                        </div>
+                                                    {% endfor %}
+                                                    <div class="form-group">
+                                                        <div >
+                                                            <div class="mb-3">
+                                                               
+                                                                <div class="col-sm-6">
+                                                                    <label for="mailing_email">Email:</label>
+                                                                <input type="email" required placeholder="admin@admin.com" value="{{userprofile.attorneyprofile.mailing_email}}" class="form-control" name="mailing_email" id="mailing_email">
+                                                                </div>
+                                                                
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                
+                                                                <div class="col-sm-6">
+                                                                    <label for="mailing_password">Password:</label>
+                                                                <input type="password" required placeholder="Password" value="{{userprofile.attorneyprofile.mailing_password}}"  class="form-control" name="mailing_password" id="mailing_password">
+                                                                <small id="emailHelp" class="form-text text-muted mt-0">Goto <a href="https://myaccount.google.com/security" style="color:blue;">Gmail Settings</a>, and make sure that Multi-Factor Authentication is turned on.<b> Generate an App password and enter the value above.</b></small>
+                                                            </div>
+                                                                
+                                                                
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                
+                                                                <div class="col-sm-12">
+                                                                    
+                                                                </div>
+                                                                
+                                                                
+                                                            </div>
+                                                            
+                                                           
+                                                            <div class="mb-3">
+                                                               
+                                                                <div class="col-sm-3">
+                                                                    
+                                                                    <button type="submit" class="btn btn-success">Save Credentials</button>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                            
+                                                            
+                                                        </div>
+                                                        
+                                                    </div>
+                                                  </form>
+                                            
+        
+        
+        
+                                        </div>
+        
+                                    </div>
+                                    <div class="tab-pane fade" id="custom-nav-threshold" role="tabpanel" aria-labelledby="custom-nav-threshold-tab">
+                                     
+                                        <div class="col-lg-12">
+                                            
+                                                
+                                                <h3 class="mt-2">Firm Threshold Values:</h3>
+                                                
+                                                <form class="mt-3" method="POST" action="{% url 'bp-addThresholdValue' %}">
+                                                    {% csrf_token %}
+                                                    {% for message in messages %}
+                                                        <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                                                            {{ message | safe }}
+                                                            </button>
+                                                        </div>
+                                                    {% endfor %}
+                                                    <div class="form-group">
+                                                        <div >
+                                                            <div class="mb-3">
+                                                               
+                                                                <div class="col-sm-5">
+                                                                    <label for="mailing_email">Property Damage Value:</label>
+                                                                    <div class="d-flex">
+                                                                        <input type="number" required value="{{userprofile.firm_threshold_values.property_damage_value}}" class="form-control" name="property_damage_value" id="property_damage_value">
+                                                                        <input type="number" required value="{{userprofile.firm_threshold_values.property_damage_value_min}}" class="form-control ml-3" name="property_damage_value_min" id="property_damage_value_min">
+                                                                        <input type="number" required value="{{userprofile.firm_threshold_values.property_damage_value_max}}" class="form-control ml-3" name="property_damage_value_max" id="property_damage_value_max">
+                                                                    </div>
+                                                               
+                                                                </div>
+                                                                
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                
+                                                                
+                                                                
+                                                                
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                
+                                                                <div class="col-sm-12">
+                                                                    
+                                                                </div>
+                                                                
+                                                                
+                                                            </div>
+                                                            
+                                                           
+                                                            <div class="mb-3">
+                                                               
+                                                                <div class="col-sm-3">
+                                                                    
+                                                                    <button type="submit" class="btn btn-success">Save</button>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                            
+                                                            
+                                                        </div>
+                                                        
+                                                    </div>
+                                                  </form>
+                                            
+        
+        
+        
+                                        </div>
+        
+                                    </div>
+                                    <div class="tab-pane fade" id="custom-nav-shakespeare" role="tabpanel" aria-labelledby="custom-nav-shakespeare-tab">
+                                     
+                                        <div class="col-lg-12">
+                                            
+                                                
+                                                <h3 class="mt-2">Shakespeare Settings:</h3>
+                                                
+                                                <form class="mt-3" method="POST" action="{% url 'bp-editShakespeareStatus' %}">
+                                                    {% csrf_token %}
+                                                    {% for message in messages %}
+                                                        <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                                                            {{ message | safe }}
+                                                            </button>
+                                                        </div>
+                                                    {% endfor %}
+                                                    <div class="form-group">
+                                                        <div >
+                                                            <div class="mb-3">
+                                                               
+                                                                <div class="col-sm-2">
+                                                                    <label for="Shakespeare">Shakespeare Status:</label>
+                                                                    <select id="Shakespeare" style="width: 150px;" name="shakespeare_status" class="form-select" onchange="this.form.submit()">
+                                                                        {% if userprofile.shakespeare_status %}
+                                                                        <option style="text-align: center;" value="On" selected>On</option>
+                                                                        <option style="text-align: center;" value="Off">Off</option>
+                                                                        {% else %}
+                                                                        <option style="text-align: center;" value="On">On</option>
+                                                                        <option style="text-align: center;" value="Off" selected>Off</option>
+                                                                        {% endif %}
+                                                                        
+                                                                      </select>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                
+                                                                
+                                                                
+                                                                
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                
+                                                                <div class="col-sm-12">
+                                                                    
+                                                                </div>
+                                                                
+                                                                
+                                                            </div>
+                                                            
+                                                           
+                                                            <div class="mb-3">
+                                                               
+                                                                <div class="col-sm-3">
+                                                                    
+                                                                    <button type="submit" class="btn btn-success">Save</button>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                            
+                                                            
+                                                        </div>
+                                                        
+                                                    </div>
+                                                  </form>
+                                            
+        
+        
+        
+                                        </div>
+        
+                                    </div>
+                                    <div class="tab-pane fade show active" id="custom-nav-home" role="tabpanel" aria-labelledby="custom-nav-home-tab">
+                                     
+                                        <div class="col-lg-12">
+                                        <div class="row">
+                                        <div class="table-responsive table--no-card m-b-20 table-img">
+                                         <table class="table table-borderless table-striped table-earning">
+                                            <thead>
+                                                <tr>
+                                                    <td>#</td>
+                                                    <td>UserName</td>
+                                                    <td>First Name</td>
+                                                    <td>Last Name</td>
+                                                    <td>Email Address</td>
+                                                    {% if request.user.bp_userprofile.account_type == 'Attorney' %}
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    {% endif %}
+                                                </tr>
+                                            </thead>
+                                                <tbody>
+                                                    {% if not users %}
+                                                        <div class="alert alert-danger" role="alert">
+                                                            No Firm Users!
+                                                        </div>
+                                                    {% else %}
+                                                        {% for user in users %}
+                                                            <tr class="hover">
+                                                                <td>{{forloop.counter}}</td>
+                                                                <td>{{user.user.username}}</td>
+                                                                <td>{{user.user.first_name}}</td>
+                                                                <td>{{user.user.last_name}}</td>
+                                                                <td>{{user.user.email}}</td>
+                                                                {% if request.user.bp_userprofile.account_type == 'Attorney' %}
+                                                                <td>
+                                                                    <form action="{% url 'bp-markAccountingPermission' user.id %}" method="post">
+                                                                        {% csrf_token %}
+                                                                        <div class="checkbox">
+                                                                            {% if user.accounting_permission == 'False' %}
+                                                                            <label> <input type="checkbox"  onChange="this.form.submit()" name="accounting_permission" > Accounting</label>
+                                                                            {% else %}
+                                                                            <label> <input type="checkbox"  onChange="this.form.submit()" name="accounting_permission" checked > Accounting</label>
+                                                                            {% endif %}
+                                                                        </div>
+                                                                        <input type="text" hidden name="permission_type" value="Accounting Permission">
+                                                                    </form>
+                                                                    
+                                                                </td>
+                                                                <td>
+                                                                    <form action="{% url 'bp-markAccountingPermission' user.id %}" method="post">
+                                                                        {% csrf_token %}
+                                                                        <div class="checkbox">
+                                                                            {% if user.accounting_admin_permission == 'False' %}
+                                                                            <label> <input type="checkbox" onChange="this.form.submit()" name="accounting_admin_permission" > Accounting Admin</label>
+                                                                            {% else %}
+                                                                            <label> <input type="checkbox" onChange="this.form.submit()" name="accounting_admin_permission" checked > Accounting Admin</label>
+                                                                            {% endif %}
+                                                                          </div>
+                                                                          <input type="text" hidden name="permission_type" value="Accounting Admin Permission">
+                                                                    </form>
+                                                                    
+                                                                </td>
+                                                                <td>
+                                                                    <form action="{% url 'bp-markUserIntake' user.id %}" method="post">
+                                                                        {% csrf_token %}
+                                                                        <div class="checkbox">
+                                                                            {% if not user.isIntake %}
+                                                                            <label> <input type="checkbox" onChange="this.form.submit()" name="intake" > Intake</label>
+                                                                            {% else %}
+                                                                            <label> <input type="checkbox" onChange="this.form.submit()" name="intake" checked > Intake</label>
+                                                                            {% endif %}
+                                                                          </div>
+                                                                          
+                                                                    </form>
+                                                                    
+                                                                </td>
+                                                                {% endif %}
+                                                            </tr>
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                    
+                                                    
+                                                    
+        
+                                                    
+                                               
+                                                
+                                                </tbody>
+                                            </table>
+                                            
+                                        </div>
+                                    </div>
+                                    </div>
+        
+                                </div>
+                                <div class="tab-pane fade show " id="custom-nav-addTeams" role="tabpanel" aria-labelledby="custom-nav-addTeams-tab">
+                                     
+                                    <div class="col-lg-12">
+                                    <div class="row">
+                                    <div class="table-responsive table--no-card m-b-20 table-img">
+                                     <table class="table table-borderless table-striped table-earning">
+                                        <thead>
+                                            <tr>
+                                                <td>#</td>
+                                                <td>UserName</td>
+                                                <td>First Name</td>
+                                                <td>Last Name</td>
+                                                <td>Email Address</td>
+                                                {% if request.user.bp_userprofile.account_type == 'Attorney' %}
+                                                <td></td>
+                                                
+                                                {% endif %}
+                                            </tr>
+                                        </thead>
+                                            <tbody>
+                                                
+                                                    {% for user in users %}
+                                                        {% if user.isIntake %}
+                                                            <tr class="hover">
+                                                                <td>{{forloop.counter}}</td>
+                                                                <td>{{user.user.username}}</td>
+                                                                <td>{{user.user.first_name}}</td>
+                                                                <td>{{user.user.last_name}}</td>
+                                                                <td>{{user.user.email}}</td>
+                                                                {% if request.user.bp_userprofile.account_type == 'Attorney' %}
+                                                                <td>
+                                                                   <button class="btn btn-success"  data-toggle="modal" data-target="#addTeam" onclick="setID({{user.id}})">Add Team</button> 
+                                                                    
+                                                                </td>
+                                                                {% endif %}
+                                                                
+                                                            </tr>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                              
+        
+                                            </tbody>
+                                        </table>
+                                        
+                                    </div>
+                                </div>
+                                </div>
+                                </div>
+                                <div class="tab-pane fade" id="custom-nav-profile" role="tabpanel" aria-labelledby="custom-nav-profile-tab">
+                                    
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                        <div class="table-responsive table--no-card m-b-20 table-img">
+                                            <table class="table table-borderless table-striped table-earning">
+                                            <thead>
+                                                <tr>
+                                                    <td>#</td>
+                                                    <td>Location</td>
+                                                    <td>firm address</td>
+                                                    <td>phone number</td>
+                                                    <td>fax number</td>
+                                                    <td>Google My Business Profile</td>
+                                                    <td colspan="1"></td>
+                                                </tr>
+                                            </thead>
+                                                <tbody>
+                                                    <tr class="hove">
+                                                        <td>1</td>
+                                                        <td>Your Law Firm</td>
+                                                        <td>100 Main Street, Suite 123<br>Bangor, ME, 04620</td>
+                                                        <td>(000) 000-0000</td>
+                                                        <td>(000) 000-0000</td>
+                                                        <td><i class="fa fa-link" aria-hidden="true"></i> https://somelinkexample.google...</td>
+                                                        <td><dic class="pancil"><img src="{% static 'BP_resources/images/icon/pencil-tool.png' %}"></dic></td>
+                                                
+                                                    </tr>
+                                                    <tr class="hove">
+                                                        <td>2</td>
+                                                        <td>Your Law Firm</td>
+                                                        <td>100 Main Street, Suite 123<br>Bangor, ME, 04620</td>
+                                                        <td>(000) 000-0000</td>
+                                                        <td>(000) 000-0000</td>
+                                                        <td><i class="fa fa-link" aria-hidden="true"></i> https://somelinkexample.google...</td>
+                                                        <td><dic class="pancil"><img src="{% static 'BP_resources/images/icon/pencil-tool.png' %}"></dic></td>
+                                                
+                                                    </tr>
+                                                    <tr class="hove">
+                                                        <td>3</td>
+                                                        <td>Your Law Firm</td>
+                                                        <td>100 Main Street, Suite 123<br>Bangor, ME, 04620</td>
+                                                        <td>(000) 000-0000</td>
+                                                        <td>(000) 000-0000</td>
+                                                        <td><i class="fa fa-link" aria-hidden="true"></i> https://somelinkexample.google...</td>
+                                                        <td><dic class="pancil"><img src="{% static 'BP_resources/images/icon/pencil-tool.png' %}"></dic></td>
+                                                
+                                                    </tr>
+                                                    <tr class="hove">
+                                                        <td>4</td>
+                                                        <td>Your Law Firm</td>
+                                                        <td>100 Main Street, Suite 123<br>Bangor, ME, 04620</td>
+                                                        <td>(000) 000-0000</td>
+                                                        <td>(000) 000-0000</td>
+                                                        <td><i class="fa fa-link" aria-hidden="true"></i> https://somelinkexample.google...</td>
+                                                        <td><dic class="pancil"><img src="{% static 'BP_resources/images/icon/pencil-tool.png' %}"></dic></td>
+                                                
+                                                    </tr>
+                                                    <tr class="hove">
+                                                        <td>5</td>
+                                                        <td>Your Law Firm</td>
+                                                        <td>100 Main Street, Suite 123<br>Bangor, ME, 04620</td>
+                                                        <td>(000) 000-0000</td>
+                                                        <td>(000) 000-0000</td>
+                                                        <td><i class="fa fa-link" aria-hidden="true"></i> https://somelinkexample.google...</td>
+                                                        <td><dic class="pancil"><img src="{% static 'BP_resources/images/icon/pencil-tool.png' %}"></dic></td>
+                                                
+                                                    </tr>
+                                                    <tr class="hove">
+                                                        <td>6</td>
+                                                        <td>Your Law Firm</td>
+                                                        <td>100 Main Street, Suite 123<br>Bangor, ME, 04620</td>
+                                                        <td>(000) 000-0000</td>
+                                                        <td>(000) 000-0000</td>
+                                                        <td><i class="fa fa-link" aria-hidden="true"></i> https://somelinkexample.google...</td>
+                                                        <td><dic class="pancil"><img src="{% static 'BP_resources/images/icon/pencil-tool.png' %}"></dic></td>
+                                                
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            
+                                        </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="custom-nav-addUsers" role="tabpanel" aria-labelledby="custom-nav-profile-tab">
+                                    
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                        <div class="table-responsive table--no-card m-b-20 table-img">
+                                            <form class="p-4" method="POST" action="{% url 'bp-addUsers' %}">
+                                                {% csrf_token %}
+                                                
+                                                <div class="mb-3 row">
+                                                    <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">username</label>
+                                                    <div class="col-sm-10">
+                                                    <input type="text" required class="form-control" name="username" id="username">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">First Name</label>
+                                                    <div class="col-sm-10">
+                                                    <input type="text" required class="form-control" name="first_name" id="first_name">
+                                                    </div>
+                                                </div>
+                            
+                                                <div class="mb-3 row">
+                                                    <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Last Name</label>
+                                                    <div class="col-sm-10">
+                                                    <input type="text" required  class="form-control" name="last_name" id="last_name">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Email</label>
+                                                    <div class="col-sm-10">
+                                                    <input type="email" required  class="form-control" name="email" id="email">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Password</label>
+                                                    <div class="col-sm-10">
+                                                    <input type="password" required  class="form-control" name="password" id="password">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Phone Extension</label>
+                                                <div class="col-sm-10">
+                                                <input type="text" required  class="form-control" name="phone_extension" id="phone_extension">
+                                                </div>
+                                            </div>
+                                                <div class="mb-3 row">
+                                                <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Attach User Types:</label>
+                                                <div>
+                                                    <div class="col-sm-10">
+                                                        <div class="form-group">
+                                                            
+                                                            <select multiple class="form-control" name="user_types" id="user_types">
+                                                                {% for user_type in user_types %}
+                                                                <option value="{{user_type.id}}">{{user_type.name}}</option>
+                                                                {% endfor %}
+                                                                
+                                                            </select>
+                                                            </div>
+                                                    </div>
+                                                </div> 
+                                                </div>
+                    
+        
+                                                <button  class="btn btn-primary" type="submit">Add User</button>
+                                                </form>
+                                            
+                                        </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="custom-nav-automatedTodos" role="tabpanel" aria-labelledby="custom-nav-automatedTodos-tab">
+                                    
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                        <div class="table-responsive table--no-card m-b-20 table-img">
+                                            <form class="p-4" method="POST" action="{% url 'bp-addScheduledToDo' %}">
+                                                {% csrf_token %}
+                                                
+                                                <div class="mb-3 row">
+                                                    <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">To-Do Name</label>
+                                                    <div class="col-sm-10">
+                                                    <input type="text" required placeholder="To-Do description" class="form-control" name="note" id="note">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Due in</label>
+                                                    <div class="col-sm-10">
+                                                    <select name="due_date" id="cars">
+                                                        <option value="Now">Now</option>
+                                                        <option value="1 day">1 day</option>
+                                                        <option selected="" value="2 days">2 days</option>
+                                                        <option value="3 days">3 days</option>
+                                                        <option value="4 days">4 days</option>
+                                                        <option value="5 days">5 days</option>
+                                                        <option value="6 days">6 days</option>
+                                                        <option value="1 week">1 week</option>
+                                                        <option value="2 weeks">2 weeks</option>
+                                                        <option value="1 month">1 month</option>
+                                                        <option value="2 months">2 months</option>
+                                                        <option value="6 months">6 months</option>
+                                                    </select>
+                                                    </div>
+                                                </div>
+                            
+                                                <div class="mb-3 row">
+                                                    <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">To-Do for</label>
+                                                    <div class="col-sm-10">
+                                                        <select name="user_type" id="cars"> 
+                                                            {% for firm_user in firm_users %}
+                                                            <option value="{{firm_user.id}}">{{firm_user.user.last_name}} {{firm_user.first_name}}</option> 
+                                                            
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Case Statuses</label>
+                                                    <div class="col-sm-10">
+                                                    <select multiple name="statuses" id="cars"> 
+                                                        {% for status in statuses %}
+                                                        <option value="{{status.id}}">{{status.name}}</option> 
+                                                        
+                                                        {% endfor %}
+                                                    </select>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Repeat</label>
+                                                    <div class="col-sm-10">
+                                                    <input type="number" placeholder="# of Days" required  class="form-control" name="repeat" id="repeat">
+                                                    </div>
+                                                </div>
+                                                
+                                                
+                    
+        
+                                                <button  class="btn btn-primary" type="submit">Add To-Do</button>
+                                                </form>
+                                            
+                                        </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="custom-nav-manageBankAccounts" role="tabpanel" aria-labelledby="custom-nav-template-tab">
+                                    
+                                    <div class="col-lg-12">
+                                        
+                                            <div style="display: flex;">
+                                                <h3 class="mt-2 me-2">Manage Bank Accounts</h3>
+                                                <button data-toggle="modal" data-target="#addBankAccount" class="btn btn-primary" style="float: right; margin-left: auto; ">Add Bank Account</button>
+                                            </div>
+                                            
+                                            
+                                            <table class="table table-hover mt-3">
+                                                <thead>
+                                                    <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Check Type</th>
+                                                    <th scope="col">Bank Account</th>
+                                                    
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for check_type in check_types %}
+                                                        <tr>
+                                                            <th scope="row">{{forloop.counter}}</th>
+                                                            <td>{{check_type.name}}</td>
+                                                            <td>
+                                                                <form action="{% url 'bp-attachCheckAccount' %}" method="post">
+                                                                    {% csrf_token %}
+                                                                    <input type="text" hidden value="{{check_type.id}}" name="check_type_id">
+                                                                    <select name="bank_account" onchange="this.form.submit()">
+                                                                        
+                                                                        <option selected value="">--Select Account to attach--</option>
+                                                                        {% for bank_account in bank_accounts %}
+                                                                            
+                                                                            <option value="{{bank_account.id}}">{{bank_account.account_name}} - *{{bank_account.account_number|slice:"-4:"}}</option>
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                </form>
+                                                            </td>
+                                                            
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                                </table>
+                                                <br>
+                                                <h3>All Bank Accounts</h3>
+                                                <table class="table table-hover mt-3">
+                                                <thead>
+                                                    <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Bank</th>
+                                                    <th scope="col">Account Name</th>
+                                                    <th scope="col">Account Number</th>
+                                                    <th scope="col">Check Types</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for account in temp_bank_accounts %}
+                                                        <tr>
+                                                            <th scope="row">{{forloop.counter}}</th>
+                                                            <td>{{account.bank_account.bank}}</td>
+                                                            <td>{{account.bank_account.account_name}}</td>
+                                                            <td>{{account.bank_account.account_number}}</td>
+                                                            <td>
+                                                                {{account.check_types}}
+                                                            </td>
+                                                            
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                                </table>
+        
+        
+        
+                                    </div>
+        
+                                </div>
+                                <div class="tab-pane fade pl-4" id="custom-firm-logo-branding" role="tabpanel" aria-labelledby="custom-firm-logo-branding-tab">
+                                    <h2 class="font-weight-bold">Firm Logo and Branding</h2>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <img id="uploadedImage" src="#" alt="Uploaded Image" accept="image/png, image/jpeg" style="display:none;">
+                                            <div class="form-check mt-3" id="logoareawhite" style="display:none;">
+                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                 Set Logo Area Background to White
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 text-right">
+                                            <div class="save-branding" id="delete-firm-logo" style="display: none">
+                                                <input type="submit" class="btn" value="Delete Firm Logo">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="logo-upload-wrapper">
+                                                <div class="upload-btn-wrapper">
+                                                    <button class="btn">Upload Firm Logo</button>
+                                                    <input type="file"  id="readUrl" name="myfile" />
+                                                </div>
+                                                <div class="placeholder-logo">
+                                                    <img src="/static/BP_resources/images/silverthorne-logo.png">
+                                                </div>
+                                            </div>
+                                            <p class="colors-intro">The five most prevalent colors in your firm's logo are below. <br>Check a color box to change the color scheme of the program layout to match your firm branding: </p>
+                                            <div class="logo-colors">
+                                                <div class="color-wrap">
+                                                      <input class="form-check-input" type="checkbox" value="" id="color1">
+                                                    <div class="color-block">
+
+                                                    </div>
+                                                    <p class="color-code">#383747</p>
+                                                </div>
+                                                <div class="color-wrap">
+                                                      <input class="form-check-input" type="checkbox" value="" id="color2">
+                                                    <div class="color-block">
+                                                        
+                                                    </div>
+                                                    <p class="color-code">#383747</p>
+                                                </div>
+                                                <div class="color-wrap">
+                                                      <input class="form-check-input" type="checkbox" value="" id="color3">
+                                                    <div class="color-block">
+                                                        
+                                                    </div>
+                                                    <p class="color-code">#858659</p>
+                                                </div>
+                                                <div class="color-wrap">
+                                                      <input class="form-check-input" type="checkbox" value="" id="color4">
+                                                    <div class="color-block">
+                                                        
+                                                    </div>
+                                                    <p class="color-code">#383747</p>
+                                                </div>
+                                                <div class="color-wrap">
+                                                      <input class="form-check-input" type="checkbox" value="" id="color5">
+                                                    <div class="color-block">
+                                                        
+                                                    </div>
+                                                    <p class="color-code">#383747</p>
+                                                </div>
+                                            </div>
+                                            <div class="save-branding">
+                                                <input type="submit" class="btn" value="Save Logo And Branding Selection">
+                                                <input type="submit" class="btn float-right" value="Save Logo And Restore Default Color">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6"></div>
+                                    </div>
+                                </div>
+                                     
+                                 </div>
+                            </div>
+                            <!--col-md-10-->
+                        </div>
+                        </div>
+
+                            </div>
+
+                        </div>
+
+                            </div>
+                        </div>  
+                       
+                    <div class="col-lg-6"> 
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2022 Ian Silverthorne</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+    <script>
+        function setID(id){
+            var temp = document.getElementById('user_id');
+            temp.value = id;
+            console.log(temp.value);
+        }
+    </script>
+    <!-- Jquery JS-->
+    <script src="{% static 'BP_resources/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'BP_resources/vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/select2/select2.min.js' %}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static 'BP_resources/js/main.js' %}"></script>
+    <script>
+        document.getElementById('readUrl').addEventListener('change', function(){
+            if (this.files[0] ) {
+              var picture = new FileReader();
+              picture.readAsDataURL(this.files[0]);
+              picture.addEventListener('load', function(event) {
+                document.getElementById('uploadedImage').setAttribute('src', event.target.result);
+                document.getElementById('uploadedImage').style.display = 'block';
+                document.getElementById('delete-firm-logo').style.display = 'block';
+                document.getElementById('logoareawhite').style.display = 'block';
+              });
+            }
+          });
+    </script>
+</body>
+
+</html>
+<!-- end document-->

@@ -1,0 +1,766 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+       
+        <!-- Title Page-->
+        <title>Dashboard</title>
+    
+        <!-- Fontfaces CSS-->
+        <link href="{% static 'BP_resources/css/font-face.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Bootstrap CSS-->
+        <link href="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Vendor CSS-->
+        <link href="{% static 'BP_resources/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Main CSS-->
+        <link href="{% static 'BP_resources/css/theme.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/sidebar.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/header.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/client.css' %}" rel="stylesheet" media="all">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    
+    </head>
+
+<body class="animsition homepage">
+    <div class="modal fade zoom-in" id="phone-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+                <form action="#" method="post" id="editClientForm1">
+                    {% csrf_token %}
+                    <div class="modal-content-row">
+                        <p>{{client.phone}}</p>
+                        <p>Phone Number</p>
+                        
+                        <input type="text" name="client_phone" class="form-control" placeholder="Enter Phone....">
+                        
+                    </div>
+                    <div class="modal-content-row mt-2">
+                        <p>{{client.email}}</p>
+                        <p>Email address</p>
+                        
+                        <input type="email" name="client_email" class="form-control" placeholder="Enter Email....">
+                        
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button form="editClientForm1" type="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade zoom-in" id="dob-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+                <form id="editClientForm2" action="#" method="post">
+                    {% csrf_token %}
+                    <div class="modal-content-row">
+                        <p>{{client.birthday}}</p>
+                        <p>DOB</p>
+                        
+                        <input type="date" name="client_dob" class="form-control" placeholder="Enter DOB....">
+                        
+                    </div>
+                    <div class="modal-content-row mt-2">
+                        <p>{{client.ssn}}</p>
+                        <p>ssn</p>
+                        
+                        <input type="number" name="client_ssn" class="form-control" placeholder="Enter SSN....">
+                        
+                    </div>
+                    <div class="modal-content-row mt-2">
+                        <p>{{client.driver_license_number}}, {{client.driver_license_state}}</p>
+                        <p>dl#</p>
+                        
+                        <input type="text" name="client_driver_license" class="form-control" placeholder="Enter DL#....">
+                        
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button form="editClientForm2" type="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            <div class="logo">
+                
+            </div>
+            
+            <div class="menu-sidebar__content">
+                <nav class="navbar-sidebar position-relative">
+                    <ul class="list-unstyled navbar__list">
+                        
+                        
+                        
+                        <li class="Row  active" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(1, '0')" href="/BP/client/50/43/">
+                                <img src="/static/BP_resources/images/icon/menu-icon3.png">Client
+                            </a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(2, '0')" style="font:14px poppins" href="/BP/medicaltreatment/50/43/">
+                               <img src="/static/BP_resources/images/icon/medical-treatment-icon-color.svg">Medical Treatment
+                            </a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li style="100%" class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(3, '0')" class="js-arrow" href="/BP/case/50/43/">
+                               <img src="/static/BP_resources/images/icon/case-icon-color.svg">Case</a>
+                               <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(4, '0')" href="/BP/todo/50/43/">
+                                <img src="/static/BP_resources/images/icon/to-do-icon-color.svg">To-Do</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(5, '0')" href="/BP/defendants/50/43/">
+                            <img src="/static/BP_resources/images/icon/defendants-icon-color.svg">Defendants</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="has-sub Row " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(6, '0')" href="/BP/caraccident/50/43/">
+                            <img src="/static/BP_resources/images/icon/menu-icon5.png">Car Accident</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(7, '0')" href="/BP/photo/50/43/">
+                              <img src="/static/BP_resources/images/icon/menu-icon6.png">Photo</a>
+                              <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(8, '0')" href="/BP/injuriessub/50/43/">
+                            <img src="/static/BP_resources/images/icon/injuries-icon-color.svg">Injuries</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(9, '0')" href="/BP/otherparties/50/43/">
+                            <img src="/static/BP_resources/images/icon/other-parties-icon-color.svg">Other Parties</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(10, '0')" href="/BP/witnesses/50/43/">
+                            <img src="/static/BP_resources/images/icon/witnesses-icon-color.svg">Witnesses</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(11, '0')" href="/BP/insurance/50/43/">
+                            <img src="/static/BP_resources/images/icon/insurance-icon-color.svg">Insurance</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(12, '0')" href="#">
+                            <img src="/static/BP_resources/images/icon/employment-icon-color.svg">Employment</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(13, '0')" href="/BP/recordings/50/43/">
+                             <img src="/static/BP_resources/images/icon/menu-icon13.png">Recordings</a>
+                             <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(14, '0')" href="/BP/incidentreport/50/43/">
+                             <img src="/static/BP_resources/images/icon/incident-folder-icon-color.svg">Incident Report</a>
+                             <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(15, '0')" href="/BP/documents/50/43/">
+                             <img src="/static/BP_resources/images/icon/menu-icon15.png">Documents</a>
+                             <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(16, '0')" href="/BP/costs/50/43/">
+                            <img src="/static/BP_resources/images/icon/costs-icon-color.svg">Costs</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(17, '0')" href="/BP/caseloan/50/43/">
+                            <img src="/static/BP_resources/images/icon/case-loans-icon-color.svg">Case Loans</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(18, '0')" href="/BP/settlement/50/43/">
+                            <img src="/static/BP_resources/images/icon/menu-icon18.png">Settlement</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(19, '0')" href="/BP/litigation/50/43/">
+                              <img src="/static/BP_resources/images/icon/menu-icon19.png">Litigation</a>
+                              <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(20, '0')" href="/BP/discovery/50/43/">
+                             <img src="/static/BP_resources/images/icon/menu-icon20.png">Discovery</a>
+                             <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(21, '0')" href="/BP/depositions/50/43/">
+                               <img src="/static/BP_resources/images/icon/menu-icon21.png">Depositions</a>
+                               <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(22, '0')" href="/BP/note/50/43/">
+                             <img src="/static/BP_resources/images/icon/notes-icon-color.svg">Notes</a>
+                             <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+        
+                    </ul>
+                </nav>
+                <div class="sidebar-bottom">
+                </div>
+                
+            </div>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container" style="padding-left: 190px">
+            <!-- HEADER DESKTOP NEW-->
+            <header class="header-main-wrapper">
+                {% for message in messages %}
+                <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                    {{ message | safe }}
+                    </button>
+                </div>
+                {% endfor %}
+                <div class="header-row">
+                    <div class="client-details">
+                        <div class="right-skew" style="transform: skew(11deg, 0deg)"></div>
+                        <div class="left-skew" style="transform: skew(-11deg, 0deg)"></div>
+                        <div class="client-image">
+                            <img src="{% static 'BP_resources/images/icon/avatar-01.jpg' %}" alt="John Doe" />
+                        </div>
+                        <div class="client-info">
+                            <span class="case-name"><a class="js-acc-btn clientTabFont" href="{% url 'bp-searchclient' %}"><b class="text-blue font-weight-normal">(888) 888-8888</b></a></span>
+                            <span class="client-name">
+                                <a class="clientTabFont d-block" href="{% url 'bp-searchclient' %}">{{client.last_name}} {{client.first_name}} </a>
+                            </span>
+                            <span class="accident-type"><a class="js-acc-btn clientTabFont" href="{% url 'bp-searchclient' %}">Auto Accident</a></span>
+                            <span class="ml-3 accident-date"><a class="js-acc-btn clientTabFont" href="{% url 'bp-searchclient' %}"><b class="text-gray font-weight-normal">DOI: </b>2/13/2022</a></span>
+                                <i class="fa fa-chevron-down" id="clients-dropdown" aria-hidden="true" ></i>
+                            
+                        </div>
+                    </div>
+                    <div class="bar">
+                        <div class="wrap stacked-icons">
+                            <ul id='main-2'>
+                                <li>    
+                                    <a href="{% url 'bp-home'%}">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/case-navigator-logo.svg' %}" alt="John Doe" />   
+                                            <small>Case Navigator</small>                                  
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'bp-firmsetting' %}">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/worklist-logo-icon.svg' %}" alt="John Doe" />   
+                                            <small>Work List</small>                                  
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'bp-calendar' %}">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/calendar-logo-icon.svg' %}" alt="John Doe" /> 
+                                            <small>Calendar</small>                                    
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'bp-checklist' %}">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/speedometer-logo-icon.svg' %}" alt="John Doe" />   
+                                            <small>Speedometer</small>                             
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/chat-logo-icon.svg' %}" alt="John Doe" />   
+                                            <small>Chat</small>                             
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/flagged-cases-logo-icon.svg' %}" alt="John Doe" />    
+                                            <small>Flagged Cases</small>                                 
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'bp-addClient' %}">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/chat-logo-icon.svg' %}" alt="John Doe" />   
+                                            <small>Add Client</small>                             
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'bp-lawfirmdirectory' %}">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/directory-logo-icon.svg' %}" alt="John Doe" />  
+                                            <small>Directory</small>                                   
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'bp-bpAccounting' %}">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/accounting-logo-icon.svg' %}" alt="John Doe" />  
+                                            <small>Accounting</small>                                   
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/library-logo-icon.svg' %}" alt="John Doe" />  
+                                            <small>Library</small>                                   
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/help-logo-icon.svg' %}" alt="John Doe" />  
+                                            <small>Help</small>                                   
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/settings-logo-icon.svg' %}" alt="John Doe" />  
+                                            <small>Settings</small>                                   
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <div class="single-icon">
+                                            <img src="{% static 'BP_resources/images/icon/logout-logo-icon.svg' %}" alt="John Doe" />  
+                                            <small>Logout</small>                                   
+                                        </div>  
+                                    </a>
+                                </li>
+                                <li class="more-2 hidden" data-width="80">
+                                    <a href="#" class="more-button">
+                                            <img src="{% static 'BP_resources/images/icon/down-arrow.png' %}" alt="John Doe" width="20" /> </a>
+                                    <ul class="collapsible-ul"></ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="margin-right: 25px; margin-top: 11px; display: inline-block; height: 35px">
+                        <a href="javascript:void(0)">
+                            <div class="inbox-icon inbox-icon-2 text-center" style="margin-right: 15px">
+                                <img src="{% static 'BP_resources/images/icon/add-new-case-logo-icon.svg' %}" alt="John Doe" />
+                                <small class="d-block">Add New Case</small>                                   
+                            </div>  
+                        </a> 
+                        <a href="javascript:void(0)">
+                            <div class="inbox-icon text-center">
+                                <img src="{% static 'BP_resources/images/icon/inbox-logo-icon.svg' %}" alt="John Doe" />
+                                <small class="d-block">Inbox</small>                                   
+                            </div>  
+                        </a> 
+                    </div>
+                    <form class="search-form" method="POST">
+                        <input type="text" class="form-control" />
+                        <div class="search-btn">
+                            <input href="bp-advanceSearch" type="submit" class="btn" value="Search" />
+                            <div class="right-skew" style="right: 0px;transform: skew(-11.31deg, 0deg);width: 5px;z-index: 1;background-color: #093761;"></div>
+                            <div class="left-skew" style="left: -5px;transform: skew(-11.31deg, 0deg);width: 5px;z-index: 1;background-color: #093761;"></div>
+                        </div>
+                        <div class="right-skew" style="right: 0;transform: skew(-11.31deg, 0deg);"></div>
+                        <div class="left-skew" style="left: -7px"></div>
+                    </form> 
+                </div>
+                <div class="checklist-section">
+                    <p class="text-white">{{total_marked}}/{{total_checklists}}</p>
+                    <div class="nt-box">
+                        <div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:{{checklist_percentage}}"></div>
+                    </div>
+                    <div class="dropdown" >
+                        <button onclick="myFunction()" class="dropbtn" style="background-color: #093761;"> 
+                            <img src="/static/BP_resources/images/icon/check-green.svg" alt="Double arrow down" class="green-check"> Checklist <img src="/static/BP_resources/images/icon/angles-down-blue.svg" alt="Double arrow down" class="double-arrow-down"></button>
+                        {% comment %} <div id="myDropdown" class="dropdown-content dropdown-content2">
+                            <div class="row">
+                                <div class="col-lg-12" >
+                                    <div class="checklist-cont" >
+                                        {% for checklist in overall_checklist %}
+                                            {% if not checklist.status  %}
+                                                <div><input type="checkbox" onclick="location.href='{% url 'bp-markChecklist' checklist.id client.id case.id  %}';" id="vehicle1" name="vehicle1" value="Bike">
+                                                    <label for="vehicle1">{{checklist.name}}</label><br>
+                                                </div>
+                                            {% else %}
+                                                <div><input type="checkbox" onclick="location.href='{% url 'bp-uncheckChecklist' checklist.case_checklist_id %}';" checked id="vehicle1" name="vehicle1" value="Bike">
+                                                    <label for="vehicle1">{{checklist.name}}</label><br>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                        
+                                    </div>
+                                </div>
+                            </div> 
+                        </div> {% endcomment %}
+                    </div>
+                    <div class="right-skew" style="left: -4px"></div>
+                </div> 
+                <div class="checklist-multi-dropdowns">
+                    <div class="checklist-section checklist-dropdown">
+                        <div class="checklist-cont"> {% for checklist in final_checklist %} {% if not checklist.status %}
+                            <div>
+                                <input type="checkbox" onclick="location.href='{% url 'bp-markChecklist' checklist.id client.id case.id  %}';" id="vehicle1" name="vehicle1" value="Bike">
+                                <label for="vehicle1">{{checklist.name}}</label>
+                                <br> 
+                            </div> {% else %}
+                            <div>
+                                <input type="checkbox" onclick="location.href='{% url 'bp-uncheckChecklist' checklist.id client.id case.id %}';" checked id="vehicle1" name="vehicle1" value="Bike">
+                                <label for="vehicle1">{{checklist.name}}</label>
+                                <br> 
+                            </div> {% endif %} {% endfor %} 
+                        </div>
+                    </div>
+                </div> 
+            </header>
+            <!-- HEADER DESKTOP NEW-->
+            <form id="orignal_form"   action="{% url 'bp-searchclient' %}" method="POST">
+                {% csrf_token %}
+                <input type="text" name="name" hidden id="letter" />
+                <input type="text" name="check" value="True" hidden>
+                
+            </form>
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="client-details-wrap">
+                    <div class="client-details-inner">
+                        <div class="first-col">
+                            <!--<a href="javascript:void(0)" data-toggle="modal" data-target="#phone-modal" class="d-block">{{client.phone}}</a>
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#phone-modal"  class="d-block email">{{client.email}}</a>-->
+                
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#dob-modal">
+                                <div class="d-block check-detail-items" style="overflow: hidden">
+                                    <small class="d-block"><div class="d-inline-block" style="width: 60px;margin-right: 2px;text-align: right"><i class="font-weight-bold">email </i><em style="float: right;font-style: normal;margin-left: 1px;color: #D5D5D5">:</em></div>{{client.email}}</small>
+                                    <small class="d-block"><div class="d-inline-block" style="width: 60px;margin-right: 2px;text-align: right"><i class="font-weight-bold">case # </i><em style="float: right;font-style: normal;margin-left: 1px;color: #D5D5D5">:</em></div>19STCVFD2234</small>
+                                    <small class="d-block"><div class="d-inline-block" style="width: 60px;margin-right: 2px;text-align: right"><i class="font-weight-bold">court # </i><em style="float: right;font-style: normal;margin-left: 1px;color: #D5D5D5">:</em></div>San Bernardino Country Court</small>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="second-col">
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#dob-modal">
+                                <div class="d-block check-detail-items" style="overflow: hidden">
+                                    <small class="d-block"><div class="d-inline-block" style="width: 30px;margin-right: 2px;text-align: right"><i class="font-weight-bold">DOB </i><em style="float: right;font-style: normal;margin-left: 1px;color: #D5D5D5">:</em></div>{{client.birthday}}</small>
+                                    <small class="d-block"><div class="d-inline-block" style="width: 30px;margin-right: 2px;text-align: right"><i class="font-weight-bold">SSN </i><em style="float: right;font-style: normal;margin-left: 1px;color: #D5D5D5">:</em></div>{{client.ssn}}</small>
+                                    <small class="d-block"><div class="d-inline-block" style="width: 30px;margin-right: 2px;text-align: right"><i class="font-weight-bold">DL# </i><em style="float: right;font-style: normal;margin-left: 1px;color: #D5D5D5">:</em></div>{{client.driver_license_number}}, {{client.driver_license_state}}</small>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="third-col">
+                            <small class="d-block"><div class="d-inline-block float-left" style="width: 54px;margin-right: 2px;text-align: right"><i class="font-weight-bold">Update </i><em style="float: right;font-style: normal;margin-left: 1px;color: #D5D5D5">:</em></div><p class="d-block overflow-hidden">Client is continued to treat, would like to see an orthpedist, not sure how much of a trip he can make this month.</p></small>
+                            <small class="d-block"><div class="d-inline-block" style="width: 54px;margin-right: 2px;text-align: right"><i class="font-weight-bold">By </i><em style="float: right;font-style: normal;margin-left: 1px;color: #D5D5D5">:</em></div>G Peralta<i class="font-weight-bold"> at </i><em style="font-style: normal;margin-left: 1px;color: #000">9:00 am</em> <i class="font-weight-bold"> on </i><em style="font-style: normal;margin-left: 1px;color: #000">8/29/2023</em></small>
+                        </div>
+                        <div class="fourth-col last-row-details">
+                            <small class="d-block float-left"><div class="d-inline-block float-left" style="width: 55px;margin-right: 2px;text-align: right"><i class="font-weight-bold">Stage </i><em style="float: right;font-style: normal;margin-left: 1px;color: #D5D5D5">:</em></div>
+                                {% if case %}
+                                <p class="d-block overflow-hidden">
+                                    {% for stage in case.auto_case_stage.all %}
+                                    {{stage.name}}, 
+                                    {% endfor %}
+                                </p>
+                                {% endif %}
+                                
+                            </small>
+                            <small class="d-block float-left"><div class="d-inline-block float-left" style="width: 55px;margin-right: 2px;text-align: right"><i class="font-weight-bold">Status </i><em style="float: right;font-style: normal;margin-left: 1px;color: #D5D5D5">:</em></div>
+                                {% if case %}
+                                <p class="d-block overflow-hidden">
+                                    {% for status in case.auto_case_status.all %}
+                                        {{status.name}},
+                                    {% endfor %}
+                                </p>
+                                {% endif %}</small>
+                        </div>
+                        <div class="fifth-col position-relative">
+                            <small style="position: absolute;
+                            top: 0%;text-align: center"><i style="display: block; font-size: 18px; font-weight: bold; text-transform: Capitalize">To-Dos </i><div class="d-inline-block font-weight-bold" style="font-size: 30px;margin-top: 9px">4</div></small>
+                        </div>
+                    </div>
+                    <div class="flagged-icon-wrap">
+                        {% if flagPage %}
+                            <div class="top-pane" onclick="location.href='#';"> <img src="{% static 'BP_resources/images/icon/flag-icon-red-bg-gray.svg' %}" width="46px"> </div> {% else %}
+                            <div class="top-pane" onclick="location.href='#';"> <img src="{% static 'BP_resources/images/icon/flag-icon-bg-gray.svg' %}" width="46px"> </div> {% endif %}
+                    </div>
+                </div>
+                <div class="section__content section__content--p30" style="margin-top: 132px">
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-lg-12 top-head">
+                                <div class="main-boxst">
+                                    <div class="text-side">
+                                <h2><img src="{% static 'BP_resources/images/icon/search-img.png' %}">Search</h2></div>
+                                <div class="list-side"> 
+                                    <h5 style="color:grey;">OPEN CLIENTS BY LAST NAME:</h5> 
+                                    <ul>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('A')" >A</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('B')" >B</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('C')" >C</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('D')" >D</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('E')" >E</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('F')" >F</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('G')" >G</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('H')" >H</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('I')" >I</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('J')" >J</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('K')" >K</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('L')" >L</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('M')" >M</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('N')" >N</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('O')" >O</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('P')" >P</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('Q')" >Q</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('R')" >R</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('S')" >S</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('T')" >T</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('U')" >U</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('V')" >V</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('W')" >W</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('X')" >X</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('Y')" >Y</a></li>
+                                    <li><a style="color:black !important;" href="#" onclick="search_by_letter('Z')" >Z</a></li>
+                                    
+                                    </ul></div>
+                                </div>
+                                <!-- <div class="mid-search">
+                                    <form class="form-header" action="" method="POST">
+                                        {% csrf_token %}
+                                        <span><input class="au-input au-input--xl" type="text" name="name" id="name" placeholder="Search by Clients Name" /><i class="fa fa-search"></i> 
+                                        <button type="submit">Search</button></span>  
+                                    </form>
+                                </div> -->
+                                <ul>
+                                <li><a onclick="selectCategory('Client')" href="#" class="active">Client</a></li>
+                                <li><a onclick="selectCategory('Defendant')" href="#">Defendant</a></li>
+                                <li><a onclick="selectCategory('Witness')" href="#">Witness</a></li>
+                                <li><a onclick="selectCategory('OtherParty')" href="#">Other Party</a></li>
+                                <li><a onclick="selectCategory('Note')" href="#">Note</a></li>
+                                <li><a onclick="selectCategory('City')" href="#">City</a></li>
+                                <li><a onclick="selectCategory('Provider')" href="#">Provider</a></li>
+                                </ul>
+                            
+                                <div class="table-responsive table--no-card m-b-40 subpg-table">
+                                    <table class="table table-borderless table-striped table-earning ">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: auto !important; text-align: center !important;">#</th>
+                                                <th style="width: auto !important; text-align: center !important;">Client</th>
+                                                
+                                                <th style="width: auto !important; text-align: center !important;">Age</th>
+                                                <th style="width: auto !important; text-align: center !important;">Gender</th>
+                                                <th style="width: auto !important; text-align: center !important;">Incident</th>
+                                                <th style="width: auto !important; text-align: center !important;">Case Type</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% if not clients %}
+                                                <div class="alert alert-danger" role="alert">
+                                                    No such client exists!
+                                                </div>
+                                            {% else %}
+                                                {% for case in clients %}
+                                                    
+                                                    <tr onclick="selectCase('{{case.case.for_client.id}}', '{{case.case.id}}')">
+                                                        <td style="width: 5% !important; text-align: center !important;">{{case.index}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;">{{case.case.for_client.last_name}}, {{case.case.for_client.first_name}}</td>
+                                                        
+                                                        <td style="width: 5% !important; text-align: center !important;">{{case.case.for_client.age}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;">{{case.case.for_client.gender}}</td>
+                                                        <td style="width: 10% !important; text-align: center !important;">{{case.case.incident_date}}</td>
+                                                        <td style="width: auto !important; text-align: center !important;">{{case.case.case_type}}</td>
+                                                        
+                                                    </tr>   
+                                                    
+                                                {% endfor %}
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+                            </div>
+                        </div>  
+                       
+                    <div class="col-lg-6"> 
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2022 Ian Silverthorne</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+    <script>
+        function selectCategory(category){
+            let temp = document.getElementById('search_category')
+            console.log(temp);
+            temp.value = category;
+            console.log(temp.value);
+            document.getElementById("search_form").submit();
+        }
+        function search_by_letter(letter){
+            document.getElementById('letter').value = letter
+            document.getElementById("orignal_form").submit();
+        }
+    </script>
+    <script>
+        function selectCase(client_id, case_id){
+            window.location = `/BP/client/${client_id}/${case_id}`;
+        }
+    </script>
+    
+
+    <!-- Jquery JS-->
+    <script src="{% static 'BP_resources/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'BP_resources/vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/select2/select2.min.js' %}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static 'BP_resources/js/main.js' %}"></script>
+<script>
+    $(".dropdown").click(function(){
+        $(".checklist-multi-dropdowns").toggle();
+      });
+</script>
+<script>
+    $("#clients-dropdown").click(function(){
+        $(".previous-client").toggle();
+      });
+</script>
+
+</body>
+
+</html>
+<!-- end document-->

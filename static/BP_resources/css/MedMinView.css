@@ -1,0 +1,32 @@
+.photos-page .section__content--p30 {
+    padding: 0 5px !important;
+  }
+  .top-pane {
+    position: absolute;
+    right: 350px !important;
+    top: -34px !important;
+  }
+  .main-content {
+    padding-top: 39px !important;
+  }
+  .top-pane {
+    top: -53px !important;
+  }
+  .colTitleUnderline {
+    width: 102% !important;
+  }
+  .three-icons, .three-icons img {
+    display: inline-block;
+    width: 22px !important;
+    padding: 0 !important;
+  }
+  .columnsContainer2 > div form {
+    position: relative !important;
+    width: 100%;
+  }
+  .columnsContainer2 > div {
+    width: 310px !important;
+  }
+  .columnsContainer2 > div:nth-child(2) {
+    width: 185px !important;
+  }

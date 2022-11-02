@@ -1,0 +1,229 @@
+{% load static %}
+{% url 'bp-todo' as todo %}
+
+<head>
+    <script src="{% static 'js/main.js' %}" defer></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+</head>
+<aside class="menu-sidebar d-none d-lg-block">
+    <div class="logo">
+        {% comment %} <img src="{% static 'BP_resources/images/icon/logo.svg' %}" /> {% endcomment %}
+    </div>
+    {% comment %} <div class="menu-sidebar__content">
+        <nav class="navbar-sidebar position-relative">
+            <ul class="list-unstyled navbar__list">
+                
+                <li style="100%" class="Row hc" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)" >
+                    <a onclick="addClickRecord({{page.id}}, '0')" class="js-arrow"  href="{% url 'bp-case' client.id case.id %}">
+                       <img src="{% static 'BP_resources/images/icon/Vector-case.png' %}">Caasdasdse</a>
+                       <div class="blueSpace" > </div>
+                </li>
+                {% for page in case.case_type.pages.all %}
+                {% if page.name == 'Case' %}
+                
+                <li style="100%" class="Row hc" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)" >
+                    <a onclick="addClickRecord({{page.id}}, '0')" class="js-arrow" href="{% url 'bp-case' client.id case.id %}">
+                       <img src="{% static 'BP_resources/images/icon/Vector-case.png' %}">Case</a>
+                       <div class="blueSpace" > </div>
+                </li>
+                {% elif page.name == 'To-Do' %}
+                <li class="Row hc" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                    <a onclick="addClickRecord({{page.id}}, '0')" href="{% url 'bp-todo' client.id case.id %}">
+                        <img src="{% static 'BP_resources/images/icon/Vector-to-do.png' %}">To-Do</a>
+                    <div class="blueSpace" > </div>
+                </li>
+                {% elif page.name == 'Client' %}
+                <li class="Row hc" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                    <a onclick="addClickRecord({{page.id}}, '0')" href="{% url 'bp-message_page' client.id case.id %}">
+                     <img src="{% static 'BP_resources/images/icon/pencil-tool.png' %}">Communication</a>
+                     <div class="blueSpace" > </div>
+                </li>
+                <li class="Row" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)" >
+                    <a onclick="addClickRecord({{page.id}}, '0')" href="{% url 'bp-client' client.id case.id %}">
+                        <img src="{% static 'BP_resources/images/icon/Client.png' %}">Client
+                    </a>
+                    <div class="blueSpace"> </div>
+                </li>
+                {% elif page.name == 'Defendants' %}
+                <li class="Row hc" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                    <a onclick="addClickRecord({{page.id}}, '0')" href="{% url 'bp-defendants' client.id case.id %}">
+                    <img src="{% static 'BP_resources/images/icon/Vector-Defendants.png' %}">Defendants</a>
+                    <div class="blueSpace" > </div>
+                </li>
+                {% elif page.name == 'Car Accident' %}
+                <li class="has-sub Row" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                    <a onclick="addClickRecord({{page.id}}, '0')" href="{% url 'bp-caraccident' client.id case.id %}">
+                    <img src="{% static 'BP_resources/images/icon/car.png' %}">Car Accident</a>
+                    <div class="blueSpace" > </div>
+                </li>
+                {% elif page.name == 'Photo' %}
+                <li class="Row hc" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                    <a onclick="addClickRecord({{page.id}}, '0')" href="{% url 'bp-photo' client.id case.id %}">
+                      <img src="{% static 'BP_resources/images/icon/image1.png' %}">Photo</a>
+                      <div class="blueSpace" > </div>
+                </li>
+                {% elif page.name == 'Injury' %}
+                <li class="Row hc" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                    <a onclick="addClickRecord({{page.id}}, '0')" href="{% url 'bp-injuriessub' client.id case.id  %}">
+                    <img src="{% static 'BP_resources/images/icon/crutch.png' %}">Injuries</a>
+                    <div class="blueSpace" > </div>
+                </li>
+                {% elif page.name == 'Medical Treatment' %}
+                <li class="Row hc" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                    <a onclick="addClickRecord({{page.id}}, '0')" style="font:14px poppins" href="{% url 'bp-medicaltreatment' client.id case.id %}">
+                       <img src="{% static 'BP_resources/images/icon/medical-treatment-icon-color.png' %}">Medical Treatment
+                    </a>
+                    <div class="blueSpace" > </div>
+                </li>
+                {% elif page.name == 'Other Parties' %}
+                <li class="Row hc" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                    <a onclick="addClickRecord({{page.id}}, '0')" href="{% url 'bp-otherparties' client.id case.id %}">
+                    <img src="{% static 'BP_resources/images/icon/Others.png' %}">Other Parties</a>
+                    <div class="blueSpace" > </div>
+                </li>
+                {% elif page.name == 'Witnesses' %}
+                <li class="Row hc" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                    <a onclick="addClickRecord({{page.id}}, '0')" href="{% url 'bp-witnesses' client.id case.id %}">
+                    <img src="{% static 'BP_resources/images/icon/witness.png' %}">Witnesses</a>
+                    <div class="blueSpace" > </div>
+                </li>
+                {% elif page.name == 'Insurance' %}
+                <li class="Row hc" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                    <a onclick="addClickRecord({{page.id}}, '0')" href="#">
+                    <img src="{% static 'BP_resources/images/icon/insurance.png' %}">Insurance</a>
+                    <div class="blueSpace" > </div>
+                </li>
+                {% elif page.name == 'Employment' %}
+                <li class="Row hc" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                    <a onclick="addClickRecord({{page.id}}, '0')" href="#">
+                    <img src="{% static 'BP_resources/images/icon/tie.png' %}">Employment</a>
+                    <div class="blueSpace" > </div>
+                </li>
+                {% elif page.name == 'Recordings' %}
+                <li class="Row hc" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                    <a onclick="addClickRecord({{page.id}}, '0')" href="{% url 'bp-recordings' client.id case.id %}">
+                     <img src="{% static 'BP_resources/images/icon/record.png' %}">Recordings</a>
+                     <div class="blueSpace" > </div>
+                </li>
+                {% elif page.name == 'Incident Report' %}
+                <li class="Row hc" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                    <a onclick="addClickRecord({{page.id}}, '0')" href="{% url 'bp-incidentreport' client.id case.id %}">
+                     <img src="{% static 'BP_resources/images/icon/folderreport.png' %}">Incident Report</a>
+                     <div class="blueSpace" > </div>
+                </li>
+                {% elif page.name == 'Documents' %}
+                <li class="Row hc" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                    <a onclick="addClickRecord({{page.id}}, '0')" href="{% url 'bp-documents' client.id case.id %}">
+                     <img src="{% static 'BP_resources/images/icon/file.png' %}">Documents</a>
+                     <div class="blueSpace" > </div>
+                </li>
+                {% elif page.name == 'Costs' %}
+                <li class="Row hc" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                    <a onclick="addClickRecord({{page.id}}, '0')" href="{% url 'bp-costs' client.id case.id %}">
+                    <img src="{% static 'BP_resources/images/icon/Cost.png' %}">Costs</a>
+                    <div class="blueSpace" > </div>
+                </li>
+                {% elif page.name == 'Case Loans' %}
+                <li class="Row hc" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                    <a onclick="addClickRecord({{page.id}}, '0')" href="{% url 'bp-caseloan' client.id case.id %}">
+                    <img src="{% static 'BP_resources/images/icon/loan.png' %}">Case Loans</a>
+                    <div class="blueSpace" > </div>
+                </li>
+                {% elif page.name == 'Settlement' %}
+                <li class="Row hc" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                    <a onclick="addClickRecord({{page.id}}, '0')" href="{% url 'bp-settlement' client.id case.id %}">
+                    <img src="{% static 'BP_resources/images/icon/law.png' %}">Settlement</a>
+                    <div class="blueSpace" > </div>
+                </li>
+                {% elif page.name == 'Litigation' %}
+                <li class="Row hc" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                    <a onclick="addClickRecord({{page.id}}, '0')" href="{% url 'bp-litigation' client.id case.id %}">
+                      <img src="{% static 'BP_resources/images/icon/judgment.png' %}">Litigation</a>
+                      <div class="blueSpace" > </div>
+                </li>
+                {% elif page.name == 'Discovery' %}
+                <li class="Row hc" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                    <a onclick="addClickRecord({{page.id}}, '0')" href="{% url 'bp-discovery' client.id case.id %}">
+                     <img src="{% static 'BP_resources/images/icon/investigation.png' %}">Discovery</a>
+                     <div class="blueSpace" > </div>
+                </li>
+                {% elif page.name == 'Depositions' %}
+                <li class="Row hc" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                    <a onclick="addClickRecord({{page.id}}, '0')" href="{% url 'bp-depositions' client.id case.id %}">
+                       <img src="{% static 'BP_resources/images/icon/Deposit.png' %}">Depositions</a>
+                       <div class="blueSpace" > </div>
+                </li>
+                {% elif page.name == 'Notes' %}
+                <li class="Row hc" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                    <a onclick="addClickRecord({{page.id}}, '0')" href="{% url 'bp-note' client.id case.id %}">
+                     <img src="{% static 'BP_resources/images/icon/pencil-tool.png' %}">Notes</a>
+                     <div class="blueSpace" > </div>
+                </li>
+                {% elif page.name == 'Dog Bite' %}
+                <li class="Row hc" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                    <a onclick="addClickRecord({{page.id}}, '0')" href="{% url 'bp-dogbite' client.id case.id %}">
+                     <img src="{% static 'BP_resources/images/icon/pencil-tool.png' %}">Dog Bite</a>
+                     <div class="blueSpace" > </div>
+                </li>
+               {% endif %}
+                {% endfor %}
+                
+            </ul>
+            
+        </nav>
+        <div class="sidebar-bottom">
+        </div>
+    </div> {% endcomment %}
+    <div class="menu-sidebar__content">
+        <nav class="navbar-sidebar position-relative">
+            <ul class="list-unstyled navbar__list">
+                {% comment %} <li style="100%" class="Row hc" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)" >
+                    <a onclick="addClickRecord({{page.id}}, '0')" class="js-arrow"  href="{% url 'bp-case' client.id case.id %}">
+                       <img src="{% static 'BP_resources/images/icon/Vector-case.png' %}">Caasdasdse</a>
+                       <div class="blueSpace" > </div>
+                </li> {% endcomment %}
+                {% for page in case.case_type.page_case_types.all %}
+                
+                <li class="Row hc {% if request.resolver_match.url_name == page.page_url %} active{% endif %}" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                    <a onclick="addClickRecord({{page.id}}, '0')" href="{% url page.page_url client.id case.id %}">
+                     <img src="{{page.page_icon.url}}">{{page.name}}</a>
+                     <div class="blueSpace" > </div>
+                </li>
+               
+                {% endfor %}
+
+            </ul>
+        </nav>
+        <!--<div class="sidebar-bottom">
+        </div>-->
+        
+    </div>
+</aside>
+
+<script>
+    function addClickRecord(page_id, click_id){
+    // $('a').on('click', function () {
+        console.log('hello');
+        console.log('FUnction loaded!')
+        $.ajax({
+            url: '/BP/clickRecord/',
+            type: "GET",
+            data: {
+                "case_id": "{{case.id}}",
+                "page_id": page_id,
+                "click_id": click_id,
+                
+            },
+           
+            success: function (data) {
+                var x = JSON.stringify(data);
+                console.log(x);
+            },
+            // Error handling 
+            error: function (error) {
+                console.log(`Error ${error}`);
+            }
+        });
+    // });
+};
+</script>

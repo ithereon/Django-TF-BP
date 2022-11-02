@@ -1,0 +1,57 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% block pagetitle %}
+    Treatment First - Add Doctor
+{% endblock pagetitle %}
+{% block content %}
+<div>
+    <h3>Add Doctor</h3>
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="mb-3 row">
+            <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">First Name</label>
+            <div class="col-sm-10">
+            <input type="text" required class="form-control" placeholder="Enter the first name" name="first_name1" id="first_name">
+            </div>
+        </div>
+        
+
+        <div class="mb-3 row">
+            <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Last Name</label>
+            <div class="col-sm-10">
+            <input type="text" required class="form-control" placeholder="Enter the last name"  name="last_name1" id="last_name">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label fw-bold">Add Location:</label>
+            <div class="col-sm-10">
+                <select class="form-select" name="location1" aria-label="Default select example">
+                    <option selected >Choose an address</option>
+                    {% for location in locations %}
+                    
+                        <option value="{{location.id}}">{{location.address}}</option>
+                    
+                    {% endfor %}
+                    </select>
+            </div>
+        </div>
+        <label  class="mb-3 fw-bold">Add Specialties</label>
+        {% for specialty in specialties %}
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-12">
+                    <div class="form-check">
+                        <input class="form-check-input" name="specialties" type="checkbox" value="{{specialty.id}}" id="option{{specialty.id}}">
+                        <label class="form-check-label" for="{{specialty.id}}">
+                        {{specialty.name}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <br>
+        <button type="submit" class="btn btn-primary">Add Doctor</button>
+    </form>
+</div>
+{% endblock content %}

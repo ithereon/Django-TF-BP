@@ -1,0 +1,106 @@
+
+  .photos-section{
+    padding: 0 5px !important;
+  }
+  .photos-page .nav-link.active {
+    color: #fff !important;
+    background-color: #093761;
+    text-decoration: none ;
+  }
+  .custom-tab nav{
+    border-bottom: 1px solid #ccc;
+    margin-left: 5px;
+  }
+  
+ .custom-tab a:hover{
+  background-color: #093761 !important;
+  color: #fff;
+}
+
+.custom-tab a{
+  display: block !important;
+  width: 100% !important;
+  border-radius: 0px !important;
+}
+.firm-setting .table-responsive.table--no-card{
+  border-radius: 0px !important;
+}
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.upload-btn-wrapper .btn {
+  border: 2px solid #eee;
+  color: #333;
+  background-color: #eee;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+#custom-firm-logo-branding h2{
+  text-transform: capitalize;
+}
+.logo-upload-wrapper{
+  display: flex;
+  margin-top: 10px;
+}
+.colors-intro{
+  color: #000;
+  margin-top: 30px;
+}
+.placeholder-logo img{
+  width: 300px;
+
+  margin-left: 50px;
+}
+.logo-colors{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+.color-wrap{
+  text-align: center;
+}
+.color-block{
+  width: 90px;
+  height: 90px;
+}
+.logo-colors .color-wrap:nth-child(1) .color-block{
+  background-color: #ED230D;
+}
+.logo-colors .color-wrap:nth-child(2) .color-block{
+  background-color: #FF9400;
+}
+.logo-colors .color-wrap:nth-child(3) .color-block{
+  background-color: #004D81;
+}
+.logo-colors  .color-wrap:nth-child(4) .color-block{
+  background-color: #EE5FA7;
+}
+.logo-colors .color-wrap:nth-child(5) .color-block{
+  background-color: #067101;
+}
+.logo-colors .form-check-input{
+  position: relative;
+  margin: 0 auto;
+}
+.save-branding .btn{
+  background-color: #093761;
+  color: #fff;
+  margin-top: 20px;
+}
+#uploadedImage{
+  width: 300px !important;
+}

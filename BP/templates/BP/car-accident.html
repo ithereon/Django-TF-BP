@@ -1,0 +1,2138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Dashboard</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="{% static 'BP_resources/css/font-face.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{% static 'BP_resources/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{% static 'BP_resources/css/theme.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/css/sidebar.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/css/header.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/css/case.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/css/client.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'BP_resources/css/medicalTreatment.css' %}" rel="stylesheet" media="all">
+
+</head>
+    
+
+<body class="animsition client-page other-parties car-accident">
+    
+    <!-- Panel popups starts here. -->
+    <div class="modal generic-popup fade bd-example-modal-lg zoom-in" id="accident-location-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 1000px" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title mx-auto">Accident Location</h5>
+            </div>
+            <div class="modal-body">
+                <form id="editClientForm2" action="{% url 'bp-editClientInfo2' client.id case.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Montgomery, Alabama</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Address 1 :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter Address 1" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Sacramento, California</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Address 2 :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter Address 2" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Phoenix</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">City :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter City" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Arizona</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">State :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter State" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">85001</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">ZIP :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter Zip" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">(031) 123-23232</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Phone :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter Phone" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">(112) 121-1 </p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Fax :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter fax" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">saffs@hsdfsd.com</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Email :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter Email" class="form-control">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0 justify-content-between pt-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button form="editClientForm2" type="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal generic-popup fade bd-example-modal-lg zoom-in" id="location-description-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 1200px" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title mx-auto">Accident Location Description</h5>
+            </div>
+            <div class="modal-body">
+                <form id="editClientForm2" action="{% url 'bp-editClientInfo2' client.id case.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-3">
+                            <p style="color: #000">Corner of Margarite and Crown Valley, Mission Viejo, CA</p>
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <p class="text-secondary">Accident Location Description :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter location description" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-3">
+                            <p style="color: #000">Rear-End Collision</p>
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <p class="text-secondary">Accident Type :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter accident type" class="form-control">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0 justify-content-between pt-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button form="editClientForm2" type="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal generic-popup fade bd-example-modal-lg zoom-in" id="description-notes-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 1200px" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title mx-auto">Accident Description and Notes</h5>
+            </div>
+            <div class="modal-body">
+                <form id="editClientForm2" action="{% url 'bp-editClientInfo2' client.id case.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-3">
+                            <p style="color: #000">Some dummy notes to display</p>
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <p class="text-secondary">Accident Description and Notes :</p>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio1">Yes</label>
+                              </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio2">No</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Do you require Ambulance</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Ambulance?</p>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio3">Yes</label>
+                              </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio4">No</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Do you require Emergency Room</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Emergency Room?</p>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio5" name="customRadio" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio5">Yes</label>
+                              </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio6" name="customRadio" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio6">No</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Do you have loss of Consciousness</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">loss of Consciousness?</p>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio7" name="customRadio" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio7">Yes</label>
+                              </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio8" name="customRadio" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio8">No</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Report Taken</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Report Taken?</p>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio9" name="customRadio" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio9">Yes</label>
+                              </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio10" name="customRadio" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio10">No</label>
+                              </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0 justify-content-between pt-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button form="editClientForm2" type="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal generic-popup fade bd-example-modal-lg zoom-in" id="client-car-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 1000px" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title mx-auto">Client Car Details</h5>
+            </div>
+            <div class="modal-body">
+                <form id="editClientForm2" action="{% url 'bp-editClientInfo2' client.id case.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Suzuki</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Make :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter car make" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Swift</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Model :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter car model" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">2014</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Year :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter car year" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">140Km / Gallon</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Mileage :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter mileage" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Silk Silver</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Color :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter car color" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">$7,000</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Value :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter car calue" class="form-control">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0 justify-content-between pt-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button form="editClientForm2" type="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal generic-popup fade bd-example-modal-lg zoom-in" id="vehicle-location-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 1000px" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title mx-auto">Location Of Vehicle</h5>
+            </div>
+            <div class="modal-body">
+                <form id="editClientForm2" action="{% url 'bp-editClientInfo2' client.id case.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-3">
+                            <p style="color: #000">Montgomery, Alabama</p>
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <p class="text-secondary">Name Of Location :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter Name Of Location" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Montgomery, Alabama</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Address 1 :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter Address 1" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Sacramento, California</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Address 2 :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter Address 2" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Phoenix</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">City :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter City" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Arizona</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">State :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter State" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">85001</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">ZIP :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter Zip" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">(031) 123-23232</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Phone :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter Phone" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">(112) 121-1 </p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Fax :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter fax" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">saffs@hsdfsd.com</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Email :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter Email" class="form-control">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0 justify-content-between pt-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button form="editClientForm2" type="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal generic-popup fade bd-example-modal-lg zoom-in" id="vehicle-description-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 1200px" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title mx-auto">Vehicle Description and Notes</h5>
+            </div>
+            <div class="modal-body">
+                <form id="editClientForm2" action="{% url 'bp-editClientInfo2' client.id case.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-3">
+                            <p style="color: #000">Some dummy notes to display</p>
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <p class="text-secondary">Vehicle Description and Notes :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter Accident Description and Notes" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-3">
+                            <p style="color: #000">$4,000.00</p>
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <p class="text-secondary">Property Damage Estimate :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter Property Damage Estimate" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-3">
+                            <p style="color: #000">$5,000.00</p>
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <p class="text-secondary">Property Damage Final :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter Property Damage final" class="form-control">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0 justify-content-between pt-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button form="editClientForm2" type="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal generic-popup fade bd-example-modal-lg zoom-in" id="defendant-car-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 1000px" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title mx-auto">Defendant Car Details</h5>
+            </div>
+            <div class="modal-body">
+                <form id="editClientForm2" action="{% url 'bp-editClientInfo2' client.id case.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Suzuki</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Make :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter car make" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Swift</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Model :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter car model" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">2014</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Year :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter car year" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">140Km / Gallon</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Mileage :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter mileage" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">Silk Silver</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Color :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter car color" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-1">
+                        <div class="col-md-4">
+                            <p style="color: #000">$7,000</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p class="text-secondary">Value :</p>
+                        </div>
+                        <div class="col-md-6">
+                           <input type="text" placeholder="Enter car calue" class="form-control">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0 justify-content-between pt-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button form="editClientForm2" type="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- Panel popups ends here -->
+    <div class="modal fade" id="addparty" tabindex="-1" aria-labelledby="addparty" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+           <div class="modal-content">
+              <div class="modal-header">
+                 <h5 class="modal-title" id="exampleModalLabel">Add Party</h5>
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet velit ab consectetur eius dignissimos nostrum</p>
+              </div> 
+              <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" style="float:left; margin-right:auto;" data-dismiss="modal">Cancel</button>
+                 <button type="submit" form="form12" class="btn btn-success">Save</button>
+              </div>
+           </div>
+        </div>
+    </div>
+    <div class="page-wrapper">
+
+        <!-- MENU SIDEBAR-->
+        {% include 'BP/SideBar.html' %}
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container" style="padding-left: 190px !important;">
+            <!-- HEADER DESKTOP NEW-->
+            {% include 'BP/header.html' %}
+            <!-- HEADER DESKTOP NEW-->
+            <div class="top-panel-wrapper">
+                <div class="panel-page-title">
+                    <p>Car Accident</p>
+                </div>
+                <div class="add-button">
+                    <input type="submit" class="btn" value="Add Involved Vehicle" data-toggle="modal" data-target="#addparty">
+                </div>
+            </div>
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content" style="padding-top: 0px !important;margin-top: -1px ">
+                <div class="row position-relative" style="padding-right: 0px !important;border: solid 5px #093761;border-radius: 8px;margin:0 5px;">
+                    <div class="col-md-8"  style="padding: 5px !important">
+                        <div class="innerContentContainer" style="margin-left: 0px;width:100%;">
+                            <div class="columnsContainer2 p-0"> 
+                                <div class="flexStart" data-toggle="modal" data-target="#accident-location-modal" onMouseOver="this.style.backgroundColor='#eee'"
+                                onMouseOut="this.style.backgroundColor='#fff'" style="height:auto;width: 250px">
+                                    <h4>Accident Location</h4>
+                                    <div class="colTitleUnderline">&nbsp;</div>   
+
+                                    <div class="colFonts colFont" style="margin-bottom: 5px;font:14px poppins;color:black"> 13001 Seal Beach Blvd., Suite 300 </div>
+                                    <div class="colFonts colFont" style="margin-top: 0px;margin-bottom: 5px;font:14px poppins"> Seal Beach,California, 90740 </div>
+                                    <p class="colText colFont"><small style="font: 14px poppins">(</small>562<small style="font: 14px poppins">)</small> 345-3456 </p>
+                                    <p class="colText colFont"><small style="font: 14px poppins">(</small>562<small style="font: 14px poppins">)</small> 345-3456 <small class="ml-2" style="font: 14px poppins">fax</small></p>
+                                    <p class="colText colFont">rghdf@kdhfg.com</p>
+                                    <form method="POST" style="width: 100%" action="/BP/fillTemplate/">
+                                        <input type="hidden" name="csrfmiddlewaretoken" value="Wui0IefcpNyJ1c44R8iy5LjulfsT5htpomZ4K8bv63Qa5OiSspPOyBMHZmB4XzYV">
+                                        <div>
+                                            <input type="text" name="provider_id" value="31" hidden="">
+                                            <div>
+                                                <select onchange="this.form.submit()" style="color:grey; font:14px poppins;width: 100%;text-align: center;" class="form-select" name="template_id" id="template_id" aria-label="Default select example">
+                                                    <option selected="" style="color:grey; font-size:14px;" value="no_option">Select Letter Template</option>
+                                                    
+                                                    </select>
+                                            </div>
+                                        </div>
+                                    </form>  
+                                </div> 
+                                <div class="flexStart" data-toggle="modal" data-target="#location-description-modal" onMouseOver="this.style.backgroundColor='#eee'"
+                                onMouseOut="this.style.backgroundColor='#fff'" style="height:auto;width: 250px;margin-left: 50px">
+                                    <h4><b style="color: #ADADAD; font-weight: 600">Location Description</b></h4>
+                                    <h5 style="text-align: left;font-size: 19px;line-height: 28px;font-weight: bold;">Corner of Margarite and Crown Valley, Mission Viejo, CA</h5>
+                                    <div style="margin-top: 28px;text-align:left">
+                                    <h4><b style="color: #ADADAD; font-weight: 600">Accident Type:</b></h4>
+                                    <h5 style="text-align: left;font-size: 19px;line-height: 28px;font-weight: bold;">Rear-End Collision</h5>
+                                </div>
+                                </div>
+                                <div class="flexStart" data-toggle="modal" data-target="#description-notes-modal" onMouseOver="this.style.backgroundColor='#eee'"
+                                onMouseOut="this.style.backgroundColor='#fff'" style="height:auto;width: 280px;margin-left: 250px">
+                                    <h4><b style="color: #ADADAD; font-weight: 600">Accident Description and Notes:</b></h4>
+                                    <h4><b style="color: #ADADAD; font-weight: 600">Some dummy notes to display</b></h4>
+                                    <div class="d-flex w-100" style="justify-content: space-between;margin-top: 40px">
+                                        <div class="text-right" style="width: 85%;">
+                                            <h5 style="font-size: 17px"><b style="color: #ADADAD; font-weight: 600">Ambulance?</b></h5>
+                                        </div>
+                                        <div class="text-right" style="width: 15%;">
+                                            <h5><b style="color: #ADADAD; font-weight: 600;">X</b></h5>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex w-100" style="justify-content: space-between;margin-top:5px">
+                                        <div class="text-right" style="width: 85%;">
+                                            <h5 style="font-size: 17px"><b style="color: #ADADAD; font-weight: 600">Emergency Room?</b></h5>
+                                        </div>
+                                        <div class="text-right" style="width: 15%;">
+                                            <h5><b style="color: #ADADAD; font-weight: 600">X</b></h5>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex w-100" style="justify-content: space-between;margin-top:5px">
+                                        <div class="text-right" style="width: 85%;">
+                                            <h5 style="font-size: 17px"><b style="color: #ADADAD; font-weight: 600">Loss of Consciousness?</b></h5>
+                                        </div>
+                                        <div class="text-right" style="width: 15%;">
+                                            <h5><b style="color: #ADADAD; font-weight: 600">X</b></h5>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex w-100" style="justify-content: space-between;margin-top:5px">
+                                        <div class="text-right" style="width: 85%">
+                                            <h5 style="font-size: 17px"><b style="color: #ADADAD; font-weight: 600">Report Taken?</b></h5>
+                                        </div>
+                                        <div class="text-right" style="width: 15%">
+                                            <h5><b style="color: #ADADAD; font-weight: 600">X</b></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1 position-relative">
+                        <div class="row dtn-re" style="position: absolute; top: 60%; transform: translateY(-50%)">
+                            <div style="width:100%;display: flex;justify-content:center">
+                                <div class="" style="margin-left: 0px;width:100%;margin-top: 5px">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="documentIcon">
+                                                <form action="/BP/upload/19/19/357/" method="POST" class="docIconForm" data-aaa="">
+                                                    <input type="hidden" name="csrfmiddlewaretoken" value="FCLPzuOeT9mXXEM54SiQiALCATmhL1ZB7usTBoKxApEo1g0TF9P6LqePe0vsDju7">
+                                                    <i class="fas fa-file-alt" style="font-size: 20px;margin-bottom:1px"></i>
+                                                    <div class="iconTextWrap">
+                                                    
+                                                        <div> Bill </div>
+                                                    
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="documentIcon">
+                                                <form action="/BP/upload/19/19/358/" method="POST" class="docIconForm" data-aaa="">
+                                                    <input type="hidden" name="csrfmiddlewaretoken" value="FCLPzuOeT9mXXEM54SiQiALCATmhL1ZB7usTBoKxApEo1g0TF9P6LqePe0vsDju7">
+                                                    <i class="fas fa-file-alt" style="font-size: 20px;margin-bottom:1px"></i>
+                                                    <div class="iconTextWrap">
+                                                    
+                                                        <div> Record </div>
+                                                    
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="documentIcon">
+                                                <form action="/BP/upload/19/19/359/" method="POST" class="docIconForm" data-aaa="">
+                                                    <input type="hidden" name="csrfmiddlewaretoken" value="FCLPzuOeT9mXXEM54SiQiALCATmhL1ZB7usTBoKxApEo1g0TF9P6LqePe0vsDju7">
+                                                    <i class="fas fa-file-alt" style="font-size: 20px;margin-bottom:1px"></i>
+                                                    <div class="iconTextWrap">
+                                                    
+                                                        <div> Open 1 </div>
+                                                    
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="documentIcon">
+                                                <form action="/BP/upload/19/19/359/" method="POST" class="docIconForm" data-aaa="">
+                                                    <input type="hidden" name="csrfmiddlewaretoken" value="FCLPzuOeT9mXXEM54SiQiALCATmhL1ZB7usTBoKxApEo1g0TF9P6LqePe0vsDju7">
+                                                    <i class="fas fa-file-alt" style="font-size: 20px;margin-bottom:1px"></i>
+                                                    <div class="iconTextWrap">
+                                                    
+                                                        <div> Open 1 </div>
+                                                    
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+
+                                <div class="pdfcontainer">
+                                    <div class="pdfViewer"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 p-0">
+                        
+                        <div class="section__content section__content--p30 p-0 m-0" style="padding: 0 !important"> 
+                            <div class="container-fluid clienthead"> 
+                                <!--{% if flagPage %}
+                                <div class="top-pane" style="top: -80px !important; right: 353px !important;" onclick="location.href='{% url 'bp-removeFlagPage' client.id case.id flagPage.id %}';"> <img src="{% static 'BP_resources/images/icon/flag-icon-red-bg-gray.svg' %}" width="46px"> </div> {% else %}
+                                <div class="top-pane" style="top: -80px !important; right: 353px !important;" onclick="location.href='{% url 'bp-flagPage' client.id case.id 'Client' 'bp-client' %}';"> <img src="{% static 'BP_resources/images/icon/flag-icon-bg-gray.svg' %}" width="46px"> </div> 
+                                {% endif %} -->
+                                <div class="flexStart wf" style="width:100%;overflow: hidden">
+                                    <div class="innerContentContainer" style="margin-left: 0px;width:100%;">
+                                        <div class="panelHeaderContainer row pb-0 wf" style="position: relative; height:49px;width:100%;margin-left:0px;margin-top:3px;margin-bottom: 0px">
+                                            <div class="col" style="height:39px">
+                                                &nbsp;
+                                            </div>
+                                            <div style="position:relative;top:-5.5px;width:250px; height:53px;margin-left:5px;border:none;display: flex;justify-content: flex-end;align-items: flex-end;">
+                                                <div class="checklistAngle textcol">
+                                                    <div class="nt-box">
+                                                            <div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:0"></div>
+                                                    </div>
+                                                    <div class="dropdown6">
+                                                        <button onclick="myFunction6(31)" class="dropbtn"><i class="fa fa-check" aria-hidden="true"></i> Checklist <i class="fa fa-chevron-down" aria-hidden="true"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            <div class="checklist-section checklist-pink" style="width: 290px !important;">
+                                                <p class="text-darker">0/2</p>
+                                                <div class="circle-wrap">
+                                                    <div class="circle">
+                                                    <div class="mask full">
+                                                        <div class="fill"></div>
+                                                    </div>
+                                                    <div class="mask half">
+                                                        <div class="fill"></div>
+                                                    </div>
+                                                    <div class="inside-circle"> 100% </div>
+                                                    </div>
+                                                </div>
+                                                <div class="dropdown6">
+                                                    <button onclick="myFunction6(31)" class="dropbtn text-darker" style="background-color: #F5E8E9;"> 
+                                                        <img src="/static/BP_resources/images/icon/check-green.svg" alt="Double arrow down" class="green-check"> Checklist <img src="/static/BP_resources/images/icon/angles-down-blue.svg" alt="Double arrow down" class="double-arrow-down"></button>
+                                                        
+                                                        <div id="myDropdown31" class="dropdown-content">
+                                                            <div class="checklist-multi-dropdowns pink-checklist-multi-dropdowns">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                                    <label class="form-check-label" for="gridCheck1">
+                                                                      Check Item example
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                                    <label class="form-check-label" for="gridCheck1">
+                                                                      Check Item example
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                                    <label class="form-check-label" for="gridCheck1">
+                                                                      Check Item example
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                                    <label class="form-check-label" for="gridCheck1">
+                                                                      Check Item example
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="row dtn-re" style="margin-bottom: 5px">
+                                        <div class="d-flex flex-wrap super-heros" style="margin-left: 0px;width:100%;display: flex;justify-content: space-evenly;margin-top: 5px">
+                                            <div class="super-hero-img">
+                                                <img src="{% static 'BP_resources/images/superhero-img1.png' %}" alt="John Doe" />
+                                            </div>
+                                            <div class="super-hero-img">
+                                                <img src="{% static 'BP_resources/images/superhero-img2.png' %}" alt="John Doe" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row position-relative" style="padding-right: 0px !important;border: solid 5px #093761;border-radius: 8px;margin:5px 5px 0 5px;">
+                    <div class="col-md-8"  style="padding: 5px !important">
+                        <div class="innerContentContainer" style="margin-left: 0px;width:100%;">
+                            <div class="columnsContainer2 p-0"> 
+                                    <div class="flexStart" data-toggle="modal" data-target="#client-car-modal" onMouseOver="this.style.backgroundColor='#eee'"
+                                    onMouseOut="this.style.backgroundColor='#fff'" style="height:auto;width: 250px">
+                                        <h4 style="color: #0a3761;margin-bottom: 10px">Client Car</h4>  
+                                        <div>
+                                            <h4 style="color: #ADADAD;font-weight:bold;margin-top: 3px">Make: </h4> 
+                                            <h4 style="color: #ADADAD;font-weight:bold;margin-top: 3px">Model: </h4> 
+                                            <h4 style="color: #ADADAD;font-weight:bold;margin-top: 3px">Year: </h4> 
+                                            <h4 style="color: #ADADAD;font-weight:bold;margin-top: 3px">Mileage: </h4> 
+                                            <h4 style="color: #ADADAD;font-weight:bold;margin-top: 3px">Color: </h4> 
+                                            <h4 style="color: #ADADAD;font-weight:bold;margin-top: 3px">Value: </h4> 
+                                        </div> 
+                                    </div> 
+                                    <div class="flexStart" data-toggle="modal" data-target="#vehicle-location-modal" onMouseOver="this.style.backgroundColor='#eee'"
+                                    onMouseOut="this.style.backgroundColor='#fff'" style="height:auto;width: 250px;margin-left: 50px">
+                                        <h4>Location of Vehicle</h4>
+                                        <div class="colTitleUnderline">&nbsp;</div>   
+
+                                        <div class="colFonts colFont" style="margin-bottom: 5px;font:14px poppins;color:black"> 13001 Seal Beach Blvd., Suite 300 </div>
+                                        <div class="colFonts colFont" style="margin-top: 0px;margin-bottom: 5px;font:14px poppins"> Seal Beach,California, 90740 </div>
+                                        <p class="colText colFont"><small style="font: 14px poppins">(</small>562<small style="font: 14px poppins">)</small> 345-3456 </p>
+                                        <p class="colText colFont"><small style="font: 14px poppins">(</small>562<small style="font: 14px poppins">)</small> 345-3456 <small class="ml-2" style="font: 14px poppins">fax</small></p>
+                                        <p class="colText colFont">rghdf@kdhfg.com</p>
+                                        <form method="POST" style="width: 100%" action="/BP/fillTemplate/">
+                                            <input type="hidden" name="csrfmiddlewaretoken" value="Wui0IefcpNyJ1c44R8iy5LjulfsT5htpomZ4K8bv63Qa5OiSspPOyBMHZmB4XzYV">
+                                            <div>
+                                                <input type="text" name="provider_id" value="31" hidden="">
+                                                <div>
+                                                    <select onchange="this.form.submit()" style="color:grey; font:14px poppins;width: 100%;text-align: center;" class="form-select" name="template_id" id="template_id" aria-label="Default select example">
+                                                        <option selected="" style="color:grey; font-size:14px;" value="no_option">Select Letter Template</option>
+                                                        
+                                                      </select>
+                                                </div>
+                                            </div>
+                                        </form>  
+                                    </div> 
+                                    <div class="flexStart" data-toggle="modal" data-target="#vehicle-description-modal" onMouseOver="this.style.backgroundColor='#eee'"
+                                    onMouseOut="this.style.backgroundColor='#fff'" style="height:auto;width: 280px;margin-left: 250px;text-align: left">
+                                        <h4><b style="color: #ADADAD; font-weight: 600">Vehicle Description and Notes:</b></h4>
+                                        <h4 style="color: #0a3761;font-weight:normal">Some dummy notes to display</h4>
+                                       <div style="margin-top: 50px">
+                                        <h4><b style="color: #ADADAD; font-weight: 600">Property Damage Estimate:</b></h4>
+                                        <h4 style="color: #0a3761;font-weight:normal">$4,000.00</h4>
+                                        <h4><b style="color: #ADADAD; font-weight: 600">Property Damage Final:</b></h4>
+                                        <h4 style="color: #0a3761;font-weight:normal">$5,000.00</h4>
+                                       </div>
+                                    </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1 position-relative">
+                        <div class="row dtn-re" style="position: absolute; top: 60%; transform: translateY(-50%)">
+                            <div style="width:100%;display: flex;justify-content:center">
+                                <div class="" style="margin-left: 0px;width:100%;margin-top: 5px">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="documentIcon">
+                                                <form action="/BP/upload/19/19/357/" method="POST" class="docIconForm" data-aaa="">
+                                                    <input type="hidden" name="csrfmiddlewaretoken" value="FCLPzuOeT9mXXEM54SiQiALCATmhL1ZB7usTBoKxApEo1g0TF9P6LqePe0vsDju7">
+                                                    <i class="fas fa-file-alt" style="font-size: 20px;margin-bottom:1px"></i>
+                                                    <div class="iconTextWrap">
+                                                    
+                                                        <div> Bill </div>
+                                                    
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="documentIcon">
+                                                <form action="/BP/upload/19/19/358/" method="POST" class="docIconForm" data-aaa="">
+                                                    <input type="hidden" name="csrfmiddlewaretoken" value="FCLPzuOeT9mXXEM54SiQiALCATmhL1ZB7usTBoKxApEo1g0TF9P6LqePe0vsDju7">
+                                                    <i class="fas fa-file-alt" style="font-size: 20px;margin-bottom:1px"></i>
+                                                    <div class="iconTextWrap">
+                                                    
+                                                        <div> Record </div>
+                                                    
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="documentIcon">
+                                                <form action="/BP/upload/19/19/359/" method="POST" class="docIconForm" data-aaa="">
+                                                    <input type="hidden" name="csrfmiddlewaretoken" value="FCLPzuOeT9mXXEM54SiQiALCATmhL1ZB7usTBoKxApEo1g0TF9P6LqePe0vsDju7">
+                                                    <i class="fas fa-file-alt" style="font-size: 20px;margin-bottom:1px"></i>
+                                                    <div class="iconTextWrap">
+                                                    
+                                                        <div> Open 1 </div>
+                                                    
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="documentIcon">
+                                                <form action="/BP/upload/19/19/359/" method="POST" class="docIconForm" data-aaa="">
+                                                    <input type="hidden" name="csrfmiddlewaretoken" value="FCLPzuOeT9mXXEM54SiQiALCATmhL1ZB7usTBoKxApEo1g0TF9P6LqePe0vsDju7">
+                                                    <i class="fas fa-file-alt" style="font-size: 20px;margin-bottom:1px"></i>
+                                                    <div class="iconTextWrap">
+                                                    
+                                                        <div> Open 1 </div>
+                                                    
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+
+                                <div class="pdfcontainer">
+                                    <div class="pdfViewer"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 p-0">
+                        
+                        <div class="section__content section__content--p30 p-0 m-0" style="padding: 0 !important"> 
+                            <div class="container-fluid clienthead"> 
+                                <!--{% if flagPage %}
+                                <div class="top-pane" style="top: -80px !important; right: 353px !important;" onclick="location.href='{% url 'bp-removeFlagPage' client.id case.id flagPage.id %}';"> <img src="{% static 'BP_resources/images/icon/flag-icon-red-bg-gray.svg' %}" width="46px"> </div> {% else %}
+                                <div class="top-pane" style="top: -80px !important; right: 353px !important;" onclick="location.href='{% url 'bp-flagPage' client.id case.id 'Client' 'bp-client' %}';"> <img src="{% static 'BP_resources/images/icon/flag-icon-bg-gray.svg' %}" width="46px"> </div> 
+                                {% endif %} -->
+                                <div class="flexStart wf" style="width:100%;overflow: hidden">
+                                    <div class="innerContentContainer" style="margin-left: 0px;width:100%;">
+                                        <div class="panelHeaderContainer row pb-0 wf" style="position: relative; height:49px;width:100%;margin-left:0px;margin-top:3px;margin-bottom: 0px">
+                                            <div class="col" style="height:39px">
+                                                &nbsp;
+                                            </div>
+                                            <div style="position:relative;top:-5.5px;width:250px; height:53px;margin-left:5px;border:none;display: flex;justify-content: flex-end;align-items: flex-end;">
+                                                <div class="checklistAngle textcol">
+                                                    <div class="nt-box">
+                                                            <div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:0"></div>
+                                                    </div>
+                                                    <div class="dropdown6">
+                                                        <button onclick="myFunction6(31)" class="dropbtn"><i class="fa fa-check" aria-hidden="true"></i> Checklist <i class="fa fa-chevron-down" aria-hidden="true"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            <div class="checklist-section checklist-pink" style="width: 290px !important;">
+                                                <p class="text-darker">0/2</p>
+                                                <div class="circle-wrap">
+                                                    <div class="circle">
+                                                    <div class="mask full">
+                                                        <div class="fill"></div>
+                                                    </div>
+                                                    <div class="mask half">
+                                                        <div class="fill"></div>
+                                                    </div>
+                                                    <div class="inside-circle"> 100% </div>
+                                                    </div>
+                                                </div>
+                                                <div class="dropdown6">
+                                                    <button onclick="myFunction6(31)" class="dropbtn text-darker" style="background-color: #F5E8E9;"> 
+                                                        <img src="/static/BP_resources/images/icon/check-green.svg" alt="Double arrow down" class="green-check"> Checklist <img src="/static/BP_resources/images/icon/angles-down-blue.svg" alt="Double arrow down" class="double-arrow-down"></button>
+                                                        
+                                                        <div id="myDropdown31" class="dropdown-content">
+                                                            <div class="checklist-multi-dropdowns pink-checklist-multi-dropdowns">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                                    <label class="form-check-label" for="gridCheck1">
+                                                                      Check Item example
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                                    <label class="form-check-label" for="gridCheck1">
+                                                                      Check Item example
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                                    <label class="form-check-label" for="gridCheck1">
+                                                                      Check Item example
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                                    <label class="form-check-label" for="gridCheck1">
+                                                                      Check Item example
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="row dtn-re" style="margin-bottom: 5px">
+                                        <div class="d-flex flex-wrap super-heros" style="margin-left: 0px;width:100%;display: flex;justify-content: space-evenly;margin-top: 5px">
+                                            <div class="super-hero-img">
+                                                <img src="{% static 'BP_resources/images/superhero-img1.png' %}" alt="John Doe" />
+                                            </div>
+                                            <div class="super-hero-img">
+                                                <img src="{% static 'BP_resources/images/superhero-img2.png' %}" alt="John Doe" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row position-relative" style="padding-right: 0px !important;border: solid 5px #093761;border-radius: 8px;margin:5px 5px 0 5px;">
+                    <div class="col-md-8"  style="padding: 5px !important">
+                        <div class="innerContentContainer" style="margin-left: 0px;width:100%;">
+                            <div class="columnsContainer2 p-0"> 
+                                    <div class="flexStart" data-toggle="modal" data-target="#defendant-car-modal" onMouseOver="this.style.backgroundColor='#eee'"
+                                    onMouseOut="this.style.backgroundColor='#fff'" style="height:auto;width: 250px">
+                                        <h4 style="color: #0a3761;margin-bottom: 10px">Defendant Car</h4>  
+                                        <div>
+                                            <h4 style="color: #ADADAD;font-weight:bold;margin-top: 3px">Make: </h4> 
+                                            <h4 style="color: #ADADAD;font-weight:bold;margin-top: 3px">Model: </h4> 
+                                            <h4 style="color: #ADADAD;font-weight:bold;margin-top: 3px">Year: </h4> 
+                                            <h4 style="color: #ADADAD;font-weight:bold;margin-top: 3px">Mileage: </h4> 
+                                            <h4 style="color: #ADADAD;font-weight:bold;margin-top: 3px">Color: </h4> 
+                                            <h4 style="color: #ADADAD;font-weight:bold;margin-top: 3px">Value: </h4> 
+                                        </div> 
+                                    </div> 
+                                    <div class="flexStart" data-toggle="modal" data-target="#vehicle-location-modal" onMouseOver="this.style.backgroundColor='#eee'"
+                                    onMouseOut="this.style.backgroundColor='#fff'" style="height:auto;width: 250px;margin-left: 50px">
+                                        <h4>Location of Vehicle</h4>
+                                        <div class="colTitleUnderline">&nbsp;</div>   
+
+                                        <div class="colFonts colFont" style="margin-bottom: 5px;font:14px poppins;color:black"> 13001 Seal Beach Blvd., Suite 300 </div>
+                                        <div class="colFonts colFont" style="margin-top: 0px;margin-bottom: 5px;font:14px poppins"> Seal Beach,California, 90740 </div>
+                                        <p class="colText colFont"><small style="font: 14px poppins">(</small>562<small style="font: 14px poppins">)</small> 345-3456 </p>
+                                        <p class="colText colFont"><small style="font: 14px poppins">(</small>562<small style="font: 14px poppins">)</small> 345-3456 <small class="ml-2" style="font: 14px poppins">fax</small></p>
+                                        <p class="colText colFont">rghdf@kdhfg.com</p>
+                                        <form method="POST" style="width: 100%" action="/BP/fillTemplate/">
+                                            <input type="hidden" name="csrfmiddlewaretoken" value="Wui0IefcpNyJ1c44R8iy5LjulfsT5htpomZ4K8bv63Qa5OiSspPOyBMHZmB4XzYV">
+                                            <div>
+                                                <input type="text" name="provider_id" value="31" hidden="">
+                                                <div>
+                                                    <select onchange="this.form.submit()" style="color:grey; font:14px poppins;width: 100%;text-align: center;" class="form-select" name="template_id" id="template_id" aria-label="Default select example">
+                                                        <option selected="" style="color:grey; font-size:14px;" value="no_option">Select Letter Template</option>
+                                                        
+                                                      </select>
+                                                </div>
+                                            </div>
+                                        </form>  
+                                    </div> 
+                                    <div class="flexStart" data-toggle="modal" data-target="#vehicle-description-modal" onMouseOver="this.style.backgroundColor='#eee'"
+                                    onMouseOut="this.style.backgroundColor='#fff'" style="height:auto;width: 280px;margin-left: 250px;text-align: left">
+                                        <h4><b style="color: #ADADAD; font-weight: 600">Vehicle Description and Notes:</b></h4>
+                                        <h4 style="color: #0a3761;font-weight:normal">Some dummy notes to display</h4>
+                                       <div style="margin-top: 50px">
+                                        <h4><b style="color: #ADADAD; font-weight: 600">Property Damage Estimate:</b></h4>
+                                        <h4 style="color: #0a3761;font-weight:normal">$4,000.00</h4>
+                                        <h4><b style="color: #ADADAD; font-weight: 600">Property Damage Final:</b></h4>
+                                        <h4 style="color: #0a3761;font-weight:normal">$5,000.00</h4>
+                                       </div>
+                                    </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1 position-relative">
+                        <div class="row dtn-re" style="position: absolute; top: 60%; transform: translateY(-50%)">
+                            <div style="width:100%;display: flex;justify-content:center">
+                                <div class="" style="margin-left: 0px;width:100%;margin-top: 5px">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="documentIcon">
+                                                <form action="/BP/upload/19/19/357/" method="POST" class="docIconForm" data-aaa="">
+                                                    <input type="hidden" name="csrfmiddlewaretoken" value="FCLPzuOeT9mXXEM54SiQiALCATmhL1ZB7usTBoKxApEo1g0TF9P6LqePe0vsDju7">
+                                                    <i class="fas fa-file-alt" style="font-size: 20px;margin-bottom:1px"></i>
+                                                    <div class="iconTextWrap">
+                                                    
+                                                        <div> Bill </div>
+                                                    
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="documentIcon">
+                                                <form action="/BP/upload/19/19/358/" method="POST" class="docIconForm" data-aaa="">
+                                                    <input type="hidden" name="csrfmiddlewaretoken" value="FCLPzuOeT9mXXEM54SiQiALCATmhL1ZB7usTBoKxApEo1g0TF9P6LqePe0vsDju7">
+                                                    <i class="fas fa-file-alt" style="font-size: 20px;margin-bottom:1px"></i>
+                                                    <div class="iconTextWrap">
+                                                    
+                                                        <div> Record </div>
+                                                    
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="documentIcon">
+                                                <form action="/BP/upload/19/19/359/" method="POST" class="docIconForm" data-aaa="">
+                                                    <input type="hidden" name="csrfmiddlewaretoken" value="FCLPzuOeT9mXXEM54SiQiALCATmhL1ZB7usTBoKxApEo1g0TF9P6LqePe0vsDju7">
+                                                    <i class="fas fa-file-alt" style="font-size: 20px;margin-bottom:1px"></i>
+                                                    <div class="iconTextWrap">
+                                                    
+                                                        <div> Open 1 </div>
+                                                    
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="documentIcon">
+                                                <form action="/BP/upload/19/19/359/" method="POST" class="docIconForm" data-aaa="">
+                                                    <input type="hidden" name="csrfmiddlewaretoken" value="FCLPzuOeT9mXXEM54SiQiALCATmhL1ZB7usTBoKxApEo1g0TF9P6LqePe0vsDju7">
+                                                    <i class="fas fa-file-alt" style="font-size: 20px;margin-bottom:1px"></i>
+                                                    <div class="iconTextWrap">
+                                                    
+                                                        <div> Open 1 </div>
+                                                    
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+
+                                <div class="pdfcontainer">
+                                    <div class="pdfViewer"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 p-0">
+                        
+                        <div class="section__content section__content--p30 p-0 m-0" style="padding: 0 !important"> 
+                            <div class="container-fluid clienthead"> 
+                                <!--{% if flagPage %}
+                                <div class="top-pane" style="top: -80px !important; right: 353px !important;" onclick="location.href='{% url 'bp-removeFlagPage' client.id case.id flagPage.id %}';"> <img src="{% static 'BP_resources/images/icon/flag-icon-red-bg-gray.svg' %}" width="46px"> </div> {% else %}
+                                <div class="top-pane" style="top: -80px !important; right: 353px !important;" onclick="location.href='{% url 'bp-flagPage' client.id case.id 'Client' 'bp-client' %}';"> <img src="{% static 'BP_resources/images/icon/flag-icon-bg-gray.svg' %}" width="46px"> </div> 
+                                {% endif %} -->
+                                <div class="flexStart wf" style="width:100%;overflow: hidden">
+                                    <div class="innerContentContainer" style="margin-left: 0px;width:100%;">
+                                        <div class="panelHeaderContainer row pb-0 wf" style="position: relative; height:49px;width:100%;margin-left:0px;margin-top:3px;margin-bottom: 0px">
+                                            <div class="col" style="height:39px">
+                                                &nbsp;
+                                            </div>
+                                            <div style="position:relative;top:-5.5px;width:250px; height:53px;margin-left:5px;border:none;display: flex;justify-content: flex-end;align-items: flex-end;">
+                                                <div class="checklistAngle textcol">
+                                                    <div class="nt-box">
+                                                            <div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:0"></div>
+                                                    </div>
+                                                    <div class="dropdown6">
+                                                        <button onclick="myFunction6(31)" class="dropbtn"><i class="fa fa-check" aria-hidden="true"></i> Checklist <i class="fa fa-chevron-down" aria-hidden="true"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            <div class="checklist-section checklist-pink" style="width: 290px !important;">
+                                                <p class="text-darker">0/2</p>
+                                                <div class="circle-wrap">
+                                                    <div class="circle">
+                                                    <div class="mask full">
+                                                        <div class="fill"></div>
+                                                    </div>
+                                                    <div class="mask half">
+                                                        <div class="fill"></div>
+                                                    </div>
+                                                    <div class="inside-circle"> 100% </div>
+                                                    </div>
+                                                </div>
+                                                <div class="dropdown6">
+                                                    <button onclick="myFunction6(31)" class="dropbtn text-darker" style="background-color: #F5E8E9;"> 
+                                                        <img src="/static/BP_resources/images/icon/check-green.svg" alt="Double arrow down" class="green-check"> Checklist <img src="/static/BP_resources/images/icon/angles-down-blue.svg" alt="Double arrow down" class="double-arrow-down"></button>
+                                                        
+                                                        <div id="myDropdown31" class="dropdown-content">
+                                                            <div class="checklist-multi-dropdowns pink-checklist-multi-dropdowns">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                                    <label class="form-check-label" for="gridCheck1">
+                                                                      Check Item example
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                                    <label class="form-check-label" for="gridCheck1">
+                                                                      Check Item example
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                                    <label class="form-check-label" for="gridCheck1">
+                                                                      Check Item example
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                                    <label class="form-check-label" for="gridCheck1">
+                                                                      Check Item example
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="row dtn-re" style="margin-bottom: 5px">
+                                        <div class="d-flex flex-wrap super-heros" style="margin-left: 0px;width:100%;display: flex;justify-content: space-evenly;margin-top: 5px">
+                                            <div class="super-hero-img">
+                                                <img src="{% static 'BP_resources/images/superhero-img1.png' %}" alt="John Doe" />
+                                            </div>
+                                            <div class="super-hero-img">
+                                                <img src="{% static 'BP_resources/images/superhero-img2.png' %}" alt="John Doe" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section__content section__content--p30" style="padding: 0 5px !important;margin:0 15px !important">
+                    {% if flagPage %}
+                            <div class="top-pane" style="top:-76px !important; right: 349px !important" onclick="location.href='{% url 'bp-removeFlagPage' client.id case.id flagPage.id %}';">
+                                <img src="{% static 'BP_resources/images/icon/flag-icon-red-bg-gray.svg' %}" width="46px">
+                            </div>
+                    {% else %}
+                        <div class="top-pane" style="top:-76px !important; right: 349px !important" onclick="location.href='{% url 'bp-flagPage' client.id case.id 'Car Accident' 'bp-caraccident' %}';">
+                            <img src="{% static 'BP_resources/images/icon/flag-icon-bg-gray.svg' %}" width="46px">
+                        </div>
+                    {% endif %}
+                    <div class="container-fluid clienthead  top-head">
+                        <div class="row" id="other-parties-page">
+                     
+                            <div class="col-lg-12 table-section">
+                                {% include 'BP/notes-section.html' %}
+                                <form method="POST" action="{% url 'bp-addToDo' client.id case.id %}"> {% csrf_token %}
+                                    <textarea id="todo-note" hidden name="note"></textarea>
+                                    <div class="footer-line">
+                                        <div class="row">
+                                            <div class="col-lg-7"> To-Do for
+                                                <select name="user_type" id="cars"> {% for user_type in case_users %}
+                                                    <option value="{{user_type.id}}">{{user_type.user_type.name}} {{user_type.user.first_name}} {{user_type.user.last_name}}</option> {% endfor %} </select> due in
+                                                <select name="due_date" id="cars">
+                                                    <option value="Now">Now</option>
+                                                    <option value="1 day">1 day</option>
+                                                    <option selected value="2 days">2 days</option>
+                                                    <option value="3 days">3 days</option>
+                                                    <option value="4 days">4 days</option>
+                                                    <option value="5 days">5 days</option>
+                                                    <option value="6 days">6 days</option>
+                                                    <option value="1 week">1 week</option>
+                                                    <option value="2 weeks">2 weeks</option>
+                                                    <option value="1 month">1 month</option>
+                                                    <option value="2 months">2 months</option>
+                                                    <option value="6 months">6 months</option>
+                                                </select>
+                                                <button onclick="addTodoNote()" type="submit">New To-Do</button>
+                                </form>
+                                </div>
+                                <div class="col-lg-5">
+                                    <select id="note_category" class="right footer-select"> {% for page in pages %} {% if page.name == 'Car Accident' %}
+                                        <option selected value="{{page.id}}">{{page.name}}</option> {% else %}
+                                        <option value="{{page.id}}">{{page.name}}</option> {% endif %} {% endfor %} </select>
+                                    <button form="notes-form" onclick="newNoteFunction()" type="submit">Add Note</button>
+                                </div>
+                                </div>
+                                <div class="col-lg-12 table-section">
+                                    <div class="row" id="other-parties-page">
+                                        <div class="col-lg-12 notetable">
+                                            <div class="">
+                                                <div class="">
+                                                    <div class="custom-tab">
+                                                        <nav>
+                                                            <div class="nav nav-tabs" id="nav-tab" role="tablist"> <a class="nav-item nav-link active" id="custom-nav-home-tab" data-toggle="tab" href="#custom-nav-all" role="tab" aria-controls="custom-nav-all" aria-selected="true">All</a> {% if 'Case' in categories %} <a class="nav-item nav-link" id="custom-nav-profile-tab" data-toggle="tab" href="#custom-nav-case" role="tab" aria-controls="custom-nav-case" aria-selected="false">case</a> {% endif %} {% if 'Client' in categories %} <a class="nav-item nav-link" id="custom-nav-contact-tab" data-toggle="tab" href="#custom-nav-client" role="tab" aria-controls="custom-nav-client" aria-selected="false">client</a> {% endif %} {% if 'Defendants' in categories %} <a class="nav-item nav-link" id="custom-nav-injurie-tab" data-toggle="tab" href="#custom-nav-injurie" role="tab" aria-controls="custom-nav-client" aria-selected="false">Defendants</a> {% endif %} {% if 'Car Accident' in categories %} <a class="nav-item nav-link" id="custom-nav-car_accident-tab" data-toggle="tab" href="#custom-nav-car_accident" role="tab" aria-controls="custom-nav-car_accident" aria-selected="false">Car Accident</a> {% endif %} {% if 'Photo' in categories %} <a class="nav-item nav-link" id="custom-nav-photo-tab" data-toggle="tab" href="#custom-nav-photo" role="tab" aria-controls="custom-nav-photo" aria-selected="false">Photo</a> {% endif %} {% if 'Injury' in categories %} <a class="nav-item nav-link" id="custom-nav-injury-tab" data-toggle="tab" href="#custom-nav-injury" role="tab" aria-controls="custom-nav-injury" aria-selected="false">injuries</a> {% endif %} {% if 'Other Party' in categories %} <a class="nav-item nav-link" id="custom-nav-other_party-tab" data-toggle="tab" href="#custom-nav-other_party" role="tab" aria-controls="custom-nav-other_party" aria-selected="false">Other Party</a> {% endif %} {% if 'Witnesses' in categories %} <a class="nav-item nav-link" id="custom-nav-witnesses-tab" data-toggle="tab" href="#custom-nav-witnesses" role="tab" aria-controls="custom-nav-witnesses" aria-selected="false">witnesses</a> {% endif %} {% if 'Insurance' in categories %} <a class="nav-item nav-link" id="custom-nav-insurance-tab" data-toggle="tab" href="#custom-nav-insurance" role="tab" aria-controls="custom-nav-insurance" aria-selected="false">Insurance</a> {% endif %} {% if 'Employment' in categories %} <a class="nav-item nav-link" id="custom-nav-employment-tab" data-toggle="tab" href="#custom-nav-employment" role="tab" aria-controls="custom-nav-employment" aria-selected="false">Employment</a> {% endif %} {% if 'Recordings' in categories %} <a class="nav-item nav-link" id="custom-nav-recording-tab" data-toggle="tab" href="#custom-nav-recording" role="tab" aria-controls="custom-nav-recording" aria-selected="false">recording</a> {% endif %} {% if 'Documents' in categories %} <a class="nav-item nav-link" id="custom-nav-documents-tab" data-toggle="tab" href="#custom-nav-documents" role="tab" aria-controls="custom-nav-documents" aria-selected="false">documents</a> {% endif %} {% if 'Costs' in categories %} <a class="nav-item nav-link" id="custom-nav-costs-tab" data-toggle="tab" href="#custom-nav-costs" role="tab" aria-controls="custom-nav-costs" aria-selected="false">costs</a> {% endif %} {% if 'Case Loans' in categories %} <a class="nav-item nav-link" id="custom-nav-case_loans-tab" data-toggle="tab" href="#custom-nav-case_loans" role="tab" aria-controls="custom-nav-case_loans" aria-selected="false">case Loan</a> {% endif %} {% if 'Settlement' in categories %} <a class="nav-item nav-link" id="custom-nav-settlement-tab" data-toggle="tab" href="#custom-nav-settlement" role="tab" aria-controls="custom-nav-settlement" aria-selected="false">Settlement</a> {% endif %} {% if 'Litigation' in categories %} <a class="nav-item nav-link" id="custom-nav-litigation-tab" data-toggle="tab" href="#custom-nav-litigation" role="tab" aria-controls="custom-nav-litigation" aria-selected="false">litigation</a> {% endif %} {% if 'Discovery' in categories %} <a class="nav-item nav-link" id="custom-nav-discovery-tab" data-toggle="tab" href="#custom-nav-discovery" role="tab" aria-controls="custom-nav-discovery" aria-selected="false">discovery</a> {% endif %} {% if 'Depositions' in categories %} <a class="nav-item nav-link" id="custom-nav-depositions-tab" data-toggle="tab" href="#custom-nav-depositions" role="tab" aria-controls="custom-nav-depositions" aria-selected="false">depositions</a> {% endif %} {% if 'Medical Treatment' in categories %} <a class="nav-item nav-link" id="custom-nav-medical-tab" data-toggle="tab" href="#custom-nav-medical" role="tab" aria-controls="custom-nav-medical" aria-selected="false">Medical Treatment</a> {% endif %} {% if 'To-Do' in categories %} <a class="nav-item nav-link" id="custom-nav-todo-tab" data-toggle="tab" href="#custom-nav-todo" role="tab" aria-controls="custom-nav-medical" aria-selected="false">To-Do</a> {% endif %} </div>
+                                                        </nav>
+                                                        <div class="tab-content" id="nav-tabContent">
+                                                            <div class="tab-pane fade show active" id="custom-nav-all" role="tabpanel" aria-labelledby="custom-nav-all-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if empty %}
+                                                                                    <div class="alert alert-danger" role="alert"> A simple danger alert—check it out! </div> {% endif %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-case" role="tabpanel" aria-labelledby="custom-nav-case-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Case' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-todo" role="tabpanel" aria-labelledby="custom-nav-todo-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'To-Do' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-client" role="tabpanel" aria-labelledby="custom-nav-client-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Client' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-injurie" role="tabpanel" aria-labelledby="custom-nav-injurie-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Defendants' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-car_accident" role="tabpanel" aria-labelledby="custom-nav-car_accident-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Car Accident' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-photo" role="tabpanel" aria-labelledby="custom-nav-photo-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Photo' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-injury" role="tabpanel" aria-labelledby="custom-nav-injury-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Injury' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-medical" role="tabpanel" aria-labelledby="custom-nav-medical-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Medical Treatment' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-other_party" role="tabpanel" aria-labelledby="custom-nav-other_party-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Other Party' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-witnesses" role="tabpanel" aria-labelledby="custom-nav-witnesses-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Witnesses' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-insurance" role="tabpanel" aria-labelledby="custom-nav-insurance-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Insurance' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-employment" role="tabpanel" aria-labelledby="custom-nav-employment-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Employment' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-recordings" role="tabpanel" aria-labelledby="custom-nav-recordings-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Recordings' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-documents" role="tabpanel" aria-labelledby="custom-nav-documents-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Documents' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-costs" role="tabpanel" aria-labelledby="custom-nav-costs-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Costs' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-case_loans" role="tabpanel" aria-labelledby="custom-nav-case_loans-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Case Loan' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-settlement" role="tabpanel" aria-labelledby="custom-nav-settlement-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Settlement' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-litigation" role="tabpanel" aria-labelledby="custom-nav-litigation-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Litigation' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-discovery" role="tabpanel" aria-labelledby="custom-nav-discovery-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Discovery' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="custom-nav-depositions" role="tabpanel" aria-labelledby="custom-nav-depositions-tab">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive table--no-card m-b-40 m-t-20">
+                                                                            <table class="table table-borderless table-striped table-earning">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Time</td>
+                                                                                        <td>User</td>
+                                                                                        <td>Note</td>
+                                                                                        <td>Category</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody> {% for note in case.case_notes.all %} {% if note.category.name == 'Depositions' %}
+                                                                                    <tr class="hove">
+                                                                                        <td class="td-autosize">{{note.created_at|date:"M d, Y"}}</td>
+                                                                                        <td class="td-autosize">{{note.created_at|time}}</td>
+                                                                                        <td class="td-autosize">{{note.created_by.attorneyprofile.first_name}}</td>
+                                                                                        <td style="color:black !important">{{note.description}}</td>
+                                                                                        <td class="td-autosize">{{note.category}}</td>
+                                                                                    </tr> {% endif %} {% endfor %} </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                            </div>
+                    </div>
+                       
+                    <div class="col-lg-6"> 
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2022 Ian Silverthorne. All rights reserved.</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqxc6kyS-LoyaHvVca125NQMefYWI3bn8&callback=initMap&libraries=&v=weekly&channel=2"
+      async
+    ></script>
+    <script>
+        function initMap() {
+            // The location of Uluru
+            var lat = {{car_accident.lat}};
+            var long = {{car_accident.long}}
+            
+
+            const uluru = { lat: lat, lng: long };
+            // The map, centered at Uluru
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 7,
+                center: uluru,
+            });
+            // The marker, positioned at Uluru
+            const marker = new google.maps.Marker({
+                position: uluru,
+                map: map,
+            });
+        }
+    </script>
+    <script src="{% static 'BP_resources/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'BP_resources/vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/select2/select2.min.js' %}">
+    </script>
+    <script>
+        /* When the user clicks on the button, 
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Main JS-->
+    <script src="{% static 'BP_resources/js/main.js' %}"></script>
+    <script>
+        function addTodoNote() {
+            var note = document.getElementById('w3review').value;
+            var temp = document.getElementById('todo-note');
+            temp.value = note;
+            console.log(note);
+        }
+
+        function newNoteFunction() {
+            var temp_category = document.getElementById('note_category').value;
+            var category = document.getElementById('category');
+            category.value = temp_category;
+        }
+        </script>
+        <script>
+            $(document).ready(function(){
+            // $('a').on('click', function () {
+                console.log('hello');
+              
+                $.ajax({
+                    url: '/BP/clickRecord/',
+                    type: "GET",
+                    data: {
+                        "case_id": "{{case.id}}",
+                        "page_id": "{{page.id}}",
+                        "click_id": "5",
+                        "clickIDDescription": "Car Accident Page Entry"
+                    },
+                   
+                    success: function (data) {
+                        var x = JSON.stringify(data);
+                        console.log(x);
+                    },
+                    // Error handling 
+                    error: function (error) {
+                        console.log(`Error ${error}`);
+                    }
+                });
+            // });
+        });
+        </script>        
+        <script>
+            function calcWidth() {
+                var navwidth = 0;
+                var morewidth = $('#main-2 .more-2').outerWidth(true);
+                $('#main-2 > li:not(.more-2)').each(function() {
+                    navwidth += $(this).outerWidth( true );
+                });
+                var availablespace = $('.wrap').outerWidth(true) - morewidth;
+                
+                if (navwidth > availablespace) {
+                  var lastItem = $('#main-2 > li:not(.more-2)').last();
+                  lastItem.attr('data-width', lastItem.outerWidth(true));
+                  lastItem.prependTo($('#main-2 .more-2 ul'));
+                  calcWidth();
+                } else {
+                  var firstMoreElement = $('#main-2 li.more-2 li').first();
+                  if (navwidth + firstMoreElement.data('width') < availablespace) {
+                    firstMoreElement.insertBefore($('#main-2 .more-2'));
+                  }
+                }
+                
+                if ($('.more-2 li').length > 0) {
+                  $('.more-2').css('display','block');
+                } else {
+                  $('.more-2').css('display','none');
+                }
+              }
+              $(window).on('resize load',function(){
+                calcWidth();
+              });
+              $(".more-button").click(function(){
+                $(".collapsible-ul").toggle();
+              });
+        </script>
+
+</body>
+
+</html>
+<!-- end document-->

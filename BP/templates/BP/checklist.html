@@ -1,0 +1,407 @@
+{% load static  %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+       
+        <!-- Title Page-->
+        <title>Dashboard</title>
+    
+        <!-- Fontfaces CSS-->
+        <link href="{% static 'BP_resources/css/font-face.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Bootstrap CSS-->
+        <link href="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Vendor CSS-->
+        <link href="{% static 'BP_resources/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Main CSS-->
+        <link href="{% static 'BP_resources/css/theme.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/sidebar.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/header.css' %}" rel="stylesheet" media="all">
+    
+    </head>
+
+<body class="animsition homepage">
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            <div class="logo">
+                
+            </div>
+            
+            <div class="menu-sidebar__content">
+                <nav class="navbar-sidebar position-relative">
+                    <ul class="list-unstyled navbar__list">
+                        
+                        
+                        
+                        <li class="Row  active" onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(1, '0')" href="/BP/client/50/43/">
+                                <img src="/static/BP_resources/images/icon/menu-icon3.png">Client
+                            </a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(2, '0')" style="font:14px poppins" href="/BP/medicaltreatment/50/43/">
+                               <img src="/static/BP_resources/images/icon/medical-treatment-icon-color.svg">Medical Treatment
+                            </a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li style="100%" class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(3, '0')" class="js-arrow" href="/BP/case/50/43/">
+                               <img src="/static/BP_resources/images/icon/case-icon-color.svg">Case</a>
+                               <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(4, '0')" href="/BP/todo/50/43/">
+                                <img src="/static/BP_resources/images/icon/to-do-icon-color.svg">To-Do</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(5, '0')" href="/BP/defendants/50/43/">
+                            <img src="/static/BP_resources/images/icon/defendants-icon-color.svg">Defendants</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="has-sub Row " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(6, '0')" href="/BP/caraccident/50/43/">
+                            <img src="/static/BP_resources/images/icon/menu-icon5.png">Car Accident</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(7, '0')" href="/BP/photo/50/43/">
+                              <img src="/static/BP_resources/images/icon/menu-icon6.png">Photo</a>
+                              <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(8, '0')" href="/BP/injuriessub/50/43/">
+                            <img src="/static/BP_resources/images/icon/injuries-icon-color.svg">Injuries</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(9, '0')" href="/BP/otherparties/50/43/">
+                            <img src="/static/BP_resources/images/icon/other-parties-icon-color.svg">Other Parties</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(10, '0')" href="/BP/witnesses/50/43/">
+                            <img src="/static/BP_resources/images/icon/witnesses-icon-color.svg">Witnesses</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(11, '0')" href="/BP/insurance/50/43/">
+                            <img src="/static/BP_resources/images/icon/insurance-icon-color.svg">Insurance</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(12, '0')" href="#">
+                            <img src="/static/BP_resources/images/icon/employment-icon-color.svg">Employment</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(13, '0')" href="/BP/recordings/50/43/">
+                             <img src="/static/BP_resources/images/icon/menu-icon13.png">Recordings</a>
+                             <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(14, '0')" href="/BP/incidentreport/50/43/">
+                             <img src="/static/BP_resources/images/icon/incident-folder-icon-color.svg">Incident Report</a>
+                             <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(15, '0')" href="/BP/documents/50/43/">
+                             <img src="/static/BP_resources/images/icon/menu-icon15.png">Documents</a>
+                             <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(16, '0')" href="/BP/costs/50/43/">
+                            <img src="/static/BP_resources/images/icon/costs-icon-color.svg">Costs</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(17, '0')" href="/BP/caseloan/50/43/">
+                            <img src="/static/BP_resources/images/icon/case-loans-icon-color.svg">Case Loans</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(18, '0')" href="/BP/settlement/50/43/">
+                            <img src="/static/BP_resources/images/icon/menu-icon18.png">Settlement</a>
+                            <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(19, '0')" href="/BP/litigation/50/43/">
+                              <img src="/static/BP_resources/images/icon/menu-icon19.png">Litigation</a>
+                              <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(20, '0')" href="/BP/discovery/50/43/">
+                             <img src="/static/BP_resources/images/icon/menu-icon20.png">Discovery</a>
+                             <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(21, '0')" href="/BP/depositions/50/43/">
+                               <img src="/static/BP_resources/images/icon/menu-icon21.png">Depositions</a>
+                               <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+                        
+                        <li class="Row hc " onmouseover="onMenuRouteHover(this)" onmouseleave="onMenuRouteLeave(this)">
+                            <a onclick="addClickRecord(22, '0')" href="/BP/note/50/43/">
+                             <img src="/static/BP_resources/images/icon/notes-icon-color.svg">Notes</a>
+                             <div class="blueSpace"> </div>
+                        </li>
+                        
+                        
+        
+                    </ul>
+                </nav>
+                <div class="sidebar-bottom">
+                </div>
+                
+            </div>
+        </aside>
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            {% include 'BP/header-desktop.html' %}
+            <!-- HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content checklist-pg" style="padding-top: 5px !important;padding-left: 190px">
+                <div class="section__content section__content--p30" style="margin-top: 32px">
+                    <div class="container-fluid px-0">
+
+                        <div class="row">
+                            <div class="col-lg-12 top-head">
+                                <h2><img src="{% static 'BP_resources/images/icon/check-img.png' %}">checklist</h2>
+                          <h2></h2>  
+                                <div class="table-responsive table--no-card m-b-40 subpg-table">
+                                    <table class="table table-borderless table-striped table-earning">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="1"></th>
+                                                <th>Total Caseload</th>
+                                                <th>Auto Accident</th>
+                                                <th>Dog Bite</th>
+                                                <th>Slip and Fall</th>
+                                                <th>Premises Liability</th>
+                                                <th>Food Poisoning</th>
+                                                <th>All Others</th> 
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Intake Worker</td>
+                                                <td><span><div role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:15"></div></span></td>
+                                                <td><span><div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:50"></div></span></td>
+                                                <td><span><div role="progressbaryellow" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:25"></div></span></td>
+                                               
+                                                <td><span><div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:50"></div></span></td>
+                                                <td><span><div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:50"></div></span></td>
+                                                <td><span><div role="progressbaryellow" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:25"></div></span></td>
+                                                <td><span><div role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:15"></div></span></td>
+                                              
+                                               
+                                            </tr>
+                                            <tr>
+                                                <td>Case AssistanT</td>
+                                                <td><span><div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:50"></div></span></td>
+                                                <td><span><div role="progressbaryellow" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:25"></div></span></td>
+                                                <td><span><div role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:15"></div></span></td>
+                                                <td><span><div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:50"></div></span></td>
+                                                <td><span><div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:50"></div></span></td>
+                                                <td><span><div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:50"></div></span></td>
+                                                <td><span><div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:50"></div></span></td>
+                                               
+                                            </tr>
+                                            <tr>
+                                                <td>Case Worker</td>
+                                                <td><span><div role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:15"></div></span></td>
+                                                <td><span><div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:50"></div></span></td>
+                                                <td><span><div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:50"></div></span></td>
+                                                <td><span><div role="progressbaryellow" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:25"></div></span></td>
+                                                <td><span><div role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:15"></div></span></td>
+                                                <td><span><div role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:15"></div></span></td>
+                                                <td><span><div role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:15"></div></span></td>
+                                               
+                                            </tr>
+                                            <tr>
+                                                <td>Case Manager</td>
+                                                <td><span><div role="progressbaryellow" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:25"></div></span></td>
+                                                <td><span><div role="progressbaryellow" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:25"></div></span></td>
+                                                <td><span><div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:50"></div></span></td>
+                                                <td><span><div role="progressbaryellow" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:25"></div></span></td>
+                                                <td><span><div role="progressbaryellow" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:25"></div></span></td>
+                                              <td><span><div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:50"></div></span></td>
+                                            <td><span><div role="progressbaryellow" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:25"></div></span></td>
+                                             </tr>
+                                            <tr>
+                                                <td>Settlement Worker</td>
+                                                <td><span><div role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:15"></div></span></td>
+                                                <td><span><div role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:15"></div></span></td>
+                                                <td><span><div role="progressbaryellow" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:25"></div></span></td>
+                                                <td><span><div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:50"></div></span></td>
+                                              <td><span><div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:50"></div></span></td>
+                                            <td><span><div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:50"></div></span></td>
+                                            <td><span><div role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:15"></div></span></td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td>Lead Attorney</td>
+                                                <td><span><div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:50"></div></span></td>
+                                                <td><span><div role="progressbaryellow" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:25"></div></span></td>
+                                                <td><span><div role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:15"></div></span></td>
+                                                <td><span><div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:50"></div></span></td>
+                                                <td><span><div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:50"></div></span></td>
+                                                <td><span><div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:50"></div></span></td>
+                                                <td><span><div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:50"></div></span></td>
+                                               
+                                            </tr>
+                                            <tr>
+                                                <td>Supervising Attorney</td>
+                                                <td><span><div role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:15"></div></span></td>
+                                                <td><span><div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:50"></div></span></td>
+                                                <td><span><div role="progressbargreen" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:50"></div></span></td>
+                                                <td><span><div role="progressbaryellow" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:25"></div></span></td>
+                                                <td><span><div role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:15"></div></span></td>
+                                                <td><span><div role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:15"></div></span></td>
+                                                <td><span><div role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:15"></div></span></td>
+                                            </tr>
+                                           
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+                            </div>
+                        </div>  
+                       
+                    <div class="col-lg-6"> 
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2022 Ian Silverthorne</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'BP_resources/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'BP_resources/vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/select2/select2.min.js' %}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static 'BP_resources/js/main.js' %}"></script>
+
+
+</body>
+
+</html>
+<!-- end document-->

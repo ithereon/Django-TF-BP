@@ -1,0 +1,264 @@
+body {
+    background-color: #f8f8f8;
+}
+
+.dz {
+    border: dashed !important;
+    border-color: #cccc !important;
+    border-radius: 10px !important;
+}
+
+.dz:hover {
+    background-color: aliceblue !important;
+}
+
+.dz-xs {
+    padding: 5px;
+    border: 1px solid #ccc !important;
+    min-height: initial;
+    border-radius: 5px !important;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.dz-xs .dz-message {
+    margin: 0px;
+    width: 100px;
+}
+
+.dz-xs .dz-message {
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
+}
+
+.dz-xs span img {
+    padding-left: 0px;
+}
+
+.dropzone.dz-xs .dz-preview {
+    padding: 0px;
+    min-height: initial;
+    margin: 0px;
+}
+
+.dropzone.dz-xs .dz-preview .dz-error-message {
+    top: 50px;
+}
+
+.dropzone.dz-xs .dz-preview.dz-error .dz-error-mark {
+    margin-left: -3px;
+    margin-top: -17px;
+    width: 30px;
+    height: 30px;
+    background: red;
+    border-radius: 50%;
+    box-shadow: 0px 1px 7px #8f8f8f;
+    opacity: 0.5;
+    text-align: center;
+    padding-top: 3px;
+}
+
+.dropzone.dz-xs [data-dz-remove] {
+    position: absolute;
+    top: -13px;
+    right: -11px;
+    cursor: pointer;
+}
+
+.sidebar-right {
+    width: 0px;
+    transition: all 0.3s ease;
+    opacity: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+}
+
+.sidebar-right.visible {
+    width: 400px;
+    opacity: 1;
+    border-left: 1px dashed #b9b9b9;
+}
+
+.pdfcontainer {
+    height: 0px;
+    transition: all 0.3s ease;
+    opacity: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+}
+
+.pdfcontainer.visible {
+    height: 605px;
+    opacity: 1;
+    border: 1px solid #b9b9b9;
+    margin-bottom: 15px;
+}
+
+.dz-xs.active {
+    box-shadow: 0px 1px 4px #7a7a7a inset;
+}
+
+[data-close="sidebar-right"] {
+    cursor: pointer;
+    position: absolute;
+    top: 6px;
+    right: 6px;
+}
+
+.doc-preview-sidebar .img-thumbnail {
+    min-height: 300px;
+}
+
+[data-dropzone-client] .dz-preview {
+    display: block;
+    height: auto !important;
+}
+
+[data-dropzone-client] .dz-image,
+[data-dropzone-client] [data-dz-thumbnail] {
+    width: 100% !important;
+    height: auto !important;
+}
+
+[data-dropzone-client] .dz-preview .dz-error-message {
+    left: 40% !important;
+    margin-left: -31% !important;
+}
+
+.td-autosize {
+    width: 1%;
+    white-space: nowrap;
+}
+
+.text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn-primary.disabled,
+.btn-primary:disabled {
+    color: #000;
+    background-color: #c3c3c3;
+    border-color: #bbbbbb;
+    cursor: not-allowed;
+    pointer-events: auto;
+}
+
+.check-circle {
+    right: 22px;
+    top: -9px;
+    background-size: 100% 100%;
+}
+
+.check-circle p {
+    height: initial;
+    border-bottom: none;
+}
+
+.medical-pg .custom-tab .check-circle {
+    top: -8px;
+    right: 0px;
+}
+
+.check-circle.check-circle-inner {
+    right: 34px;
+    top: -1px;
+}
+
+.homepage .table-earning tbody tr td.td-autosize,
+td.td-autosize {
+    width: 1% !important;
+    white-space: nowrap !important;
+}
+
+.subpg-table .table-earning tbody td,
+.subpg-table .table-earning.text-center-td td {
+    text-align: center !important;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, .075) !important;
+}
+
+.footer-select {
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 0.5px solid rgba(9, 55, 97, 0.75);
+}
+
+.filter-item {
+    margin-bottom: 5px;
+    display: block;
+    border-radius: 5px;
+    padding:10px;
+    background-color: #e4e4e4;
+}
+
+.filter-item.active {
+    color: #fff;
+    background-color: #0b5ed7;
+}
+
+.filter-item-all {
+    margin-bottom: 15px;
+    display: block;
+    border-radius: 5px;
+    padding:10px 0px;
+    text-decoration: none;
+}
+
+.filter-item-all:hover {
+    text-decoration: underline;
+}
+
+.dl-condensed dd{
+    margin-bottom: 1px;
+}
+
+.dl-condensed dt {
+    font-weight: normal;
+}
+
+.right-0{
+    right: 0;
+}
+
+.badge-specialty {
+    padding:5px;
+    padding-top: 12px;
+    color: white !important; 
+    font-weight: bold !important;
+    border-radius: 5px;
+    width: 25px;
+    text-align: center;
+    height: 25px;
+    line-height: 0;
+    vertical-align: middle;
+}
+
+.table-th-norm th{
+    font-weight: normal;
+}
+
+.k-list-item.k-selected{
+    background-color: #0b5ed7;
+}
+
+.k-list-item.k-selected.k-hover, .k-list-item.k-selected:hover{
+    background-color: #0b56c7;
+}
+
+.k-input, .k-widget.k-input {
+    border-color: #ced4da;
+}
+
+.hide-tbody tbody{
+    display: none;
+}

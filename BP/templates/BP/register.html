@@ -1,0 +1,238 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+       
+    
+        <!-- Title Page-->
+        <title>Register</title>
+    
+        <!-- Fontfaces CSS-->
+        <link href="{% static 'BP_resources/css/font-face.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Bootstrap CSS-->
+        <link href="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Vendor CSS-->
+        <link href="{% static 'BP_resources/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+    
+        <!-- Main CSS-->
+        <link href="{% static 'BP_resources/css/theme.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/sidebar.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'BP_resources/css/header.css' %}" rel="stylesheet" media="all">
+    
+    </head>
+
+<body >
+    <div >
+
+
+        <!-- PAGE CONTAINER-->
+        <div >
+            <!-- HEADER DESKTOP-->
+       
+            <!-- HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="container">
+                    <div>
+                        
+                        <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Create a Firm</h5>
+                              {% if form.errors %}
+                              {% for field in form %}
+                                  {% for error in field.errors %}
+                                      <div class="alert alert-warning">
+                                          <strong style="color: black;">{{ error|escape }}</strong>
+                                      </div>
+                                  {% endfor %}
+                              {% endfor %}
+                              {% for error in form.non_field_errors %}
+                                  <div class="alert alert-danger">
+                                      <strong>{{ error|escape }}</strong>
+                                  </div>
+                              {% endfor %}
+                          {% endif %}
+                          <form method="POST" action="{% url 'bp-register' %}">
+                              {% csrf_token %}
+                          
+                              <div class="mb-3 row">
+                                  <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Username</label>
+                                  <div class="col-sm-10">
+                                  <input type="text" required class="form-control" name="username" id="username">
+                                  </div>
+                              </div>
+          
+                              <div class="mb-3 row">
+                                  <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Email</label>
+                                  <div class="col-sm-10">
+                                  <input type="email" required  class="form-control" name="email" id="email">
+                                  </div>
+                              </div>
+          
+                              <!-- <div class="mb-3 row">
+                                  <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Role:</label>
+                                  <div class="col-sm-10">
+                                      <select class="form-select" name="account_type" aria-label="Default select example">
+                                          
+                                          <option selected value="Provider">Medical Provider</option>
+                                          <option value="Attorney">Attorney</option>
+                                          <option value="Marketer">Marketer</option>
+                                          
+                                        </select>
+                                  </div>
+                              </div> -->
+          
+                              <div class="mb-3 row">
+                                  <label for="inputFirstName" class="col-sm-2 col-form-label fw-bold">First Name</label>
+                                  <div class="col-sm-10">
+                                  <input type="text"   class="form-control" name="first_name" id="first_name">
+                                  </div>
+                              </div>
+          
+                              <div class="mb-3 row">
+                                  <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Last Name</label>
+                                  <div class="col-sm-10">
+                                  <input type="text"   class="form-control" name="last_name" id="last_name">
+                                  </div>
+                              </div>
+          
+                              <div class="mb-3 row">
+                                  <label for="inputLastName" class="col-sm-2 col-form-label fw-bold">Office Name</label>
+                                  <div class="col-sm-10">
+                                  <input type="text"   class="form-control" name="office_name" id="office_name">
+                                  </div>
+                              </div>
+          
+                              <div class="mb-3 row">
+                                  <label for="inputPassword" class="col-sm-2 col-form-label fw-bold">Password</label>
+                                  <div class="col-sm-10">
+                                  <input type="password"   class="form-control" name="password1" id="password1">
+                                  </div>
+                              </div>
+          
+                              <div class="mb-3 row">
+                                  <label for="inputPassword" class="col-sm-2 col-form-label fw-bold">Confirm Password</label>
+                                  <div class="col-sm-10">
+                                  <input type="password"   class="form-control" name="password2" id="password2">
+                                  </div>
+                              </div>
+                              <!-- <div class="mb-3 row">
+                                <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">User Type</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select" name="user_type" id="user_type" aria-label="Default select example">
+                                        
+                                        
+                                        <option value="no_option">---Select User Type---</option>
+                                        {% for type in user_types %}
+                                        <option value="{{type.id}}">{{type.name}}</option>
+                                        
+                                        {% endfor %}
+                                        
+                                      </select>
+                                </div>
+                                </div> -->
+                                <hr>
+                                <div class="mb-3 row">
+                                    <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Address 1</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" required class="form-control" placeholder="Enter Address 1" name="address1" data-field="address1">
+                                    </div>
+                                </div>
+    
+                                <div class="mb-3 row">
+                                    <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">Address 2</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" placeholder="Enter the Suite & Office No." name="address3" id="address2" data-field="address2">
+                                    </div>
+                                </div>
+    
+                                <div class="mb-3 row">
+                                    <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">City</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" required class="form-control" name="city1" id="city" data-field="city" />
+                                    </div>
+                                </div>
+    
+                                <div class="mb-3 row">
+                                    <label for="inputUsername" class="col-sm-2 col-form-label fw-bold">State</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" required class="form-control" name="state1" id="state" data-field="state" />
+                                    </div>
+                                </div>
+    
+                                <!-- <div class="mb-3 row temp1">
+                                    <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Country</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" required class="form-control" name="country1" id="country" data-field="country" />
+                                    </div>
+                                </div> -->
+    
+                                <div class="mb-3 row temp1">
+                                    <label for="inputEmail" class="col-sm-2 col-form-label fw-bold">Zip Code</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="postal1" id="postal" data-field="postal" />
+                                    </div>
+                                </div>
+                              <button  class="btn btn-primary" type="submit">Register</button>
+                            </form>
+                            <br>
+                              <p class="card-text">Already have a firm?</p>
+                              
+                              <a href="{% url 'bp-loginpage' %}" class="card-link">Login</a>
+                            </div>
+                          </div>
+                            
+                    </div>  
+                       
+        
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'BP_resources/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'BP_resources/vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'BP_resources/vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'BP_resources/vendor/select2/select2.min.js' %}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static 'BP_resources/js/main.js' %}"></script>
+
+
+</body>
+
+</html>
+<!-- end document-->
